@@ -64,19 +64,6 @@ class PhoneView extends StatelessWidget {
             ),
           ),
         ),
-        // Align(
-        //   alignment: Alignment.topRight,
-        //   child: InkWell(
-        //     onTap: () {},
-        //     child: Text(
-        //       'Forgot Password',
-        //       style: TextStyle(
-        //         fontSize: 10.sp,
-        //         color: Get.theme.primaryColor,
-        //       ),
-        //     ),
-        //   ),
-        // ),
         SizedBox(height: 3.h),
         LoginButton(
           text: 'Sign In',
