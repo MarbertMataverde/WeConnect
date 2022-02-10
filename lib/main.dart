@@ -1,14 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import 'firebase_options.dart';
+import 'themes/themes.dart';
+import 'views/view login body/view_login_body.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(InitialPage());
+  runApp(const InitialPage());
 }
 
 class InitialPage extends StatelessWidget {
@@ -16,18 +20,17 @@ class InitialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          title: 'Material App',
+          debugShowCheckedModeBanner: false,
+          theme: lightThemeData,
+          darkTheme: darkThemeData,
+          themeMode: ThemeMode.dark,
+          home: const AuthBody(),
+        );
+      },
     );
   }
 }
