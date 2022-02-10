@@ -1,6 +1,6 @@
-# weconnect
+# ✨WeConnect
 
-A new Flutter project.
+A new Portal for URS 
 
 ## Getting Started
 
