@@ -55,7 +55,7 @@ class StudentAxCodeGenerator extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               Form(
-                child: LoginPageTextFormField(
+                child: CustomTextFormField(
                   ctrlr: _studentAxCodeCtrlr,
                   hint: 'Number of access code..',
                   isPassword: kFalse,
