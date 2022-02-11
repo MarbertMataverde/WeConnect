@@ -15,6 +15,7 @@ class CustomButton extends StatelessWidget {
   final Color? bgColor;
   final BorderSide? borderSide;
   final dynamic onPress;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
