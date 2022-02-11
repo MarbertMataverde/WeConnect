@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -16,11 +18,21 @@ final TextEditingController _professorAxCodeCtrlr = TextEditingController();
 final authentication = Get.put(Authentication());
 final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
 
-class ProfessorAxCodeGenerator extends StatelessWidget {
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
+
+class ProfessorAxCodeGenerator extends StatefulWidget {
   const ProfessorAxCodeGenerator({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ProfessorAxCodeGenerator> createState() =>
+      _ProfessorAxCodeGeneratorState();
+}
+
+class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,26 +66,54 @@ class ProfessorAxCodeGenerator extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               Form(
+                key: _validationKey,
                 child: CustomTextFormField(
                   ctrlr: _professorAxCodeCtrlr,
                   hint: 'Number of access code..',
                   isPassword: kFalse,
+                  inputFormater: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Enter The Number of Access Code For Professors👨🏻‍💻';
+                    }
+                  },
                 ),
               ),
               SizedBox(height: 3.h),
-              CustomButton(
-                onPress: () async {
-                  xlsxAccessCodeGenerator.createAccessCodeExcelFile(
-                      _collectionName,
-                      _professorAxCodeCtrlr.text,
-                      _professorAccessCodeFileName);
-                },
-                text: 'Generate',
-                textColor: Get.theme.primaryColor,
-                bgColor: Get.isDarkMode
-                    ? kTextFormFieldColorDarkTheme
-                    : kTextFormFieldColorLightTheme,
-              ),
+              isLoading
+                  ? SpinKitSpinningLines(
+                      color: Get.theme.primaryColor,
+                      lineWidth: 1,
+                      itemCount: 5,
+                      size: 50,
+                    )
+                  : CustomButton(
+                      onPress: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        final _isValid =
+                            _validationKey.currentState!.validate();
+                        if (_isValid == true) {
+                          await xlsxAccessCodeGenerator
+                              .createAccessCodeExcelFile(
+                            _collectionName,
+                            _professorAxCodeCtrlr.text,
+                            _professorAccessCodeFileName,
+                          );
+                        }
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                      text: 'Generate',
+                      textColor: Get.theme.primaryColor,
+                      bgColor: Get.isDarkMode
+                          ? kTextFormFieldColorDarkTheme
+                          : kTextFormFieldColorLightTheme,
+                    ),
               Row(
                 children: [
                   Flexible(
