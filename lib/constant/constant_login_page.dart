@@ -27,3 +27,17 @@ InputBorder kLoginPageTextFormFieldFocusedBorder = OutlineInputBorder(
   ),
   borderRadius: BorderRadius.circular(kTextFormFieldRadius),
 );
+
+AppBar kLoginLoginAppBarBackButton = AppBar(
+  backgroundColor: Colors.transparent,
+  elevation: 0.0,
+  leading: IconButton(
+    onPressed: () {
+      Get.back();
+    },
+    icon: Icon(
+      Icons.arrow_back_rounded,
+      color: Get.theme.primaryColor,
+    ),
+  ),
+);
