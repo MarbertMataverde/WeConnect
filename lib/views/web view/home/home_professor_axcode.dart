@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -58,6 +59,14 @@ class ProfessorAxCodeGenerator extends StatelessWidget {
                   ctrlr: _professorAxCodeCtrlr,
                   hint: 'Number of access code..',
                   isPassword: kFalse,
+                  inputFormater: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Enter The Number of Access Code For Professors👨🏻‍💻';
+                    }
+                  },
                 ),
               ),
               SizedBox(height: 3.h),
