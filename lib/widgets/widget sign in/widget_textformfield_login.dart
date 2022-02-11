@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../constant/constant.dart';
@@ -12,6 +13,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.hint,
     required this.isPassword,
     this.keyboardType,
+    required this.validator,
+    this.inputFormater,
   }) : super(key: key);
   //?controller
   final TextEditingController ctrlr;
@@ -20,9 +23,14 @@ class CustomTextFormField extends StatelessWidget {
   //?it is password or not
   final bool isPassword;
   final TextInputType? keyboardType;
+  // ignore: prefer_typing_uninitialized_variables
+  final validator;
+  final List<TextInputFormatter>? inputFormater;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      inputFormatters: inputFormater,
       keyboardType: keyboardType,
       controller: ctrlr,
       obscureText: isPassword,
