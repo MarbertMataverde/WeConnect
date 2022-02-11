@@ -5,13 +5,17 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/auth/auth.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
+import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';
+import 'package:weconnect/views/phone%20view/sign%20up/student%20sign%20up/stud_axcode_checker.dart';
 
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
-import '../sign up/student sign up/student_signup_page.dart';
 
 final TextEditingController _emailCtrlr = TextEditingController();
 final TextEditingController _passwordCtrlr = TextEditingController();
+
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
 
 final authentication = Get.put(Authentication());
 
@@ -35,7 +39,7 @@ class _PhoneViewState extends State<PhoneView> {
         actions: [
           TextButton(
             onPressed: () {
-              Get.to(() => const StudentSignUpPage());
+              Get.to(() => const StudentAxCodeChecker());
             },
             child: Text(
               'Sign Up',
@@ -73,6 +77,7 @@ class _PhoneViewState extends State<PhoneView> {
               ),
               SizedBox(height: 2.h),
               Form(
+                key: _validationKey,
                 child: Column(
                   children: [
                     CustomTextFormField(
@@ -80,6 +85,18 @@ class _PhoneViewState extends State<PhoneView> {
                       hint: 'Email',
                       isPassword: kFalse,
                       keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        bool _isEmailValid = RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value!);
+                        if (value.isEmpty) {
+                          return 'Please Enter Your Email😊';
+                        }
+                        if (!_isEmailValid) {
+                          return 'Invalid Email😐';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
@@ -87,6 +104,15 @@ class _PhoneViewState extends State<PhoneView> {
                       hint: 'Password',
                       isPassword: kTrue,
                       keyboardType: TextInputType.visiblePassword,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Password🔐';
+                        }
+                        if (value.toString().length < 8) {
+                          return 'Password Should Be Longer or Equal to 8 characters👌';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
@@ -94,7 +120,9 @@ class _PhoneViewState extends State<PhoneView> {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const ForgotPassword());
+                  },
                   child: Text(
                     'Forgot Password',
                     style: TextStyle(
@@ -117,18 +145,17 @@ class _PhoneViewState extends State<PhoneView> {
                         setState(() {
                           isLoading = true;
                         });
-                        authentication.signIn(
-                          _emailCtrlr.text,
-                          _passwordCtrlr.text,
-                        );
-                        Future.delayed(
-                          const Duration(seconds: 3),
-                          () => setState(
-                            () {
-                              isLoading = false;
-                            },
-                          ),
-                        );
+                        final _isValid =
+                            _validationKey.currentState!.validate();
+                        if (_isValid == true) {
+                          await authentication.signIn(
+                            _emailCtrlr.text,
+                            _passwordCtrlr.text,
+                          );
+                        }
+                        setState(() {
+                          isLoading = false;
+                        });
                       },
                       text: 'Sign In',
                       textColor: Get.theme.primaryColor,

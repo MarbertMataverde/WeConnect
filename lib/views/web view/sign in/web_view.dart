@@ -12,6 +12,9 @@ import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 final TextEditingController _emailCtrlr = TextEditingController();
 final TextEditingController _passwordCtrlr = TextEditingController();
 
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
+
 final authentication = Get.put(Authentication());
 
 class WebView extends StatefulWidget {
@@ -54,18 +57,40 @@ class _WebViewState extends State<WebView> {
               ),
               SizedBox(height: 2.h),
               Form(
+                key: _validationKey,
                 child: Column(
                   children: [
                     CustomTextFormField(
                       ctrlr: _emailCtrlr,
                       hint: 'Email',
                       isPassword: kFalse,
+                      validator: (value) {
+                        bool _isEmailValid = RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value!);
+                        if (value.isEmpty) {
+                          return 'Please Enter Your Email 😊';
+                        }
+                        if (!_isEmailValid) {
+                          return 'Invalid Email 😐';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
                       isPassword: kTrue,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Password 🔐';
+                        }
+                        if (value.toString().length < 8) {
+                          return 'Password Should Be Longer or Equal to 8 characters👌';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
@@ -75,7 +100,7 @@ class _WebViewState extends State<WebView> {
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
-                    'Forgot Password',
+                    'Need Support 👨‍💻',
                     style: TextStyle(
                       color: Get.theme.primaryColor,
                     ),
@@ -95,18 +120,18 @@ class _WebViewState extends State<WebView> {
                         setState(() {
                           isLoading = true;
                         });
-                        authentication.signIn(
-                          _emailCtrlr.text,
-                          _passwordCtrlr.text,
-                        );
-                        Future.delayed(
-                          const Duration(seconds: 3),
-                          () => setState(
-                            () {
-                              isLoading = false;
-                            },
-                          ),
-                        );
+                        final _isValid =
+                            _validationKey.currentState!.validate();
+                        if (_isValid == true) {
+                          await authentication.signIn(
+                            _emailCtrlr.text,
+                            _passwordCtrlr.text,
+                          );
+                        }
+
+                        setState(() {
+                          isLoading = false;
+                        });
                       },
                       text: 'Sign In',
                       textColor: Get.theme.primaryColor,
@@ -114,32 +139,6 @@ class _WebViewState extends State<WebView> {
                           ? kTextFormFieldColorDarkTheme
                           : kTextFormFieldColorLightTheme,
                     ),
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Don\'t have an account?',
-                      style: TextStyle(
-                        color: Get.isDarkMode
-                            ? kTextColorDarkTheme
-                            : kTextColorLightTheme,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Get.theme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),
