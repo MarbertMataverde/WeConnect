@@ -1,6 +1,6 @@
 # ✨WeConnect
 
-A new Portal for URS 
+A new Portal for URS🔥
 
 ## Getting Started
 
