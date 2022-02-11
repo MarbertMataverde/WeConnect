@@ -9,9 +9,9 @@ import '../../../utils/xlsx_access_code_generator.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 
-const String _collectionName = 'Professor-access-code';
-const String _ProfessorAccessCodeFileName = 'GeneratedProfessorsAccessCode';
-final TextEditingController _ProfessorAxCodeCtrlr = TextEditingController();
+const String _collectionName = 'professor-access-code';
+const String _professorAccessCodeFileName = 'GeneratedProfessorsAccessCode';
+final TextEditingController _professorAxCodeCtrlr = TextEditingController();
 
 final authentication = Get.put(Authentication());
 final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
@@ -54,8 +54,8 @@ class ProfessorAxCodeGenerator extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               Form(
-                child: LoginPageTextFormField(
-                  ctrlr: _ProfessorAxCodeCtrlr,
+                child: CustomTextFormField(
+                  ctrlr: _professorAxCodeCtrlr,
                   hint: 'Number of access code..',
                   isPassword: kFalse,
                 ),
@@ -65,8 +65,8 @@ class ProfessorAxCodeGenerator extends StatelessWidget {
                 onPress: () async {
                   xlsxAccessCodeGenerator.createAccessCodeExcelFile(
                       _collectionName,
-                      _ProfessorAxCodeCtrlr.text,
-                      _ProfessorAccessCodeFileName);
+                      _professorAxCodeCtrlr.text,
+                      _professorAccessCodeFileName);
                 },
                 text: 'Generate',
                 textColor: Get.theme.primaryColor,
