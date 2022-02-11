@@ -52,6 +52,12 @@ class StudentAxCodeChecker extends StatelessWidget {
                   ctrlr: _axCodeCtrlr,
                   hint: 'Access Code',
                   isPassword: kFalse,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Enter Access Code👨🏻‍💻';
+                    }
+                    return null;
+                  },
                 ),
               ),
               SizedBox(height: 3.h),

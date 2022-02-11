@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/auth/auth.dart';
@@ -10,12 +12,15 @@ import '../../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../../widgets/widget sign in/widget_textformfield_login.dart';
 
 final TextEditingController _nameCtrlr = TextEditingController();
-final TextEditingController _collegeOfCtrlr = TextEditingController();
+
 final TextEditingController _studNumCtrlr = TextEditingController();
 final TextEditingController _emailCtrlr = TextEditingController();
 final TextEditingController _passwordCtrlr = TextEditingController();
 
 final authentication = Get.put(Authentication());
+
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
 
 //*LIST OF COLLEGES
 final _collegeList = [
@@ -24,7 +29,7 @@ final _collegeList = [
   'College of Computer Studies',
   'Masteral',
 ];
-String? _studentCollege;
+String? _collegeOf;
 
 //access code
 final String _accessCode = Get.arguments.toString();
@@ -39,6 +44,8 @@ class StudentSignUpPage extends StatefulWidget {
 }
 
 class _StudentSignUpPageState extends State<StudentSignUpPage> {
+  //loading spinner
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,8 +99,9 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   fontSize: 12.sp,
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: 1.h),
               Form(
+                key: _validationKey,
                 child: Column(
                   children: [
                     CustomTextFormField(
@@ -101,6 +109,15 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       hint: 'Full Name',
                       isPassword: kFalse,
                       keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Your Beautiful Name 🤗';
+                        }
+                        if (value.toString().length <= 2) {
+                          return 'Please Enter Your Full Name 😉';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 2.h),
                     Container(
@@ -125,37 +142,61 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                               Icons.arrow_drop_down,
                               color: Get.theme.primaryColor,
                             ),
-                            value: _studentCollege,
+                            value: _collegeOf,
                             hint: const Text(
                               'COA/COB/CCS/MASTERAL',
                             ),
                             items: _collegeList.map(buildMenuItem).toList(),
                             onChanged: (value) => setState(
-                              () => _studentCollege = value,
+                              () => _collegeOf = value,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    // CustomTextFormField(
-                    //   ctrlr: _collegeOfCtrlr,
-                    //   hint: 'Contact Number',
-                    //   isPassword: kFalse,
-                    //   keyboardType: TextInputType.number,
-                    // ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
                       ctrlr: _studNumCtrlr,
                       hint: 'Student Number',
                       isPassword: kFalse,
                       keyboardType: TextInputType.number,
+                      inputFormater: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      ],
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Enter Student Number 😊';
+                        }
+                      },
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 5.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'This what you will use to sign in 🔐',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 1.h),
                     CustomTextFormField(
                       ctrlr: _emailCtrlr,
                       hint: 'Email Address',
                       isPassword: kFalse,
                       keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        bool _isEmailValid = RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value!);
+                        if (value.isEmpty) {
+                          return 'Please Enter Your Email 😊';
+                        }
+                        if (!_isEmailValid) {
+                          return 'Invalid Email 😐';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
@@ -163,19 +204,68 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       hint: 'Password',
                       isPassword: kTrue,
                       keyboardType: TextInputType.visiblePassword,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Password 🔐';
+                        }
+                        if (value.toString().length < 8) {
+                          return 'Password Should Be Longer or Equal to 8 characters👌';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 3.h),
-              CustomButton(
-                onPress: () async {},
-                text: 'Create⚡',
-                textColor: Get.theme.primaryColor,
-                bgColor: Get.isDarkMode
-                    ? kTextFormFieldColorDarkTheme
-                    : kTextFormFieldColorLightTheme,
-              ),
+              isLoading
+                  ? SpinKitSpinningLines(
+                      color: Get.theme.primaryColor,
+                      lineWidth: 1,
+                      itemCount: 5,
+                      size: 50,
+                    )
+                  : CustomButton(
+                      onPress: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        final _isValid =
+                            _validationKey.currentState!.validate();
+                        Get.focusScope!.unfocus();
+                        //validation for colleges or masteral
+                        if (_collegeOf == null) {
+                          Get.defaultDialog(
+                            content: Text(
+                              'Please Select College 😉',
+                              style: TextStyle(
+                                color: Get.theme.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9.sp,
+                              ),
+                            ),
+                          );
+                        }
+                        if (_isValid == true && _collegeOf != null) {
+                          await authentication.createStudentAccount(
+                            _accessCode,
+                            _nameCtrlr.text,
+                            _collegeOf.toString(),
+                            int.parse(_studNumCtrlr.text),
+                            _emailCtrlr.text,
+                            _passwordCtrlr.text,
+                          );
+                        }
+                        setState(() {
+                          isLoading = true;
+                        });
+                      },
+                      text: 'Create⚡',
+                      textColor: Get.theme.primaryColor,
+                      bgColor: Get.isDarkMode
+                          ? kTextFormFieldColorDarkTheme
+                          : kTextFormFieldColorLightTheme,
+                    ),
             ],
           ),
         ),
