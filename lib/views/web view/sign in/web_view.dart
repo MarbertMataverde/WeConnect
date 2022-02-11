@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -13,11 +14,17 @@ final TextEditingController _passwordCtrlr = TextEditingController();
 
 final authentication = Get.put(Authentication());
 
-class WebView extends StatelessWidget {
+class WebView extends StatefulWidget {
   const WebView({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<WebView> createState() => _WebViewState();
+}
+
+class _WebViewState extends State<WebView> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,13 +56,13 @@ class WebView extends StatelessWidget {
               Form(
                 child: Column(
                   children: [
-                    LoginPageTextFormField(
+                    CustomTextFormField(
                       ctrlr: _emailCtrlr,
                       hint: 'Email',
                       isPassword: kFalse,
                     ),
                     SizedBox(height: 2.h),
-                    LoginPageTextFormField(
+                    CustomTextFormField(
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
                       isPassword: kTrue,
@@ -76,19 +83,37 @@ class WebView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 3.h),
-              CustomButton(
-                onPress: () async {
-                  authentication.signIn(
-                    _emailCtrlr.text,
-                    _passwordCtrlr.text,
-                  );
-                },
-                text: 'Sign In',
-                textColor: Get.theme.primaryColor,
-                bgColor: Get.isDarkMode
-                    ? kTextFormFieldColorDarkTheme
-                    : kTextFormFieldColorLightTheme,
-              ),
+              isLoading
+                  ? SpinKitSpinningLines(
+                      color: Get.theme.primaryColor,
+                      lineWidth: 1,
+                      itemCount: 5,
+                      size: 50,
+                    )
+                  : CustomButton(
+                      onPress: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        authentication.signIn(
+                          _emailCtrlr.text,
+                          _passwordCtrlr.text,
+                        );
+                        Future.delayed(
+                          const Duration(seconds: 3),
+                          () => setState(
+                            () {
+                              isLoading = false;
+                            },
+                          ),
+                        );
+                      },
+                      text: 'Sign In',
+                      textColor: Get.theme.primaryColor,
+                      bgColor: Get.isDarkMode
+                          ? kTextFormFieldColorDarkTheme
+                          : kTextFormFieldColorLightTheme,
+                    ),
               Row(
                 children: [
                   Flexible(
