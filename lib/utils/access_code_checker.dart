@@ -11,7 +11,10 @@ final firestore = FirebaseFirestore.instance;
 
 class AccessCodeChecker extends GetxController {
   //professor access code checker
-  Future professorAccessCodeChecker(String _accessCode, _context) async {
+  Future professorAccessCodeChecker(
+    String _accessCode,
+    _context,
+  ) async {
     await firestore
         .collection('professor-access-code')
         .doc(_accessCode)
@@ -57,7 +60,7 @@ class AccessCodeChecker extends GetxController {
         ),
         entryAnimation: EntryAnimation.bottom,
         title: const Text(
-          'Access Code Not Found',
+          'Access Code Not Found 😶',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
         ),

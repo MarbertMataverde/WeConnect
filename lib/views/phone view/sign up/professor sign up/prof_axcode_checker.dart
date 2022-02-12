@@ -58,6 +58,7 @@ class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
               ),
               SizedBox(height: 2.h),
               Form(
+                key: _validationKey,
                 child: CustomTextFormField(
                   ctrlr: _axCodeCtrlr,
                   hint: 'Access Code',
