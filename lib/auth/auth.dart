@@ -134,10 +134,10 @@ class Authentication extends GetxController {
                   'student-email': _emailAddress,
                   'channels': [],
                 }).whenComplete(() {
-                  // _customDialog.dialog(
-                  //   'REGISTRATION COMPLETE',
-                  //   'You can now log in with your accout',
-                  // );
+                  firestore
+                      .collection('professor-access-code')
+                      .doc(_accessCode)
+                      .delete();
                   Get.off(() => const MainFeed());
                 })
               });
@@ -181,10 +181,10 @@ class Authentication extends GetxController {
                   'employee-number': _employeeNumber,
                   'student-email': _emailAddress,
                 }).whenComplete(() {
-                  // _customDialog.dialog(
-                  //   'REGISTRATION COMPLETE',
-                  //   'You can now log in with your accout',
-                  // );
+                  firestore
+                      .collection('professor-access-code')
+                      .doc(_accessCode)
+                      .delete();
                   Get.off(() => const MainFeed());
                 })
               });
