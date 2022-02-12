@@ -87,8 +87,10 @@ class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
                             _validationKey.currentState!.validate();
                         Get.focusScope!.unfocus();
                         if (_isValid == true) {
-                          await acessCodeChecker
-                              .professorAccessCodeChecker(_axCodeCtrlr.text);
+                          await acessCodeChecker.professorAccessCodeChecker(
+                            _axCodeCtrlr.text,
+                            context,
+                          );
                         }
                         setState(() {
                           isLoading = false;
