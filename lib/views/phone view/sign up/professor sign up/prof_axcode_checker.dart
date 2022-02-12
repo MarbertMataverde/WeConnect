@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -13,11 +14,21 @@ final TextEditingController _axCodeCtrlr = TextEditingController();
 
 final acessCodeChecker = Get.put(AccessCodeChecker());
 
-class ProfessorAxCodeChecker extends StatelessWidget {
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
+
+class ProfessorAxCodeChecker extends StatefulWidget {
   const ProfessorAxCodeChecker({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ProfessorAxCodeChecker> createState() => _ProfessorAxCodeCheckerState();
+}
+
+class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
+  //loading spinner
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,18 +71,35 @@ class ProfessorAxCodeChecker extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 3.h),
-              CustomButton(
-                onPress: () async {
-                  Get.focusScope!.unfocus();
-                  acessCodeChecker
-                      .professorAccessCodeChecker(_axCodeCtrlr.text);
-                },
-                text: 'Continue',
-                textColor: Get.theme.primaryColor,
-                bgColor: Get.isDarkMode
-                    ? kTextFormFieldColorDarkTheme
-                    : kTextFormFieldColorLightTheme,
-              ),
+              isLoading
+                  ? SpinKitSpinningLines(
+                      color: Get.theme.primaryColor,
+                      lineWidth: 1,
+                      itemCount: 5,
+                      size: 50,
+                    )
+                  : CustomButton(
+                      onPress: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        final _isValid =
+                            _validationKey.currentState!.validate();
+                        Get.focusScope!.unfocus();
+                        if (_isValid == true) {
+                          await acessCodeChecker
+                              .professorAccessCodeChecker(_axCodeCtrlr.text);
+                        }
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                      text: 'Continue',
+                      textColor: Get.theme.primaryColor,
+                      bgColor: Get.isDarkMode
+                          ? kTextFormFieldColorDarkTheme
+                          : kTextFormFieldColorLightTheme,
+                    ),
             ],
           ),
         ),
