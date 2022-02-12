@@ -254,10 +254,11 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                             int.parse(_studNumCtrlr.text),
                             _emailCtrlr.text,
                             _passwordCtrlr.text,
+                            context,
                           );
                         }
                         setState(() {
-                          isLoading = true;
+                          isLoading = false;
                         });
                       },
                       text: 'Create⚡',

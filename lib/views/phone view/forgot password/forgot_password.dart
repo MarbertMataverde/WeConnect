@@ -119,9 +119,14 @@ class _PhoneViewState extends State<ForgotPassword> {
                         });
                         final _isValid =
                             _validationKey.currentState!.validate();
-
+                        Get.focusScope!.unfocus();
                         if (_isValid == true) {
-                          await authentication.resetPassword(_emailCtrlr.text);
+                          await authentication.resetPassword(
+                            _emailCtrlr.text,
+                            context,
+                          );
+
+                          _emailCtrlr.clear();
                         }
                         setState(() {
                           isLoading = false;

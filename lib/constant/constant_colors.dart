@@ -16,3 +16,11 @@ const Color kTextFormFieldTextColorDarkTheme =
 
 const Color kTextColorLightTheme = Color.fromARGB(255, 71, 71, 71);
 const Color kTextColorDarkTheme = Color.fromARGB(255, 207, 207, 207);
+
+//text button color
+const Color kTextButtonColorLightTheme = Color.fromARGB(255, 255, 255, 255);
+const Color kTextButtonColorDarkTheme = Color(0xff172A46);
+
+//button color
+const Color kButtonColorLightTheme = Color.fromARGB(169, 251, 251, 251);
+const Color kButtonColorDarkTheme = Color(0xff172A46);

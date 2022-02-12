@@ -62,6 +62,7 @@ class ProfessorAxCodeChecker extends StatelessWidget {
               SizedBox(height: 3.h),
               CustomButton(
                 onPress: () async {
+                  Get.focusScope!.unfocus();
                   acessCodeChecker
                       .professorAccessCodeChecker(_axCodeCtrlr.text);
                 },

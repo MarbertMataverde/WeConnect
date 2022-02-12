@@ -147,10 +147,12 @@ class _PhoneViewState extends State<PhoneView> {
                         });
                         final _isValid =
                             _validationKey.currentState!.validate();
+                        Get.focusScope!.unfocus();
                         if (_isValid == true) {
                           await authentication.signIn(
                             _emailCtrlr.text,
                             _passwordCtrlr.text,
+                            context,
                           );
                         }
                         setState(() {

@@ -43,6 +43,7 @@ dependencies:
   universal_html: ^2.0.8
   flutter_spinkit: ^5.1.0
   cloud_firestore: ^3.1.8
+  giff_dialog: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/vectors/
+    - assets/gifs/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
