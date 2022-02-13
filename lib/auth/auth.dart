@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';
+import 'package:weconnect/views/web%20view/home/home_student_axcode.dart';
 
 import '../constant/constant.dart';
 import '../views/phone view/home/main feed/main_feed.dart';
@@ -19,16 +22,19 @@ class Authentication extends GetxController {
   //sign in
   Future<void> signIn(String _emailAddress, String _password, _context) async {
     try {
-      await _auth.signInWithEmailAndPassword(
-          email: _emailAddress, password: _password);
-      //*GETTING THE ROLE OF THE USER WHO JUST LOGGED IN
-      // _roleRouteLogic.getUserRoleAndScreenRoutingLogic(_auth.currentUser!.uid);
-      debugPrint('Sign In Success');
-      // Get.off(() => const MainFeed());
-      // Get.to(() => const StudentAxCodeGenerator());
-      //*WE CAN USE THIS FOR THE WHOLE APP FUNCTIONALITY LIKE UPLOAD/COMMENT AND MORE
-      // box.write('uid', _auth.currentUser!.uid); //*THIS IS OUR USER IDENTIFIER
-      update();
+      await _auth
+          .signInWithEmailAndPassword(email: _emailAddress, password: _password)
+          .then((value) async {
+        //shared preferences initialization
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        //writing data to sharedPreference
+        await sharedPreferences.setString(
+            'signInToken', value.user!.email as String);
+        kIsWeb
+            ? Get.off(() => const StudentAxCodeGenerator())
+            : Get.off(() => const MainFeed());
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showDialog(
