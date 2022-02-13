@@ -45,16 +45,9 @@ dependencies:
   cloud_firestore: ^3.1.8
   giff_dialog: ^1.0.1
 
-  #hive
-  hive:
-  hive_flutter:
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  #hive
-  hive_generator:
-  build_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
