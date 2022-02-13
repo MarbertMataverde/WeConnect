@@ -176,10 +176,10 @@ class Authentication extends GetxController {
                     .set({
                   'regs-access-code': _accessCode,
                   'profile-image-url': kDefaultProfile,
-                  'student-name': _fullName,
+                  'professor-name': _fullName,
                   'contact-number': _contactNumber,
                   'employee-number': _employeeNumber,
-                  'student-email': _emailAddress,
+                  'professor-email': _emailAddress,
                 }).whenComplete(() {
                   firestore
                       .collection('professor-access-code')

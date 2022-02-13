@@ -2,10 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import 'firebase_options.dart';
 import 'themes/themes.dart';
-import 'views/view login body/view_login_body.dart';
+import 'views/signin body/signin_body.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +27,7 @@ class InitialPage extends StatelessWidget {
           theme: lightThemeData,
           darkTheme: darkThemeData,
           themeMode: ThemeMode.dark,
-          home: const AuthBody(),
+          home: const SignInBody(),
         );
       },
     );
