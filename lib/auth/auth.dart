@@ -7,7 +7,9 @@ import 'package:giff_dialog/giff_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';
+import 'package:weconnect/views/phone%20view/sign%20in/phone_view.dart';
 import 'package:weconnect/views/web%20view/home/home_student_axcode.dart';
+import 'package:weconnect/views/web%20view/sign%20in/web_view.dart';
 
 import '../constant/constant.dart';
 import '../views/phone view/home/main feed/main_feed.dart';
@@ -312,5 +314,14 @@ class Authentication extends GetxController {
         },
       ),
     );
+  }
+
+  //signedout
+  Future<void> signOut() async {
+    _auth.signOut();
+    //shared preferences initialization
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.remove('signInToken');
+    Get.off(() => kIsWeb ? const WebView() : const PhoneView());
   }
 }
