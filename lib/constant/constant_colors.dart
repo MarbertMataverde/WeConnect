@@ -22,5 +22,5 @@ const Color kTextButtonColorLightTheme = Color.fromARGB(255, 255, 255, 255);
 const Color kTextButtonColorDarkTheme = Color(0xff172A46);
 
 //button color
-const Color kButtonColorLightTheme = Color.fromARGB(169, 251, 251, 251);
-const Color kButtonColorDarkTheme = Color(0xff172A46);
+const Color kButtonColorLightTheme = Color(0xff172A46);
+const Color kButtonColorDarkTheme = Color.fromARGB(169, 251, 251, 251);
