@@ -1,18 +1,22 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';
-import 'package:weconnect/views/phone%20view/sign%20in/phone_view.dart';
-import 'package:weconnect/views/web%20view/home/home_student_axcode.dart';
-import 'package:weconnect/views/web%20view/sign%20in/web_view.dart';
+import 'package:weconnect/controller/account_type_getter.dart';
+import 'package:weconnect/views/web%20view/home/home_web_wrapper.dart';
 
 import '../constant/constant.dart';
-import '../views/phone view/home/main feed/main_feed.dart';
+import '../views/phone view/forgot password/forgot_password.dart';
+import '../views/phone view/home/home_phone_wrapper.dart';
+import '../views/phone view/sign in/phone_view.dart';
+import '../views/web view/sign in/web_view.dart';
 
 //*INITIALIZING FIRESTORE as firestore
 final firestore = FirebaseFirestore.instance;
@@ -20,22 +24,32 @@ final firestore = FirebaseFirestore.instance;
 //initializing firebase auth as _auth
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
+//get storage box
+final box = GetStorage();
+
+final accountType = Get.put(AccountType());
+
 class Authentication extends GetxController {
   //sign in
   Future<void> signIn(String _emailAddress, String _password, _context) async {
+    //shared preferences initialization
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       await _auth
           .signInWithEmailAndPassword(email: _emailAddress, password: _password)
-          .then((value) async {
-        //shared preferences initialization
-        SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
+          .then((UserCredential value) async {
+        //getting current uid
+        box.write('currentUid', value.user!.uid);
+        //getting account type
+        accountType.getter();
+        // log(GetStorage().read('currentUid'));
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
+        //routing based on the screen type
         kIsWeb
-            ? Get.off(() => const StudentAxCodeGenerator())
-            : Get.off(() => const MainFeed());
+            ? Get.offAll(() => const HomeWebWrapper())
+            : Get.offAll(() => const HomePhoneWrapper());
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -77,21 +91,11 @@ class Authentication extends GetxController {
                     : kTextButtonColorLightTheme,
               ),
             ),
-            //? reset button
+            onlyOkButton: true,
             buttonCancelColor:
                 Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-            buttonCancelText: Text(
-              'Reset',
-              style: TextStyle(
-                color: Get.theme.primaryColor,
-              ),
-            ),
-            onCancelButtonPressed: () {
-              Get.back();
-              Get.to(() => const ForgotPassword());
-            },
             image: Image.asset(
-              'assets/gifs/user_not_found.gif',
+              'assets/gifs/incorrect_password.gif',
               fit: BoxFit.cover,
             ),
             entryAnimation: EntryAnimation.bottom,
@@ -101,7 +105,7 @@ class Authentication extends GetxController {
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
             ),
             description: const Text(
-              'Please make sure your password is correct ✔ \nIf you forgot your password you can reset it now by clicking the reset button 😉',
+              'Please make sure your password is correct ✔ 😉',
               textAlign: TextAlign.center,
             ),
             onOkButtonPressed: () {
@@ -129,26 +133,31 @@ class Authentication extends GetxController {
       await _auth
           .createUserWithEmailAndPassword(
               email: _emailAddress, password: _password)
-          .then((value) => {
-                firestore
-                    .collection('student')
-                    .doc(_auth.currentUser!.uid)
-                    .set({
-                  'regs-access-code': _accessCode,
-                  'student-name': _fullName,
-                  'college': _college,
-                  'student-number': _studentNumber,
-                  'profile-image-url': kDefaultProfile,
-                  'student-email': _emailAddress,
-                  'channels': [],
-                }).whenComplete(() {
-                  firestore
-                      .collection('professor-access-code')
-                      .doc(_accessCode)
-                      .delete();
-                  Get.off(() => const MainFeed());
-                })
-              });
+          .then((value) async {
+        firestore
+            .collection('accounts')
+            .doc('students')
+            .collection('account')
+            .doc(_auth.currentUser!.uid)
+            .set({
+          'regs-access-code': _accessCode,
+          'account-tpye': 'studentAccountType',
+          'student-name': _fullName,
+          'college': _college,
+          'student-number': _studentNumber,
+          'profile-image-url': kDefaultProfile,
+          'student-email': _emailAddress,
+          'channels': [],
+        }).whenComplete(() {
+          firestore.collection('student-access-code').doc(_accessCode).delete();
+
+          Get.offAll(() => const HomePhoneWrapper());
+        });
+        //getting current uid
+        GetStorage().write('currentUid', value.user!.uid);
+        //getting account type
+        accountType.getter();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         // _customDialog.dialog(
@@ -177,25 +186,33 @@ class Authentication extends GetxController {
       await _auth
           .createUserWithEmailAndPassword(
               email: _emailAddress, password: _password)
-          .then((value) => {
-                firestore
-                    .collection('professor')
-                    .doc(_auth.currentUser!.uid)
-                    .set({
-                  'regs-access-code': _accessCode,
-                  'profile-image-url': kDefaultProfile,
-                  'professor-name': _fullName,
-                  'contact-number': _contactNumber,
-                  'employee-number': _employeeNumber,
-                  'professor-email': _emailAddress,
-                }).whenComplete(() {
-                  firestore
-                      .collection('professor-access-code')
-                      .doc(_accessCode)
-                      .delete();
-                  Get.off(() => const MainFeed());
-                })
-              });
+          .then((value) async {
+        firestore
+            .collection('accounts')
+            .doc('professors')
+            .collection('account')
+            .doc(_auth.currentUser!.uid)
+            .set({
+          'regs-access-code': _accessCode,
+          'account-tpye': 'professorAccountType',
+          'profile-image-url': kDefaultProfile,
+          'professor-name': _fullName,
+          'contact-number': _contactNumber,
+          'employee-number': _employeeNumber,
+          'professor-email': _emailAddress,
+          'channels': [],
+        }).whenComplete(() {
+          firestore
+              .collection('professor-access-code')
+              .doc(_accessCode)
+              .delete();
+          Get.offAll(() => const HomePhoneWrapper());
+        });
+        //getting current uid
+        GetStorage().write('currentUid', value.user!.uid);
+        //getting account type
+        accountType.getter();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         // _customDialog.dialog(
@@ -321,7 +338,8 @@ class Authentication extends GetxController {
     _auth.signOut();
     //shared preferences initialization
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.remove('signInToken');
-    Get.off(() => kIsWeb ? const WebView() : const PhoneView());
+    await sharedPreferences.clear();
+    await box.erase();
+    Get.offAll(() => kIsWeb ? const WebView() : const PhoneViewSignIn());
   }
 }
