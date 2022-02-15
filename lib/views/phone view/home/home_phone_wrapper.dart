@@ -1,0 +1,145 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weconnect/auth/auth.dart';
+import 'package:weconnect/constant/constant_colors.dart';
+import 'package:weconnect/views/phone%20view/home/campus_feed.dart';
+
+//firestore initialization
+final firestore = FirebaseFirestore.instance;
+
+//title colors
+final colorizeColors = [
+  Get.theme.primaryColor,
+  Colors.yellow,
+  Colors.cyan,
+  Colors.red,
+  Get.theme.primaryColor,
+];
+
+//title text style
+final colorizeTextStyle = TextStyle(
+  fontSize: 20.sp,
+);
+
+//bottom navigation bar pages
+final _pages = [
+  const CampusFeed(),
+  //TODO add more pages
+];
+
+//authentication injection
+final authentication = Get.put(Authentication());
+
+class HomePhoneWrapper extends StatefulWidget {
+  const HomePhoneWrapper({Key? key}) : super(key: key);
+
+  @override
+  State<HomePhoneWrapper> createState() => _HomeWrapperState();
+}
+
+class _HomeWrapperState extends State<HomePhoneWrapper> {
+  var _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: IconButton(
+            onPressed: () {
+              authentication.signOut();
+            },
+            icon: Icon(
+              MdiIcons.bellOutline,
+              color: Get.isDarkMode
+                  ? kButtonColorDarkTheme
+                  : kButtonColorLightTheme,
+            )),
+        centerTitle: true,
+        title: SizedBox(
+          width: 250.0,
+          child: AnimatedTextKit(
+            repeatForever: true,
+            animatedTexts: [
+              ColorizeAnimatedText(
+                'WeConnect',
+                speed: const Duration(milliseconds: 400),
+                textAlign: TextAlign.center,
+                textStyle: colorizeTextStyle,
+                colors: colorizeColors,
+              ),
+              ColorizeAnimatedText(
+                'WeConnect',
+                speed: const Duration(milliseconds: 400),
+                textAlign: TextAlign.center,
+                textStyle: colorizeTextStyle,
+                colors: colorizeColors,
+              ),
+            ],
+            isRepeatingAnimation: true,
+            onTap: () {
+              print("Tap Event");
+            },
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(MdiIcons.menu,
+                  color: Get.isDarkMode
+                      ? kButtonColorDarkTheme
+                      : kButtonColorLightTheme))
+        ],
+      ),
+      body: _pages[_currentIndex],
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _currentIndex,
+        onTap: (i) => setState(() => _currentIndex = i),
+        items: [
+          /// Home
+          SalomonBottomBarItem(
+            icon: const Icon(MdiIcons.newspaperVariantOutline),
+            title: const Text("Campus Feed"),
+            selectedColor: Colors.blue,
+          ),
+
+          /// Likes
+          SalomonBottomBarItem(
+            icon: const Icon(MdiIcons.newspaperVariantMultipleOutline),
+            title: const Text("College Feed"),
+            selectedColor: Colors.orange,
+          ),
+
+          /// Search
+          SalomonBottomBarItem(
+            icon: const Icon(MdiIcons.messageBulleted),
+            title: const Text("Channel Box"),
+            selectedColor: Colors.teal,
+          ),
+
+          /// Profile
+          SalomonBottomBarItem(
+            icon: const Icon(MdiIcons.forumOutline),
+            title: const Text("Forum"),
+            selectedColor: Colors.cyan,
+          ),
+
+          /// Profile
+          SalomonBottomBarItem(
+            icon: const Icon(MdiIcons.accountOutline),
+            title: const Text("Profile"),
+            selectedColor: Get.isDarkMode ? Colors.white : Colors.black,
+          ),
+        ],
+      ),
+    );
+  }
+}
