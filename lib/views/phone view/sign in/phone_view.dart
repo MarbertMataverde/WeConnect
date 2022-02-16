@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/auth/auth.dart';
+import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';

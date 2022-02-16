@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 
-import '../../../auth/auth.dart';
+import '../../../authentication/authentication_controller.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 

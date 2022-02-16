@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/auth/auth.dart';
+import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 
@@ -208,7 +208,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                             _validationKey.currentState!.validate();
                         Get.focusScope!.unfocus();
                         if (_isValid == true) {
-                          await authentication.createProfessorAccount(
+                          await authentication.professorSignUp(
                             _accessCode,
                             _nameCtrlr.text,
                             int.parse(_contNumCtrlr.text),
