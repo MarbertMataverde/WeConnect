@@ -56,6 +56,7 @@ dependencies:
   firebase_storage: ^10.2.7
   get_storage: ^2.0.3
   animated_bottom_navigation_bar: ^0.3.2
+  focused_menu: ^1.0.5
 
 dev_dependencies:
   flutter_test:

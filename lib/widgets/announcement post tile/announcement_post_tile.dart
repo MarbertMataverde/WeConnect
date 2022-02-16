@@ -4,14 +4,24 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:get/get.dart';
-import 'package:glassmorphism_ui/glassmorphism_ui.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
+
+//account type
+final box = GetStorage();
+
+//pop up based on account type
+final popUpMenu = Get.put(ControllerPostTilePopUpMenu());
 
 class AnnouncementPostTile extends StatelessWidget {
   const AnnouncementPostTile({
@@ -35,7 +45,7 @@ class AnnouncementPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(postCreatedAt.toString());
+    final _accountType = box.read('accountType');
     return Card(
       elevation: 3,
       color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,
@@ -85,48 +95,23 @@ class AnnouncementPostTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.bottomSheet(Container(
-                      height: 20.h,
-                      color: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton.icon(
-                              style: TextButton.styleFrom(
-                                //style
-                                primary: Get.isDarkMode
-                                    ? kTextColorDarkTheme
-                                    : kTextColorLightTheme,
-                              ),
-                              onPressed: () {},
-                              icon: const Icon(Icons.delete_forever_rounded),
-                              label: const Text('Delete Post 🗑️')),
-                          Divider(
-                            thickness: 0.7,
-                            indent: 5.w,
-                            endIndent: 5.w,
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
-                          ),
-                          TextButton.icon(
-                              style: TextButton.styleFrom(
-                                //style
-                                primary: Get.isDarkMode
-                                    ? kTextColorDarkTheme
-                                    : kTextColorLightTheme,
-                              ),
-                              onPressed: () {},
-                              icon: const Icon(Icons.edit_rounded),
-                              label: const Text('Edit Post 🖊')),
-                        ],
-                      ),
-                    ));
-                  },
+                FocusedMenuHolder(
+                  menuWidth: MediaQuery.of(context).size.width * 0.50,
+                  blurSize: 1.0,
+                  menuItemExtent: 5.h,
+                  menuBoxDecoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(1.w))),
+                  duration: const Duration(milliseconds: 100),
+                  animateMenuItems: true,
+                  blurBackgroundColor: Colors.black,
+                  openWithTap: true,
+                  menuOffset: 1.h,
+                  onPressed: () {},
+                  menuItems: _accountType == 'accountTypeCampusAdmin' ||
+                          _accountType == 'accountTypeRegistrarAdmin'
+                      ? popUpMenu.campusAndRegistrarAdminMenuItem
+                      : popUpMenu.professorsAndStudentsMenuItem,
                   child: Icon(
                     Icons.more_vert_rounded,
                     color: Get.isDarkMode
@@ -156,33 +141,23 @@ class AnnouncementPostTile extends StatelessWidget {
             ),
           ),
           postMedia.length == 1
-              ? InkWell(
-                  onTap: () {
-                    log('imaged cliked');
-                  },
-                  child: Image.network(postMedia.first),
-                )
-              : InkWell(
-                  onTap: () {
-                    log('imaged cliked');
-                  },
-                  child: CarouselSlider(
-                    items: postMedia
-                        .map(
-                          (item) => Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: 100.w,
-                          ),
-                        )
-                        .toList(),
-                    options: CarouselOptions(
-                      pageSnapping: true,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      autoPlay: true,
-                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                    ),
+              ? Image.network(postMedia.first)
+              : CarouselSlider(
+                  items: postMedia
+                      .map(
+                        (item) => Image.network(
+                          item,
+                          fit: BoxFit.cover,
+                          width: 100.w,
+                        ),
+                      )
+                      .toList(),
+                  options: CarouselOptions(
+                    pageSnapping: true,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    autoPlay: true,
+                    autoPlayCurve: Curves.fastLinearToSlowEaseIn,
                   ),
                 ),
           Row(

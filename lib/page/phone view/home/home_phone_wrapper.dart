@@ -128,39 +128,25 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
         items: [
-          /// Home
           SalomonBottomBarItem(
             icon: const Icon(MdiIcons.newspaperVariantOutline),
             title: const Text("Campus Feed"),
             selectedColor: Colors.blue,
           ),
-
-          /// Likes
           SalomonBottomBarItem(
             icon: const Icon(MdiIcons.newspaperVariantMultipleOutline),
             title: const Text("College Feed"),
             selectedColor: Colors.orange,
           ),
-
-          /// Search
           SalomonBottomBarItem(
             icon: const Icon(MdiIcons.messageBulleted),
             title: const Text("Channel Box"),
             selectedColor: Colors.teal,
           ),
-
-          /// Profile
           SalomonBottomBarItem(
             icon: const Icon(MdiIcons.forumOutline),
             title: const Text("Forum"),
             selectedColor: Colors.cyan,
-          ),
-
-          /// Profile
-          SalomonBottomBarItem(
-            icon: const Icon(MdiIcons.accountOutline),
-            title: const Text("Profile"),
-            selectedColor: Get.isDarkMode ? Colors.white : Colors.black,
           ),
         ],
       ),
