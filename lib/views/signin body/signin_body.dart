@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weconnect/views/phone%20view/home/main%20feed/main_feed.dart';
-import 'package:weconnect/views/web%20view/home/home_student_axcode.dart';
+import 'package:weconnect/views/web%20view/home/home_web_wrapper.dart';
 
+import '../phone view/home/home_phone_wrapper.dart';
 import '../phone view/sign in/phone_view.dart';
+import '../web view/home/home_student_axcode.dart';
 import '../web view/sign in/web_view.dart';
 
 class SignInBody extends StatelessWidget {
@@ -20,14 +21,14 @@ class SignInBody extends StatelessWidget {
         builder: (context, constraints) {
           //?phone view
           if (constraints.maxWidth < 768) {
-            return isSignedIn ? const MainFeed() : const PhoneView();
+            return isSignedIn
+                ? const HomePhoneWrapper()
+                : const PhoneViewSignIn();
           }
           //you can add layout for tablet too
           //?web view
           else {
-            return isSignedIn
-                ? const StudentAxCodeGenerator()
-                : const WebView();
+            return isSignedIn ? const HomeWebWrapper() : const WebView();
           }
         },
       ),

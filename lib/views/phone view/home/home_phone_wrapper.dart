@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/auth/auth.dart';
 import 'package:weconnect/constant/constant_colors.dart';
+import 'package:weconnect/controller/account_type_getter.dart';
 import 'package:weconnect/views/phone%20view/home/campus_feed.dart';
 
 //firestore initialization
@@ -28,11 +30,14 @@ final colorizeTextStyle = TextStyle(
   fontSize: 20.sp,
 );
 
-//bottom navigation bar pages
 final _pages = [
   const CampusFeed(),
   //TODO add more pages
 ];
+// get storage box
+final box = GetStorage();
+
+var _currentIndex = 0; //default index of a first screen
 
 //authentication injection
 final authentication = Get.put(Authentication());
@@ -45,7 +50,7 @@ class HomePhoneWrapper extends StatefulWidget {
 }
 
 class _HomeWrapperState extends State<HomePhoneWrapper> {
-  var _currentIndex = 0;
+  // final String accountType = box.read('accountType');
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +97,18 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: Icon(MdiIcons.menu,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme))
+            onPressed: () {},
+            icon: Icon(
+              MdiIcons.menu,
+              color: Get.isDarkMode
+                  ? kButtonColorDarkTheme
+                  : kButtonColorLightTheme,
+            ),
+          ),
         ],
       ),
-      body: _pages[_currentIndex],
+      body: CampusFeed(),
+      // body: _pages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),

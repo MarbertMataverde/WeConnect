@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,9 +14,31 @@ final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .doc('campus-feed')
     .collection('post')
     .snapshots();
+final box = GetStorage();
 
-class CampusFeed extends StatelessWidget {
+//account get current signed in account type
+String? shredPrefsAccountType;
+
+class CampusFeed extends StatefulWidget {
   const CampusFeed({Key? key}) : super(key: key);
+
+  @override
+  State<CampusFeed> createState() => _CampusFeedState();
+}
+
+class _CampusFeedState extends State<CampusFeed> {
+  @override
+  void initState() {
+    getDataFromSharedPrefs();
+    super.initState();
+  }
+
+  Future getDataFromSharedPrefs() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      shredPrefsAccountType = sharedPreferences.getString('accountType');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +71,21 @@ class CampusFeed extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
-        mini: true,
-        onPressed: () async {
-          SharedPreferences sharedPreferences =
-              await SharedPreferences.getInstance();
-
-          log(sharedPreferences.get('accountType').toString());
-        },
-        child: Icon(
-          MdiIcons.textBoxPlusOutline,
-          color:
-              Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+      floatingActionButton: Visibility(
+        visible: box.read('accountType') == 'accountTypeCampusAdmin',
+        child: FloatingActionButton(
+          backgroundColor: Get.isDarkMode
+              ? kTextFormFieldColorDarkTheme
+              : kTextFormFieldColorLightTheme,
+          mini: true,
+          onPressed: () async {
+            print(box.read('accountType'));
+          },
+          child: Icon(
+            MdiIcons.textBoxPlusOutline,
+            color:
+                Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+          ),
         ),
       ),
     );

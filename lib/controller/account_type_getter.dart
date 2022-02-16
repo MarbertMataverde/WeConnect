@@ -21,6 +21,12 @@ class AccountType extends GetxController {
       'accountTypeCampusAdmin',
     );
     accountTypeIdentifier(
+      //registrar admin
+      'registrar-admin',
+      _currentUid,
+      'accountTypeRegistrarAdmin',
+    );
+    accountTypeIdentifier(
       //coa admin
       'coa-admin',
       _currentUid,
@@ -63,8 +69,6 @@ class AccountType extends GetxController {
     String currentUid,
     String accountType,
   ) async {
-    //shared preferences initialization
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await firestore
         .collection('accounts')
         .doc(doc)
@@ -74,6 +78,9 @@ class AccountType extends GetxController {
         .then(
       (value) async {
         if (value.exists) {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          box.write('accountType', accountType);
           await sharedPreferences.setString('accountType', accountType);
         }
       },

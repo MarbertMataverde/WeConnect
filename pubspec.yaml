@@ -54,8 +54,8 @@ dependencies:
   animated_text_kit: ^4.2.1
   file_picker: ^4.4.0
   firebase_storage: ^10.2.7
-  get_state_manager: ^3.13.0
   get_storage: ^2.0.3
+  animated_bottom_navigation_bar: ^0.3.2
 
 dev_dependencies:
   flutter_test:
