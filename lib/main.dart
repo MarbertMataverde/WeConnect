@@ -52,15 +52,7 @@ class _InitialPageState extends State<InitialPage> {
           theme: lightThemeData,
           darkTheme: darkThemeData,
           themeMode: ThemeMode.dark,
-          initialRoute: '/',
-          getPages: [
-            GetPage(
-              name: '/',
-              page: () => SignInBody(
-                isSignedIn: _isSignedIn,
-              ),
-            ),
-          ],
+          home: SignInBody(isSignedIn: _isSignedIn),
         );
       },
     );

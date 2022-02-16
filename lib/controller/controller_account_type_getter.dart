@@ -82,8 +82,6 @@ class AccountType extends GetxController {
         .then(
       (value) async {
         if (value.exists) {
-          SharedPreferences sharedPreferences =
-              await SharedPreferences.getInstance();
           box.write('accountType', accountType);
           kIsWeb
               ? Get.off(() => const HomeWebWrapper())

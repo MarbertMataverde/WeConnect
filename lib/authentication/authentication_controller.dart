@@ -39,12 +39,11 @@ class Authentication extends GetxController {
         //getting current uid
         box.write('currentUid', value.user!.uid);
         //getting account type
-        // log(GetStorage().read('currentUid'));
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
-        accountType.getter();
       });
+      accountType.getter();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         dialog.userNotFoundDialog(
