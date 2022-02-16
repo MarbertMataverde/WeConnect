@@ -71,23 +71,6 @@ class _CampusFeedState extends State<CampusFeed> {
           );
         },
       ),
-      floatingActionButton: Visibility(
-        visible: box.read('accountType') == 'accountTypeCampusAdmin',
-        child: FloatingActionButton(
-          backgroundColor: Get.isDarkMode
-              ? kTextFormFieldColorDarkTheme
-              : kTextFormFieldColorLightTheme,
-          mini: true,
-          onPressed: () async {
-            print(box.read('accountType'));
-          },
-          child: Icon(
-            MdiIcons.textBoxPlusOutline,
-            color:
-                Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-          ),
-        ),
-      ),
     );
   }
 }

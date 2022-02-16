@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant_colors.dart';
+import 'package:weconnect/controller/controller_account_type_getter.dart';
 
 import 'campus_feed.dart';
 
@@ -41,6 +43,8 @@ var _currentIndex = 0; //default index of a first screen
 //authentication injection
 final authentication = Get.put(Authentication());
 
+final getAccountType = Get.put(AccountType());
+
 class HomePhoneWrapper extends StatefulWidget {
   const HomePhoneWrapper({Key? key}) : super(key: key);
 
@@ -49,8 +53,7 @@ class HomePhoneWrapper extends StatefulWidget {
 }
 
 class _HomeWrapperState extends State<HomePhoneWrapper> {
-  // final String accountType = box.read('accountType');
-
+  final _accountType = box.read('accountType');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +98,19 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
           ),
         ),
         actions: [
+          Visibility(
+            visible: _accountType == 'accountTypeCampusAdmin' ||
+                _accountType == 'accountTypeCampusAdmin',
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                MdiIcons.cardPlusOutline,
+                color: Get.isDarkMode
+                    ? kButtonColorDarkTheme
+                    : kButtonColorLightTheme,
+              ),
+            ),
+          ),
           IconButton(
             onPressed: () {},
             icon: Icon(

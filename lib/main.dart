@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/page/phone%20view/home/home_phone_wrapper.dart';
 import 'firebase_options.dart';
 import 'page/signin body/signin_body.dart';
 import 'setting/setting_theme.dart';
@@ -51,9 +52,15 @@ class _InitialPageState extends State<InitialPage> {
           theme: lightThemeData,
           darkTheme: darkThemeData,
           themeMode: ThemeMode.dark,
-          home: SignInBody(
-            isSignedIn: _isSignedIn,
-          ),
+          initialRoute: '/',
+          getPages: [
+            GetPage(
+              name: '/',
+              page: () => SignInBody(
+                isSignedIn: _isSignedIn,
+              ),
+            ),
+          ],
         );
       },
     );

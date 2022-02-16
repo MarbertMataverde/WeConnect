@@ -39,15 +39,11 @@ class Authentication extends GetxController {
         //getting current uid
         box.write('currentUid', value.user!.uid);
         //getting account type
-        accountType.getter();
         // log(GetStorage().read('currentUid'));
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
-        //routing based on the screen type
-        kIsWeb
-            ? Get.offAll(() => const HomeWebWrapper())
-            : Get.offAll(() => const HomePhoneWrapper());
+        accountType.getter();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -212,6 +208,6 @@ class Authentication extends GetxController {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.clear();
     await box.erase();
-    Get.offAll(() => kIsWeb ? const WebView() : const PhoneViewSignIn());
+    Get.off(() => kIsWeb ? const WebView() : const PhoneViewSignIn());
   }
 }

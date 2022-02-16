@@ -1,9 +1,13 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../page/phone view/home/home_phone_wrapper.dart';
+import '../page/web view/home/home_web_wrapper.dart';
 
 //*INITIALIZING FIRESTORE as firestore
 final firestore = FirebaseFirestore.instance;
@@ -81,7 +85,9 @@ class AccountType extends GetxController {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
           box.write('accountType', accountType);
-          await sharedPreferences.setString('accountType', accountType);
+          kIsWeb
+              ? Get.off(() => const HomeWebWrapper())
+              : Get.off(() => const HomePhoneWrapper());
         }
       },
     );
