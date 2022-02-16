@@ -1,19 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/views/phone%20view/forgot%20password/forgot_password.dart';
-import 'package:weconnect/views/phone%20view/sign%20up/student%20sign%20up/stud_axcode_checker.dart';
 
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../forgot password/forgot_password.dart';
+import '../sign up/student sign up/stud_axcode_checker.dart';
 
 final TextEditingController _emailCtrlr = TextEditingController();
 final TextEditingController _passwordCtrlr = TextEditingController();

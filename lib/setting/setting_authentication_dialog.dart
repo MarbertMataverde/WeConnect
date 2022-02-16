@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 
 import '../constant/constant_colors.dart';
-import '../views/phone view/forgot password/forgot_password.dart';
+import '../page/phone view/forgot password/forgot_password.dart';
 
 class SettingAuthenticationDialog extends GetxController {
   //reset password dialog

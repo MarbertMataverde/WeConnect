@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weconnect/views/web%20view/home/home_web_wrapper.dart';
 
 import '../phone view/home/home_phone_wrapper.dart';
 import '../phone view/sign in/phone_view.dart';
-import '../web view/home/home_student_axcode.dart';
+import '../web view/home/home_web_wrapper.dart';
 import '../web view/sign in/web_view.dart';
 
 class SignInBody extends StatelessWidget {

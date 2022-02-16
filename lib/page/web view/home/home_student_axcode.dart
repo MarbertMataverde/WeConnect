@@ -7,13 +7,14 @@ import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
-import '../../../utils/xlsx_access_code_generator.dart';
+import '../../../utils/utils_xlsx_access_code_generator.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
+import 'home_professor_axcode.dart';
 
-const String _collectionName = 'professor-access-code';
-const String _professorAccessCodeFileName = 'GeneratedProfessorsAccessCode';
-final TextEditingController _professorAxCodeCtrlr = TextEditingController();
+const String _collectionName = 'student-access-code';
+const String _studentAccessCodeFileName = 'GeneratedStudentsAccessCode';
+final TextEditingController _studentAxCodeCtrlr = TextEditingController();
 
 final authentication = Get.put(Authentication());
 final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
@@ -21,17 +22,16 @@ final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
-class ProfessorAxCodeGenerator extends StatefulWidget {
-  const ProfessorAxCodeGenerator({
+class StudentAxCodeGenerator extends StatefulWidget {
+  const StudentAxCodeGenerator({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ProfessorAxCodeGenerator> createState() =>
-      _ProfessorAxCodeGeneratorState();
+  State<StudentAxCodeGenerator> createState() => _StudentAxCodeGeneratorState();
 }
 
-class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
+class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
               ),
               const Flexible(
                 child: Text(
-                  'For Professors',
+                  'For Students',
                   style: TextStyle(
                     fontSize: 15,
                     height: 0.5,
@@ -68,7 +68,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
               Form(
                 key: _validationKey,
                 child: CustomTextFormField(
-                  ctrlr: _professorAxCodeCtrlr,
+                  ctrlr: _studentAxCodeCtrlr,
                   hint: 'Number of access code..',
                   isPassword: kFalse,
                   inputFormater: <TextInputFormatter>[
@@ -76,7 +76,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                   ],
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Enter The Number of Access Code For Professors👨🏻‍💻';
+                      return 'Enter The Number of Access Code For Students👨🏻‍💻';
                     }
                   },
                 ),
@@ -100,8 +100,8 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                           await xlsxAccessCodeGenerator
                               .createAccessCodeExcelFile(
                             _collectionName,
-                            _professorAxCodeCtrlr.text,
-                            _professorAccessCodeFileName,
+                            _studentAxCodeCtrlr.text,
+                            _studentAccessCodeFileName,
                           );
                         }
                         setState(() {
@@ -118,7 +118,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                 children: [
                   Flexible(
                     child: Text(
-                      'Go',
+                      'Not for students?',
                       style: TextStyle(
                         color: Get.isDarkMode
                             ? kTextColorDarkTheme
@@ -130,10 +130,10 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                     alignment: Alignment.topRight,
                     child: TextButton(
                       onPressed: () {
-                        Get.back();
+                        Get.to(() => const ProfessorAxCodeGenerator());
                       },
                       child: Text(
-                        'Back',
+                        'Professors',
                         style: TextStyle(
                           color: Get.theme.primaryColor,
                         ),

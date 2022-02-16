@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/views/signin%20body/signin_body.dart';
 import 'firebase_options.dart';
-import 'themes/themes.dart';
+import 'page/signin body/signin_body.dart';
+import 'setting/setting_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

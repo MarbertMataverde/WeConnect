@@ -1,74 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/constant/constant_login_page.dart';
-import 'package:weconnect/utils/access_code_checker.dart';
-import 'package:weconnect/views/phone%20view/sign%20up/professor%20sign%20up/prof_axcode_checker.dart';
 
-import '../../../../widgets/widget sign in/widget_custom_button.dart';
-import '../../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../../../authentication/authentication_controller.dart';
+import '../../../utils/utils_xlsx_access_code_generator.dart';
+import '../../../widgets/widget sign in/widget_custom_button.dart';
+import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 
-final TextEditingController _axCodeCtrlr = TextEditingController();
+const String _collectionName = 'professor-access-code';
+const String _professorAccessCodeFileName = 'GeneratedProfessorsAccessCode';
+final TextEditingController _professorAxCodeCtrlr = TextEditingController();
 
-final acessCodeChecker = Get.put(AccessCodeChecker());
+final authentication = Get.put(Authentication());
+final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
-class StudentAxCodeChecker extends StatefulWidget {
-  const StudentAxCodeChecker({
+class ProfessorAxCodeGenerator extends StatefulWidget {
+  const ProfessorAxCodeGenerator({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<StudentAxCodeChecker> createState() => _StudentAxCodeCheckerState();
+  State<ProfessorAxCodeGenerator> createState() =>
+      _ProfessorAxCodeGeneratorState();
 }
 
-class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
-  //loading spinner
+class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kLoginLoginAppBarBackButton,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: kPagePaddingHorizontal.w,
-            right: kPagePaddingHorizontal.w,
-          ),
+      body: Center(
+        child: SizedBox(
+          height: Get.mediaQuery.size.height,
+          width: Get.mediaQuery.size.width * 0.3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Student Sign Up',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  color: Get.theme.primaryColor,
-                  fontWeight: FontWeight.bold,
+              Flexible(
+                child: Text(
+                  'Generate Access Code',
+                  style: TextStyle(
+                    color: Get.theme.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
                 ),
               ),
-              Text(
-                'Please type your access code to continue',
-                style: TextStyle(
-                  fontSize: 12.sp,
+              const Flexible(
+                child: Text(
+                  'For Professors',
+                  style: TextStyle(
+                    fontSize: 15,
+                    height: 0.5,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SizedBox(height: 2.h),
               Form(
                 key: _validationKey,
                 child: CustomTextFormField(
-                  ctrlr: _axCodeCtrlr,
-                  hint: 'Access Code',
+                  ctrlr: _professorAxCodeCtrlr,
+                  hint: 'Number of access code..',
                   isPassword: kFalse,
+                  inputFormater: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Enter Access Code👨🏻‍💻';
+                      return 'Enter The Number of Access Code For Professors👨🏻‍💻';
                     }
-                    return null;
                   },
                 ),
               ),
@@ -87,18 +96,19 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                         });
                         final _isValid =
                             _validationKey.currentState!.validate();
-                        Get.focusScope!.unfocus();
                         if (_isValid == true) {
-                          await acessCodeChecker.studentAccessCodeChecker(
-                            _axCodeCtrlr.text,
-                            context,
+                          await xlsxAccessCodeGenerator
+                              .createAccessCodeExcelFile(
+                            _collectionName,
+                            _professorAxCodeCtrlr.text,
+                            _professorAccessCodeFileName,
                           );
                         }
                         setState(() {
                           isLoading = false;
                         });
                       },
-                      text: 'Continue',
+                      text: 'Generate',
                       textColor: Get.theme.primaryColor,
                       bgColor: Get.isDarkMode
                           ? kTextFormFieldColorDarkTheme
@@ -108,7 +118,7 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                 children: [
                   Flexible(
                     child: Text(
-                      'Sign up as',
+                      'Go',
                       style: TextStyle(
                         color: Get.isDarkMode
                             ? kTextColorDarkTheme
@@ -120,12 +130,11 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                     alignment: Alignment.topRight,
                     child: TextButton(
                       onPressed: () {
-                        Get.off(() => const ProfessorAxCodeChecker());
+                        Get.back();
                       },
                       child: Text(
-                        'Professor',
+                        'Back',
                         style: TextStyle(
-                          fontSize: 10.sp,
                           color: Get.theme.primaryColor,
                         ),
                       ),

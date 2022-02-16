@@ -1,23 +1,17 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:giff_dialog/giff_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/controller/account_type_getter.dart';
-import 'package:weconnect/views/web%20view/home/home_web_wrapper.dart';
 
 import '../constant/constant.dart';
+import '../controller/controller_account_type_getter.dart';
+import '../page/phone view/home/home_phone_wrapper.dart';
+import '../page/phone view/sign in/phone_view.dart';
+import '../page/web view/home/home_web_wrapper.dart';
+import '../page/web view/sign in/web_view.dart';
 import '../setting/setting_authentication_dialog.dart';
-import '../views/phone view/forgot password/forgot_password.dart';
-import '../views/phone view/home/home_phone_wrapper.dart';
-import '../views/phone view/sign in/phone_view.dart';
-import '../views/web view/sign in/web_view.dart';
 
 //*INITIALIZING FIRESTORE as firestore
 final firestore = FirebaseFirestore.instance;

@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/controller/account_type_getter.dart';
-import 'package:weconnect/views/phone%20view/home/campus_feed.dart';
+
+import 'campus_feed.dart';
 
 //firestore initialization
 final firestore = FirebaseFirestore.instance;

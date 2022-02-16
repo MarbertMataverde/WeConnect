@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
-import 'package:weconnect/views/phone%20view/sign%20up/student%20sign%20up/student_signup_page.dart';
 
-import '../views/phone view/sign up/professor sign up/professor_signup_page.dart';
+import '../page/phone view/sign up/professor sign up/professor_signup_page.dart';
+import '../page/phone view/sign up/student sign up/student_signup_page.dart';
 
 final firestore = FirebaseFirestore.instance;
 
