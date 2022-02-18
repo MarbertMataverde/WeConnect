@@ -6,6 +6,39 @@ import '../constant/constant_colors.dart';
 import '../page/phone view/forgot password/forgot_password.dart';
 
 class SettingAuthenticationDialog extends GetxController {
+  //invalid account type
+  Future<dynamic> invalidAccountTypeDialog(
+    _context,
+    String assetLocation,
+    String title,
+    String description,
+  ) async {
+    showDialog(
+      context: _context,
+      builder: (_) => AssetGiffDialog(
+        onlyOkButton: true,
+        buttonOkColor: Get.theme.primaryColor,
+        image: Image.asset(
+          assetLocation,
+          fit: BoxFit.cover,
+        ),
+        entryAnimation: EntryAnimation.bottom,
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        description: Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        onOkButtonPressed: () {
+          Get.back();
+        },
+      ),
+    );
+  }
+
   //reset password dialog
   Future<dynamic> resetPasswordDialog(
     _context,
