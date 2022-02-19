@@ -16,8 +16,7 @@ final firestore = FirebaseFirestore.instance;
 final box = GetStorage();
 
 class AccountType extends GetxController {
-  Future getter() async {
-    final _currentUid = box.read('currentUid');
+  Future getter(String _currentUid) async {
     accountTypeIdentifier(
       //campus admin
       'campus-admin',

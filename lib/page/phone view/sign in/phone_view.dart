@@ -7,6 +7,7 @@ import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 
+import '../../../controller/controller_account_type_getter.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 import '../forgot password/forgot_password.dart';
@@ -19,6 +20,9 @@ final TextEditingController _passwordCtrlr = TextEditingController();
 final _validationKey = GlobalKey<FormState>();
 
 final authentication = Get.put(Authentication());
+
+// account type routing
+final accountType = Get.put(AccountType());
 
 class PhoneViewSignIn extends StatefulWidget {
   const PhoneViewSignIn({
@@ -146,8 +150,6 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                       onPress: () async {
                         SharedPreferences sp =
                             await SharedPreferences.getInstance();
-                        print(sp.get('accountType'));
-
                         setState(() {
                           isLoading = true;
                         });
@@ -160,6 +162,7 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                             _passwordCtrlr.text,
                             context,
                           );
+                          accountType.getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;

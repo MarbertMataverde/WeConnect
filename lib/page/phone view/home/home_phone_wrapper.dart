@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +13,7 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/controller/controller_account_type_getter.dart';
+import 'package:weconnect/controller/controller_upload_post.dart';
 
 import 'campus_feed.dart';
 

@@ -5,7 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/page/phone%20view/home/home_phone_wrapper.dart';
 import 'firebase_options.dart';
+import 'page/phone view/sign in/phone_view.dart';
 import 'page/signin body/signin_body.dart';
+import 'page/web view/home/home_web_wrapper.dart';
+import 'page/web view/sign in/web_view.dart';
 import 'setting/setting_theme.dart';
 
 void main() async {
@@ -52,7 +55,23 @@ class _InitialPageState extends State<InitialPage> {
           theme: lightThemeData,
           darkTheme: darkThemeData,
           themeMode: ThemeMode.dark,
-          home: SignInBody(isSignedIn: _isSignedIn),
+          home: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                //?phone view
+                if (constraints.maxWidth < 768) {
+                  return _isSignedIn
+                      ? const HomePhoneWrapper()
+                      : const PhoneViewSignIn();
+                }
+                //you can add layout for tablet too
+                //?web view
+                else {
+                  return _isSignedIn ? const HomeWebWrapper() : const WebView();
+                }
+              },
+            ),
+          ),
         );
       },
     );

@@ -38,12 +38,14 @@ class Authentication extends GetxController {
           .then((UserCredential value) async {
         //getting current uid
         box.write('currentUid', value.user!.uid);
+        //getting current uid
+        sharedPreferences.setString('currentUid', value.user!.uid);
         //getting account type
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
       });
-      accountType.getter();
+      // accountType.getter();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         dialog.userNotFoundDialog(
@@ -103,8 +105,8 @@ class Authentication extends GetxController {
         });
         //getting current uid
         GetStorage().write('currentUid', value.user!.uid);
-        //getting account type
-        accountType.getter();
+        // //getting account type
+        // accountType.getter();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -163,7 +165,7 @@ class Authentication extends GetxController {
         //getting current uid
         GetStorage().write('currentUid', value.user!.uid);
         //getting account type
-        accountType.getter();
+        // accountType.getter();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
