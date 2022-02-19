@@ -9,7 +9,6 @@ import '../constant/constant.dart';
 import '../controller/controller_account_type_getter.dart';
 import '../page/phone view/home/home_phone_wrapper.dart';
 import '../page/phone view/sign in/phone_view.dart';
-import '../page/web view/home/home_web_wrapper.dart';
 import '../page/web view/sign in/web_view.dart';
 import '../setting/setting_authentication_dialog.dart';
 

@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../constant/constant_colors.dart';
 import '../../../widgets/announcement post tile/announcement_post_tile.dart';
@@ -29,9 +27,22 @@ class CampusFeed extends StatefulWidget {
 }
 
 class _CampusFeedState extends State<CampusFeed> {
+  String? accountType;
+  @override
+  void initState() {
+    accountTypeGetter();
+    super.initState();
+  }
+
+  Future accountTypeGetter() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      accountType = sharedPreferences.get('accountType') as String;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final accountType = box.read('accountType');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

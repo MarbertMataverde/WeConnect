@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
@@ -81,6 +79,9 @@ class AccountType extends GetxController {
         .then(
       (value) async {
         if (value.exists) {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.setString('accountType', accountType);
           box.write('accountType', accountType);
           kIsWeb
               ? Get.off(() => const HomeWebWrapper())

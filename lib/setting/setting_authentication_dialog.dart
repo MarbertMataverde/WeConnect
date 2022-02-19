@@ -184,7 +184,7 @@ class SettingAuthenticationDialog extends GetxController {
         title: Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
         ),
         description: Text(
           description,

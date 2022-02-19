@@ -16,7 +16,6 @@ class HomeWebWrapper extends StatefulWidget {
 }
 
 class _HomeWrapperState extends State<HomeWebWrapper> {
-  var _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +23,7 @@ class _HomeWrapperState extends State<HomeWebWrapper> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
-        title: Text('WeConnect'),
+        title: const Text('WeConnect'),
         actions: [
           IconButton(
             onPressed: () {
