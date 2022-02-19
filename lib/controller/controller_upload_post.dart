@@ -24,7 +24,7 @@ int count = 0;
 //*DATETIME CREATED FILE NAME
 final String _dateTimeNow = DateTime.now().toString();
 
-class UploadPost extends GetxController {
+class ControllerUploadPost extends GetxController {
   Future<void> uploadPostForCampusFeed(
     String _collectionName,
     String _postDescription,

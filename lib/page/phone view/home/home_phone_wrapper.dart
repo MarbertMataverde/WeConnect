@@ -14,25 +14,12 @@ import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/controller/controller_account_type_getter.dart';
 import 'package:weconnect/controller/controller_upload_post.dart';
+import 'package:weconnect/page/phone%20view/home/upload/upload_post.dart';
 
 import 'campus_feed.dart';
 
 //firestore initialization
 final firestore = FirebaseFirestore.instance;
-
-//title colors
-final colorizeColors = [
-  Get.theme.primaryColor,
-  Colors.yellow,
-  Colors.cyan,
-  Colors.red,
-  Get.theme.primaryColor,
-];
-
-//title text style
-final colorizeTextStyle = TextStyle(
-  fontSize: 20.sp,
-);
 
 final _pages = [
   const CampusFeed(),
@@ -60,71 +47,6 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              authentication.signOut();
-            },
-            icon: Icon(
-              MdiIcons.bellOutline,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
-        centerTitle: true,
-        title: SizedBox(
-          width: 250.0,
-          child: AnimatedTextKit(
-            repeatForever: true,
-            animatedTexts: [
-              ColorizeAnimatedText(
-                'WeConnect',
-                speed: const Duration(milliseconds: 400),
-                textAlign: TextAlign.center,
-                textStyle: colorizeTextStyle,
-                colors: colorizeColors,
-              ),
-              ColorizeAnimatedText(
-                'WeConnect',
-                speed: const Duration(milliseconds: 400),
-                textAlign: TextAlign.center,
-                textStyle: colorizeTextStyle,
-                colors: colorizeColors,
-              ),
-            ],
-            isRepeatingAnimation: true,
-            onTap: () {
-              print("Tap Event");
-            },
-          ),
-        ),
-        actions: [
-          Visibility(
-            visible: _accountType == 'accountTypeCampusAdmin' ||
-                _accountType == 'accountTypeCampusAdmin',
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                MdiIcons.cardPlusOutline,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              ),
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              MdiIcons.menu,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            ),
-          ),
-        ],
-      ),
       body: CampusFeed(),
       // body: _pages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
