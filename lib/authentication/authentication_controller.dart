@@ -21,7 +21,8 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 //get storage box
 final box = GetStorage();
 
-final accountType = Get.put(AccountType());
+//getting account type
+final accountType = Get.put(ControllerAccountType());
 
 //dialogs
 final dialog = Get.put(SettingAuthenticationDialog());
@@ -37,9 +38,8 @@ class Authentication extends GetxController {
           .then((UserCredential value) async {
         //getting current uid
         box.write('currentUid', value.user!.uid);
-        //getting current uid
-        sharedPreferences.setString('currentUid', value.user!.uid);
         //getting account type
+        sharedPreferences.setString('currentUid', value.user!.uid);
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
@@ -78,6 +78,8 @@ class Authentication extends GetxController {
     String _password,
     _context,
   ) async {
+    //shared preferences initialization
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -91,21 +93,19 @@ class Authentication extends GetxController {
             .set({
           'regs-access-code': _accessCode,
           'account-tpye': 'studentAccountType',
-          'student-name': _fullName,
+          'profile-name': _fullName,
           'college': _college,
           'student-number': _studentNumber,
           'profile-image-url': kDefaultProfile,
-          'student-email': _emailAddress,
+          'profile-email': _emailAddress,
           'channels': [],
         }).whenComplete(() {
           firestore.collection('student-access-code').doc(_accessCode).delete();
-
+          //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting current uid
-        GetStorage().write('currentUid', value.user!.uid);
-        // //getting account type
-        // accountType.getter();
+        //getting account type
+        sharedPreferences.setString('currentUid', value.user!.uid);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -135,6 +135,8 @@ class Authentication extends GetxController {
     String _password,
     _context,
   ) async {
+    //shared preferences initialization
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -149,22 +151,21 @@ class Authentication extends GetxController {
           'regs-access-code': _accessCode,
           'account-tpye': 'professorAccountType',
           'profile-image-url': kDefaultProfile,
-          'professor-name': _fullName,
+          'profile-name': _fullName,
           'contact-number': _contactNumber,
           'employee-number': _employeeNumber,
-          'professor-email': _emailAddress,
+          'profile-email': _emailAddress,
           'channels': [],
         }).whenComplete(() {
           firestore
               .collection('professor-access-code')
               .doc(_accessCode)
               .delete();
+          //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting current uid
-        GetStorage().write('currentUid', value.user!.uid);
         //getting account type
-        // accountType.getter();
+        sharedPreferences.setString('currentUid', value.user!.uid);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

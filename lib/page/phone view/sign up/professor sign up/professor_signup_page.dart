@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -201,6 +202,8 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     )
                   : CustomButton(
                       onPress: () async {
+                        SharedPreferences sp =
+                            await SharedPreferences.getInstance();
                         setState(() {
                           isLoading = true;
                         });
@@ -217,6 +220,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                             _passwordCtrlr.text,
                             context,
                           );
+                          accountType.getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;

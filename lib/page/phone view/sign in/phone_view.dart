@@ -22,7 +22,7 @@ final _validationKey = GlobalKey<FormState>();
 final authentication = Get.put(Authentication());
 
 // account type routing
-final accountType = Get.put(AccountType());
+final accountType = Get.put(ControllerAccountType());
 
 class PhoneViewSignIn extends StatefulWidget {
   const PhoneViewSignIn({

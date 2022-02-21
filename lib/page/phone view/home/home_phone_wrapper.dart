@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:weconnect/authentication/authentication_controller.dart';
-import 'package:weconnect/controller/controller_account_type_getter.dart';
 
 import 'campus_feed.dart';
 
@@ -20,10 +17,7 @@ final box = GetStorage();
 
 var _currentIndex = 0; //default index of a first screen
 
-//authentication injection
-final authentication = Get.put(Authentication());
-
-final getAccountType = Get.put(AccountType());
+//getting the current user inforamtion
 
 class HomePhoneWrapper extends StatefulWidget {
   const HomePhoneWrapper({Key? key}) : super(key: key);

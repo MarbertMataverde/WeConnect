@@ -13,7 +13,7 @@ final firestore = FirebaseFirestore.instance;
 //storage box for storing current uid
 final box = GetStorage();
 
-class AccountType extends GetxController {
+class ControllerAccountType extends GetxController {
   Future getter(String _currentUid) async {
     accountTypeIdentifier(
       //campus admin
@@ -81,7 +81,13 @@ class AccountType extends GetxController {
         if (value.exists) {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
-          sharedPreferences.setString('accountType', accountType);
+          await sharedPreferences.setString('accountType', accountType);
+          await sharedPreferences.setString(
+              'currentProfileImageUrl', value.get('profile-image-url'));
+          await sharedPreferences.setString(
+              'currentProfileName', value.get('profile-name'));
+
+          //get storage account type for pop up menu post tile
           box.write('accountType', accountType);
           kIsWeb
               ? Get.off(() => const HomeWebWrapper())

@@ -23,24 +23,24 @@ int count = 0;
 //*DATETIME CREATED FILE NAME
 final String _dateTimeNow = DateTime.now().toString();
 
-class ControllerUploadPost extends GetxController {
+class ControllerCreatePost extends GetxController {
   Future<void> uploadPostForCampusFeed(
     String _collectionName,
     String _postDescription,
-    String _profileName,
-    String _profileUrl,
+    String _accountName,
+    String _accountProfileImageUrl,
   ) async {
     FirebaseFirestore.instance
         .collection(_collectionName)
-        .doc('campus-feed-post')
+        .doc('campus-feed')
         .collection('post')
         .doc()
         .set({
           'post-description': _postDescription,
           'post-media': listOfImageUrls,
-          'profile-name': _profileName,
-          'profile-url': _profileUrl,
-          'created-at': DateTime.now(),
+          'account-name': _accountName,
+          'account-profile-image-url': _accountProfileImageUrl,
+          'post-created-at': DateTime.now(),
           'storage-fileName': _dateTimeNow
         })
         .whenComplete(() => {
@@ -57,8 +57,8 @@ class ControllerUploadPost extends GetxController {
   Future<void> uploadPost(
     String _collectionName,
     String _postDescription,
-    String _profileName,
-    String _profileUrl,
+    String _accountName,
+    String _accountProfileImageUrl,
     String _docName,
   ) async {
     FirebaseFirestore.instance
@@ -69,9 +69,9 @@ class ControllerUploadPost extends GetxController {
         .set({
           'post-description': _postDescription,
           'post-media': listOfImageUrls,
-          'profile-name': _profileName,
-          'profile-url': _profileUrl,
-          'created-at': DateTime.now(),
+          'account-name': _accountName,
+          'account-profile-image-url': _accountProfileImageUrl,
+          'post-created-at': DateTime.now(),
           'storage-fileName': _dateTimeNow
         })
         .whenComplete(() => {
@@ -89,9 +89,9 @@ class ControllerUploadPost extends GetxController {
     FilePickerResult? result,
     String _collectionName,
     String _postDescription,
-    String _profileName,
+    String _accountName,
     String _profileUrl,
-    String _role,
+    String _accountType,
     String _docName,
   ) async {
     if (result != null && _postDescription.isEmpty == false) {
@@ -101,24 +101,25 @@ class ControllerUploadPost extends GetxController {
         await uploadImagesToFirebaseStorage(
           'file-number-$count',
           image.path,
-          _role,
+          _accountType,
           _dateTimeNow,
         );
         count++;
       }
       //* ROLE CHECKING FOR UPLOADING POST IN CAMPUS FEED WITH TWO DIFF
       //* ACCOUNT CAMPUS ADMIN AND REGISTRAR
-      _role == 'CAMPUS-ADMIN' || _role == 'REGISTRAR-ADMIN'
+      _accountType == 'accountTypeCampusAdmin' ||
+              _accountType == 'accountTypeRegistrarAdmin'
           ? uploadPostForCampusFeed(
               _collectionName,
               _postDescription,
-              _profileName,
+              _accountName,
               _profileUrl,
             )
           : uploadPost(
               _collectionName,
               _postDescription,
-              _profileName,
+              _accountName,
               _profileUrl,
               _docName,
             );

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weconnect/page/phone%20view/forgot%20password/forgot_password.dart';
 
 import '../../../constant/constant_colors.dart';
 import '../../../widgets/announcement post tile/announcement_post_tile.dart';
@@ -15,6 +16,7 @@ final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .collection('announcements')
     .doc('campus-feed')
     .collection('post')
+    .orderBy('post-created-at', descending: true)
     .snapshots();
 
 final box = GetStorage();
@@ -48,7 +50,9 @@ class _CampusFeedState extends State<CampusFeed> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              authentication.signOut();
+            },
             icon: Icon(
               MdiIcons.bellOutline,
               color: Get.isDarkMode
@@ -65,7 +69,12 @@ class _CampusFeedState extends State<CampusFeed> {
                 accountType == 'accountTypeCampusAdmin',
             child: IconButton(
               onPressed: () {
-                Get.to(() => const UploadFeedPost());
+                Get.to(
+                  () => const UploadFeedPost(
+                    collectionName: 'announcements',
+                    docName: 'campus-feed',
+                  ),
+                );
               },
               icon: Icon(
                 MdiIcons.cardPlusOutline,

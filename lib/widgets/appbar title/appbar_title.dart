@@ -41,7 +41,7 @@ class AppBarTitle extends StatelessWidget {
           ),
           ColorizeAnimatedText(
             'WeConnect',
-            speed: const Duration(milliseconds: 500),
+            speed: const Duration(milliseconds: 300),
             textAlign: TextAlign.center,
             textStyle: colorizeTextStyle,
             colors: colorizeColors,
@@ -49,7 +49,7 @@ class AppBarTitle extends StatelessWidget {
         ],
         isRepeatingAnimation: true,
         onTap: () {
-          print("Tap Event");
+          debugPrint("Tap Event");
         },
       ),
     );
