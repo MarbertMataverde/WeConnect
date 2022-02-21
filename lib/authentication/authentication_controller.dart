@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/constant.dart';
-import '../controller/controller_account_type_getter.dart';
+import '../controller/controller_account_information.dart';
 import '../page/phone view/home/home_phone_wrapper.dart';
 import '../page/phone view/sign in/phone_view.dart';
 import '../page/web view/sign in/web_view.dart';
@@ -22,7 +22,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final box = GetStorage();
 
 //getting account type
-final accountType = Get.put(ControllerAccountType());
+final accountType = Get.put(ControllerAccountInformation());
 
 //dialogs
 final dialog = Get.put(SettingAuthenticationDialog());

@@ -7,7 +7,7 @@ import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 
-import '../../../controller/controller_account_type_getter.dart';
+import '../../../controller/controller_account_information.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../widgets/widget sign in/widget_textformfield_login.dart';
 import '../forgot password/forgot_password.dart';
@@ -22,7 +22,7 @@ final _validationKey = GlobalKey<FormState>();
 final authentication = Get.put(Authentication());
 
 // account type routing
-final accountType = Get.put(ControllerAccountType());
+final accountType = Get.put(ControllerAccountInformation());
 
 class PhoneViewSignIn extends StatefulWidget {
   const PhoneViewSignIn({

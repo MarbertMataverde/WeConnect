@@ -13,7 +13,7 @@ final firestore = FirebaseFirestore.instance;
 //storage box for storing current uid
 final box = GetStorage();
 
-class ControllerAccountType extends GetxController {
+class ControllerAccountInformation extends GetxController {
   Future getter(String _currentUid) async {
     accountTypeIdentifier(
       //campus admin
