@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/authentication/authentication_controller.dart';
 import 'package:weconnect/constant/constant.dart';
@@ -22,7 +21,7 @@ final _validationKey = GlobalKey<FormState>();
 final authentication = Get.put(Authentication());
 
 // account type routing
-final accountType = Get.put(ControllerAccountInformation());
+final accountInfomation = Get.put(ControllerAccountInformation());
 
 class PhoneViewSignIn extends StatefulWidget {
   const PhoneViewSignIn({
@@ -148,8 +147,6 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                     )
                   : CustomButton(
                       onPress: () async {
-                        SharedPreferences sp =
-                            await SharedPreferences.getInstance();
                         setState(() {
                           isLoading = true;
                         });
@@ -162,7 +159,6 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                             _passwordCtrlr.text,
                             context,
                           );
-                          accountType.getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;

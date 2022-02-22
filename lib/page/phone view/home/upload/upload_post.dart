@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +36,8 @@ class UploadFeedPost extends StatefulWidget {
 
 class _UploadFeedPostState extends State<UploadFeedPost> {
   final TextEditingController _descriptionCtrlr = TextEditingController();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -111,28 +114,47 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                       label: const Text('CHOOSE IMAGE'),
                       icon: const Icon(Icons.image),
                     ),
-                    TextButton.icon(
-                      style: TextButton.styleFrom(
-                          //style
-                          primary: Get.isDarkMode
-                              ? kTextColorDarkTheme
-                              : kTextColorLightTheme),
-                      onPressed: () async {
-                        SharedPreferences _sp =
-                            await SharedPreferences.getInstance();
-                        await _createPost.dataChecker(
-                          result,
-                          widget.collectionName,
-                          _descriptionCtrlr.text,
-                          _sp.get('currentProfileName') as String,
-                          _sp.get('currentProfileImageUrl') as String,
-                          _sp.get('accountType') as String,
-                          widget.docName,
-                        );
-                      },
-                      label: const Text('UPLOAD NOW'),
-                      icon: const Icon(Icons.upload),
-                    ),
+                    isLoading
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                const Text('Uploading Please Wait..'),
+                                SpinKitThreeInOut(
+                                  color: Get.theme.primaryColor,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          )
+                        : TextButton.icon(
+                            style: TextButton.styleFrom(
+                                //style
+                                primary: Get.isDarkMode
+                                    ? kTextColorDarkTheme
+                                    : kTextColorLightTheme),
+                            onPressed: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              SharedPreferences _sp =
+                                  await SharedPreferences.getInstance();
+                              await _createPost.dataChecker(
+                                result,
+                                widget.collectionName,
+                                _descriptionCtrlr.text,
+                                _sp.get('currentProfileName') as String,
+                                _sp.get('currentProfileImageUrl') as String,
+                                _sp.get('accountType') as String,
+                                widget.docName,
+                              );
+                              setState(() {
+                                isLoading = false;
+                              });
+                            },
+                            label: const Text('UPLOAD NOW'),
+                            icon: const Icon(Icons.upload),
+                          ),
                   ],
                 ),
               ],

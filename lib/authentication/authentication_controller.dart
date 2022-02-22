@@ -22,7 +22,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final box = GetStorage();
 
 //getting account type
-final accountType = Get.put(ControllerAccountInformation());
+final accountInformation = Get.put(ControllerAccountInformation());
 
 //dialogs
 final dialog = Get.put(SettingAuthenticationDialog());
@@ -40,11 +40,15 @@ class Authentication extends GetxController {
         box.write('currentUid', value.user!.uid);
         //getting account type
         sharedPreferences.setString('currentUid', value.user!.uid);
+        //getting account information
+        await sharedPreferences.setString('currentUid', value.user!.uid);
+        accountInformation
+            .getter(sharedPreferences.get('currentUid') as String);
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
       });
-      // accountType.getter();
+      // accountInformation.getter();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         dialog.userNotFoundDialog(
@@ -92,7 +96,7 @@ class Authentication extends GetxController {
             .doc(_auth.currentUser!.uid)
             .set({
           'regs-access-code': _accessCode,
-          'account-tpye': 'studentAccountType',
+          'account-tpye': 'studentAccountInformation',
           'profile-name': _fullName,
           'college': _college,
           'student-number': _studentNumber,
@@ -104,8 +108,10 @@ class Authentication extends GetxController {
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting account type
-        sharedPreferences.setString('currentUid', value.user!.uid);
+        //getting account information
+        await sharedPreferences.setString('currentUid', value.user!.uid);
+        accountInformation
+            .getter(sharedPreferences.get('currentUid') as String);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -149,7 +155,7 @@ class Authentication extends GetxController {
             .doc(_auth.currentUser!.uid)
             .set({
           'regs-access-code': _accessCode,
-          'account-tpye': 'professorAccountType',
+          'account-tpye': 'professorAccountInformation',
           'profile-image-url': kDefaultProfile,
           'profile-name': _fullName,
           'contact-number': _contactNumber,
@@ -164,8 +170,10 @@ class Authentication extends GetxController {
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting account type
-        sharedPreferences.setString('currentUid', value.user!.uid);
+        //getting account information
+        await sharedPreferences.setString('currentUid', value.user!.uid);
+        accountInformation
+            .getter(sharedPreferences.get('currentUid') as String);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

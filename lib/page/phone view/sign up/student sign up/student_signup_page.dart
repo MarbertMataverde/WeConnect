@@ -259,7 +259,8 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                             _passwordCtrlr.text,
                             context,
                           );
-                          accountType.getter(sp.get('currentUid') as String);
+                          accountInformation
+                              .getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;
