@@ -12,6 +12,7 @@ import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/controller/controller_delete_post.dart';
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
+import 'package:weconnect/setting/setting_post_tile_dialog.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 
@@ -21,8 +22,8 @@ final box = GetStorage();
 //pop up based on account type
 final popUpMenu = Get.put(ControllerPostTilePopUpMenu());
 
-//delete post controller
-final _controllerDeletePost = Get.put(ControllerDeletePost());
+//dialogs
+final dialogs = Get.put(SettingPostTileDialog());
 
 class AnnouncementPostTile extends StatelessWidget {
   const AnnouncementPostTile({
@@ -143,8 +144,18 @@ class AnnouncementPostTile extends StatelessWidget {
                             'Delete',
                             Icons.delete_outlined,
                             Colors.red,
-                            () => _controllerDeletePost.deletePost(
-                                announcementTypeDoc, postDocId, postMedia),
+                            () {
+                              //dialog for deletion of post
+                              dialogs.deletePostDialog(
+                                context,
+                                'assets/gifs/question_mark.gif',
+                                'Delete Post 🗑',
+                                'Are you sure? your about to delete this post? 🤔',
+                                announcementTypeDoc,
+                                postDocId,
+                                postMedia,
+                              );
+                            },
                           ),
                         ]
                       :
