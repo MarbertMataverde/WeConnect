@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'campus_feed.dart';
 
@@ -27,6 +28,18 @@ class HomePhoneWrapper extends StatefulWidget {
 }
 
 class _HomeWrapperState extends State<HomePhoneWrapper> {
+  @override
+  void initState() {
+    accountTypeToGetStorage();
+    super.initState();
+  }
+
+  Future accountTypeToGetStorage() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    box.write('accountType', sharedPreferences.get('accountType'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
