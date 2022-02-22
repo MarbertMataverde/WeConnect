@@ -49,7 +49,7 @@ FocusedMenuItem focusMenuItem(
   String title,
   IconData trailingIcon,
   Color iconColor,
-  Function onPressed,
+  onPressed,
 ) {
   return FocusedMenuItem(
     title: Text(

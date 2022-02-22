@@ -118,6 +118,10 @@ class _CampusFeedState extends State<CampusFeed> {
                 accountProfileImageUrl: data.docs[index]
                     ['account-profile-image-url'],
                 postMedia: _imageList,
+                //delition data
+                announcementTypeDoc: 'campus-feed',
+                postDocId: data.docs[index].id,
+                media: _imageList,
               );
             },
           );

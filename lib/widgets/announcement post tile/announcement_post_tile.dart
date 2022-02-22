@@ -6,9 +6,11 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/controller/controller_delete_post.dart';
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
@@ -19,6 +21,9 @@ final box = GetStorage();
 //pop up based on account type
 final popUpMenu = Get.put(ControllerPostTilePopUpMenu());
 
+//delete post controller
+final _controllerDeletePost = Get.put(ControllerDeletePost());
+
 class AnnouncementPostTile extends StatelessWidget {
   const AnnouncementPostTile({
     Key? key,
@@ -27,6 +32,10 @@ class AnnouncementPostTile extends StatelessWidget {
     required this.postDescription,
     required this.accountProfileImageUrl,
     required this.postMedia,
+    //deletion constructor
+    required this.announcementTypeDoc,
+    required this.postDocId,
+    required this.media,
   }) : super(key: key);
   //when announcement post created
   final Timestamp postCreatedAt;
@@ -38,6 +47,15 @@ class AnnouncementPostTile extends StatelessWidget {
   final String accountProfileImageUrl;
   //post images or media
   final List postMedia;
+
+  //delition data
+  //announcement type like campus-feed, coa-feed like that so that we know where
+  //to remove the specific post
+  final String announcementTypeDoc;
+  //post doc ID
+  final String postDocId;
+  //List of images with the post
+  final List media;
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +124,45 @@ class AnnouncementPostTile extends StatelessWidget {
                   onPressed: () {},
                   menuItems: _accountType == 'accountTypeCampusAdmin' ||
                           _accountType == 'accountTypeRegistrarAdmin'
-                      ? popUpMenu.campusAndRegistrarAdminMenuItem
-                      : popUpMenu.professorsAndStudentsMenuItem,
+                      ?
+                      //menu item for campus and registrar admin
+                      [
+                          focusMenuItem(
+                            'Details',
+                            MdiIcons.details,
+                            Colors.black54,
+                            () {},
+                          ),
+                          focusMenuItem(
+                            'Edit Post',
+                            MdiIcons.pencil,
+                            Colors.black54,
+                            () {},
+                          ),
+                          focusMenuItem(
+                            'Delete',
+                            Icons.delete_outlined,
+                            Colors.red,
+                            () => _controllerDeletePost.deletePost(
+                                announcementTypeDoc, postDocId, postMedia),
+                          ),
+                        ]
+                      :
+                      //menu item for professors and students
+                      [
+                          focusMenuItem(
+                            'Details',
+                            MdiIcons.details,
+                            Colors.black54,
+                            () {},
+                          ),
+                          focusMenuItem(
+                            'Report',
+                            Icons.report_outlined,
+                            Colors.red,
+                            () {},
+                          ),
+                        ],
                   child: Icon(
                     Icons.more_vert_rounded,
                     color: Get.isDarkMode
