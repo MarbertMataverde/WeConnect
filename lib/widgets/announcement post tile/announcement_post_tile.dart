@@ -141,19 +141,29 @@ class AnnouncementPostTile extends StatelessWidget {
               : CarouselSlider(
                   items: postMedia
                       .map(
-                        (item) => Image.network(
-                          item,
-                          fit: BoxFit.cover,
-                          width: 100.w,
+                        (item) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 1.w),
+                          child: Image.network(
+                            item,
+                            fit: BoxFit.cover,
+                            width: Get.mediaQuery.size.width,
+                          ),
                         ),
                       )
                       .toList(),
                   options: CarouselOptions(
-                    pageSnapping: true,
-                    enlargeCenterPage: true,
-                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    height: 50.h,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 1,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
                     autoPlay: true,
-                    autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+                    autoPlayInterval: const Duration(seconds: 9),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 900),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
                   ),
                 ),
           Row(
