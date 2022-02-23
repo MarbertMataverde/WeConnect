@@ -135,7 +135,7 @@ class AnnouncementPostTile extends StatelessWidget {
                             () {},
                           ),
                           focusMenuItem(
-                            'Edit Post',
+                            'Edit Caption',
                             MdiIcons.pencil,
                             Colors.black54,
                             () {},
