@@ -10,9 +10,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:weconnect/controller/controller_delete_post.dart';
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
 import 'package:weconnect/setting/setting_post_tile_dialog.dart';
+
+import '../post comment (Write and Show)/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 
@@ -224,7 +225,7 @@ class AnnouncementPostTile extends StatelessWidget {
                     initialPage: 0,
                     enableInfiniteScroll: true,
                     autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 9),
+                    autoPlayInterval: const Duration(seconds: 5),
                     autoPlayAnimationDuration:
                         const Duration(milliseconds: 900),
                     autoPlayCurve: Curves.fastOutSlowIn,
@@ -245,7 +246,15 @@ class AnnouncementPostTile extends StatelessWidget {
                           ? kTextColorDarkTheme
                           : kTextColorLightTheme,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(
+                        () => ShowAllComment(
+                          postDocId: postDocId,
+                          collectionName: 'announcements',
+                          docName: 'campus-feed',
+                        ),
+                      );
+                    },
                     icon: const Icon(Icons.message),
                     label: Text(
                       'Write and show comments',

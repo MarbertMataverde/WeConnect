@@ -28,7 +28,6 @@ class AppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250.0,
       child: AnimatedTextKit(
         repeatForever: true,
         animatedTexts: [
