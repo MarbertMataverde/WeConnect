@@ -7,10 +7,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weconnect/page/phone%20view/forgot%20password/forgot_password.dart';
 
-import '../../../constant/constant_colors.dart';
-import '../../../widgets/announcement post tile/announcement_post_tile.dart';
-import '../../../widgets/appbar title/appbar_title.dart';
-import 'upload/upload_post.dart';
+import '../../../../constant/constant_colors.dart';
+import '../../../../widgets/announcement post tile/announcement_post_tile.dart';
+import '../../../../widgets/appbar title/appbar_title.dart';
+import '../upload/upload_post.dart';
 
 final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .collection('announcements')
