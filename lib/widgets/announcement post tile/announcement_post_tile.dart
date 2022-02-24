@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
+import 'package:weconnect/page/phone%20view/home/post%20details/post_details.dart';
 import 'package:weconnect/setting/setting_post_tile_dialog.dart';
 
 import '../../page/phone view/home/edit post caption/edit_caption.dart';
@@ -31,7 +32,7 @@ class AnnouncementPostTile extends StatelessWidget {
     Key? key,
     required this.postCreatedAt,
     required this.accountName,
-    required this.postDescription,
+    required this.postCaption,
     required this.accountProfileImageUrl,
     required this.postMedia,
     //deletion constructor
@@ -44,7 +45,7 @@ class AnnouncementPostTile extends StatelessWidget {
   //account name
   final String accountName;
   //description of the post
-  final String postDescription;
+  final String postCaption;
   //account prifile image url
   final String accountProfileImageUrl;
   //post images or media
@@ -143,7 +144,14 @@ class AnnouncementPostTile extends StatelessWidget {
                             'Details',
                             MdiIcons.details,
                             Colors.black54,
-                            () {},
+                            () {
+                              Get.to(
+                                () => PostDetails(
+                                  postMedia: postMedia,
+                                  postCaption: postCaption,
+                                ),
+                              );
+                            },
                           ),
                           focusMenuItem(
                             'Edit Caption',
@@ -154,7 +162,7 @@ class AnnouncementPostTile extends StatelessWidget {
                                 () => EditCaption(
                                   docName: announcementTypeDoc,
                                   postDocId: postDocId,
-                                  recentCaption: postDescription,
+                                  recentCaption: postCaption,
                                 ),
                               );
                             },
@@ -184,7 +192,14 @@ class AnnouncementPostTile extends StatelessWidget {
                             'Details',
                             MdiIcons.details,
                             Colors.black54,
-                            () {},
+                            () {
+                              Get.to(
+                                () => PostDetails(
+                                  postMedia: postMedia,
+                                  postCaption: postCaption,
+                                ),
+                              );
+                            },
                           ),
                           focusMenuItem(
                             'Report',
@@ -207,7 +222,7 @@ class AnnouncementPostTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ExpandableText(
-              postDescription,
+              postCaption,
               style: TextStyle(
                 color:
                     Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
@@ -222,33 +237,45 @@ class AnnouncementPostTile extends StatelessWidget {
             ),
           ),
           postMedia.length == 1
-              ? Image.network(postMedia.first)
-              : CarouselSlider(
-                  items: postMedia
-                      .map(
-                        (item) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: Get.mediaQuery.size.width,
+              ? GestureDetector(
+                  onTap: () => Get.to(() => PostDetails(
+                        postMedia: postMedia,
+                        postCaption: postCaption,
+                      )),
+                  child: Image.network(postMedia.first),
+                )
+              : GestureDetector(
+                  onTap: () => Get.to(() => PostDetails(
+                        postMedia: postMedia,
+                        postCaption: postCaption,
+                      )),
+                  child: CarouselSlider(
+                    items: postMedia
+                        .map(
+                          (item) => Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 1.w),
+                            child: Image.network(
+                              item,
+                              fit: BoxFit.cover,
+                              width: Get.mediaQuery.size.width,
+                            ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: 50.h,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
+                        )
+                        .toList(),
+                    options: CarouselOptions(
+                      height: Get.mediaQuery.size.height * .5,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 900),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    ),
                   ),
                 ),
           Row(

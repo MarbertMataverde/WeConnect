@@ -114,7 +114,7 @@ class _CampusFeedState extends State<CampusFeed> {
               return AnnouncementPostTile(
                 postCreatedAt: data.docs[index]['post-created-at'],
                 accountName: data.docs[index]['account-name'],
-                postDescription: data.docs[index]['post-caption'],
+                postCaption: data.docs[index]['post-caption'],
                 accountProfileImageUrl: data.docs[index]
                     ['account-profile-image-url'],
                 postMedia: _imageList,
