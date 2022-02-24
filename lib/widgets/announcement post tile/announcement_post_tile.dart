@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
+import 'package:weconnect/page/phone%20view/home/edit%20caption/edit_caption.dart';
 import 'package:weconnect/setting/setting_post_tile_dialog.dart';
 
 import '../post comment (Write and Show)/comment_write_show.dart';
@@ -21,7 +22,6 @@ DateFormat dateFormat = DateFormat("MMM-dd");
 final box = GetStorage();
 
 //pop up based on account type
-final popUpMenu = Get.put(ControllerPostTilePopUpMenu());
 
 //dialogs
 final dialogs = Get.put(SettingPostTileDialog());
@@ -58,6 +58,16 @@ class AnnouncementPostTile extends StatelessWidget {
   final String postDocId;
   //List of images with the post
   final List media;
+
+  //editign caption
+  //announcement type doc name
+  // same as announcementTypeDoc
+  //
+  //announcement doc id
+  //same as postDocId
+  //
+  //recent description
+  //same as postDescriotion
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +129,7 @@ class AnnouncementPostTile extends StatelessWidget {
                       color: Colors.transparent,
                       borderRadius: BorderRadius.all(Radius.circular(1.w))),
                   duration: const Duration(milliseconds: 100),
-                  animateMenuItems: true,
+                  animateMenuItems: false,
                   blurBackgroundColor: Colors.black,
                   openWithTap: true,
                   menuOffset: 1.h,
@@ -139,7 +149,15 @@ class AnnouncementPostTile extends StatelessWidget {
                             'Edit Caption',
                             MdiIcons.pencil,
                             Colors.black54,
-                            () {},
+                            () {
+                              Get.to(
+                                () => EditCaption(
+                                  docName: announcementTypeDoc,
+                                  postDocId: postDocId,
+                                  recentCaption: postDescription,
+                                ),
+                              );
+                            },
                           ),
                           focusMenuItem(
                             'Delete',

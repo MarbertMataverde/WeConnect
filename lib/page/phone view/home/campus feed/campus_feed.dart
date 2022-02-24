@@ -122,6 +122,7 @@ class _CampusFeedState extends State<CampusFeed> {
                 announcementTypeDoc: 'campus-feed',
                 postDocId: data.docs[index].id,
                 media: _imageList,
+                //edit caption
               );
             },
           );
