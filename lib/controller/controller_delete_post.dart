@@ -11,6 +11,16 @@ class ControllerDeletePost extends GetxController {
     String postDocId,
     List<dynamic> imageUrls,
   ) async {
+    //comment delition
+    await FirebaseFirestore.instance
+        .collection('announcements')
+        .doc(announcementTypeDoc)
+        .collection('post')
+        .doc(postDocId)
+        .collection('comments')
+        .doc()
+        .delete();
+    //post data delition
     await FirebaseFirestore.instance
         .collection('announcements')
         .doc(announcementTypeDoc)
