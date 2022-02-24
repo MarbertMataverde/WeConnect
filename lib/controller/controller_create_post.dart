@@ -26,7 +26,7 @@ final String _dateTimeNow = DateTime.now().toString();
 class ControllerCreatePost extends GetxController {
   Future<void> uploadPostForCampusFeed(
     String _collectionName,
-    String _postDescription,
+    String _postCaption,
     String _accountName,
     String _accountProfileImageUrl,
   ) async {
@@ -36,7 +36,7 @@ class ControllerCreatePost extends GetxController {
         .collection('post')
         .doc()
         .set({
-          'post-description': _postDescription,
+          'post-caption': _postCaption,
           'post-media': listOfImageUrls,
           'account-name': _accountName,
           'account-profile-image-url': _accountProfileImageUrl,
@@ -56,7 +56,7 @@ class ControllerCreatePost extends GetxController {
 
   Future<void> uploadPost(
     String _collectionName,
-    String _postDescription,
+    String _postCaption,
     String _accountName,
     String _accountProfileImageUrl,
     String _docName,
@@ -67,7 +67,7 @@ class ControllerCreatePost extends GetxController {
         .collection('post')
         .doc()
         .set({
-          'post-description': _postDescription,
+          'post-caption': _postCaption,
           'post-media': listOfImageUrls,
           'account-name': _accountName,
           'account-profile-image-url': _accountProfileImageUrl,
@@ -88,13 +88,13 @@ class ControllerCreatePost extends GetxController {
   Future<void> dataChecker(
     FilePickerResult? result,
     String _collectionName,
-    String _postDescription,
+    String _postCaption,
     String _accountName,
     String _profileUrl,
     String _accountType,
     String _docName,
   ) async {
-    if (result != null && _postDescription.isEmpty == false) {
+    if (result != null && _postCaption.isEmpty == false) {
       _pikedImages = result.paths.map((path) => File(path!)).toList();
 
       for (var image in _pikedImages) {
@@ -112,13 +112,13 @@ class ControllerCreatePost extends GetxController {
               _accountType == 'accountTypeRegistrarAdmin'
           ? uploadPostForCampusFeed(
               _collectionName,
-              _postDescription,
+              _postCaption,
               _accountName,
               _profileUrl,
             )
           : uploadPost(
               _collectionName,
-              _postDescription,
+              _postCaption,
               _accountName,
               _profileUrl,
               _docName,
@@ -126,7 +126,7 @@ class ControllerCreatePost extends GetxController {
       listOfImageUrls.clear();
     }
 
-    // if (_postDescription.isEmpty == true) {
+    // if (_postCaption.isEmpty == true) {
     //   _customDialog.dialog(
     //     'DESCRIPTION MISSING',
     //     'Please enter a description for this post to continue',
