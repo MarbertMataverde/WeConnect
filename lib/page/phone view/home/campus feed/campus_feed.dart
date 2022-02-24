@@ -10,7 +10,7 @@ import 'package:weconnect/page/phone%20view/forgot%20password/forgot_password.da
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/announcement post tile/announcement_post_tile.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
-import '../upload/upload_post.dart';
+import '../upload post/upload_post.dart';
 
 final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .collection('announcements')
