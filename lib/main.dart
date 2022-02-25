@@ -64,7 +64,15 @@ class _InitialPageState extends State<InitialPage> {
                       : const PhoneViewSignIn();
                 }
                 //you can add layout for tablet too
-                //?web view
+                //theirs one more sing in bug for web
+                // !!!!!!!!!!!!!BUUUUUUUUUUUUUGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!
+                // ! if the other account type try to signed-in in web base
+                // ! the _isSignedIn will be set to false even if will not navigated
+                // ! to HomeWebWrapper. If the user reload the page the sharedPrps
+                // ! will be excuted and the stored data will be get and automaticaly
+                // ! navigate to HomeWebWrapper even if the account type is not
+                // ! campus admin.
+                // !web view
                 else {
                   return _isSignedIn ? const HomeWebWrapper() : const WebView();
                 }
