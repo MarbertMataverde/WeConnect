@@ -4,6 +4,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/controller/controller_theme_changer.dart';
 
+import '../../page/phone view/reports/reports.dart';
+
 final changeTheme = Get.put(ControllerChangeTheme());
 
 class WidgetNavigationDrawer extends StatelessWidget {
@@ -30,6 +32,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
               child: buildDrawerItem(
                 icon: Icons.report_outlined,
                 title: 'Reports',
+                onCliked: () => selectedItem(context, 1),
               ),
             ),
           ],
@@ -63,6 +66,9 @@ void selectedItem(BuildContext context, int index) {
   switch (index) {
     case 0:
       changeTheme.toggleChangeTheme();
+      break;
+    case 1:
+      Get.to(() => const Reports());
       break;
     default:
   }

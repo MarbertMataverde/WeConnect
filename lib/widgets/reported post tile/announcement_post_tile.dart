@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable_text/expandable_text.dart';
@@ -29,8 +27,8 @@ final box = GetStorage();
 //dialogs
 final dialogs = Get.put(SettingPostTileDialog());
 
-class AnnouncementPostTile extends StatelessWidget {
-  const AnnouncementPostTile({
+class ReportedPostTile extends StatelessWidget {
+  const ReportedPostTile({
     Key? key,
     required this.postCreatedAt,
     required this.accountName,
@@ -137,79 +135,41 @@ class AnnouncementPostTile extends StatelessWidget {
                   openWithTap: true,
                   menuOffset: 1.h,
                   onPressed: () {},
-                  menuItems: _accountType == 'accountTypeCampusAdmin' ||
-                          _accountType == 'accountTypeRegistrarAdmin'
-                      ?
+                  menuItems:
                       //menu item for campus and registrar admin
                       [
-                          focusMenuItem(
-                            'Details',
-                            MdiIcons.details,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => PostDetails(
-                                  postMedia: postMedia,
-                                  postCaption: postCaption,
-                                ),
-                              );
-                            },
+                    focusMenuItem(
+                      'Edit Caption',
+                      MdiIcons.pencil,
+                      Colors.black54,
+                      () {
+                        Get.to(
+                          () => EditCaption(
+                            docName: announcementTypeDoc,
+                            postDocId: postDocId,
+                            recentCaption: postCaption,
                           ),
-                          focusMenuItem(
-                            'Edit Caption',
-                            MdiIcons.pencil,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => EditCaption(
-                                  docName: announcementTypeDoc,
-                                  postDocId: postDocId,
-                                  recentCaption: postCaption,
-                                ),
-                              );
-                            },
-                          ),
-                          focusMenuItem(
-                            'Delete',
-                            Icons.delete_outlined,
-                            Colors.red,
-                            () {
-                              //dialog for deletion of post
-                              dialogs.deletePostDialog(
-                                context,
-                                'assets/gifs/question_mark.gif',
-                                'Delete Post 🗑',
-                                'Are you sure? your about to delete this post? 🤔',
-                                announcementTypeDoc,
-                                postDocId,
-                                postMedia,
-                              );
-                            },
-                          ),
-                        ]
-                      :
-                      //menu item for professors and students
-                      [
-                          focusMenuItem(
-                            'Details',
-                            MdiIcons.details,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => PostDetails(
-                                  postMedia: postMedia,
-                                  postCaption: postCaption,
-                                ),
-                              );
-                            },
-                          ),
-                          focusMenuItem(
-                            'Report',
-                            Icons.report_outlined,
-                            Colors.red,
-                            () {},
-                          ),
-                        ],
+                        );
+                      },
+                    ),
+                    focusMenuItem(
+                      'Delete',
+                      Icons.delete_outlined,
+                      Colors.red,
+                      () {
+                        //dialog for deletion of post
+                        dialogs.deletePostDialog(
+                          context,
+                          'assets/gifs/question_mark.gif',
+                          'Delete Post 🗑',
+                          'Are you sure? your about to delete this post? 🤔',
+                          announcementTypeDoc,
+                          postDocId,
+                          postMedia,
+                        );
+                      },
+                    ),
+                  ],
                   child: Icon(
                     Icons.more_vert_rounded,
                     color: Get.isDarkMode
@@ -280,41 +240,6 @@ class AnnouncementPostTile extends StatelessWidget {
                     ),
                   ),
                 ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Align(
-                  alignment: Alignment.center,
-                  child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                      primary: Get.isDarkMode
-                          ? kTextColorDarkTheme
-                          : kTextColorLightTheme,
-                    ),
-                    onPressed: () {
-                      Get.to(
-                        () => ShowAllComment(
-                          postDocId: postDocId,
-                          collectionName: 'announcements',
-                          docName: 'campus-feed',
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.message),
-                    label: Text(
-                      'Write and show comments',
-                      style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
