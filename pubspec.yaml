@@ -57,6 +57,7 @@ dependencies:
   get_storage: ^2.0.3
   animated_bottom_navigation_bar: ^0.3.2
   focused_menu: ^1.0.5
+  avatar_glow: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,7 @@ flutter:
   assets:
     - assets/vectors/
     - assets/gifs/
+    - assets/logo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

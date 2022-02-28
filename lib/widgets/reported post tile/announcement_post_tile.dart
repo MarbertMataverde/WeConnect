@@ -15,7 +15,6 @@ import 'package:weconnect/page/phone%20view/home/post%20details/post_details.dar
 import 'package:weconnect/setting/setting_post_tile_dialog.dart';
 
 import '../../page/phone view/home/edit post caption/edit_caption.dart';
-import '../post comment (Write and Show)/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 
@@ -72,7 +71,6 @@ class ReportedPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _accountType = box.read('accountType');
     return Card(
       elevation: 3,
       color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,

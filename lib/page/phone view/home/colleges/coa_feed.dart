@@ -13,23 +13,23 @@ import '../../../../widgets/announcement post tile/announcement_post_tile.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../upload post/upload_post.dart';
 
-final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
+final Stream<QuerySnapshot> coaFeedSnapshot = FirebaseFirestore.instance
     .collection('announcements')
-    .doc('campus-feed')
+    .doc('coa-feed')
     .collection('post')
     .orderBy('post-created-at', descending: true)
     .snapshots();
 
 final box = GetStorage();
 
-class CampusFeed extends StatefulWidget {
-  const CampusFeed({Key? key}) : super(key: key);
+class CoaFeed extends StatefulWidget {
+  const CoaFeed({Key? key}) : super(key: key);
 
   @override
-  State<CampusFeed> createState() => _CampusFeedState();
+  State<CoaFeed> createState() => _CoaFeedState();
 }
 
-class _CampusFeedState extends State<CampusFeed> {
+class _CoaFeedState extends State<CoaFeed> {
   String? accountType;
   @override
   void initState() {
@@ -52,28 +52,27 @@ class _CampusFeedState extends State<CampusFeed> {
           elevation: 0.0,
           leading: IconButton(
               onPressed: () {
-                authentication.signOut();
+                Get.back();
               },
               icon: Icon(
-                MdiIcons.bellOutline,
+                MdiIcons.arrowLeft,
                 color: Get.isDarkMode
                     ? kButtonColorDarkTheme
                     : kButtonColorLightTheme,
               )),
           centerTitle: true,
           title: const AppBarTitle(
-            title: 'Campus Feed',
+            title: 'COA Feed',
           ),
           actions: [
             Visibility(
-              visible: accountType == 'accountTypeCampusAdmin' ||
-                  accountType == 'accountTypeCampusAdmin',
+              visible: accountType == 'accountTypeCoaAdmin',
               child: IconButton(
                 onPressed: () {
                   Get.to(
                     () => const UploadFeedPost(
                       collectionName: 'announcements',
-                      docName: 'campus-feed',
+                      docName: 'coa-feed',
                     ),
                   );
                 },
@@ -104,7 +103,7 @@ class _CampusFeedState extends State<CampusFeed> {
         ),
         extendBody: true,
         body: StreamBuilder<QuerySnapshot>(
-          stream: campusFeedSnapshot,
+          stream: coaFeedSnapshot,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -127,7 +126,7 @@ class _CampusFeedState extends State<CampusFeed> {
                       ['account-profile-image-url'],
                   postMedia: _imageList,
                   //delition data
-                  announcementTypeDoc: 'campus-feed',
+                  announcementTypeDoc: 'Coa-feed',
                   postDocId: data.docs[index].id,
                   media: _imageList,
                   //edit caption

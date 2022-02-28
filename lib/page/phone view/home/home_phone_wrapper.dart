@@ -4,15 +4,17 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weconnect/page/phone%20view/home/colleges/select_college.dart';
 
 import 'campus feed/campus_feed.dart';
 
 //firestore initialization
 final firestore = FirebaseFirestore.instance;
 
-// final _pages = [
-//   const CampusFeed(),
-// ];
+final _pages = [
+  const CampusFeed(),
+  const SelectCollegeFeed(),
+];
 // get storage box
 final box = GetStorage();
 
@@ -43,7 +45,7 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const CampusFeed(),
+      body: _pages[_currentIndex],
       // body: _pages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,

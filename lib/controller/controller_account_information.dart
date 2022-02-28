@@ -47,7 +47,7 @@ class ControllerAccountInformation extends GetxController {
       //ccs admin
       'ccs-admin',
       _currentUid,
-      'accountTypeCssAdmin',
+      'accountTypeCcsAdmin',
     );
     accountTypeIdentifier(
       //masteral admin

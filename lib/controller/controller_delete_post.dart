@@ -12,10 +12,10 @@ class ControllerDeletePost extends GetxController {
     List<dynamic> imageUrls,
   ) async {
     //reports deletion
-    final reportedDocumments = await FirebaseFirestore.instance
-        .collection('reports')
-        .where('post-documment-id', isEqualTo: postDocId)
-        .get();
+    // final reportedDocumments = await FirebaseFirestore.instance
+    //     .collection('reports')
+    //     .where('post-documment-id', isEqualTo: postDocId)
+    //     .get();
 
     //comment delition
     await FirebaseFirestore.instance

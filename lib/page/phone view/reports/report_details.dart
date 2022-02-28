@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:weconnect/page/phone%20view/reports/open_reported_post.dart';
-import 'package:weconnect/widgets/announcement%20post%20tile/announcement_post_tile.dart';
 
 import '../../../constant/constant_colors.dart';
 import '../../../widgets/appbar title/appbar_title.dart';
