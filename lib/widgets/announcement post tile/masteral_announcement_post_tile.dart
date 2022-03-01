@@ -27,8 +27,8 @@ final box = GetStorage();
 //dialogs
 final dialogs = Get.put(SettingPostTileDialog());
 
-class AnnouncementPostTile extends StatelessWidget {
-  const AnnouncementPostTile({
+class MasteralAnnouncementPostTile extends StatelessWidget {
+  const MasteralAnnouncementPostTile({
     Key? key,
     required this.postCreatedAt,
     required this.accountName,
@@ -39,6 +39,7 @@ class AnnouncementPostTile extends StatelessWidget {
     required this.announcementTypeDoc,
     required this.postDocId,
     required this.media,
+    required this.accountType,
   }) : super(key: key);
   //when announcement post created
   final Timestamp postCreatedAt;
@@ -60,6 +61,8 @@ class AnnouncementPostTile extends StatelessWidget {
   //List of images with the post
   final List media;
 
+  final String accountType;
+
   //editign caption
   //announcement type doc name
   // same as announcementTypeDoc
@@ -72,7 +75,6 @@ class AnnouncementPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _accountType = box.read('accountType');
     return Card(
       elevation: 3,
       color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,
@@ -135,8 +137,7 @@ class AnnouncementPostTile extends StatelessWidget {
                   openWithTap: true,
                   menuOffset: 1.h,
                   onPressed: () {},
-                  menuItems: _accountType == 'accountTypeCampusAdmin' ||
-                          _accountType == 'accountTypeRegistrarAdmin'
+                  menuItems: accountType == 'accountTypeMasteralAdmin'
                       ?
                       //menu item for campus and registrar admin
                       [

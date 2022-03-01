@@ -9,7 +9,7 @@ import 'package:weconnect/page/phone%20view/forgot%20password/forgot_password.da
 import 'package:weconnect/widgets/navigation%20drawer/widget_navigation_drawer.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/announcement post tile/announcement_post_tile.dart';
+import '../../../../widgets/announcement post tile/campus_announcement_post_tile.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../upload post/upload_post.dart';
 
@@ -119,7 +119,7 @@ class _CampusFeedState extends State<CampusFeed> {
               itemCount: data.size,
               itemBuilder: (context, index) {
                 List _imageList = data.docs[index]['post-media'];
-                return AnnouncementPostTile(
+                return CampusAnnouncementPostTile(
                   postCreatedAt: data.docs[index]['post-created-at'],
                   accountName: data.docs[index]['account-name'],
                   postCaption: data.docs[index]['post-caption'],
@@ -130,7 +130,8 @@ class _CampusFeedState extends State<CampusFeed> {
                   announcementTypeDoc: 'campus-feed',
                   postDocId: data.docs[index].id,
                   media: _imageList,
-                  //edit caption
+                  //account type
+                  accountType: accountType.toString(),
                 );
               },
             );
