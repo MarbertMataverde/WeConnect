@@ -201,6 +201,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      maxLine: 1,
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
                       isPassword: kTrue,

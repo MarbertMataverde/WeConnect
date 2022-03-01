@@ -86,6 +86,7 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                 child: Column(
                   children: [
                     CustomTextFormField(
+                      maxLine: 1,
                       ctrlr: _emailCtrlr,
                       hint: 'Email',
                       isPassword: kFalse,
@@ -105,6 +106,7 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      maxLine: 1,
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
                       isPassword: kTrue,
