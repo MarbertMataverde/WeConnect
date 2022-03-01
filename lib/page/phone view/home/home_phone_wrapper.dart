@@ -15,12 +15,8 @@ import 'campus feed/campus_feed.dart';
 //firestore initialization
 final firestore = FirebaseFirestore.instance;
 
-// get storage box
-final box = GetStorage();
-
-var _currentIndex = 0; //default index of a first screen
-
-//getting the current user inforamtion
+//default index of a first screen
+var _currentIndex = 0;
 
 class HomePhoneWrapper extends StatefulWidget {
   const HomePhoneWrapper({Key? key}) : super(key: key);
@@ -30,6 +26,7 @@ class HomePhoneWrapper extends StatefulWidget {
 }
 
 class _HomeWrapperState extends State<HomePhoneWrapper> {
+  String? accountType;
   @override
   void initState() {
     accountTypeToGetStorage();
@@ -38,15 +35,15 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
 
   Future accountTypeToGetStorage() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    box.write('accountType', sharedPreferences.get('accountType'));
+    accountType = sharedPreferences.get('accountType') as String;
   }
 
   @override
   Widget build(BuildContext context) {
-    final accountType = box.read('accountType');
     final _pages = [
+      //campus feed (main feed)
       const CampusFeed(),
+      //college account type based feed
       accountType == 'accountTypeCoaAdmin'
           ? const CoaFeed()
           : accountType == 'accountTypeCobAdmin'
@@ -59,7 +56,6 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
     ];
     return Scaffold(
       body: _pages[_currentIndex],
-      // body: _pages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
