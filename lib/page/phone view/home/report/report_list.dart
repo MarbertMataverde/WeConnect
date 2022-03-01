@@ -1,18 +1,19 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sizer/sizer.dart';
 import 'package:weconnect/controller/controller_report.dart';
+import 'package:weconnect/page/phone%20view/home/report/detailed_report.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
-final Stream<QuerySnapshot> reportStream =
-    FirebaseFirestore.instance.collection('reports').snapshots();
+final Stream<QuerySnapshot> reportStream = FirebaseFirestore.instance
+    .collection('reports')
+    .orderBy('reported-at', descending: true)
+    .snapshots();
 
 //report controller
 final report = Get.put(ControllerReport());
@@ -52,19 +53,36 @@ class ReportList extends StatelessWidget {
             return const Text("Loading");
           }
           final data = snapshot.requireData;
+
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
+              Timestamp reportedAt = data.docs[index]['reported-at'];
               return Slidable(
                 endActionPane: ActionPane(
                   motion: const StretchMotion(),
                   children: [
                     SlidableAction(
-                      onPressed: (_) {},
+                      onPressed: (_) {
+                        Get.to(() => DetailedReport(
+                              //reported post tile
+                              reportType: data.docs[index]['report-type'],
+                              postDocId: data.docs[index]['post-documment-id'],
+                              //reporter concerns
+                              reportedAt: data.docs[index]['reported-at'],
+                              reporterName: data.docs[index]['reporter-name'],
+                              reporterProfileImageUrl: data.docs[index]
+                                  ['reporter-profile-image-url'],
+                              reportedConcern: data.docs[index]
+                                  ['report-concern'],
+                              reportedConcernDescription: data.docs[index]
+                                  ['report-concern-description'],
+                            ));
+                      },
                       backgroundColor: Get.theme.primaryColor,
                       foregroundColor: Colors.white,
                       icon: MdiIcons.newspaperVariantOutline,
-                      label: 'View Post',
+                      label: 'Details',
                     ),
                     SlidableAction(
                       onPressed: (_) {
@@ -88,7 +106,21 @@ class ReportList extends StatelessWidget {
                   tileColor: Get.isDarkMode
                       ? kTextFormFieldColorDarkTheme
                       : kTextFormFieldColorLightTheme,
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => DetailedReport(
+                          //reported post tile
+                          reportType: data.docs[index]['report-type'],
+                          postDocId: data.docs[index]['post-documment-id'],
+                          //reporter concerns
+                          reportedAt: data.docs[index]['reported-at'],
+                          reporterName: data.docs[index]['reporter-name'],
+                          reporterProfileImageUrl: data.docs[index]
+                              ['reporter-profile-image-url'],
+                          reportedConcern: data.docs[index]['report-concern'],
+                          reportedConcernDescription: data.docs[index]
+                              ['report-concern-description'],
+                        ));
+                  },
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(
                         data.docs[index]['reporter-profile-image-url']),
@@ -98,67 +130,14 @@ class ReportList extends StatelessWidget {
                     data.docs[index]['report-concern-description'],
                     overflow: TextOverflow.ellipsis,
                   ),
+                  trailing: Text(
+                      timeago.format(reportedAt.toDate(), locale: 'en_short')),
                 ),
               );
             },
           );
-          // return ListView(
-          //   children: snapshot.data!.docs.map((DocumentSnapshot document) {
-          //     Map<String, dynamic> data =
-          //         document.data()! as Map<String, dynamic>;
-          //     final dataId = snapshot.requireData;
-          //     return Slidable(
-          //       endActionPane: ActionPane(
-          //         motion: const StretchMotion(),
-          //         children: [
-          //           SlidableAction(
-          //             onPressed: (_) {},
-          //             backgroundColor: Get.theme.primaryColor,
-          //             foregroundColor: Colors.white,
-          //             icon: MdiIcons.newspaperVariantOutline,
-          //             label: 'View Post',
-          //           ),
-          //           SlidableAction(
-          //             onPressed: (_) {
-          //             },
-          //             backgroundColor: Colors.red,
-          //             foregroundColor: Colors.white,
-          //             icon: Icons.delete_outline,
-          //             label: 'Dismiss',
-          //           ),
-          //         ],
-          //       ),
-          //       child: reportListTile(
-          //         reportData: data,
-          //       ),
-          //     );
-          //   }).toList(),
-          // );
         },
       ),
     );
   }
-}
-
-Widget reportListTile({
-  required reportData,
-}) {
-  return ListTile(
-    tileColor: Get.isDarkMode
-        ? kTextFormFieldColorDarkTheme
-        : kTextFormFieldColorLightTheme,
-    onTap: () {
-      // Get.to(() => ReportDetails(
-      //       data: data,
-      //     ));
-    },
-    leading: CircleAvatar(
-      backgroundImage: NetworkImage(reportData['reporter-profile-image-url']),
-    ),
-    title: Text(reportData['reporter-name']),
-    subtitle: Text(
-      reportData['report-concern-description'],
-      overflow: TextOverflow.ellipsis,
-    ),
-  );
 }
