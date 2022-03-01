@@ -206,7 +206,9 @@ class CcsAnnouncementPostTile extends StatelessWidget {
                             'Report',
                             Icons.report_outlined,
                             Colors.red,
-                            () {},
+                            () {
+                              dialogs.reportPostDialog();
+                            },
                           ),
                         ],
                   child: Icon(
