@@ -58,6 +58,7 @@ dependencies:
   animated_bottom_navigation_bar: ^0.3.2
   focused_menu: ^1.0.5
   avatar_glow: ^2.0.2
+  flutter_slidable: ^1.2.0
 
 dev_dependencies:
   flutter_test:

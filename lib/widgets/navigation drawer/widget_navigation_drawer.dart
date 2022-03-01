@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/controller/controller_theme_changer.dart';
 
-import '../../page/phone view/reports/reports.dart';
+import '../../page/phone view/home/report/report_list.dart';
 
 final changeTheme = Get.put(ControllerChangeTheme());
 
@@ -63,12 +63,13 @@ Widget buildDrawerItem({
 }
 
 void selectedItem(BuildContext context, int index) {
+  Get.back();
   switch (index) {
     case 0:
       changeTheme.toggleChangeTheme();
       break;
     case 1:
-      Get.to(() => const Reports());
+      Get.to(() => const ReportList());
       break;
     default:
   }
