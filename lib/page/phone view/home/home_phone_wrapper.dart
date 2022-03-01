@@ -26,6 +26,7 @@ class HomePhoneWrapper extends StatefulWidget {
 
 class _HomeWrapperState extends State<HomePhoneWrapper> {
   String? accountType;
+  String? studentCollege;
   @override
   void initState() {
     accountTypeToGetStorage();
@@ -35,6 +36,7 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
   Future accountTypeToGetStorage() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accountType = sharedPreferences.get('accountType') as String;
+    studentCollege = sharedPreferences.get('studentCollege').toString();
   }
 
   @override
@@ -43,13 +45,17 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
       //campus feed (main feed)
       const CampusFeed(),
       //college account type based feed
-      accountType == 'accountTypeCoaAdmin'
+      accountType == 'accountTypeCoaAdmin' ||
+              studentCollege == 'College of Accountancy'
           ? const CoaFeed()
-          : accountType == 'accountTypeCobAdmin'
+          : accountType == 'accountTypeCobAdmin' ||
+                  studentCollege == 'College of Business'
               ? const CobFeed()
-              : accountType == 'accountTypeCcsAdmin'
+              : accountType == 'accountTypeCcsAdmin' ||
+                      studentCollege == 'College of Computer Studies'
                   ? const CcsFeed()
-                  : accountType == 'accountTypeMasteralAdmin'
+                  : accountType == 'accountTypeMasteralAdmin' ||
+                          studentCollege == 'Masteral'
                       ? const MasteralFeed()
                       : const SelectCollegeFeed(),
     ];

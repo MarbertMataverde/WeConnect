@@ -90,9 +90,10 @@ class ControllerAccountInformation extends GetxController {
               'currentProfileImageUrl', value.get('profile-image-url'));
           await sharedPreferences.setString(
               'currentProfileName', value.get('profile-name'));
-
-          //get storage account type for pop up menu post tile
-          box.write('accountType', accountType);
+          if (sharedPreferences.get('accountType') == 'accountTypeStudent') {
+            await sharedPreferences.setString(
+                'studentCollege', value.get('college'));
+          }
           //routing
           if (kIsWeb) {
             if (sharedPreferences.get('accountType') ==

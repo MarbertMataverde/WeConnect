@@ -31,6 +31,7 @@ class CampusFeed extends StatefulWidget {
 
 class _CampusFeedState extends State<CampusFeed> {
   String? accountType;
+
   @override
   void initState() {
     accountTypeGetter();
@@ -40,7 +41,7 @@ class _CampusFeedState extends State<CampusFeed> {
   Future accountTypeGetter() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      accountType = sharedPreferences.get('accountType') as String;
+      accountType = sharedPreferences.get('accountType').toString();
     });
   }
 

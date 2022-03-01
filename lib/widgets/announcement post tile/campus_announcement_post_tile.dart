@@ -75,7 +75,6 @@ class CampusAnnouncementPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _accountType = box.read('accountType');
     return Card(
       elevation: 3,
       color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,
@@ -138,8 +137,8 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                   openWithTap: true,
                   menuOffset: 1.h,
                   onPressed: () {},
-                  menuItems: _accountType == 'accountTypeCampusAdmin' ||
-                          _accountType == 'accountTypeRegistrarAdmin'
+                  menuItems: accountType == 'accountTypeCampusAdmin' ||
+                          accountType == 'accountTypeRegistrarAdmin'
                       ?
                       //menu item for campus and registrar admin
                       [
