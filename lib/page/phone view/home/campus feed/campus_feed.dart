@@ -68,7 +68,7 @@ class _CampusFeedState extends State<CampusFeed> {
           actions: [
             Visibility(
               visible: accountType == 'accountTypeCampusAdmin' ||
-                  accountType == 'accountTypeCampusAdmin',
+                  accountType == 'accountTypeRegistrarAdmin',
               child: IconButton(
                 onPressed: () {
                   Get.to(

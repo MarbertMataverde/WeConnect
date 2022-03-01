@@ -124,14 +124,14 @@ class DetailedReport extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 12.w),
-                        child: Text(
-                          reportedConcern,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 10.sp,
-                          ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        reportedConcern.toUpperCase(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.sp,
                         ),
                       ),
                       Text(
