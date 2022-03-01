@@ -30,6 +30,7 @@ class CoaFeed extends StatefulWidget {
 
 class _CoaFeedState extends State<CoaFeed> {
   String? accountType;
+  String? studentCollege;
   @override
   void initState() {
     accountTypeGetter();
@@ -40,6 +41,7 @@ class _CoaFeedState extends State<CoaFeed> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       accountType = sharedPreferences.get('accountType') as String;
+      studentCollege = sharedPreferences.get('studentCollege').toString();
     });
   }
 
@@ -51,16 +53,22 @@ class _CoaFeedState extends State<CoaFeed> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          // leading: IconButton(
-          //     onPressed: () {
-          //       Get.back();
-          //     },
-          //     icon: Icon(
-          //       MdiIcons.arrowLeft,
-          //       color: Get.isDarkMode
-          //           ? kButtonColorDarkTheme
-          //           : kButtonColorLightTheme,
-          //     )),
+          leading: Visibility(
+            visible: (accountType == 'accountTypeCampusAdmin' ||
+                    accountType == 'accountTypeRegistrarAdmin' ||
+                    accountType == 'accountTypeProfessor') ||
+                studentCollege != 'College of Accountancy',
+            child: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(
+                  MdiIcons.arrowLeft,
+                  color: Get.isDarkMode
+                      ? kButtonColorDarkTheme
+                      : kButtonColorLightTheme,
+                )),
+          ),
           centerTitle: true,
           title: const AppBarTitle(
             title: 'COA Feed',
