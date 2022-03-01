@@ -9,7 +9,10 @@ import '../../page/phone view/home/report/report_list.dart';
 final changeTheme = Get.put(ControllerChangeTheme());
 
 class WidgetNavigationDrawer extends StatelessWidget {
-  const WidgetNavigationDrawer({Key? key}) : super(key: key);
+  const WidgetNavigationDrawer({Key? key, required this.accountType})
+      : super(key: key);
+
+  final String accountType;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class WidgetNavigationDrawer extends StatelessWidget {
             ),
             //reported post
             Visibility(
-              visible: true, //TODO visibility
+              visible: accountType == 'accountTypeCampusAdmin' ||
+                  accountType == 'accountTypeRegistrarAdmin',
               child: buildDrawerItem(
                 icon: Icons.report_outlined,
                 title: 'Reports',
