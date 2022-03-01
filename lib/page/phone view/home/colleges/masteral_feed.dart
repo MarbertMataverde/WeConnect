@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/page/phone%20view/forgot%20password/forgot_password.dart';
 import 'package:weconnect/widgets/navigation%20drawer/widget_navigation_drawer.dart';
 
 import '../../../../constant/constant_colors.dart';
@@ -50,16 +49,16 @@ class _MasteralFeedState extends State<MasteralFeed> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                MdiIcons.arrowLeft,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              )),
+          // leading: IconButton(
+          //     onPressed: () {
+          //       Get.back();
+          //     },
+          //     icon: Icon(
+          //       MdiIcons.arrowLeft,
+          //       color: Get.isDarkMode
+          //           ? kButtonColorDarkTheme
+          //           : kButtonColorLightTheme,
+          //     )),
           centerTitle: true,
           title: const AppBarTitle(
             title: 'Masteral Feed',
@@ -72,7 +71,7 @@ class _MasteralFeedState extends State<MasteralFeed> {
                   Get.to(
                     () => const UploadFeedPost(
                       collectionName: 'announcements',
-                      docName: 'Masteral-feed',
+                      docName: 'masteral-feed',
                     ),
                   );
                 },

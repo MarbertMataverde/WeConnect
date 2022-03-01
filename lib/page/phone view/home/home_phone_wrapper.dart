@@ -4,6 +4,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weconnect/page/phone%20view/home/colleges/ccs_feed.dart';
+import 'package:weconnect/page/phone%20view/home/colleges/coa_feed.dart';
+import 'package:weconnect/page/phone%20view/home/colleges/cob_feed.dart';
+import 'package:weconnect/page/phone%20view/home/colleges/masteral_feed.dart';
 import 'package:weconnect/page/phone%20view/home/colleges/select_college.dart';
 
 import 'campus feed/campus_feed.dart';
@@ -11,10 +15,6 @@ import 'campus feed/campus_feed.dart';
 //firestore initialization
 final firestore = FirebaseFirestore.instance;
 
-final _pages = [
-  const CampusFeed(),
-  const SelectCollegeFeed(),
-];
 // get storage box
 final box = GetStorage();
 
@@ -44,6 +44,19 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    final accountType = box.read('accountType');
+    final _pages = [
+      const CampusFeed(),
+      accountType == 'accountTypeCoaAdmin'
+          ? const CoaFeed()
+          : accountType == 'accountTypeCobAdmin'
+              ? const CobFeed()
+              : accountType == 'accountTypeCcsAdmin'
+                  ? const CcsFeed()
+                  : accountType == 'accountTypeMasteralAdmin'
+                      ? const MasteralFeed()
+                      : const SelectCollegeFeed(),
+    ];
     return Scaffold(
       body: _pages[_currentIndex],
       // body: _pages[_currentIndex],
