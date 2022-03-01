@@ -204,6 +204,18 @@ class DialogPostTile extends GetxController {
                 reportDocummentId: reportDocumentId,
               );
               Get.back();
+              Get.showSnackbar(GetSnackBar(
+                icon: Icon(
+                  MdiIcons.checkBold,
+                  color: Get.theme.primaryColor,
+                ),
+                margin: EdgeInsets.all(2.w),
+                borderRadius: 1.w,
+                backgroundColor: kButtonColorLightTheme,
+                message: 'Success report submitted.',
+                duration: const Duration(seconds: 3),
+                forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+              ));
             }
           },
           child: const Text('Submit'),
