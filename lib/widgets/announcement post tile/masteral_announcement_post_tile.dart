@@ -11,10 +11,10 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
-import 'package:weconnect/page/phone%20view/home/post%20details/post_details.dart';
-import 'package:weconnect/setting/setting_post_tile_dialog.dart';
+import 'package:weconnect/dialog/dialog_post_tile_.dart';
 
 import '../../page/phone view/home/edit post caption/edit_caption.dart';
+import '../../page/phone view/home/post details/post_details.dart';
 import '../post comment (Write and Show)/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
@@ -25,7 +25,7 @@ final box = GetStorage();
 //pop up based on account type
 
 //dialogs
-final dialogs = Get.put(SettingPostTileDialog());
+final dialogs = Get.put(DialogPostTile());
 
 class MasteralAnnouncementPostTile extends StatelessWidget {
   const MasteralAnnouncementPostTile({

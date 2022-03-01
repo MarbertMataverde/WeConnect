@@ -5,7 +5,7 @@ import 'package:giff_dialog/giff_dialog.dart';
 import '../constant/constant_colors.dart';
 import '../page/phone view/forgot password/forgot_password.dart';
 
-class SettingAuthenticationDialog extends GetxController {
+class DialogAuthentication extends GetxController {
   //invalid account type
   Future<dynamic> invalidAccountTypeDialog(
     _context,

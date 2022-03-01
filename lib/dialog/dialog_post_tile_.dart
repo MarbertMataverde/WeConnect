@@ -13,7 +13,7 @@ final _controllerDeletePost = Get.put(ControllerDeletePost());
 //edit caption controller
 final controllerEditCaption = Get.put(ControllerEditPostCaption());
 
-class SettingPostTileDialog extends GetxController {
+class DialogPostTile extends GetxController {
   //post delition dialog
   Future<dynamic> deletePostDialog(
     _context,
