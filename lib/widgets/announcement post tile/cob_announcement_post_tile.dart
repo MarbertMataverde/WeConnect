@@ -207,7 +207,10 @@ class CobAnnouncementPostTile extends StatelessWidget {
                             Icons.report_outlined,
                             Colors.red,
                             () {
-                              dialogs.reportPostDialog();
+                              dialogs.reportPostDialog(
+                                reportType: 'cob-feed',
+                                reportDocumentId: postDocId,
+                              );
                             },
                           ),
                         ],

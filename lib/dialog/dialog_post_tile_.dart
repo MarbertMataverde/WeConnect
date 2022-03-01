@@ -5,15 +5,20 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/controller/controller_delete_post.dart';
+import 'package:weconnect/controller/controller_report.dart';
 import 'package:weconnect/widgets/widget%20sign%20in/widget_textformfield_login.dart';
 
 import '../constant/constant_colors.dart';
 import '../controller/controller_edit_post_caption.dart';
 
-final _controllerDeletePost = Get.put(ControllerDeletePost());
+//delete post
+final controllerDeletePost = Get.put(ControllerDeletePost());
 
 //edit caption controller
 final controllerEditCaption = Get.put(ControllerEditPostCaption());
+
+//report post
+final controllerReportPost = Get.put(ControllerReport());
 
 class DialogPostTile extends GetxController {
   //post delition dialog
@@ -46,7 +51,7 @@ class DialogPostTile extends GetxController {
           textAlign: TextAlign.center,
         ),
         onOkButtonPressed: () async {
-          _controllerDeletePost.deletePost(
+          controllerDeletePost.deletePost(
               announcementTypeDoc, postDocId, postMedia);
           Get.back();
           Get.showSnackbar(GetSnackBar(
@@ -113,12 +118,16 @@ class DialogPostTile extends GetxController {
   }
 
   //report post dialog
-  Future<dynamic> reportPostDialog() async {
+  Future<dynamic> reportPostDialog({
+    required String reportType,
+    required String reportDocumentId,
+  }) async {
     // Validation Key
     final _validationKey = GlobalKey<FormState>();
     //controllers
-    final TextEditingController reasonOfReportCtrlr = TextEditingController();
-    final TextEditingController descriptionOfConcern = TextEditingController();
+    final TextEditingController reportConcernCtrlr = TextEditingController();
+    final TextEditingController reportConcernDescriptionCtrlr =
+        TextEditingController();
     Get.defaultDialog(
       barrierDismissible: false,
       backgroundColor: Get.theme.scaffoldBackgroundColor,
@@ -132,7 +141,7 @@ class DialogPostTile extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextFormField(
-                ctrlr: reasonOfReportCtrlr,
+                ctrlr: reportConcernCtrlr,
                 hint: 'Reason of report..',
                 isPassword: kFalse,
                 validator: (value) {
@@ -147,7 +156,7 @@ class DialogPostTile extends GetxController {
               CustomTextFormField(
                 minimumLine: 3,
                 maxLine: 5,
-                ctrlr: descriptionOfConcern,
+                ctrlr: reportConcernDescriptionCtrlr,
                 hint: 'Your concern description..',
                 isPassword: kFalse,
                 validator: (value) {
@@ -183,9 +192,19 @@ class DialogPostTile extends GetxController {
               backgroundColor: Get.theme.primaryColor.withOpacity(0.7),
               padding: EdgeInsets.symmetric(
                   horizontal: Get.mediaQuery.size.width * 0.1)),
-          onPressed: () {
+          onPressed: () async {
             final _isValid = _validationKey.currentState!.validate();
             Get.focusScope!.unfocus();
+
+            if (_isValid == true) {
+              await controllerReportPost.newReport(
+                reportType: reportType,
+                reportConcern: reportConcernCtrlr.text,
+                reportConcernDescription: reportConcernDescriptionCtrlr.text,
+                reportDocummentId: reportDocumentId,
+              );
+              Get.back();
+            }
           },
           child: const Text('Submit'),
         )

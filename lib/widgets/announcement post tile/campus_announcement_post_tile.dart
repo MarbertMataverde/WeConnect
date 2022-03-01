@@ -208,7 +208,10 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                             Icons.report_outlined,
                             Colors.red,
                             () {
-                              dialogs.reportPostDialog();
+                              dialogs.reportPostDialog(
+                                reportType: 'campus-feed',
+                                reportDocumentId: postDocId,
+                              );
                             },
                           ),
                         ],

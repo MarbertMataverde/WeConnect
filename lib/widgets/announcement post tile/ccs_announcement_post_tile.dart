@@ -207,7 +207,10 @@ class CcsAnnouncementPostTile extends StatelessWidget {
                             Icons.report_outlined,
                             Colors.red,
                             () {
-                              dialogs.reportPostDialog();
+                              dialogs.reportPostDialog(
+                                reportType: 'ccs-feed',
+                                reportDocumentId: postDocId,
+                              );
                             },
                           ),
                         ],
