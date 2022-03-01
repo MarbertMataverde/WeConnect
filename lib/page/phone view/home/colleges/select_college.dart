@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/page/phone%20view/home/colleges/ccs_feed.dart';
 import 'package:weconnect/page/phone%20view/home/colleges/masteral_feed.dart';
@@ -23,10 +24,26 @@ class SelectCollegeFeed extends StatefulWidget {
 }
 
 class _SelectCollegeFeedState extends State<SelectCollegeFeed> {
+  String? accountType;
+  @override
+  void initState() {
+    accountTypeGetter();
+    super.initState();
+  }
+
+  Future accountTypeGetter() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      accountType = sharedPreferences.get('accountType') as String;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const WidgetNavigationDrawer(),
+      endDrawer: WidgetNavigationDrawer(
+        accountType: accountType.toString(),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,

@@ -5,7 +5,6 @@ import 'package:giff_dialog/giff_dialog.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/page/phone%20view/home/campus%20feed/campus_feed.dart';
 
 import '../constant/constant_colors.dart';
 

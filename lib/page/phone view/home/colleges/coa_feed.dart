@@ -45,7 +45,9 @@ class _CoaFeedState extends State<CoaFeed> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        endDrawer: const WidgetNavigationDrawer(),
+        endDrawer: WidgetNavigationDrawer(
+          accountType: accountType.toString(),
+        ),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
