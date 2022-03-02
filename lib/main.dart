@@ -53,7 +53,7 @@ class _InitialPageState extends State<InitialPage> {
           debugShowCheckedModeBanner: false,
           theme: lightThemeData,
           darkTheme: darkThemeData,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.system,
           home: SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
