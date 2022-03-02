@@ -4,13 +4,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/ccs_feed.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/coa_feed.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/cob_feed.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/masteral_feed.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/select_college.dart';
 
 import 'campus feed/campus_feed.dart';
+import 'colleges/ccs_feed.dart';
+import 'colleges/coa_feed.dart';
+import 'colleges/cob_feed.dart';
+import 'colleges/masteral_feed.dart';
+import 'colleges/select_college.dart';
 
 //firestore initialization
 final firestore = FirebaseFirestore.instance;

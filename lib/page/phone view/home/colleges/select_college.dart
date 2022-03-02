@@ -5,14 +5,14 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/ccs_feed.dart';
-import 'package:weconnect/page/phone%20view/home/colleges/masteral_feed.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
+import 'ccs_feed.dart';
 import 'coa_feed.dart';
 import 'cob_feed.dart';
+import 'masteral_feed.dart';
 
 final box = GetStorage();
 

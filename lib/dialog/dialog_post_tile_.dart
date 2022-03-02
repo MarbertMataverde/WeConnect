@@ -6,10 +6,10 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/controller/controller_delete_post.dart';
 import 'package:weconnect/controller/controller_report.dart';
-import 'package:weconnect/widgets/widget%20sign%20in/widget_textformfield_login.dart';
 
 import '../constant/constant_colors.dart';
 import '../controller/controller_edit_post_caption.dart';
+import '../widgets/widget sign in/widget_textformfield_login.dart';
 
 //delete post
 final controllerDeletePost = Get.put(ControllerDeletePost());

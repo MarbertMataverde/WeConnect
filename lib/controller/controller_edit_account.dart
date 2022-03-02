@@ -2,10 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:weconnect/page/phone%20view/home/upload%20post/upload_post.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final FirebaseStorage firebaseStorage = FirebaseStorage.instance;

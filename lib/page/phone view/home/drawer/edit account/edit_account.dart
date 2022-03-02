@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/widget%20sign%20in/widget_textformfield_login.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';

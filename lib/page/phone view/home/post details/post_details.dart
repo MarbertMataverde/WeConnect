@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/page/phone%20view/home/post%20details/image_details.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
+import 'image_details.dart';
 
 class PostDetails extends StatelessWidget {
   const PostDetails(
