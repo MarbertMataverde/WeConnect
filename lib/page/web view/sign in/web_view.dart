@@ -79,6 +79,7 @@ class _WebViewState extends State<WebView> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      maxLine: 1,
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
                       isPassword: kTrue,
