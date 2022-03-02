@@ -13,8 +13,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
 import 'package:weconnect/dialog/dialog_post_tile_.dart';
 
-import '../edit post caption/edit_caption.dart';
-import '../post details/post_details.dart';
+import '../../edit post caption/edit_caption.dart';
+import '../../post details/post_details.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 

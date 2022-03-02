@@ -6,7 +6,10 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/controller/controller_theme_changer.dart';
 
-import '../../page/phone view/home/report/report_list.dart';
+import 'drawer_items.dart';
+import 'named_divider.dart';
+import 'profile_header.dart';
+import 'selected_item_routing.dart';
 
 final changeTheme = Get.put(ControllerChangeTheme());
 
@@ -30,7 +33,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
             : kTextFormFieldColorLightTheme,
         child: ListView(
           children: <Widget>[
-            buildProfileHeader(
+            drawerProfileHeader(
               onCliked: () {},
               profileAccountCollegeType: accountType == 'accountTypeCampusAdmin'
                   ? 'Campus Admin'
@@ -53,12 +56,14 @@ class WidgetNavigationDrawer extends StatelessWidget {
             //account divider
             namedDivider(dividerName: 'Account'),
             //account items
-            buildDrawerItem(
-              title: 'Edit Personal Information',
-              icon: MdiIcons.noteEditOutline,
-              onCliked: () {},
+            drawerItems(
+              title: 'Edit Account',
+              icon: MdiIcons.accountEditOutline,
+              onCliked: () {
+                selectedItem(context, 0);
+              },
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Edit Sign In Details',
               icon: MdiIcons.emailOutline,
               onCliked: () {},
@@ -72,7 +77,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
                 children: [
                   //issue divider
                   namedDivider(dividerName: 'Issues'),
-                  buildDrawerItem(
+                  drawerItems(
                     icon: Icons.report_outlined,
                     title: 'Reports',
                     onCliked: () => selectedItem(context, 1),
@@ -83,22 +88,22 @@ class WidgetNavigationDrawer extends StatelessWidget {
             //campus divider
             namedDivider(dividerName: 'Campus'),
             //campus items
-            buildDrawerItem(
+            drawerItems(
               title: 'About',
               icon: MdiIcons.accountQuestionOutline,
               onCliked: () {},
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Gallery',
               icon: MdiIcons.imageFrame,
               onCliked: () {},
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Vision Mission Goals',
               icon: MdiIcons.target,
               onCliked: () {},
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Downloadable Forms',
               icon: MdiIcons.downloadBoxOutline,
               onCliked: () {},
@@ -106,17 +111,17 @@ class WidgetNavigationDrawer extends StatelessWidget {
             //others divider
             namedDivider(dividerName: 'Others'),
             //others items
-            buildDrawerItem(
+            drawerItems(
               title: 'Terms and Condition',
               icon: MdiIcons.fileOutline,
               onCliked: () {},
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Privacy Policy',
               icon: MdiIcons.shieldAccountVariantOutline,
               onCliked: () {},
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Help & Feedback',
               icon: MdiIcons.lifebuoy,
               onCliked: () {},
@@ -131,7 +136,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
                   ? kButtonColorDarkTheme
                   : kButtonColorLightTheme,
             ),
-            buildDrawerItem(
+            drawerItems(
               title: 'Sign Out',
               icon: MdiIcons.logout,
               onCliked: () {},
@@ -140,121 +145,5 @@ class WidgetNavigationDrawer extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Widget namedDivider({required String dividerName}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      //account
-      Padding(
-        padding: EdgeInsets.only(left: 5.w),
-        child: Text(
-          dividerName,
-          textScaleFactor: 1.1,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      //divider
-      Divider(
-        height: 0,
-        indent: 5.w,
-        endIndent: 5.w,
-        thickness: 0.5,
-        color: Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-      ),
-    ],
-  );
-}
-
-Widget buildProfileHeader({
-  required String profileImageUrl,
-  required String profileName,
-  required String profileAccountCollegeType,
-  VoidCallback? onCliked,
-}) {
-  return InkWell(
-    onTap: onCliked,
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
-      child: SizedBox(
-        width: 100.w,
-        height: 10.h,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  profileName,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  profileAccountCollegeType,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 7.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 1.w,
-            ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(profileImageUrl),
-              radius: 4.h,
-            )
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-Widget buildDrawerItem({
-  required String title,
-  required IconData icon,
-  VoidCallback? onCliked,
-}) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 5.w),
-    child: ListTile(
-      trailing: Icon(
-        icon,
-        color: Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color:
-              Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-        ),
-      ),
-      onTap: onCliked,
-    ),
-  );
-}
-
-void selectedItem(BuildContext context, int index) {
-  Get.back();
-  switch (index) {
-    case 0:
-      changeTheme.toggleChangeTheme();
-      break;
-    case 1:
-      Get.to(() => const ReportList());
-      break;
-    default:
   }
 }
