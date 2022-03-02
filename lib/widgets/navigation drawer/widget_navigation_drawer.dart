@@ -9,7 +9,7 @@ import 'package:weconnect/controller/controller_theme_changer.dart';
 import 'drawer_items.dart';
 import 'named_divider.dart';
 import 'profile_header.dart';
-import 'selected_item_routing.dart';
+import 'selected_item_function.dart';
 
 final changeTheme = Get.put(ControllerChangeTheme());
 
@@ -80,7 +80,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
                   drawerItems(
                     icon: Icons.report_outlined,
                     title: 'Reports',
-                    onCliked: () => selectedItem(context, 1),
+                    onCliked: () => selectedItem(context, 2),
                   ),
                 ],
               ),
@@ -91,22 +91,30 @@ class WidgetNavigationDrawer extends StatelessWidget {
             drawerItems(
               title: 'About',
               icon: MdiIcons.accountQuestionOutline,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 3);
+              },
             ),
             drawerItems(
               title: 'Gallery',
               icon: MdiIcons.imageFrame,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 4);
+              },
             ),
             drawerItems(
               title: 'Vision Mission Goals',
               icon: MdiIcons.target,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 5);
+              },
             ),
             drawerItems(
               title: 'Downloadable Forms',
               icon: MdiIcons.downloadBoxOutline,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 6);
+              },
             ),
             //others divider
             namedDivider(dividerName: 'Others'),
@@ -114,17 +122,23 @@ class WidgetNavigationDrawer extends StatelessWidget {
             drawerItems(
               title: 'Terms and Condition',
               icon: MdiIcons.fileOutline,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 7);
+              },
             ),
             drawerItems(
               title: 'Privacy Policy',
               icon: MdiIcons.shieldAccountVariantOutline,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 8);
+              },
             ),
             drawerItems(
               title: 'Help & Feedback',
               icon: MdiIcons.lifebuoy,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 9);
+              },
             ),
             //sign out divider
             Divider(
@@ -139,7 +153,9 @@ class WidgetNavigationDrawer extends StatelessWidget {
             drawerItems(
               title: 'Sign Out',
               icon: MdiIcons.logout,
-              onCliked: () {},
+              onCliked: () {
+                selectedItem(context, 10);
+              },
             ),
           ],
         ),

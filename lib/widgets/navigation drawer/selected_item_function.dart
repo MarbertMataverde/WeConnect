@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../authentication/authentication_controller.dart';
 import '../../page/phone view/home/drawer/edit account/edit_account.dart';
 import '../../page/phone view/home/drawer/report/report_list.dart';
+
+final authentication = Get.put(Authentication());
 
 void selectedItem(
   BuildContext context,
@@ -14,8 +17,12 @@ void selectedItem(
       //Edit Personal Information
       Get.to(() => const EditAccount());
       break;
-    case 1:
+    case 2:
+      //report list
       Get.to(() => const ReportList());
+      break;
+    case 10:
+      authentication.signOut();
       break;
     default:
   }

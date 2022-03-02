@@ -56,9 +56,7 @@ class _CampusFeedState extends State<CampusFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
-              onPressed: () {
-                authentication.signOut();
-              },
+              onPressed: () {},
               icon: Icon(
                 MdiIcons.bellOutline,
                 color: Get.isDarkMode
