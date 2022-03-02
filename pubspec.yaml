@@ -59,6 +59,7 @@ dependencies:
   focused_menu: ^1.0.5
   avatar_glow: ^2.0.2
   flutter_slidable: ^1.2.0
+  image_picker: ^0.8.4+10
 
 dev_dependencies:
   flutter_test:
