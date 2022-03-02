@@ -49,6 +49,7 @@ class _CobFeedState extends State<CobFeed> {
   Widget build(BuildContext context) => Scaffold(
         endDrawer: WidgetNavigationDrawer(
           accountType: accountType.toString(),
+          studentCollege: studentCollege.toString(),
         ),
         appBar: AppBar(
           backgroundColor: Colors.transparent,

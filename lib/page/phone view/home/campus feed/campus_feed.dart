@@ -31,7 +31,7 @@ class CampusFeed extends StatefulWidget {
 
 class _CampusFeedState extends State<CampusFeed> {
   String? accountType;
-
+  String? studentCollege;
   @override
   void initState() {
     accountTypeGetter();
@@ -42,6 +42,7 @@ class _CampusFeedState extends State<CampusFeed> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       accountType = sharedPreferences.get('accountType').toString();
+      studentCollege = sharedPreferences.get('studentCollege').toString();
     });
   }
 
@@ -49,6 +50,7 @@ class _CampusFeedState extends State<CampusFeed> {
   Widget build(BuildContext context) => Scaffold(
         endDrawer: WidgetNavigationDrawer(
           accountType: accountType.toString(),
+          studentCollege: studentCollege.toString(),
         ),
         appBar: AppBar(
           backgroundColor: Colors.transparent,

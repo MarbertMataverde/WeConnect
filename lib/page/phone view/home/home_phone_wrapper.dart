@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +17,9 @@ final firestore = FirebaseFirestore.instance;
 
 //default index of a first screen
 var _currentIndex = 0;
+
+//global box
+final box = GetStorage();
 
 class HomePhoneWrapper extends StatefulWidget {
   const HomePhoneWrapper({Key? key}) : super(key: key);
@@ -37,6 +41,10 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accountType = sharedPreferences.get('accountType') as String;
     studentCollege = sharedPreferences.get('studentCollege').toString();
+    box.write(
+        'profileName', sharedPreferences.get('currentProfileName').toString());
+    box.write('profileImageUrl',
+        sharedPreferences.get('currentProfileImageUrl').toString());
   }
 
   @override
