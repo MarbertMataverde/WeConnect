@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class ControllerDeletePost extends GetxController {
   //*DELETING POST

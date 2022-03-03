@@ -8,8 +8,8 @@ import '../../../constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../utils/utils_xlsx_access_code_generator.dart';
-import '../../../widgets/widget sign in/widget_custom_button.dart';
-import '../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../../../widgets/button/custom_button.dart';
+import '../../../widgets/text form field/custom_textformfield.dart';
 
 const String _collectionName = 'professor-access-code';
 const String _professorAccessCodeFileName = 'GeneratedProfessorsAccessCode';

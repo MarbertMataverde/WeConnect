@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart' as firebase;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart' as firebase;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 

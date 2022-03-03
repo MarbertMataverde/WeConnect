@@ -6,9 +6,8 @@ import '../../../../constant/constant.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../utils/utils_access_code_checker.dart';
-
-import '../../../../widgets/widget sign in/widget_custom_button.dart';
-import '../../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../../../../widgets/button/custom_button.dart';
+import '../../../../widgets/text form field/custom_textformfield.dart';
 
 final TextEditingController _axCodeCtrlr = TextEditingController();
 

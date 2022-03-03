@@ -6,13 +6,20 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../constant/constant.dart';
+import '../../../../widgets/text form field/custom_textformfield.dart';
 
 import '../../../../constant/constant_colors.dart';
+import '../../../../widgets/appbar title/appbar_title.dart';
 
 final box = GetStorage();
 
 final TextEditingController channelNameCtrlr = TextEditingController();
+
+// Validation Key
+final _validationKey = GlobalKey<FormState>();
 
 class NewChannel extends StatefulWidget {
   const NewChannel({Key? key}) : super(key: key);
@@ -44,24 +51,21 @@ class _NewChannelState extends State<NewChannel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.transparent,
+        elevation: 0.0,
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-          ),
-        ),
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              MdiIcons.arrowLeft,
+              color: Get.isDarkMode
+                  ? kButtonColorDarkTheme
+                  : kButtonColorLightTheme,
+            )),
         centerTitle: true,
-        title: Text(
-          'Create New Channel',
-          style: TextStyle(
-            fontSize: 15.sp,
-            color: Get.theme.primaryColor,
-          ),
+        title: const AppBarTitle(
+          title: 'Create New Channel',
         ),
         actions: [
           IconButton(
@@ -74,9 +78,13 @@ class _NewChannelState extends State<NewChannel> {
               // );
             },
             icon: Icon(
-              Icons.check,
-              color:
-                  Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+              MdiIcons.check,
+              color: selectedImage != null &&
+                      _validationKey.currentState!.validate() == kTrue
+                  ? Get.theme.primaryColor
+                  : Get.isDarkMode
+                      ? kButtonColorDarkTheme
+                      : kButtonColorLightTheme,
             ),
           ),
         ],
@@ -97,17 +105,13 @@ class _NewChannelState extends State<NewChannel> {
                         },
                         child: Image.file(
                           selectedImage!,
-                          width: 20.w,
-                          height: 20.w,
+                          width: Get.mediaQuery.size.width * 0.25,
+                          height: Get.mediaQuery.size.width * 0.25,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   )
-
-                // ? Image.file(
-                //     selectedImage!,
-                //   )
                 : ClipOval(
                     child: Material(
                       color: Get.theme.primaryColor, // Button color
@@ -118,10 +122,10 @@ class _NewChannelState extends State<NewChannel> {
                           pickImage();
                         },
                         child: SizedBox(
-                          width: 20.w,
-                          height: 20.w,
+                          width: Get.mediaQuery.size.width * 0.25,
+                          height: Get.mediaQuery.size.width * 0.25,
                           child: Icon(
-                            Icons.image,
+                            MdiIcons.camera,
                             size: 10.w,
                           ),
                         ),
@@ -131,38 +135,17 @@ class _NewChannelState extends State<NewChannel> {
             SizedBox(
               height: 3.h,
             ),
-            TextFormField(
-              controller: channelNameCtrlr,
-              cursorColor: Get.theme.primaryColor,
-              style: TextStyle(
-                color:
-                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-                fontWeight: FontWeight.w700,
-                fontSize: 10.sp,
-              ),
-              decoration: InputDecoration(
-                labelText: 'Channel Name',
-                labelStyle: TextStyle(
-                  color: Get.isDarkMode
-                      ? kTextColorDarkTheme
-                      : kTextColorLightTheme,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 10.sp,
-                ),
-                //*Filled Color
-                filled: true,
-                fillColor: Get.isDarkMode
-                    ? kTextFormFieldColorDarkTheme
-                    : kTextFormFieldColorLightTheme,
-                //*Enabled Border
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(2.sp),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Get.theme.primaryColor),
-                ),
-              ),
+            Form(
+              key: _validationKey,
+              child: CustomTextFormField(
+                  ctrlr: channelNameCtrlr,
+                  hint: 'Channel Name',
+                  isPassword: kFalse,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Your Email😊';
+                    }
+                  }),
             ),
           ],
         ),

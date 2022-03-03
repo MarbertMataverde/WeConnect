@@ -9,7 +9,7 @@ import '../controller/controller_report.dart';
 
 import '../constant/constant_colors.dart';
 import '../controller/controller_edit_post_caption.dart';
-import '../widgets/widget sign in/widget_textformfield_login.dart';
+import '../widgets/text form field/custom_textformfield.dart';
 
 //delete post
 final controllerDeletePost = Get.put(ControllerDeletePost());

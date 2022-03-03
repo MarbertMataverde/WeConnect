@@ -8,11 +8,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../../../../dialog/dialog_post_tile_.dart';
-
 import '../../edit post caption/edit_caption.dart';
 import '../../post details/post_details.dart';
 

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
 import '../../../constant/constant_colors.dart';
 
 import '../../../controller/controller_account_information.dart';
-import '../../../widgets/widget sign in/widget_custom_button.dart';
-import '../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../../../widgets/button/custom_button.dart';
+import '../../../widgets/text form field/custom_textformfield.dart';
 import '../forgot password/forgot_password.dart';
 import '../sign up/student sign up/stud_axcode_checker.dart';
 

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,7 +65,7 @@ class ControllerNewChannel extends GetxController {
         avatarDownloadUrl = getDownloadUrlOfTheAvatar;
       });
     } on FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
+      log(e.code);
     }
   }
 

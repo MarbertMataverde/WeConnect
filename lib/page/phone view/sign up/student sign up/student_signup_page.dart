@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../authentication/authentication_controller.dart';
 import '../../../../constant/constant.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
-
-import '../../../../widgets/widget sign in/widget_custom_button.dart';
-import '../../../../widgets/widget sign in/widget_textformfield_login.dart';
+import '../../../../widgets/button/custom_button.dart';
+import '../../../../widgets/text form field/custom_textformfield.dart';
 
 final TextEditingController _nameCtrlr = TextEditingController();
 
