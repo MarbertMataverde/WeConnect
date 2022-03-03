@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/controller/controller_new_channel.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
@@ -21,6 +22,8 @@ final TextEditingController channelNameCtrlr = TextEditingController();
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
+final channel = Get.put(ControllerNewChannel());
+
 class NewChannel extends StatefulWidget {
   const NewChannel({Key? key}) : super(key: key);
 
@@ -30,6 +33,8 @@ class NewChannel extends StatefulWidget {
 
 class _NewChannelState extends State<NewChannel> {
   File? selectedImage;
+  //is create button enable or not
+  bool checkIconButtonIsEnable = false;
 
   Future pickImage() async {
     try {
@@ -69,18 +74,19 @@ class _NewChannelState extends State<NewChannel> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              // _newChannel.createNewChannelAndUploadAvatarFunction(
-              //   selectedImage!.path,
-              //   channelNameCtrlr.text,
-              //   box.read('currentUserProfileName'),
-              //   box.read('uid'),
-              // );
-            },
+            onPressed: checkIconButtonIsEnable && selectedImage != null
+                ? () {
+                    // _newChannel.createNewChannelAndUploadAvatarFunction(
+                    //   selectedImage!.path,
+                    //   channelNameCtrlr.text,
+                    //   box.read('currentUserProfileName'),
+                    //   box.read('uid'),
+                    // );
+                  }
+                : null,
             icon: Icon(
               MdiIcons.check,
-              color: selectedImage != null &&
-                      _validationKey.currentState!.validate() == kTrue
+              color: checkIconButtonIsEnable && selectedImage != null
                   ? Get.theme.primaryColor
                   : Get.isDarkMode
                       ? kButtonColorDarkTheme
@@ -137,13 +143,18 @@ class _NewChannelState extends State<NewChannel> {
             ),
             Form(
               key: _validationKey,
+              onChanged: () => setState(() => checkIconButtonIsEnable =
+                  _validationKey.currentState!.validate()),
               child: CustomTextFormField(
                   ctrlr: channelNameCtrlr,
                   hint: 'Channel Name',
                   isPassword: kFalse,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please Enter Your Email😊';
+                      return 'Channel name is required😊';
+                    }
+                    if (value.toString().length <= 8) {
+                      return 'Channel name should be at least 8 character😊';
                     }
                   }),
             ),

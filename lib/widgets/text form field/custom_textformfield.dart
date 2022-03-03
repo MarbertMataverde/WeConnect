@@ -17,6 +17,8 @@ class CustomTextFormField extends StatelessWidget {
     this.inputFormater,
     this.minimumLine,
     this.maxLine,
+    this.autovalidateMode,
+    this.onChanged,
   }) : super(key: key);
   //?controller
   final TextEditingController ctrlr;
@@ -32,6 +34,10 @@ class CustomTextFormField extends StatelessWidget {
   final int? minimumLine;
   //?max lines
   final int? maxLine;
+  //?auto validation
+  final AutovalidateMode? autovalidateMode;
+  //?on data change
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,8 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: ctrlr,
       obscureText: isPassword,
+      autovalidateMode: autovalidateMode,
+      onChanged: onChanged,
       style: kLoginPageTextFormFieldTextStyle,
       cursorColor: Get.isDarkMode
           ? kTextFormFieldCursorColorDarkTheme
