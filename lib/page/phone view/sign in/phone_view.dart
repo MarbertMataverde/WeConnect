@@ -150,8 +150,6 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                     )
                   : CustomButton(
                       onPress: () async {
-                        SharedPreferences sp =
-                            await SharedPreferences.getInstance();
                         setState(() {
                           isLoading = true;
                         });
@@ -164,8 +162,6 @@ class _PhoneViewState extends State<PhoneViewSignIn> {
                             _passwordCtrlr.text,
                             context,
                           );
-                          await accountInformation
-                              .getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;

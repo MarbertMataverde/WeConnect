@@ -45,6 +45,8 @@ class Authentication extends GetxController {
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
+        await accountInformation
+            .getter(sharedPreferences.get('currentUid') as String);
       });
       // accountInformation.getter();
     } on FirebaseAuthException catch (e) {

@@ -229,8 +229,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                     )
                   : CustomButton(
                       onPress: () async {
-                        SharedPreferences sp =
-                            await SharedPreferences.getInstance();
                         setState(() {
                           isLoading = true;
                         });
@@ -260,8 +258,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                             _passwordCtrlr.text,
                             context,
                           );
-                          await accountInformation
-                              .getter(sp.get('currentUid') as String);
                         }
                         setState(() {
                           isLoading = false;

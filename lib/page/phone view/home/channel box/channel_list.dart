@@ -1,11 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ChannelList extends StatelessWidget {
+import '../../../../constant/constant_colors.dart';
+import '../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
+import '../upload post/upload_post.dart';
+
+class ChannelList extends StatefulWidget {
   const ChannelList({Key? key}) : super(key: key);
 
   @override
+  State<ChannelList> createState() => _ChannelListState();
+}
+
+class _ChannelListState extends State<ChannelList> {
+  String? accountType;
+  String? studentCollege;
+  @override
+  void initState() {
+    accountTypeGetter();
+    super.initState();
+  }
+
+  Future accountTypeGetter() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      accountType = sharedPreferences.get('accountType').toString();
+      studentCollege = sharedPreferences.get('studentCollege').toString();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      endDrawer: WidgetNavigationDrawer(
+        accountType: accountType.toString(),
+        studentCollege: studentCollege.toString(),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        centerTitle: true,
+        title: const AppBarTitle(
+          title: 'Channel List',
+        ),
+        actions: [
+          Visibility(
+            visible: accountType == 'accountTypeProfessor',
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                MdiIcons.cardPlusOutline,
+                color: Get.isDarkMode
+                    ? kButtonColorDarkTheme
+                    : kButtonColorLightTheme,
+              ),
+            ),
+          ),
+          Builder(
+            builder: ((context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                icon: Icon(
+                  MdiIcons.menu,
+                  color: Get.isDarkMode
+                      ? kButtonColorDarkTheme
+                      : kButtonColorLightTheme,
+                ),
+              );
+            }),
+          ),
+        ],
+      ),
       body: Center(
         child: Text('Channel Box'),
       ),
