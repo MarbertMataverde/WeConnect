@@ -23,10 +23,10 @@ class ForgotPassword extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ForgotPassword> createState() => _PhoneViewState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _PhoneViewState extends State<ForgotPassword> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {

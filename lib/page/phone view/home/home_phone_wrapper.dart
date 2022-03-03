@@ -27,10 +27,10 @@ class HomePhoneWrapper extends StatefulWidget {
   const HomePhoneWrapper({Key? key}) : super(key: key);
 
   @override
-  State<HomePhoneWrapper> createState() => _HomeWrapperState();
+  State<HomePhoneWrapper> createState() => _HomePhoneWrapperState();
 }
 
-class _HomeWrapperState extends State<HomePhoneWrapper> {
+class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
   String? accountType;
   String? studentCollege;
   @override

@@ -7,14 +7,14 @@ import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 
-class ChannelList extends StatefulWidget {
-  const ChannelList({Key? key}) : super(key: key);
+class NewChannel extends StatefulWidget {
+  const NewChannel({Key? key}) : super(key: key);
 
   @override
-  State<ChannelList> createState() => _ChannelListState();
+  State<NewChannel> createState() => _NewChannelState();
 }
 
-class _ChannelListState extends State<ChannelList> {
+class _NewChannelState extends State<NewChannel> {
   String? accountType;
   String? studentCollege;
   @override

@@ -30,10 +30,10 @@ class PhoneViewSignIn extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<PhoneViewSignIn> createState() => _PhoneViewState();
+  State<PhoneViewSignIn> createState() => _PhoneViewSignInState();
 }
 
-class _PhoneViewState extends State<PhoneViewSignIn> {
+class _PhoneViewSignInState extends State<PhoneViewSignIn> {
   bool isLoading = false;
 
   @override
