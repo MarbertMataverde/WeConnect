@@ -260,7 +260,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                             _passwordCtrlr.text,
                             context,
                           );
-                          accountInformation
+                          await accountInformation
                               .getter(sp.get('currentUid') as String);
                         }
                         setState(() {

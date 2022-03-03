@@ -42,8 +42,6 @@ class Authentication extends GetxController {
         sharedPreferences.setString('currentUid', value.user!.uid);
         //getting account information
         await sharedPreferences.setString('currentUid', value.user!.uid);
-        accountInformation
-            .getter(sharedPreferences.get('currentUid') as String);
         //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
