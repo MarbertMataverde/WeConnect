@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weconnect/page/phone%20view/home/channel%20box/channel_list.dart';
+import 'package:weconnect/page/phone%20view/home/forum/forum.dart';
 
 import 'campus feed/campus_feed.dart';
 import 'colleges/ccs_feed.dart';
@@ -66,6 +68,8 @@ class _HomeWrapperState extends State<HomePhoneWrapper> {
                           studentCollege == 'Masteral'
                       ? const MasteralFeed()
                       : const SelectCollegeFeed(),
+      const ChannelList(),
+      const Forum(),
     ];
     return Scaffold(
       body: _pages[_currentIndex],
