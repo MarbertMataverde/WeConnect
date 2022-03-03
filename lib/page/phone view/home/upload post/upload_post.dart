@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/widgets/appbar%20title/appbar_title.dart';
+import '../../../../constant/constant_colors.dart';
+import '../../../../widgets/appbar%20title/appbar_title.dart';
 
 import '../../../../controller/controller_create_post.dart';
 

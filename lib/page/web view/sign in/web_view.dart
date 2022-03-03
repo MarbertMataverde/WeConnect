@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../../constant/constant.dart';
+import '../../../constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../widgets/widget sign in/widget_custom_button.dart';

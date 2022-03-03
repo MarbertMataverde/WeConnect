@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
+import 'new_channel.dart';
 
 class ChannelList extends StatefulWidget {
   const ChannelList({Key? key}) : super(key: key);
@@ -50,7 +51,9 @@ class _ChannelListState extends State<ChannelList> {
             visible: accountType == 'accountTypeProfessor',
             child: IconButton(
               tooltip: 'New Channel Box',
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const NewChannel());
+              },
               icon: Icon(
                 MdiIcons.messagePlusOutline,
                 color: Get.isDarkMode

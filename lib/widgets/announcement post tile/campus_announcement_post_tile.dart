@@ -8,9 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
+import '../../controller/controller_post_tile_pop_up_menu.dart';
 
 import '../../dialog/dialog_post_tile_.dart';
 import '../../page/phone view/home/edit post caption/edit_caption.dart';

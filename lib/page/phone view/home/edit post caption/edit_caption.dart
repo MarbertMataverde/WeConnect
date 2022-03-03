@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/dialog/dialog_post_tile_.dart';
 
 import '../../../../constant/constant_colors.dart';
+import '../../../../dialog/dialog_post_tile_.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
 //dialogs

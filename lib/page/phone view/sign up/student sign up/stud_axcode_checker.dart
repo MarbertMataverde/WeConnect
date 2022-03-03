@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/constant/constant_login_page.dart';
-import 'package:weconnect/utils/utils_access_code_checker.dart';
+import '../../../../constant/constant.dart';
+import '../../../../constant/constant_colors.dart';
+import '../../../../constant/constant_login_page.dart';
+import '../../../../utils/utils_access_code_checker.dart';
 
 import '../../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../../widgets/widget sign in/widget_textformfield_login.dart';

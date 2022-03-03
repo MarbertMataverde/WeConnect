@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/controller/controller_delete_post.dart';
-import 'package:weconnect/controller/controller_report.dart';
+import '../constant/constant.dart';
+import '../controller/controller_delete_post.dart';
+import '../controller/controller_report.dart';
 
 import '../constant/constant_colors.dart';
 import '../controller/controller_edit_post_caption.dart';

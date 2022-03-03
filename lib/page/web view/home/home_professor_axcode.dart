@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../../constant/constant.dart';
+import '../../../constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../utils/utils_xlsx_access_code_generator.dart';

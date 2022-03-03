@@ -4,9 +4,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/authentication/authentication_controller.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../../../authentication/authentication_controller.dart';
+import '../../../../constant/constant.dart';
+import '../../../../constant/constant_colors.dart';
 
 import '../../../../widgets/widget sign in/widget_custom_button.dart';
 import '../../../../widgets/widget sign in/widget_textformfield_login.dart';

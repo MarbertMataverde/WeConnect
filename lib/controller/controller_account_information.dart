@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/dialog/dialog_authentication.dart';
 
+import '../dialog/dialog_authentication.dart';
 import '../page/phone view/home/home_phone_wrapper.dart';
 import '../page/web view/home/home_web_wrapper.dart';
 

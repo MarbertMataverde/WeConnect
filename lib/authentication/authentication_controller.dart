@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/dialog/dialog_authentication.dart';
+import '../dialog/dialog_authentication.dart';
 
 import '../constant/constant.dart';
 import '../controller/controller_account_information.dart';
