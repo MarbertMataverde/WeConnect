@@ -20,6 +20,7 @@ String? currentAccountType;
 String? currentStudentCollege;
 String? currentProfileName;
 String? currentProfileImageUrl;
+String? currentUserId;
 
 class ControllerAccountInformation extends GetxController {
   Future getter(String _currentUid) async {
@@ -87,9 +88,10 @@ class ControllerAccountInformation extends GetxController {
         .then(
       (value) async {
         if (value.exists) {
-          //writing data to sharedPreference
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
+          //writing data to sharedPreference
+          currentUserId = sharedPreferences.get('currentUid').toString();
           await sharedPreferences.setString('accountType', accountType);
           currentAccountType = sharedPreferences.get('accountType').toString();
           await sharedPreferences.setString(

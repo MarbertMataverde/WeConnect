@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controller/controller_account_information.dart';
 import '../../phone%20view/home/channel%20box/channel_list.dart';
 import '../../phone%20view/home/forum/forum.dart';
