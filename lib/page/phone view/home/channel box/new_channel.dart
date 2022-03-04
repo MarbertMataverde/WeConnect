@@ -3,24 +3,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_new_channel.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
+import 'package:weconnect/controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
-final box = GetStorage();
-
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
-final channel = Get.put(ControllerNewChannel());
+final channel = Get.put(ControllerChannel());
 
 class NewChannel extends StatefulWidget {
   const NewChannel({Key? key}) : super(key: key);
@@ -35,6 +34,8 @@ class _NewChannelState extends State<NewChannel> {
   bool checkIconButtonIsEnable = false;
   //controller
   final TextEditingController channelNameCtrlr = TextEditingController();
+  //is creating?
+  bool isCreating = false;
 
   Future pickImage() async {
     try {
@@ -73,26 +74,40 @@ class _NewChannelState extends State<NewChannel> {
           title: 'Create New Channel',
         ),
         actions: [
-          IconButton(
-            onPressed: checkIconButtonIsEnable && selectedImage != null
-                ? () {
-                    channel.createNewChannelAndUploadAvatarFunction(
-                      filePath: selectedImage!.path,
-                      channelName: channelNameCtrlr.text,
-                      channelAdminName: box.read('profileName'),
-                      professorUid: box.read('currentUid'),
-                    );
-                  }
-                : null,
-            icon: Icon(
-              MdiIcons.check,
-              color: checkIconButtonIsEnable && selectedImage != null
-                  ? Get.theme.primaryColor
-                  : Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
-            ),
-          ),
+          isCreating
+              ? Padding(
+                  padding: EdgeInsets.only(right: 2.5.w),
+                  child: SpinKitSpinningLines(
+                    color: Get.theme.primaryColor,
+                    size: Get.mediaQuery.size.width * 0.08,
+                  ),
+                )
+              : IconButton(
+                  onPressed: checkIconButtonIsEnable && selectedImage != null
+                      ? () async {
+                          setState(() {
+                            isCreating = true;
+                          });
+                          await channel.createNewChannelAndUploadAvatarFunction(
+                            filePath: selectedImage!.path,
+                            channelName: channelNameCtrlr.text,
+                            channelAdminName: currentProfileName,
+                            professorUid: currentUserId,
+                          );
+                          setState(() {
+                            isCreating = false;
+                          });
+                        }
+                      : null,
+                  icon: Icon(
+                    MdiIcons.check,
+                    color: checkIconButtonIsEnable && selectedImage != null
+                        ? Get.theme.primaryColor
+                        : Get.isDarkMode
+                            ? kButtonColorDarkTheme
+                            : kButtonColorLightTheme,
+                  ),
+                ),
         ],
       ),
       body: Padding(

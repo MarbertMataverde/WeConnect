@@ -22,8 +22,6 @@ DateFormat dateFormat = DateFormat("MMM-dd");
 //account type
 final box = GetStorage();
 
-//pop up based on account type
-
 //dialogs
 final dialogs = Get.put(DialogPostTile());
 
@@ -125,7 +123,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                   ],
                 ),
                 FocusedMenuHolder(
-                  menuWidth: MediaQuery.of(context).size.width * 0.50,
+                  menuWidth: Get.mediaQuery.size.width * 0.50,
                   blurSize: 1.0,
                   menuItemExtent: 5.h,
                   menuBoxDecoration: BoxDecoration(

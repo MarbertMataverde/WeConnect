@@ -10,7 +10,7 @@ final firestore = FirebaseFirestore.instance;
 
 String avatarDownloadUrl = '';
 
-class ControllerNewChannel extends GetxController {
+class ControllerChannel extends GetxController {
   Future<void> createNewChannel(
     String channelAdminName,
     String channelName,
@@ -39,7 +39,9 @@ class ControllerNewChannel extends GetxController {
 
   //deleting channel
   Future<void> deleteChannel(
-      String _channelDocId, String _avatarImageUrl) async {
+    String _channelDocId,
+    String _avatarImageUrl,
+  ) async {
     firestore.collection('channels').doc(_channelDocId).delete().whenComplete(
         () => deleteAvatarImageFromFireStoreStorage(_avatarImageUrl));
   }
