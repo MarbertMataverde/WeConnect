@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controller/controller_account_information.dart';
 import '../../phone%20view/home/channel%20box/channel_list.dart';
 import '../../phone%20view/home/forum/forum.dart';
@@ -30,24 +32,20 @@ class HomePhoneWrapper extends StatefulWidget {
   State<HomePhoneWrapper> createState() => _HomePhoneWrapperState();
 }
 
-class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
-  // String? currentAccountType;
-  // String? currentStudentCollege;
-  // @override
-  // void initState() {
-  //   accountTypeToGetStorage();
-  //   super.initState();
-  // }
+//get account information
+final accountInformation = Get.put(ControllerAccountInformation());
 
-  // Future accountTypeToGetStorage() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   currentAccountType = sharedPreferences.get('currentAccountType') as String;
-  //   currentStudentCollege = sharedPreferences.get('currentStudentCollege').toString();
-  //   box.write(
-  //       'profileName', sharedPreferences.get('currentProfileName').toString());
-  //   box.write('profileImageUrl',
-  //       sharedPreferences.get('currentProfileImageUrl').toString());
-  // }
+class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
+  @override
+  void initState() {
+    getAccountInformation();
+    super.initState();
+  }
+
+  Future getAccountInformation() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    accountInformation.getter(sharedPreferences.get('currentUid').toString());
+  }
 
   @override
   Widget build(BuildContext context) {

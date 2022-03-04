@@ -214,6 +214,6 @@ class Authentication extends GetxController {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.clear();
     await box.erase();
-    Get.off(() => kIsWeb ? const WebView() : const PhoneViewSignIn());
+    Get.offAll(() => kIsWeb ? const WebView() : const PhoneViewSignIn());
   }
 }

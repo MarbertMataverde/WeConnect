@@ -112,7 +112,10 @@ class ControllerAccountInformation extends GetxController {
           //routing
           if (kIsWeb) {
             if (currentAccountType == 'accountTypeCampusAdmin') {
-              Get.off(() => const HomeWebWrapper());
+              Get.offAll(
+                () => const HomeWebWrapper(),
+                transition: Transition.noTransition,
+              );
             } else {
               dialogs.invalidAccountTypeDialog(
                 Get.context,
@@ -122,7 +125,10 @@ class ControllerAccountInformation extends GetxController {
               );
             }
           } else {
-            Get.off(() => const HomePhoneWrapper());
+            Get.off(
+              () => const HomePhoneWrapper(),
+              transition: Transition.noTransition,
+            );
           }
         }
       },

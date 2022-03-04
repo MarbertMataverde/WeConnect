@@ -33,6 +33,7 @@ class _CoaFeedState extends State<CoaFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: Visibility(
+            //arrow left college admin bug
             visible: (currentAccountType == 'accountTypeCampusAdmin' ||
                     currentAccountType == 'accountTypeRegistrarAdmin' ||
                     currentAccountType == 'accountTypeProfessor') ||
@@ -40,6 +41,7 @@ class _CoaFeedState extends State<CoaFeed> {
             child: IconButton(
                 onPressed: () {
                   Get.back();
+                  print(currentAccountType);
                 },
                 icon: Icon(
                   MdiIcons.arrowLeft,
