@@ -57,10 +57,7 @@ class _CampusFeedState extends State<CampusFeed> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        endDrawer: WidgetNavigationDrawer(
-          accountType: currentAccountType.toString(),
-          studentCollege: currentStudentCollege.toString(),
-        ),
+        endDrawer: const WidgetNavigationDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,

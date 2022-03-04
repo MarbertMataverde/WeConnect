@@ -18,12 +18,9 @@ final changeTheme = Get.put(ControllerChangeTheme());
 final box = GetStorage();
 
 class WidgetNavigationDrawer extends StatelessWidget {
-  const WidgetNavigationDrawer(
-      {Key? key, required this.accountType, required this.studentCollege})
-      : super(key: key);
-
-  final String accountType;
-  final String studentCollege;
+  const WidgetNavigationDrawer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +33,24 @@ class WidgetNavigationDrawer extends StatelessWidget {
           children: <Widget>[
             drawerProfileHeader(
               onCliked: () {},
-              profileAccountCollegeType: accountType == 'accountTypeCampusAdmin'
+              profileAccountCollegeType: currentAccountType ==
+                      'accountTypeCampusAdmin'
                   ? 'Campus Admin'
-                  : accountType == 'accountTypeRegistrarAdmin'
+                  : currentAccountType == 'accountTypeRegistrarAdmin'
                       ? 'Registrar Admin'
-                      : accountType == 'accountTypeCoaAdmin'
+                      : currentAccountType == 'accountTypeCoaAdmin'
                           ? 'College of Accountancy Admin'
-                          : accountType == 'accountTypeCobAdmin'
+                          : currentAccountType == 'accountTypeCobAdmin'
                               ? 'College of Business Admin'
-                              : accountType == 'accountTypeCcsAdmin'
+                              : currentAccountType == 'accountTypeCcsAdmin'
                                   ? 'College of Computer Studies Admin'
-                                  : accountType == 'accountTypeMasteralAdmin'
+                                  : currentAccountType ==
+                                          'accountTypeMasteralAdmin'
                                       ? 'Masteral Admin'
-                                      : accountType == 'accountTypeProfessor'
+                                      : currentAccountType ==
+                                              'accountTypeProfessor'
                                           ? 'Professor'
-                                          : studentCollege,
+                                          : currentStudentCollege.toString(),
               profileImageUrl: currentProfileImageUrl.toString(),
               profileName: currentProfileName.toString(),
             ),
@@ -72,8 +72,8 @@ class WidgetNavigationDrawer extends StatelessWidget {
 
             //reported post
             Visibility(
-              visible: accountType == 'accountTypeCampusAdmin' ||
-                  accountType == 'accountTypeRegistrarAdmin',
+              visible: currentAccountType == 'accountTypeCampusAdmin' ||
+                  currentAccountType == 'accountTypeRegistrarAdmin',
               child: Column(
                 children: [
                   //issue divider

@@ -47,10 +47,7 @@ class _CcsFeedState extends State<CcsFeed> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        endDrawer: WidgetNavigationDrawer(
-          accountType: accountType.toString(),
-          studentCollege: studentCollege.toString(),
-        ),
+        endDrawer: const WidgetNavigationDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,

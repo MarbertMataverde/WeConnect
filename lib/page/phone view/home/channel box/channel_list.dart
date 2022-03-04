@@ -54,10 +54,7 @@ class _ChannelListState extends State<ChannelList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: WidgetNavigationDrawer(
-        accountType: accountType.toString(),
-        studentCollege: studentCollege.toString(),
-      ),
+      endDrawer: const WidgetNavigationDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
