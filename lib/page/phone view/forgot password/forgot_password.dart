@@ -9,8 +9,6 @@ import '../../../constant/constant_login_page.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 
-final TextEditingController _emailCtrlr = TextEditingController();
-
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
@@ -27,6 +25,8 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   bool isLoading = false;
+  //controller
+  final TextEditingController _emailCtrlr = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

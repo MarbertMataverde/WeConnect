@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constant/constant_colors.dart';
+import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/campus_announcement_post_tile.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
@@ -29,27 +30,36 @@ class CampusFeed extends StatefulWidget {
 }
 
 class _CampusFeedState extends State<CampusFeed> {
-  String? accountType;
-  String? studentCollege;
+  // String? currentAccountType;
+  // String? studentCollege;
+  // @override
+  // void initState() {
+  //   accountTypeGetter();
+
+  //   super.initState();
+  // }
+
+  // Future accountTypeGetter() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     currentAccountType = sharedPreferences.get('currentAccountType').toString();
+  //     studentCollege = sharedPreferences.get('studentCollege').toString();
+  //   });
+  // }
   @override
   void initState() {
-    accountTypeGetter();
+    print(currentAccountType);
+    print(currentProfileImageUrl);
+    print(currentProfileName);
+    print(currentStudentCollege);
     super.initState();
-  }
-
-  Future accountTypeGetter() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      accountType = sharedPreferences.get('accountType').toString();
-      studentCollege = sharedPreferences.get('studentCollege').toString();
-    });
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: WidgetNavigationDrawer(
-          accountType: accountType.toString(),
-          studentCollege: studentCollege.toString(),
+          accountType: currentAccountType.toString(),
+          studentCollege: currentStudentCollege.toString(),
         ),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -68,8 +78,8 @@ class _CampusFeedState extends State<CampusFeed> {
           ),
           actions: [
             Visibility(
-              visible: accountType == 'accountTypeCampusAdmin' ||
-                  accountType == 'accountTypeRegistrarAdmin',
+              visible: currentAccountType == 'accountTypeCampusAdmin' ||
+                  currentAccountType == 'accountTypeRegistrarAdmin',
               child: IconButton(
                 onPressed: () {
                   Get.to(
@@ -133,7 +143,7 @@ class _CampusFeedState extends State<CampusFeed> {
                   postDocId: data.docs[index].id,
                   media: _imageList,
                   //account type
-                  accountType: accountType.toString(),
+                  accountType: currentAccountType.toString(),
                 );
               },
             );

@@ -17,8 +17,6 @@ import '../../../../widgets/appbar title/appbar_title.dart';
 
 final box = GetStorage();
 
-final TextEditingController channelNameCtrlr = TextEditingController();
-
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
@@ -35,6 +33,8 @@ class _NewChannelState extends State<NewChannel> {
   File? selectedImage;
   //is create button enable or not
   bool checkIconButtonIsEnable = false;
+  //controller
+  final TextEditingController channelNameCtrlr = TextEditingController();
 
   Future pickImage() async {
     try {
@@ -76,12 +76,12 @@ class _NewChannelState extends State<NewChannel> {
           IconButton(
             onPressed: checkIconButtonIsEnable && selectedImage != null
                 ? () {
-                    // _newChannel.createNewChannelAndUploadAvatarFunction(
-                    //   selectedImage!.path,
-                    //   channelNameCtrlr.text,
-                    //   box.read('currentUserProfileName'),
-                    //   box.read('uid'),
-                    // );
+                    channel.createNewChannelAndUploadAvatarFunction(
+                      filePath: selectedImage!.path,
+                      channelName: channelNameCtrlr.text,
+                      channelAdminName: box.read('profileName'),
+                      professorUid: box.read('currentUid'),
+                    );
                   }
                 : null,
             icon: Icon(

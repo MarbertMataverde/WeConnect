@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../controller/controller_account_information.dart';
 import '../../phone%20view/home/channel%20box/channel_list.dart';
 import '../../phone%20view/home/forum/forum.dart';
 
@@ -31,23 +32,23 @@ class HomePhoneWrapper extends StatefulWidget {
 }
 
 class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
-  String? accountType;
-  String? studentCollege;
-  @override
-  void initState() {
-    accountTypeToGetStorage();
-    super.initState();
-  }
+  // String? currentAccountType;
+  // String? currentStudentCollege;
+  // @override
+  // void initState() {
+  //   accountTypeToGetStorage();
+  //   super.initState();
+  // }
 
-  Future accountTypeToGetStorage() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    accountType = sharedPreferences.get('accountType') as String;
-    studentCollege = sharedPreferences.get('studentCollege').toString();
-    box.write(
-        'profileName', sharedPreferences.get('currentProfileName').toString());
-    box.write('profileImageUrl',
-        sharedPreferences.get('currentProfileImageUrl').toString());
-  }
+  // Future accountTypeToGetStorage() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   currentAccountType = sharedPreferences.get('currentAccountType') as String;
+  //   currentStudentCollege = sharedPreferences.get('currentStudentCollege').toString();
+  //   box.write(
+  //       'profileName', sharedPreferences.get('currentProfileName').toString());
+  //   box.write('profileImageUrl',
+  //       sharedPreferences.get('currentProfileImageUrl').toString());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +56,17 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
       //campus feed (main feed)
       const CampusFeed(),
       //college account type based feed
-      accountType == 'accountTypeCoaAdmin' ||
-              studentCollege == 'College of Accountancy'
+      currentAccountType == 'accountTypeCoaAdmin' ||
+              currentStudentCollege == 'College of Accountancy'
           ? const CoaFeed()
-          : accountType == 'accountTypeCobAdmin' ||
-                  studentCollege == 'College of Business'
+          : currentAccountType == 'accountTypeCobAdmin' ||
+                  currentStudentCollege == 'College of Business'
               ? const CobFeed()
-              : accountType == 'accountTypeCcsAdmin' ||
-                      studentCollege == 'College of Computer Studies'
+              : currentAccountType == 'accountTypeCcsAdmin' ||
+                      currentStudentCollege == 'College of Computer Studies'
                   ? const CcsFeed()
-                  : accountType == 'accountTypeMasteralAdmin' ||
-                          studentCollege == 'Masteral'
+                  : currentAccountType == 'accountTypeMasteralAdmin' ||
+                          currentStudentCollege == 'Masteral'
                       ? const MasteralFeed()
                       : const SelectCollegeFeed(),
       const ChannelList(),

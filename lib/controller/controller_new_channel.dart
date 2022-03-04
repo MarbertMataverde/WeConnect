@@ -12,19 +12,19 @@ String avatarDownloadUrl = '';
 
 class ControllerNewChannel extends GetxController {
   Future<void> createNewChannel(
-    String _channelAdminName,
-    String _channelName,
-    String _professorUid,
+    String channelAdminName,
+    String channelName,
+    String professorUid,
   ) async {
     firestore
         .collection('channels')
         .doc()
         .set({
-          'channel-admin-name': _channelAdminName,
+          'channel-admin-name': channelAdminName,
           'channel-avatar-image': avatarDownloadUrl,
-          'channel-name': _channelName,
+          'channel-name': channelName,
           'create-at': Timestamp.now(),
-          'professor-uid': _professorUid,
+          'professor-uid': professorUid,
         })
         .whenComplete(() => {
               Get.back(),
@@ -50,15 +50,15 @@ class ControllerNewChannel extends GetxController {
 
   //uploading new avatar image for new channel
   Future<void> uploadAvatar(
-    String _filePath,
-    String _channelName,
+    String filePath,
+    String channelName,
   ) async {
-    File file = File(_filePath);
+    File file = File(filePath);
     //! if you want to add handling option do it after defense when someone will
     //! help you hehe -marbert :>>
     try {
       await storage
-          .ref('channelAvatar/$_channelName')
+          .ref('channelAvatar/$channelName')
           .putFile(file)
           .then((value) async {
         String getDownloadUrlOfTheAvatar = await value.ref.getDownloadURL();
@@ -70,23 +70,23 @@ class ControllerNewChannel extends GetxController {
   }
 
   //new channel execcuter
-  Future<void> createNewChannelAndUploadAvatarFunction(
+  Future<void> createNewChannelAndUploadAvatarFunction({
     //channel avatar upload
-    _filePath,
-    _channelName, //? used by both function
+    filePath,
+    channelName, //? used by both function
     //new chhanel
-    _channelAdminName,
-    _professorUid,
-  ) async {
+    channelAdminName,
+    professorUid,
+  }) async {
     await uploadAvatar(
-      _filePath,
-      _channelName,
+      filePath,
+      channelName,
     );
 
     createNewChannel(
-      _channelAdminName,
-      _channelName,
-      _professorUid,
+      channelAdminName,
+      channelName,
+      professorUid,
     );
   }
 }
