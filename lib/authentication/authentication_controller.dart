@@ -36,13 +36,8 @@ class Authentication extends GetxController {
       await _auth
           .signInWithEmailAndPassword(email: _emailAddress, password: _password)
           .then((UserCredential value) async {
-        //getting current uid
-        box.write('currentUid', value.user!.uid);
-        //getting account type
-        sharedPreferences.setString('currentUid', value.user!.uid);
-        //getting account information
+        //this will make sure that the current user id is not null
         await sharedPreferences.setString('currentUid', value.user!.uid);
-        //writing data to sharedPreference
         await sharedPreferences.setString(
             'signInToken', value.user!.email as String);
         await accountInformation
@@ -108,9 +103,10 @@ class Authentication extends GetxController {
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting account information
+        //this will make sure that the current user id is not null
         await sharedPreferences.setString('currentUid', value.user!.uid);
-        accountInformation
+        //getting account information
+        await accountInformation
             .getter(sharedPreferences.get('currentUid') as String);
       });
     } on FirebaseAuthException catch (e) {
@@ -170,9 +166,10 @@ class Authentication extends GetxController {
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
         });
-        //getting account information
+        //this will make sure that the current user id is not null
         await sharedPreferences.setString('currentUid', value.user!.uid);
-        accountInformation
+        //getting account information
+        await accountInformation
             .getter(sharedPreferences.get('currentUid') as String);
       });
     } on FirebaseAuthException catch (e) {

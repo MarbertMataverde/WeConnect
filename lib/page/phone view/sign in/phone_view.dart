@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
@@ -11,9 +12,6 @@ import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 import '../forgot password/forgot_password.dart';
 import '../sign up/student sign up/stud_axcode_checker.dart';
-
-final TextEditingController _emailCtrlr = TextEditingController();
-final TextEditingController _passwordCtrlr = TextEditingController();
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
@@ -34,6 +32,9 @@ class PhoneViewSignIn extends StatefulWidget {
 
 class _PhoneViewSignInState extends State<PhoneViewSignIn> {
   bool isLoading = false;
+
+  final TextEditingController _emailCtrlr = TextEditingController();
+  final TextEditingController _passwordCtrlr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome Back!',
+                'Welcome Back ✨',
                 style: TextStyle(
                   fontSize: 18.sp,
                   color: Get.theme.primaryColor,
@@ -149,6 +150,9 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                     )
                   : CustomButton(
                       onPress: () async {
+                        //shared preferences initialization
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
                         setState(() {
                           isLoading = true;
                         });

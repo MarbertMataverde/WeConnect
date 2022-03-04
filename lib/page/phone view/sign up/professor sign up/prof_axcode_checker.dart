@@ -9,8 +9,6 @@ import '../../../../utils/utils_access_code_checker.dart';
 import '../../../../widgets/button/custom_button.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
-final TextEditingController _axCodeCtrlr = TextEditingController();
-
 final acessCodeChecker = Get.put(AccessCodeChecker());
 
 // Validation Key
@@ -28,6 +26,8 @@ class ProfessorAxCodeChecker extends StatefulWidget {
 class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
   //loading spinner
   bool isLoading = false;
+  //access cocde controller
+  final TextEditingController _axCodeCtrlr = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Professor Sign Up',
+                'Professor Sign Up 👨🏻‍🏫',
                 style: TextStyle(
                   fontSize: 18.sp,
                   color: Get.theme.primaryColor,

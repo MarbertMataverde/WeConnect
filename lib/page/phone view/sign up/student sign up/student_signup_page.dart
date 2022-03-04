@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../authentication/authentication_controller.dart';
 import '../../../../constant/constant.dart';
@@ -9,12 +10,6 @@ import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../widgets/button/custom_button.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
-
-final TextEditingController _nameCtrlr = TextEditingController();
-
-final TextEditingController _studNumCtrlr = TextEditingController();
-final TextEditingController _emailCtrlr = TextEditingController();
-final TextEditingController _passwordCtrlr = TextEditingController();
 
 final authentication = Get.put(Authentication());
 
@@ -45,6 +40,11 @@ class StudentSignUpPage extends StatefulWidget {
 class _StudentSignUpPageState extends State<StudentSignUpPage> {
   //loading spinner
   bool isLoading = false;
+  //controllers
+  final TextEditingController _nameCtrlr = TextEditingController();
+  final TextEditingController _studNumCtrlr = TextEditingController();
+  final TextEditingController _emailCtrlr = TextEditingController();
+  final TextEditingController _passwordCtrlr = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +85,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Student Sign Up',
+                'Student Sign Up 👨🏻‍🎓',
                 style: TextStyle(
                   fontSize: 18.sp,
                   color: Get.theme.primaryColor,

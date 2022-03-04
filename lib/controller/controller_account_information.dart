@@ -16,6 +16,10 @@ final box = GetStorage();
 
 //dialogs
 final dialogs = Get.put(DialogAuthentication());
+String? currentAccountType;
+String? currentStudentCollege;
+String? currentProfileName;
+String? currentProfileImageUrl;
 
 class ControllerAccountInformation extends GetxController {
   Future getter(String _currentUid) async {
@@ -83,21 +87,29 @@ class ControllerAccountInformation extends GetxController {
         .then(
       (value) async {
         if (value.exists) {
+          //writing data to sharedPreference
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
           await sharedPreferences.setString('accountType', accountType);
+          currentAccountType = sharedPreferences.get('accountType').toString();
           await sharedPreferences.setString(
               'currentProfileImageUrl', value.get('profile-image-url'));
+          currentProfileImageUrl =
+              sharedPreferences.get('currentProfileImageUrl').toString();
           await sharedPreferences.setString(
               'currentProfileName', value.get('profile-name'));
+          currentProfileName =
+              sharedPreferences.get('currentProfileName').toString();
+
           if (sharedPreferences.get('accountType') == 'accountTypeStudent') {
             await sharedPreferences.setString(
                 'studentCollege', value.get('college'));
+            currentStudentCollege =
+                sharedPreferences.get('studentCollege').toString();
           }
           //routing
           if (kIsWeb) {
-            if (sharedPreferences.get('accountType') ==
-                'accountTypeCampusAdmin') {
+            if (currentAccountType == 'accountTypeCampusAdmin') {
               Get.off(() => const HomeWebWrapper());
             } else {
               dialogs.invalidAccountTypeDialog(
