@@ -1,7 +1,6 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,8 +11,6 @@ import 'ccs_feed.dart';
 import 'coa_feed.dart';
 import 'cob_feed.dart';
 import 'masteral_feed.dart';
-
-final box = GetStorage();
 
 class SelectCollegeFeed extends StatefulWidget {
   const SelectCollegeFeed({Key? key}) : super(key: key);

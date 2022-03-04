@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
-import 'package:weconnect/controller/controller_channel.dart';
+import '../../../../controller/controller_account_information.dart';
+import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant_colors.dart';
-
 import 'home_student_axcode.dart';
 
 final authentication = Get.put(Authentication());

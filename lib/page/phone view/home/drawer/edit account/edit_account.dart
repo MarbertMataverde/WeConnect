@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
+import '../../../../../controller/controller_account_information.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../constant/constant_colors.dart';
@@ -19,8 +18,6 @@ final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .orderBy('post-created-at', descending: true)
     .snapshots();
 
-final box = GetStorage();
-
 class CampusFeed extends StatefulWidget {
   const CampusFeed({Key? key}) : super(key: key);
 
@@ -29,31 +26,6 @@ class CampusFeed extends StatefulWidget {
 }
 
 class _CampusFeedState extends State<CampusFeed> {
-  // String? currentAccountType;
-  // String? studentCollege;
-  // @override
-  // void initState() {
-  //   accountTypeGetter();
-
-  //   super.initState();
-  // }
-
-  // Future accountTypeGetter() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     currentAccountType = sharedPreferences.get('currentAccountType').toString();
-  //     studentCollege = sharedPreferences.get('studentCollege').toString();
-  //   });
-  // }
-  @override
-  void initState() {
-    print(currentAccountType);
-    print(currentProfileImageUrl);
-    print(currentProfileName);
-    print(currentStudentCollege);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),

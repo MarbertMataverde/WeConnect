@@ -5,9 +5,9 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
-import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
-import 'package:weconnect/dialog/dialog_channel.dart';
+import '../../../../controller/controller_account_information.dart';
+import '../../../../controller/controller_post_tile_pop_up_menu.dart';
+import '../../../../dialog/dialog_channel.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_channel.dart';

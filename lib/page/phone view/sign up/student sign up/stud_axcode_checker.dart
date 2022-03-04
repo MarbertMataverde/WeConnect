@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../../constant/constant.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../utils/utils_access_code_checker.dart';
-
 import '../../../../widgets/button/custom_button.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 import '../professor sign up/prof_axcode_checker.dart';
