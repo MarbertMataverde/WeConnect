@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/announcement post tile/masteral_announcement_post_tile.dart';
@@ -19,8 +20,6 @@ final Stream<QuerySnapshot> masteralFeedSnapshot = FirebaseFirestore.instance
     .orderBy('post-created-at', descending: true)
     .snapshots();
 
-final box = GetStorage();
-
 class MasteralFeed extends StatefulWidget {
   const MasteralFeed({Key? key}) : super(key: key);
 
@@ -29,22 +28,6 @@ class MasteralFeed extends StatefulWidget {
 }
 
 class _MasteralFeedState extends State<MasteralFeed> {
-  String? accountType;
-  String? studentCollege;
-  @override
-  void initState() {
-    accountTypeGetter();
-    super.initState();
-  }
-
-  Future accountTypeGetter() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      accountType = sharedPreferences.get('accountType') as String;
-      studentCollege = sharedPreferences.get('studentCollege').toString();
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),
@@ -52,10 +35,10 @@ class _MasteralFeedState extends State<MasteralFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: Visibility(
-            visible: (accountType == 'accountTypeCampusAdmin' ||
-                    accountType == 'accountTypeRegistrarAdmin' ||
-                    accountType == 'accountTypeProfessor') ||
-                studentCollege == 'Masteral',
+            visible: (currentAccountType == 'accountTypeCampusAdmin' ||
+                    currentAccountType == 'accountTypeRegistrarAdmin' ||
+                    currentAccountType == 'accountTypeProfessor') ||
+                currentStudentCollege == 'Masteral',
             child: IconButton(
                 onPressed: () {
                   Get.back();
@@ -73,7 +56,7 @@ class _MasteralFeedState extends State<MasteralFeed> {
           ),
           actions: [
             Visibility(
-              visible: accountType == 'accountTypeMasteralAdmin',
+              visible: currentAccountType == 'accountTypeMasteralAdmin',
               child: IconButton(
                 onPressed: () {
                   Get.to(
@@ -137,7 +120,7 @@ class _MasteralFeedState extends State<MasteralFeed> {
                   postDocId: data.docs[index].id,
                   media: _imageList,
                   //account type
-                  accountType: accountType.toString(),
+                  accountType: currentAccountType.toString(),
                 );
               },
             );

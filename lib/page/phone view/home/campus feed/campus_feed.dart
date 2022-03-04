@@ -19,8 +19,6 @@ final Stream<QuerySnapshot> campusFeedSnapshot = FirebaseFirestore.instance
     .orderBy('post-created-at', descending: true)
     .snapshots();
 
-final box = GetStorage();
-
 class CampusFeed extends StatefulWidget {
   const CampusFeed({Key? key}) : super(key: key);
 
@@ -29,31 +27,6 @@ class CampusFeed extends StatefulWidget {
 }
 
 class _CampusFeedState extends State<CampusFeed> {
-  // String? currentAccountType;
-  // String? studentCollege;
-  // @override
-  // void initState() {
-  //   accountTypeGetter();
-
-  //   super.initState();
-  // }
-
-  // Future accountTypeGetter() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     currentAccountType = sharedPreferences.get('currentAccountType').toString();
-  //     studentCollege = sharedPreferences.get('studentCollege').toString();
-  //   });
-  // }
-  @override
-  void initState() {
-    print(currentAccountType);
-    print(currentProfileImageUrl);
-    print(currentProfileName);
-    print(currentStudentCollege);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),

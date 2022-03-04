@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constant/constant_colors.dart';
+import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/coa_announcement_post_tile.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
@@ -19,8 +18,6 @@ final Stream<QuerySnapshot> coaFeedSnapshot = FirebaseFirestore.instance
     .orderBy('post-created-at', descending: true)
     .snapshots();
 
-final box = GetStorage();
-
 class CoaFeed extends StatefulWidget {
   const CoaFeed({Key? key}) : super(key: key);
 
@@ -29,22 +26,6 @@ class CoaFeed extends StatefulWidget {
 }
 
 class _CoaFeedState extends State<CoaFeed> {
-  String? accountType;
-  String? studentCollege;
-  @override
-  void initState() {
-    accountTypeGetter();
-    super.initState();
-  }
-
-  Future accountTypeGetter() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      accountType = sharedPreferences.get('accountType') as String;
-      studentCollege = sharedPreferences.get('studentCollege').toString();
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),
@@ -52,10 +33,10 @@ class _CoaFeedState extends State<CoaFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: Visibility(
-            visible: (accountType == 'accountTypeCampusAdmin' ||
-                    accountType == 'accountTypeRegistrarAdmin' ||
-                    accountType == 'accountTypeProfessor') ||
-                studentCollege != 'College of Accountancy',
+            visible: (currentAccountType == 'accountTypeCampusAdmin' ||
+                    currentAccountType == 'accountTypeRegistrarAdmin' ||
+                    currentAccountType == 'accountTypeProfessor') ||
+                currentStudentCollege != 'College of Accountancy',
             child: IconButton(
                 onPressed: () {
                   Get.back();
@@ -73,7 +54,7 @@ class _CoaFeedState extends State<CoaFeed> {
           ),
           actions: [
             Visibility(
-              visible: accountType == 'accountTypeCoaAdmin',
+              visible: currentAccountType == 'accountTypeCoaAdmin',
               child: IconButton(
                 onPressed: () {
                   Get.to(
@@ -137,7 +118,7 @@ class _CoaFeedState extends State<CoaFeed> {
                   postDocId: data.docs[index].id,
                   media: _imageList,
                   //accountType
-                  accountType: accountType.toString(),
+                  accountType: currentAccountType.toString(),
                 );
               },
             );

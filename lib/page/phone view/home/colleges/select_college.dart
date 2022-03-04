@@ -13,8 +13,6 @@ import 'coa_feed.dart';
 import 'cob_feed.dart';
 import 'masteral_feed.dart';
 
-final box = GetStorage();
-
 class SelectCollegeFeed extends StatefulWidget {
   const SelectCollegeFeed({Key? key}) : super(key: key);
 
