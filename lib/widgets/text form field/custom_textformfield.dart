@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLine,
     this.autovalidateMode,
     this.onChanged,
+    this.suffixWidget,
   }) : super(key: key);
   //?controller
   final TextEditingController ctrlr;
@@ -38,6 +39,8 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
   //?on data change
   final Function(String)? onChanged;
+  //?suffix widget
+  final Widget? suffixWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +59,10 @@ class CustomTextFormField extends StatelessWidget {
           ? kTextFormFieldCursorColorDarkTheme
           : kTextFormFieldCursorColorLightTheme,
       decoration: InputDecoration(
+        errorStyle: TextStyle(
+          color: Get.theme.primaryColor.withAlpha(180),
+        ),
+        suffixIcon: suffixWidget,
         filled: kTrue,
         fillColor: Get.isDarkMode
             ? kTextFormFieldColorDarkTheme

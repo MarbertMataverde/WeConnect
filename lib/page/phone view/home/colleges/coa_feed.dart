@@ -41,7 +41,6 @@ class _CoaFeedState extends State<CoaFeed> {
             child: IconButton(
                 onPressed: () {
                   Get.back();
-                  print(currentAccountType);
                 },
                 icon: Icon(
                   MdiIcons.arrowLeft,

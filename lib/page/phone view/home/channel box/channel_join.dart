@@ -21,14 +21,14 @@ final _validationKey = GlobalKey<FormState>();
 
 final channel = Get.put(ControllerChannel());
 
-class NewChannel extends StatefulWidget {
-  const NewChannel({Key? key}) : super(key: key);
+class ChannelJoin extends StatefulWidget {
+  const ChannelJoin({Key? key}) : super(key: key);
 
   @override
-  State<NewChannel> createState() => _NewChannelState();
+  State<ChannelJoin> createState() => _ChannelJoinState();
 }
 
-class _NewChannelState extends State<NewChannel> {
+class _ChannelJoinState extends State<ChannelJoin> {
   File? selectedImage;
   //is create button enable or not
   bool checkIconButtonIsEnable = false;

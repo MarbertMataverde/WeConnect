@@ -11,15 +11,17 @@ final firestore = FirebaseFirestore.instance;
 String avatarDownloadUrl = '';
 
 class ControllerChannel extends GetxController {
-  Future<void> createNewChannel(
-    String channelAdminName,
-    String channelName,
-    String professorUid,
-  ) async {
+  Future<void> createNewChannel({
+    required String channelAdminName,
+    required String channelName,
+    required String professorUid,
+    required String token,
+  }) async {
     firestore
         .collection('channels')
         .doc()
         .set({
+          'channel-token': token,
           'channel-admin-name': channelAdminName,
           'channel-avatar-image': avatarDownloadUrl,
           'channel-name': channelName,
@@ -51,10 +53,10 @@ class ControllerChannel extends GetxController {
   }
 
   //uploading new avatar image for new channel
-  Future<void> uploadAvatar(
-    String filePath,
-    String channelName,
-  ) async {
+  Future<void> uploadAvatar({
+    required String filePath,
+    required String channelName,
+  }) async {
     File file = File(filePath);
     //! if you want to add handling option do it after defense when someone will
     //! help you hehe -marbert :>>
@@ -79,16 +81,18 @@ class ControllerChannel extends GetxController {
     //new chhanel
     channelAdminName,
     professorUid,
+    token,
   }) async {
     await uploadAvatar(
-      filePath,
-      channelName,
+      filePath: filePath,
+      channelName: channelName,
     );
 
     createNewChannel(
-      channelAdminName,
-      channelName,
-      professorUid,
+      token: token,
+      channelAdminName: channelAdminName,
+      channelName: channelName,
+      professorUid: professorUid,
     );
   }
 }

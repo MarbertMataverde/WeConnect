@@ -5,6 +5,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/page/phone%20view/home/channel%20box/channel_join.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../../../dialog/dialog_channel.dart';
@@ -13,7 +14,7 @@ import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
-import 'new_channel.dart';
+import 'channel_new.dart';
 
 final channel = Get.put(ControllerChannel());
 
@@ -53,12 +54,27 @@ class _ChannelListState extends State<ChannelList> {
           Visibility(
             visible: currentAccountType == 'accountTypeProfessor',
             child: IconButton(
-              tooltip: 'New Channel Box',
+              tooltip: 'New Channel🔥',
               onPressed: () {
-                Get.to(() => const NewChannel());
+                Get.to(() => const ChannelNew());
               },
               icon: Icon(
                 MdiIcons.messagePlusOutline,
+                color: Get.isDarkMode
+                    ? kButtonColorDarkTheme
+                    : kButtonColorLightTheme,
+              ),
+            ),
+          ),
+          Visibility(
+            visible: currentAccountType == 'accountTypeStudent',
+            child: IconButton(
+              tooltip: 'Join Channel🔥',
+              onPressed: () {
+                Get.to(() => const ChannelJoin());
+              },
+              icon: Icon(
+                MdiIcons.shapeRectanglePlus,
                 color: Get.isDarkMode
                     ? kButtonColorDarkTheme
                     : kButtonColorLightTheme,
