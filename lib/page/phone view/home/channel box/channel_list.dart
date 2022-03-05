@@ -5,6 +5,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/page/phone%20view/home/channel%20box/channel_inside.dart';
 import 'package:weconnect/page/phone%20view/home/channel%20box/channel_join.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_post_tile_pop_up_menu.dart';
@@ -118,7 +119,14 @@ class _ChannelListState extends State<ChannelList> {
                 channelAvatarImage: data.docs[index]['channel-avatar-image'],
                 channelAdminName: data.docs[index]['channel-admin-name'],
                 channelName: data.docs[index]['channel-name'],
-                onCliked: () {},
+                onCliked: () {
+                  Get.to(() => ChannelInside(
+                        channelName: data.docs[index]['channel-name'],
+                        channelDocId: data.docs[index].id,
+                        channelAvatarImage: data.docs[index]
+                            ['channel-avatar-image'],
+                      ));
+                },
                 //deleting channel
                 channelDocId: data.docs[index].id,
               );
