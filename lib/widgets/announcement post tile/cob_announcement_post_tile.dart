@@ -302,7 +302,7 @@ class CobAnnouncementPostTile extends StatelessWidget {
                         () => ShowAllComment(
                           postDocId: postDocId,
                           collectionName: 'announcements',
-                          docName: 'campus-feed',
+                          docName: 'cob-feed',
                         ),
                       );
                     },

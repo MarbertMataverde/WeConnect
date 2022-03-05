@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
 
 import '../../constant/constant_colors.dart';
 import '../../controller/controller_write_post_comment.dart';
@@ -139,16 +140,14 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                         : kTextColorLightTheme,
                     onPressed: () async {
                       final _isValid = _formKey.currentState!.validate();
-                      SharedPreferences _sp =
-                          await SharedPreferences.getInstance();
 
                       if (_isValid == true) {
                         await _addComment.writeCommentToCampusPost(
                           widget.collectionName, //? COLLECTION NAME
                           widget.docName, //? DOCUMENT NAME
                           _commentController.text,
-                          _sp.get('currentProfileImageUrl') as String,
-                          _sp.get('currentProfileName') as String,
+                          currentProfileImageUrl.toString(),
+                          currentProfileName.toString(),
                           widget.postDocId,
                           Timestamp.now(),
                         );

@@ -19,9 +19,6 @@ import '../post comment (Write and Show)/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 
-//account type
-final box = GetStorage();
-
 //dialogs
 final dialogs = Get.put(DialogPostTile());
 

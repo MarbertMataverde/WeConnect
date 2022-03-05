@@ -302,7 +302,7 @@ class CcsAnnouncementPostTile extends StatelessWidget {
                         () => ShowAllComment(
                           postDocId: postDocId,
                           collectionName: 'announcements',
-                          docName: 'campus-feed',
+                          docName: 'ccs-feed',
                         ),
                       );
                     },

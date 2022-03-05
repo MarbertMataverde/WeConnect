@@ -302,7 +302,7 @@ class CoaAnnouncementPostTile extends StatelessWidget {
                         () => ShowAllComment(
                           postDocId: postDocId,
                           collectionName: 'announcements',
-                          docName: 'campus-feed',
+                          docName: 'coa-feed',
                         ),
                       );
                     },
