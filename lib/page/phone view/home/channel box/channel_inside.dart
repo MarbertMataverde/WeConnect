@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant.dart';
 import 'package:weconnect/controller/controller_account_information.dart';
+import 'package:weconnect/controller/controller_getx.dart';
+import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
 import 'package:weconnect/page/phone%20view/home/channel%20box/channel_settings.dart';
 
 import '../../../../constant/constant_colors.dart';
@@ -40,6 +44,7 @@ class _ChannelInsideState extends State<ChannelInside> {
   final _formKey = GlobalKey<FormState>();
   //controllers
   final TextEditingController announcementCtrlr = TextEditingController();
+  final getxContoller = Get.put(ControllerGetX());
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _channelAnnouncementsStream = FirebaseFirestore
@@ -115,52 +120,80 @@ class _ChannelInsideState extends State<ChannelInside> {
                 children: [
                   Form(
                     key: _formKey,
+                    autovalidateMode: AutovalidateMode.always,
                     child: SizedBox(
                       width: Get.mediaQuery.size.width,
                       child: Row(
                         children: [
-                          IconButton(
-                              splashRadius: Get.mediaQuery.size.width * 0.05,
-                              onPressed: () {},
-                              icon: Icon(
-                                MdiIcons.filePlusOutline,
-                                color: Get.isDarkMode
-                                    ? kButtonColorDarkTheme
-                                    : kButtonColorLightTheme,
-                              )),
-                          IconButton(
-                              splashRadius: Get.mediaQuery.size.width * 0.05,
-                              onPressed: () {},
-                              icon: Icon(
-                                MdiIcons.fileImagePlusOutline,
-                                color: Get.isDarkMode
-                                    ? kButtonColorDarkTheme
-                                    : kButtonColorLightTheme,
-                              )),
+                          GetBuilder<ControllerGetX>(builder: (controller) {
+                            return controller.textFieldEmptyUpload
+                                ? Row(
+                                    children: [
+                                      IconButton(
+                                          splashRadius:
+                                              Get.mediaQuery.size.width * 0.05,
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            MdiIcons.filePlusOutline,
+                                            color: Get.isDarkMode
+                                                ? kButtonColorDarkTheme
+                                                : kButtonColorLightTheme,
+                                          )),
+                                      IconButton(
+                                          splashRadius:
+                                              Get.mediaQuery.size.width * 0.05,
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            MdiIcons.fileImagePlusOutline,
+                                            color: Get.isDarkMode
+                                                ? kButtonColorDarkTheme
+                                                : kButtonColorLightTheme,
+                                          )),
+                                    ],
+                                  )
+                                : IconButton(
+                                    onPressed: () {
+                                      getxContoller
+                                          .emptyTextFieldForUploadButton(true);
+                                    },
+                                    icon: const Icon(
+                                      MdiIcons.arrowRightDropCircleOutline,
+                                    ));
+                          }),
                           Expanded(
                             child: buildAnnouncementTextFormField(
                               focusNode: _focus,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  if (value.isEmpty) {}
+                                  getxContoller.emptyTextFieldForSendButton(
+                                      value.isEmpty);
+                                  getxContoller.emptyTextFieldForUploadButton(
+                                      value.isEmpty);
+                                } else {
+                                  getxContoller.emptyTextFieldForSendButton(
+                                      value.isEmpty);
+                                  getxContoller.emptyTextFieldForUploadButton(
+                                      value.isEmpty);
                                 }
+
                                 return null;
                               },
                               ctrlr: announcementCtrlr,
                             ),
                           ),
-                          IconButton(
-                            splashRadius: Get.mediaQuery.size.width * 0.05,
-                            onPressed: () {
-                              // final _isValid = _validationKey
-                              //     .currentState!
-                              //     .validate();
-                              // if (_isValid == true) {}
-                            },
-                            icon: const Icon(
-                              MdiIcons.sendOutline,
-                            ),
-                          ),
+                          GetBuilder<ControllerGetX>(builder: (controller) {
+                            return IconButton(
+                              splashRadius: Get.mediaQuery.size.width * 0.05,
+                              onPressed:
+                                  controller.textFieldEmptySend ? null : () {},
+                              icon: Icon(
+                                MdiIcons.sendOutline,
+                                color: controller.textFieldEmptySend
+                                    ? Get.theme.disabledColor
+                                    : Get.theme.primaryColor,
+                              ),
+                            );
+                          }),
                         ],
                       ),
                     ),
