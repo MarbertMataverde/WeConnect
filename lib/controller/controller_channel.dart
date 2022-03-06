@@ -3,7 +3,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sizer/sizer.dart';
+
+import '../constant/constant_colors.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 final firestore = FirebaseFirestore.instance;
@@ -19,14 +24,14 @@ class ControllerChannel extends GetxController {
   }) async {
     firestore
         .collection('channels')
-        .doc()
+        .doc(token)
         .set({
-          'channel-token': token,
           'channel-admin-name': channelAdminName,
           'channel-avatar-image': avatarDownloadUrl,
           'channel-name': channelName,
           'create-at': Timestamp.now(),
           'professor-uid': professorUid,
+          'subscriber-list': [],
         })
         .whenComplete(() => {
               Get.back(),
@@ -94,5 +99,38 @@ class ControllerChannel extends GetxController {
       channelName: channelName,
       professorUid: professorUid,
     );
+  }
+
+  //join channel
+  Future<void> joinChannel({
+    required String token,
+    required List studentUid,
+  }) async {
+    firestore
+        .collection('channels')
+        .doc(token)
+        .update({'subscriber-list': FieldValue.arrayUnion(studentUid)});
+    Get.back();
+  }
+
+  //channel is exsisting or not checker
+  Future<void> channelChecker(
+      {required String token, required List studentUid}) async {
+    firestore.collection('channels').doc(token).get().then(
+          (channelExsist) => channelExsist.exists
+              ? joinChannel(token: token, studentUid: studentUid)
+              : Get.showSnackbar(GetSnackBar(
+                  icon: Icon(
+                    MdiIcons.alphaXBoxOutline,
+                    color: Get.theme.primaryColor,
+                  ),
+                  margin: EdgeInsets.all(2.w),
+                  borderRadius: 1.w,
+                  backgroundColor: kButtonColorLightTheme,
+                  message: 'Token din\'t exsist',
+                  duration: const Duration(seconds: 2),
+                  forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+                )),
+        );
   }
 }

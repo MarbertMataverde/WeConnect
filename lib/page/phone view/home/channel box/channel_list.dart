@@ -157,39 +157,42 @@ Widget buildChannelTile({
         channelName,
       ),
       subtitle: Text(channelAdminName),
-      trailing: FocusedMenuHolder(
-        menuWidth: Get.mediaQuery.size.width * 0.50,
-        blurSize: 1.0,
-        menuItemExtent: 5.h,
-        menuBoxDecoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.all(Radius.circular(1.w))),
-        duration: const Duration(milliseconds: 100),
-        animateMenuItems: false,
-        blurBackgroundColor: Colors.black,
-        openWithTap: true,
-        menuOffset: 1.h,
-        onPressed: () {},
-        menuItems: [
-          focusMenuItem(
-            'Delete Channel',
-            MdiIcons.deleteOutline,
-            Colors.red,
-            () => channelDialog.deleteChannelDialog(
-              Get.context,
-              assetLocation: 'assets/gifs/question_mark.gif',
-              title: 'Channel Delition 🗑',
-              description:
-                  'Yor\'re about to delete this channel\nare you sure about that?',
-              channelDocId: channelDocId,
-              channelAvatarImage: channelAvatarImage,
-            ),
-          )
-        ],
-        child: Icon(
-          MdiIcons.dotsVerticalCircleOutline,
-          color:
-              Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+      trailing: Visibility(
+        visible: currentAccountType.toString() == 'accountTypeProfessor',
+        child: FocusedMenuHolder(
+          menuWidth: Get.mediaQuery.size.width * 0.50,
+          blurSize: 1.0,
+          menuItemExtent: 5.h,
+          menuBoxDecoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.all(Radius.circular(1.w))),
+          duration: const Duration(milliseconds: 100),
+          animateMenuItems: false,
+          blurBackgroundColor: Colors.black,
+          openWithTap: true,
+          menuOffset: 1.h,
+          onPressed: () {},
+          menuItems: [
+            focusMenuItem(
+              'Delete Channel',
+              MdiIcons.deleteOutline,
+              Colors.red,
+              () => channelDialog.deleteChannelDialog(
+                Get.context,
+                assetLocation: 'assets/gifs/question_mark.gif',
+                title: 'Channel Delition 🗑',
+                description:
+                    'Yor\'re about to delete this channel\nare you sure about that?',
+                channelDocId: channelDocId,
+                channelAvatarImage: channelAvatarImage,
+              ),
+            )
+          ],
+          child: Icon(
+            MdiIcons.dotsVerticalCircleOutline,
+            color:
+                Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+          ),
         ),
       ),
     ),

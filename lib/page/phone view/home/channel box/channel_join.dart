@@ -1,11 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../controller/controller_account_information.dart';
@@ -33,25 +30,9 @@ class _ChannelJoinState extends State<ChannelJoin> {
   //is create button enable or not
   bool checkIconButtonIsEnable = false;
   //controller
-  final TextEditingController channelNameCtrlr = TextEditingController();
+  final TextEditingController tokenCtrlr = TextEditingController();
   //is creating?
-  bool isCreating = false;
-
-  Future pickImage() async {
-    try {
-      final selectedImage =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (selectedImage == null) {
-        return;
-      }
-      final selectedTempImage = File(selectedImage.path);
-      setState(() {
-        this.selectedImage = selectedTempImage;
-      });
-    } on PlatformException catch (e) {
-      log('Failed to pick image: $e');
-    }
-  }
+  bool isJoining = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +52,10 @@ class _ChannelJoinState extends State<ChannelJoin> {
             )),
         centerTitle: true,
         title: const AppBarTitle(
-          title: 'Create New Channel',
+          title: 'Join Channel',
         ),
         actions: [
-          isCreating
+          isJoining
               ? Padding(
                   padding: EdgeInsets.only(right: 2.5.w),
                   child: SpinKitSpinningLines(
@@ -83,25 +64,22 @@ class _ChannelJoinState extends State<ChannelJoin> {
                   ),
                 )
               : IconButton(
-                  onPressed: checkIconButtonIsEnable && selectedImage != null
+                  onPressed: checkIconButtonIsEnable
                       ? () async {
                           setState(() {
-                            isCreating = true;
+                            isJoining = true;
                           });
-                          await channel.createNewChannelAndUploadAvatarFunction(
-                            filePath: selectedImage!.path,
-                            channelName: channelNameCtrlr.text,
-                            channelAdminName: currentProfileName,
-                            professorUid: currentUserId,
-                          );
+                          await channel.channelChecker(
+                              token: tokenCtrlr.text,
+                              studentUid: [currentUserId]);
                           setState(() {
-                            isCreating = false;
+                            isJoining = false;
                           });
                         }
                       : null,
                   icon: Icon(
                     MdiIcons.check,
-                    color: checkIconButtonIsEnable && selectedImage != null
+                    color: checkIconButtonIsEnable
                         ? Get.theme.primaryColor
                         : Get.isDarkMode
                             ? kButtonColorDarkTheme
@@ -112,68 +90,25 @@ class _ChannelJoinState extends State<ChannelJoin> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 5.h),
-        child: Column(
-          children: [
-            selectedImage != null
-                ? ClipOval(
-                    child: Material(
-                      color: Get.theme.primaryColor, // Button color
-                      child: InkWell(
-                        splashColor:
-                            Get.theme.dialogBackgroundColor, // Splash color
-                        onTap: () {
-                          pickImage();
-                        },
-                        child: Image.file(
-                          selectedImage!,
-                          width: Get.mediaQuery.size.width * 0.25,
-                          height: Get.mediaQuery.size.width * 0.25,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  )
-                : ClipOval(
-                    child: Material(
-                      color: Get.theme.primaryColor, // Button color
-                      child: InkWell(
-                        splashColor:
-                            Get.theme.dialogBackgroundColor, // Splash color
-                        onTap: () {
-                          pickImage();
-                        },
-                        child: SizedBox(
-                          width: Get.mediaQuery.size.width * 0.25,
-                          height: Get.mediaQuery.size.width * 0.25,
-                          child: Icon(
-                            MdiIcons.camera,
-                            size: 10.w,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-            SizedBox(
-              height: 3.h,
-            ),
-            Form(
-              key: _validationKey,
-              onChanged: () => setState(() => checkIconButtonIsEnable =
-                  _validationKey.currentState!.validate()),
-              child: CustomTextFormField(
-                  ctrlr: channelNameCtrlr,
-                  hint: 'Channel Name',
-                  isPassword: kFalse,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Channel name is required😊';
-                    }
-                    if (value.toString().length <= 8) {
-                      return 'Channel name should be at least 8 character😊';
-                    }
-                  }),
-            ),
-          ],
+        child: Form(
+          key: _validationKey,
+          onChanged: () => setState(() => checkIconButtonIsEnable =
+              _validationKey.currentState!.validate()),
+          child: CustomTextFormField(
+            inputAction: TextInputAction.done,
+            maxLine: 1,
+            ctrlr: tokenCtrlr,
+            hint: 'Channel Token',
+            isPassword: kFalse,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Channel token is required😊';
+              }
+              if (value.toString().length < 7) {
+                return 'Token must be at least 7 character😊';
+              }
+            },
+          ),
         ),
       ),
     );

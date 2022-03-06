@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.autovalidateMode,
     this.onChanged,
     this.suffixWidget,
+    this.inputAction,
   }) : super(key: key);
   //?controller
   final TextEditingController ctrlr;
@@ -41,10 +42,12 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   //?suffix widget
   final Widget? suffixWidget;
+  final TextInputAction? inputAction;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: inputAction,
       minLines: minimumLine,
       maxLines: maxLine,
       validator: validator,
