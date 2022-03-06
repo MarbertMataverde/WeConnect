@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
-import 'package:weconnect/controller/controller_getx.dart';
-import 'package:weconnect/controller/controller_post_tile_pop_up_menu.dart';
-import 'package:weconnect/page/phone%20view/home/channel%20box/channel_settings.dart';
+import '../../../../constant/constant.dart';
+import '../../../../controller/controller_account_information.dart';
+import '../../../../controller/controller_getx.dart';
+import '../../../phone%20view/home/channel%20box/channel_settings.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
