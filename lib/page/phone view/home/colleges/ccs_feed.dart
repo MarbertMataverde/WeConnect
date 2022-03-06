@@ -6,7 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../../controller/controller_account_information.dart';
 
-import 'package:weconnect/controller/controller_account_information.dart';
+import '../../../../controller/controller_account_information.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/announcement post tile/ccs_announcement_post_tile.dart';

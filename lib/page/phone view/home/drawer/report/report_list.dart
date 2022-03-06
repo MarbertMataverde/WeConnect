@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../../controller/controller_report.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../constant/constant_colors.dart';
+import '../../../../../controller/controller_report.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';
 import 'detailed_report.dart';
 
