@@ -133,4 +133,26 @@ class ControllerChannel extends GetxController {
                 )),
         );
   }
+
+  //create new channel announcement
+  Future<void> newChannelAnnouncement({
+    String? announcementMessage,
+    List? announcementMediaUrl,
+    String? announcementUploadedFileUrl,
+    required String token,
+    required String adminName,
+  }) async {
+    firestore
+        .collection('channels')
+        .doc(token)
+        .collection('channel-announcements')
+        .doc()
+        .set({
+      'announcement-created-at': Timestamp.now(),
+      'announcement-message': announcementMessage,
+      'announcement-media': announcementMediaUrl,
+      'announcement-uploaded-file-url': announcementUploadedFileUrl,
+      'admin-name': adminName,
+    });
+  }
 }

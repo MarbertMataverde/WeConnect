@@ -13,4 +13,6 @@ class ControllerGetX extends GetxController {
     textFieldEmptyUpload = isEmpty;
     update();
   }
+
+  
 }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weconnect/dialog/dialog_channel.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_getx.dart';
@@ -32,13 +34,8 @@ class ChannelInside extends StatefulWidget {
 }
 
 class _ChannelInsideState extends State<ChannelInside> {
-  // Validation Key
-  final _validationKey = GlobalKey<FormState>();
-  final FocusNode _focus = FocusNode();
   //is focused?
   bool isFocused = false;
-  //text field key
-  final _formKey = GlobalKey<FormState>();
   //controllers
   final TextEditingController announcementCtrlr = TextEditingController();
   final getxContoller = Get.put(ControllerGetX());
@@ -116,7 +113,6 @@ class _ChannelInsideState extends State<ChannelInside> {
               child: Row(
                 children: [
                   Form(
-                    key: _formKey,
                     autovalidateMode: AutovalidateMode.always,
                     child: SizedBox(
                       width: Get.mediaQuery.size.width,
@@ -159,7 +155,6 @@ class _ChannelInsideState extends State<ChannelInside> {
                           }),
                           Expanded(
                             child: buildAnnouncementTextFormField(
-                              focusNode: _focus,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   getxContoller.emptyTextFieldForSendButton(
@@ -172,7 +167,6 @@ class _ChannelInsideState extends State<ChannelInside> {
                                   getxContoller.emptyTextFieldForUploadButton(
                                       value.isEmpty);
                                 }
-
                                 return null;
                               },
                               ctrlr: announcementCtrlr,
@@ -181,8 +175,21 @@ class _ChannelInsideState extends State<ChannelInside> {
                           GetBuilder<ControllerGetX>(builder: (controller) {
                             return IconButton(
                               splashRadius: Get.mediaQuery.size.width * 0.05,
-                              onPressed:
-                                  controller.textFieldEmptySend ? null : () {},
+                              onPressed: controller.textFieldEmptySend
+                                  ? null
+                                  : () async {
+                                      await channel.newChannelAnnouncement(
+                                        announcementMessage:
+                                            announcementCtrlr.text,
+                                        announcementMediaUrl: ['image url'],
+                                        announcementUploadedFileUrl:
+                                            'file-download-url',
+                                        adminName:
+                                            currentProfileName.toString(),
+                                        token: widget.channelDocId,
+                                      );
+                                      announcementCtrlr.clear();
+                                    },
                               icon: Icon(
                                 MdiIcons.sendOutline,
                                 color: controller.textFieldEmptySend
@@ -208,10 +215,8 @@ class _ChannelInsideState extends State<ChannelInside> {
 Widget buildAnnouncementTextFormField({
   required String? Function(String?)? validator,
   required TextEditingController ctrlr,
-  required FocusNode focusNode,
 }) {
   return TextFormField(
-    focusNode: focusNode,
     minLines: 1,
     maxLines: 5,
     validator: validator,
