@@ -1,29 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkwell/linkwell.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weconnect/constant/constant_colors.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
-class ChannelAnnouncementTiles extends StatelessWidget {
-  const ChannelAnnouncementTiles({
-    Key? key,
-    required this.announcementMessage,
-    required this.announcementCreatedAt,
-    required this.announcementMedia,
-    required this.announcementUploadedFileUrl,
-  }) : super(key: key);
-
-  final String announcementMessage;
-  final Timestamp announcementCreatedAt;
-  final List announcementMedia;
-  final String announcementUploadedFileUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return buildAnnouncementTile();
-  }
-}
-
-Widget buildAnnouncementTile({
-  String? announcementMessage,
+Widget buildChannelAnnouncementTile({
+  required String announcementMessage,
+  required Timestamp announcementCreatedAt,
 }) {
-  return Text(announcementMessage.toString());
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(5.w),
+          topRight: Radius.circular(5.w),
+          bottomRight: Radius.circular(5.w),
+        ),
+        color: Get.isDarkMode
+            ? kTextFormFieldColorDarkTheme
+            : kTextFormFieldColorLightTheme,
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(3.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LinkWell(
+              announcementMessage,
+              linkStyle: TextStyle(
+                color: Get.theme.primaryColor,
+              ),
+              style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+            ),
+            Text(
+              timeago.format(announcementCreatedAt.toDate(),
+                  locale: 'en_short'),
+              textScaleFactor: 0.7,
+              style: TextStyle(
+                color:
+                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
 }

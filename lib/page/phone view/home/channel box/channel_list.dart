@@ -122,7 +122,7 @@ class _ChannelListState extends State<ChannelList> {
                 onCliked: () {
                   Get.to(() => ChannelInside(
                         channelName: data.docs[index]['channel-name'],
-                        channelDocId: data.docs[index].id,
+                        token: data.docs[index].id,
                         channelAvatarImage: data.docs[index]
                             ['channel-avatar-image'],
                       ));

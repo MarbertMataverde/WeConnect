@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -137,8 +138,6 @@ class ControllerChannel extends GetxController {
   //create new channel announcement
   Future<void> newChannelAnnouncement({
     String? announcementMessage,
-    List? announcementMediaUrl,
-    String? announcementUploadedFileUrl,
     required String token,
     required String adminName,
   }) async {
@@ -150,8 +149,6 @@ class ControllerChannel extends GetxController {
         .set({
       'announcement-created-at': Timestamp.now(),
       'announcement-message': announcementMessage,
-      'announcement-media': announcementMediaUrl,
-      'announcement-uploaded-file-url': announcementUploadedFileUrl,
       'admin-name': adminName,
     });
   }

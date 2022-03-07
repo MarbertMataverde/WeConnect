@@ -60,6 +60,7 @@ dependencies:
   avatar_glow: ^2.0.2
   flutter_slidable: ^1.2.0
   image_picker: ^0.8.4+10
+  linkwell: ^2.0.6
 
 dev_dependencies:
   flutter_test:
