@@ -4,7 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/dialog/dialog_channel.dart';
+import '../../../../dialog/dialog_channel.dart';
+import '../../../phone%20view/home/channel%20box/channel_announcement_tiles.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_getx.dart';
@@ -45,7 +46,8 @@ class _ChannelInsideState extends State<ChannelInside> {
         .instance
         .collection('channels')
         .doc(widget.channelDocId)
-        .collection('announcements')
+        .collection('channel-announcements')
+        .orderBy('announcement-created-at', descending: false)
         .snapshots();
     return Scaffold(
       appBar: AppBar(
@@ -99,7 +101,15 @@ class _ChannelInsideState extends State<ChannelInside> {
                 return ListView.builder(
                   itemCount: data.size,
                   itemBuilder: (context, index) {
-                    return Container();
+                    return ChannelAnnouncementTiles(
+                      announcementCreatedAt: data.docs[index]
+                          ['announcement-created-at'],
+                      announcementMedia: data.docs[index]['announcement-media'],
+                      announcementUploadedFileUrl: data.docs[index]
+                          ['announcement-uploaded-file-url'],
+                      announcementMessage: data.docs[index]
+                          ['announcement-message'],
+                    );
                   },
                 );
               },
@@ -181,9 +191,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       await channel.newChannelAnnouncement(
                                         announcementMessage:
                                             announcementCtrlr.text,
-                                        announcementMediaUrl: ['image url'],
-                                        announcementUploadedFileUrl:
-                                            'file-download-url',
+                                        announcementMediaUrl: [],
+                                        announcementUploadedFileUrl: '',
                                         adminName:
                                             currentProfileName.toString(),
                                         token: widget.channelDocId,

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
 class ControllerGetX extends GetxController {
+  //channel text form file state
   bool textFieldEmptySend = true;
   bool textFieldEmptyUpload = true;
-
   emptyTextFieldForSendButton(bool isEmpty) {
     textFieldEmptySend = isEmpty;
     update();
@@ -14,5 +14,5 @@ class ControllerGetX extends GetxController {
     update();
   }
 
-  
+  //channel announcement tile
 }

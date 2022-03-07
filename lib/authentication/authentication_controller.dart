@@ -4,10 +4,10 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../dialog/dialog_authentication.dart';
 
 import '../constant/constant.dart';
 import '../controller/controller_account_information.dart';
+import '../dialog/dialog_authentication.dart';
 import '../page/phone view/home/home_phone_wrapper.dart';
 import '../page/phone view/sign in/phone_view.dart';
 import '../page/web view/sign in/web_view.dart';

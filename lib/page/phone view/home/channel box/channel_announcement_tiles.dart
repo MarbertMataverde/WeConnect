@@ -1,35 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-//text only
-Widget channelTextAnnouncement() {
-  return Container();
-}
-
-//text with image
-Widget channelTextWithImageAnnouncement() {
-  return Container();
-}
-
-//file only
-Widget channelFileAnnouncement() {
-  return Container();
-}
-
-//multiple image
-Widget channelMultipleImageAnnouncement() {
-  return Container();
-}
-
-//multiple image with text
-Widget channelMultipleImageWithTextAnnouncement() {
-  return Container();
-}
+import 'package:get/get.dart';
 
 class ChannelAnnouncementTiles extends StatelessWidget {
-  const ChannelAnnouncementTiles({Key? key}) : super(key: key);
+  const ChannelAnnouncementTiles({
+    Key? key,
+    required this.announcementMessage,
+    required this.announcementCreatedAt,
+    required this.announcementMedia,
+    required this.announcementUploadedFileUrl,
+  }) : super(key: key);
+
+  final String announcementMessage;
+  final Timestamp announcementCreatedAt;
+  final List announcementMedia;
+  final String announcementUploadedFileUrl;
 
   @override
   Widget build(BuildContext context) {
-    return Card();
+    return buildAnnouncementTile();
   }
+}
+
+Widget buildAnnouncementTile({
+  String? announcementMessage,
+}) {
+  return Text(announcementMessage.toString());
 }
