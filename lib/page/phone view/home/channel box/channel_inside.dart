@@ -227,6 +227,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                                         filePicked: pickedFile,
                                       );
                                       announcementCtrlr.clear();
+                                      pickedImage?.files.clear();
+                                      pickedFile?.files.clear();
                                     },
                               icon: Icon(
                                 MdiIcons.sendOutline,
