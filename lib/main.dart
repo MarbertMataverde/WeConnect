@@ -7,7 +7,6 @@ import 'package:sizer/sizer.dart';
 import 'firebase_options.dart';
 import 'page/phone view/sign in/phone_view.dart';
 import 'page/phone%20view/home/home_phone_wrapper.dart';
-import 'page/web view/home/home_web_wrapper.dart';
 import 'page/web view/sign in/web_view.dart';
 import 'setting/setting_theme.dart';
 
@@ -19,9 +18,6 @@ void main() async {
   runApp(const InitialPage());
 }
 
-//valitaion varialble
-bool _isSignedIn = false;
-
 class InitialPage extends StatefulWidget {
   const InitialPage({Key? key}) : super(key: key);
 
@@ -32,17 +28,13 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
-    isSignedIn();
+    getAccountInformation();
     super.initState();
   }
 
-  Future isSignedIn() async {
-    //shared preferences initialization
+  Future getAccountInformation() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    final _uid = sharedPreferences.get('signInToken');
-    setState(() {
-      _isSignedIn = _uid != null;
-    });
+    accountInformation.getter(sharedPreferences.get('currentUid').toString());
   }
 
   @override
@@ -60,22 +52,9 @@ class _InitialPageState extends State<InitialPage> {
               builder: (context, constraints) {
                 //?phone view
                 if (constraints.maxWidth < 768) {
-                  return _isSignedIn
-                      ? const HomePhoneWrapper()
-                      : const PhoneViewSignIn();
-                }
-                //you can add layout for tablet too
-                //theirs one more sing in bug for web
-                // !!!!!!!!!!!!!BUUUUUUUUUUUUUGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!
-                // ! if the other account type try to signed-in in web base
-                // ! the _isSignedIn will be set to false even if will not navigated
-                // ! to HomeWebWrapper. If the user reload the page the sharedPrps
-                // ! will be excuted and the stored data will be get and automaticaly
-                // ! navigate to HomeWebWrapper even if the account type is not
-                // ! campus admin.
-                // !web view
-                else {
-                  return _isSignedIn ? const HomeWebWrapper() : const WebView();
+                  return const PhoneViewSignIn();
+                } else {
+                  return const WebView();
                 }
               },
             ),

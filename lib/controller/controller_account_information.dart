@@ -21,6 +21,7 @@ String? currentStudentCollege;
 String? currentProfileName;
 String? currentProfileImageUrl;
 String? currentUserId;
+bool? isSignedIn;
 
 class ControllerAccountInformation extends GetxController {
   Future getter(String _currentUid) async {
@@ -91,6 +92,8 @@ class ControllerAccountInformation extends GetxController {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
           //writing data to sharedPreference
+          await sharedPreferences.setBool('isSignedIn', true);
+          isSignedIn = sharedPreferences.getBool('isSignedIn');
           currentUserId = sharedPreferences.get('currentUid').toString();
           await sharedPreferences.setString('accountType', accountType);
           currentAccountType = sharedPreferences.get('accountType').toString();
