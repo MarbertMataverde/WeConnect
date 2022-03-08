@@ -16,24 +16,6 @@ import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
-FilePickerResult? pickedImage;
-Future<void> selectImage() async {
-  pickedImage = await FilePicker.platform.pickFiles(
-    allowMultiple: true,
-    allowedExtensions: ['png', 'jpg'],
-    type: FileType.custom,
-  );
-}
-
-FilePickerResult? pickedFile;
-Future<void> selectFile() async {
-  pickedFile = await FilePicker.platform.pickFiles(
-    allowMultiple: false,
-    allowedExtensions: ['pdf', 'doc', 'xlsx', 'ppt'],
-    type: FileType.custom,
-  );
-}
-
 class ChannelInside extends StatefulWidget {
   const ChannelInside(
       {Key? key,
@@ -54,11 +36,32 @@ class ChannelInside extends StatefulWidget {
 }
 
 class _ChannelInsideState extends State<ChannelInside> {
-  //is focused?
-  bool isFocused = false;
   //controllers
   final TextEditingController announcementCtrlr = TextEditingController();
   final getxContoller = Get.put(ControllerGetX());
+  //image picker
+  FilePickerResult? pickedImage;
+  Future<void> selectImage() async {
+    pickedImage = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      allowedExtensions: ['png', 'jpg'],
+      type: FileType.custom,
+    );
+  }
+
+  //file picker
+  FilePickerResult? pickedFile;
+  Future<void> selectFile() async {
+    pickedFile = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      allowedExtensions: ['pdf', 'doc', 'xlsx', 'ppt'],
+      type: FileType.custom,
+    );
+  }
+
+  //is focused?
+  bool isFocused = false;
+
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _channelAnnouncementsStream = FirebaseFirestore
@@ -156,30 +159,84 @@ class _ChannelInsideState extends State<ChannelInside> {
                             return controller.textFieldEmptyUpload
                                 ? Row(
                                     children: [
-                                      IconButton(
-                                          splashRadius:
-                                              Get.mediaQuery.size.width * 0.05,
-                                          onPressed: () {
-                                            selectFile();
-                                          },
-                                          icon: Icon(
-                                            MdiIcons.filePlusOutline,
-                                            color: Get.isDarkMode
-                                                ? kButtonColorDarkTheme
-                                                : kButtonColorLightTheme,
-                                          )),
-                                      IconButton(
-                                          splashRadius:
-                                              Get.mediaQuery.size.width * 0.05,
-                                          onPressed: () {
-                                            selectImage();
-                                          },
-                                          icon: Icon(
-                                            MdiIcons.fileImagePlusOutline,
-                                            color: Get.isDarkMode
-                                                ? kButtonColorDarkTheme
-                                                : kButtonColorLightTheme,
-                                          )),
+                                      GetBuilder<ControllerGetX>(
+                                          builder: (selectFileController) {
+                                        return IconButton(
+                                            splashRadius:
+                                                Get.mediaQuery.size.width *
+                                                    0.05,
+                                            onPressed: selectFileController
+                                                    .fileIconButtonEnable
+                                                ? () {
+                                                    selectFile()
+                                                        .whenComplete(() {
+                                                      if (pickedFile != null) {
+                                                        getxContoller
+                                                            .emptyFilesForSendButton(
+                                                                false);
+                                                        getxContoller
+                                                            .reEnableSelectImageIconButton(
+                                                                false);
+                                                      } else {
+                                                        getxContoller
+                                                            .emptyFilesForSendButton(
+                                                                true);
+                                                        getxContoller
+                                                            .reEnableSelectImageIconButton(
+                                                                true);
+                                                      }
+                                                    });
+                                                  }
+                                                : null,
+                                            icon: Icon(
+                                              MdiIcons.filePlusOutline,
+                                              color: selectFileController
+                                                      .fileIconButtonEnable
+                                                  ? Get.isDarkMode
+                                                      ? kButtonColorDarkTheme
+                                                      : kButtonColorLightTheme
+                                                  : Get.theme.disabledColor,
+                                            ));
+                                      }),
+                                      GetBuilder<ControllerGetX>(
+                                          builder: (selectImageController) {
+                                        return IconButton(
+                                            splashRadius:
+                                                Get.mediaQuery.size.width *
+                                                    0.05,
+                                            onPressed: selectImageController
+                                                    .imageIconButtonEnable
+                                                ? () {
+                                                    selectImage()
+                                                        .whenComplete(() {
+                                                      if (pickedImage != null) {
+                                                        getxContoller
+                                                            .emptyFilesForSendButton(
+                                                                false);
+                                                        getxContoller
+                                                            .reEnableSelectFileIconButton(
+                                                                false);
+                                                      } else {
+                                                        getxContoller
+                                                            .emptyFilesForSendButton(
+                                                                true);
+                                                        getxContoller
+                                                            .reEnableSelectFileIconButton(
+                                                                true);
+                                                      }
+                                                    });
+                                                  }
+                                                : null,
+                                            icon: Icon(
+                                              MdiIcons.fileImagePlusOutline,
+                                              color: selectImageController
+                                                      .imageIconButtonEnable
+                                                  ? Get.isDarkMode
+                                                      ? kButtonColorDarkTheme
+                                                      : kButtonColorLightTheme
+                                                  : Get.theme.disabledColor,
+                                            ));
+                                      }),
                                     ],
                                   )
                                 : IconButton(
@@ -213,7 +270,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                           GetBuilder<ControllerGetX>(builder: (controller) {
                             return IconButton(
                               splashRadius: Get.mediaQuery.size.width * 0.05,
-                              onPressed: controller.textFieldEmptySend
+                              onPressed: controller.filesEmpty &&
+                                      controller.textFieldEmptySend
                                   ? null
                                   : () async {
                                       channel.uploadAnnouncement(
@@ -222,17 +280,26 @@ class _ChannelInsideState extends State<ChannelInside> {
                                         adminName:
                                             currentProfileName.toString(),
                                         announcementMessage:
-                                            announcementCtrlr.text,
+                                            announcementCtrlr.text.isEmpty
+                                                ? ''
+                                                : announcementCtrlr.text,
                                         imagePicked: pickedImage,
                                         filePicked: pickedFile,
                                       );
                                       announcementCtrlr.clear();
                                       pickedImage?.files.clear();
                                       pickedFile?.files.clear();
+                                      getxContoller
+                                          .emptyFilesForSendButton(true);
+                                      getxContoller
+                                          .reEnableSelectFileIconButton(true);
+                                      getxContoller
+                                          .reEnableSelectImageIconButton(true);
                                     },
                               icon: Icon(
                                 MdiIcons.sendOutline,
-                                color: controller.textFieldEmptySend
+                                color: controller.filesEmpty &&
+                                        controller.textFieldEmptySend
                                     ? Get.theme.disabledColor
                                     : Get.theme.primaryColor,
                               ),

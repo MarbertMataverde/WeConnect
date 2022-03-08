@@ -313,6 +313,11 @@ class ControllerChannel extends GetxController {
             announcementTime.toString(),
           );
         }
+        newChannelAnnouncement(
+          token: token,
+          adminName: adminName,
+          announcementMessage: announcementMessage,
+        );
         listOfFileUrls.clear();
         listOfImageUrls.clear();
       } else {
@@ -326,6 +331,11 @@ class ControllerChannel extends GetxController {
             announcementTime.toString(),
           );
         }
+        newChannelAnnouncement(
+          token: token,
+          adminName: adminName,
+          announcementMessage: announcementMessage,
+        );
         listOfImageUrls.clear();
       }
     } else if (filePicked != null) {
@@ -339,6 +349,11 @@ class ControllerChannel extends GetxController {
           announcementTime.toString(),
         );
       }
+      newChannelAnnouncement(
+        token: token,
+        adminName: adminName,
+        announcementMessage: announcementMessage,
+      );
       listOfFileUrls.clear();
     }
   }

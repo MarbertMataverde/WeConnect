@@ -117,61 +117,57 @@ Widget buildChannelImageOnly({
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(5.w),
-          topRight: Radius.circular(5.w),
-          bottomRight: Radius.circular(5.w),
-        ),
         color: Get.isDarkMode
             ? kTextFormFieldColorDarkTheme
             : kTextFormFieldColorLightTheme,
       ),
-      child: Padding(
-        padding: EdgeInsets.all(3.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            announcementImageList.length == 1
-                ? Image.network(announcementImageList.first)
-                : CarouselSlider(
-                    items: announcementImageList
-                        .map(
-                          (item) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 1.w),
-                            child: Image.network(
-                              item,
-                              fit: BoxFit.cover,
-                              width: Get.mediaQuery.size.width,
-                            ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          announcementImageList.length == 1
+              ? Image.network(announcementImageList.first)
+              : CarouselSlider(
+                  items: announcementImageList
+                      .map(
+                        (item) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 1.w),
+                          child: Image.network(
+                            item,
+                            fit: BoxFit.cover,
+                            width: Get.mediaQuery.size.width,
                           ),
-                        )
-                        .toList(),
-                    options: CarouselOptions(
-                      height: Get.mediaQuery.size.height * .5,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 1,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 5),
-                      autoPlayAnimationDuration:
-                          const Duration(milliseconds: 900),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                    ),
+                        ),
+                      )
+                      .toList(),
+                  options: CarouselOptions(
+                    height: Get.mediaQuery.size.height * .5,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 1,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 5),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 900),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
                   ),
-            Text(
-              timeago.format(announcementCreatedAt.toDate(),
-                  locale: 'en_short'),
+                ),
+          Padding(
+            padding: EdgeInsets.all(2.w),
+            child: Text(
+              timeago.format(
+                announcementCreatedAt.toDate(),
+              ),
               textScaleFactor: 0.8,
               style: TextStyle(
                 color:
                     Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     ),
   );
