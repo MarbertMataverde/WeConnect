@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sizer/sizer.dart';
+
 import '../../../../dialog/dialog_channel.dart';
 import '../../../phone%20view/home/channel%20box/channel_announcement_tiles.dart';
 import '../../../../constant/constant.dart';
@@ -16,7 +16,6 @@ import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
-// //*THIS IS RESPONSIBLE FOR GETTING IMAGES
 FilePickerResult? pickedImage;
 Future<void> selectImage() async {
   pickedImage = await FilePicker.platform.pickFiles(
@@ -125,28 +124,15 @@ class _ChannelInsideState extends State<ChannelInside> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: data.size,
                     itemBuilder: (context, index) {
-                      return buildChannelMessageAndFileUrlTile(
+                      return channelTile(
                           announcementMessage: data.docs[index]
                               ['announcement-message'],
                           announcementFileList: data.docs[index]
                               ['announcement-file-urls'],
+                          announcementImageList: data.docs[index]
+                              ['announcement-image-urls'],
                           announcementCreatedAt: data.docs[index]
                               ['announcement-created-at']);
-
-                      // buildChannelMessageAndImageTile(
-                      //     announcementMessage: data.docs[index]
-                      //         ['announcement-message'],
-                      //     announcementImageList: data.docs[index]
-                      //         ['announcement-image-urls'],
-                      //     announcementCreatedAt: data.docs[index]
-                      //         ['announcement-created-at']);
-
-                      // buildChannelMessageOnlyTile(
-                      //   announcementMessage: data.docs[index]
-                      //       ['announcement-message'],
-                      //   announcementCreatedAt: data.docs[index]
-                      //       ['announcement-created-at'],
-                      // );
                     },
                   ),
                 );

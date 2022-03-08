@@ -232,7 +232,7 @@ class ControllerChannel extends GetxController {
           listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
           // loop for each file
           for (var file in listOfFilePath) {
-            await uploadImagesToFirebaseStorage(
+            await uploadFileToFirebaseStorage(
               file.path,
               channelName.toString(),
               announcementTime.toString(),
@@ -307,7 +307,7 @@ class ControllerChannel extends GetxController {
         listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
         // loop for each file
         for (var file in listOfFilePath) {
-          await uploadImagesToFirebaseStorage(
+          await uploadFileToFirebaseStorage(
             file.path,
             channelName.toString(),
             announcementTime.toString(),
@@ -333,7 +333,7 @@ class ControllerChannel extends GetxController {
       listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
       // loop for each file
       for (var file in listOfFilePath) {
-        await uploadImagesToFirebaseStorage(
+        await uploadFileToFirebaseStorage(
           file.path,
           channelName.toString(),
           announcementTime.toString(),
