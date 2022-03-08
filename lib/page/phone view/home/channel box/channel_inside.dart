@@ -17,23 +17,23 @@ import '../../../../constant/constant_login_page.dart';
 import '../../../../widgets/appbar title/appbar_title.dart';
 
 // //*THIS IS RESPONSIBLE FOR GETTING IMAGES
-// FilePickerResult? pickedImage;
-// Future<void> selectImage() async {
-//   pickedImage = await FilePicker.platform.pickFiles(
-//     allowMultiple: true,
-//     allowedExtensions: ['png', 'jpg'],
-//     type: FileType.custom,
-//   );
-// }
+FilePickerResult? pickedImage;
+Future<void> selectImage() async {
+  pickedImage = await FilePicker.platform.pickFiles(
+    allowMultiple: true,
+    allowedExtensions: ['png', 'jpg'],
+    type: FileType.custom,
+  );
+}
 
-// FilePickerResult? pickedFile;
-// Future<void> selectFile() async {
-//   pickedFile = await FilePicker.platform.pickFiles(
-//     allowMultiple: false,
-//     allowedExtensions: ['pdf', 'doc', 'xlsx', 'ppt'],
-//     type: FileType.custom,
-//   );
-// }
+FilePickerResult? pickedFile;
+Future<void> selectFile() async {
+  pickedFile = await FilePicker.platform.pickFiles(
+    allowMultiple: false,
+    allowedExtensions: ['pdf', 'doc', 'xlsx', 'ppt'],
+    type: FileType.custom,
+  );
+}
 
 class ChannelInside extends StatefulWidget {
   const ChannelInside(
@@ -125,12 +125,28 @@ class _ChannelInsideState extends State<ChannelInside> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: data.size,
                     itemBuilder: (context, index) {
-                      return buildChannelAnnouncementTile(
-                        announcementMessage: data.docs[index]
-                            ['announcement-message'],
-                        announcementCreatedAt: data.docs[index]
-                            ['announcement-created-at'],
-                      );
+                      return buildChannelMessageAndFileUrlTile(
+                          announcementMessage: data.docs[index]
+                              ['announcement-message'],
+                          announcementFileList: data.docs[index]
+                              ['announcement-file-urls'],
+                          announcementCreatedAt: data.docs[index]
+                              ['announcement-created-at']);
+
+                      // buildChannelMessageAndImageTile(
+                      //     announcementMessage: data.docs[index]
+                      //         ['announcement-message'],
+                      //     announcementImageList: data.docs[index]
+                      //         ['announcement-image-urls'],
+                      //     announcementCreatedAt: data.docs[index]
+                      //         ['announcement-created-at']);
+
+                      // buildChannelMessageOnlyTile(
+                      //   announcementMessage: data.docs[index]
+                      //       ['announcement-message'],
+                      //   announcementCreatedAt: data.docs[index]
+                      //       ['announcement-created-at'],
+                      // );
                     },
                   ),
                 );
@@ -158,7 +174,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                           splashRadius:
                                               Get.mediaQuery.size.width * 0.05,
                                           onPressed: () {
-                                            // selectFile();
+                                            selectFile();
                                           },
                                           icon: Icon(
                                             MdiIcons.filePlusOutline,
@@ -170,7 +186,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                           splashRadius:
                                               Get.mediaQuery.size.width * 0.05,
                                           onPressed: () {
-                                            // selectImage();
+                                            selectImage();
                                           },
                                           icon: Icon(
                                             MdiIcons.fileImagePlusOutline,
@@ -214,12 +230,15 @@ class _ChannelInsideState extends State<ChannelInside> {
                               onPressed: controller.textFieldEmptySend
                                   ? null
                                   : () async {
-                                      channel.newChannelAnnouncement(
+                                      channel.uploadAnnouncement(
                                         token: widget.token,
+                                        channelName: widget.channelName,
                                         adminName:
                                             currentProfileName.toString(),
                                         announcementMessage:
                                             announcementCtrlr.text,
+                                        imagePicked: pickedImage,
+                                        filePicked: pickedFile,
                                       );
                                       announcementCtrlr.clear();
                                     },

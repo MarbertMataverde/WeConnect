@@ -61,6 +61,7 @@ dependencies:
   flutter_slidable: ^1.2.0
   image_picker: ^0.8.4+10
   linkwell: ^2.0.6
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

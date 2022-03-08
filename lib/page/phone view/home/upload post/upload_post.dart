@@ -14,6 +14,7 @@ import '../../../../controller/controller_create_post.dart';
 FilePickerResult? result;
 Future<void> pickImages() async {
   result = await FilePicker.platform.pickFiles(
+    allowCompression: true,
     allowMultiple: true,
     allowedExtensions: ['png', 'jpg'],
     type: FileType.custom,
@@ -70,8 +71,7 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                   controller: _descriptionCtrlr,
                   cursorColor: Get.theme.primaryColor,
                   maxLines: null,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.multiline,
                   textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(
                     color: Get.isDarkMode

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as p;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,16 @@ final FirebaseStorage storage = FirebaseStorage.instance;
 final firestore = FirebaseFirestore.instance;
 
 String avatarDownloadUrl = '';
+
+//images link
+List<String> listOfImageUrls = [];
+//list of image path
+List<File> listOfImagePath = [];
+
+//file link
+List<String> listOfFileUrls = [];
+//list of file path
+List<File> listOfFilePath = [];
 
 class ControllerChannel extends GetxController {
   Future<void> createNewChannel({
@@ -149,7 +160,186 @@ class ControllerChannel extends GetxController {
         .set({
       'announcement-created-at': Timestamp.now(),
       'announcement-message': announcementMessage,
+      'announcement-image-urls': listOfImageUrls,
+      'announcement-file-urls': listOfFileUrls,
       'admin-name': adminName,
     });
+  }
+
+  //images upload
+  Future<void> uploadImagesToFirebaseStorage(
+      String filePath, String channelName, String announcementTime) async {
+    File file = File(filePath);
+    String basename = p.basename(file.path);
+    try {
+      await storage
+          .ref('$channelName/$announcementTime/$basename')
+          .putFile(file)
+          .then((value) async {
+        String getUrl = await value.ref.getDownloadURL();
+        listOfImageUrls.add(getUrl);
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+      // e.g, e.code == 'canceled'
+    }
+  }
+
+  //file upload
+  Future<void> uploadFileToFirebaseStorage(
+      String filePath, String channelName, String announcementTime) async {
+    File file = File(filePath);
+    String basename = p.basename(file.path);
+    try {
+      await storage
+          .ref('$channelName/$announcementTime/$basename')
+          .putFile(file)
+          .then((value) async {
+        String getUrl = await value.ref.getDownloadURL();
+        listOfFileUrls.add(getUrl);
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+      // e.g, e.code == 'canceled'
+    }
+  }
+
+  //uploading everything in the firestore and storage
+  Future<void> uploadAnnouncement({
+    FilePickerResult? imagePicked,
+    FilePickerResult? filePicked,
+    String? channelName,
+    String? announcementMessage,
+    required String token,
+    required String adminName,
+  }) async {
+    final Timestamp announcementTime = Timestamp.now();
+    if (announcementMessage!.isNotEmpty) {
+      if (imagePicked != null) {
+        if (filePicked != null) {
+          // all field has data
+          listOfImagePath =
+              imagePicked.paths.map((path) => File(path!)).toList();
+          // loop for each image
+          for (var image in listOfImagePath) {
+            await uploadImagesToFirebaseStorage(
+              image.path,
+              channelName.toString(),
+              announcementTime.toString(),
+            );
+          }
+          //file upload
+          listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
+          // loop for each file
+          for (var file in listOfFilePath) {
+            await uploadImagesToFirebaseStorage(
+              file.path,
+              channelName.toString(),
+              announcementTime.toString(),
+            );
+          }
+
+          //announcement message
+          newChannelAnnouncement(
+            token: token,
+            adminName: adminName,
+            announcementMessage: announcementMessage,
+          );
+          listOfFileUrls.clear();
+          listOfImageUrls.clear();
+        } else {
+          //announcement message and image only
+          listOfImagePath =
+              imagePicked.paths.map((path) => File(path!)).toList();
+          // loop for each image
+          for (var image in listOfImagePath) {
+            await uploadImagesToFirebaseStorage(
+              image.path,
+              channelName.toString(),
+              announcementTime.toString(),
+            );
+          }
+          newChannelAnnouncement(
+            token: token,
+            adminName: adminName,
+            announcementMessage: announcementMessage,
+          );
+          listOfImageUrls.clear();
+        }
+      } else if (filePicked != null) {
+        //announcement message and file only
+        listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
+        // loop for each file
+        for (var file in listOfFilePath) {
+          await uploadFileToFirebaseStorage(
+            file.path,
+            channelName.toString(),
+            announcementTime.toString(),
+          );
+        }
+        newChannelAnnouncement(
+          token: token,
+          adminName: adminName,
+          announcementMessage: announcementMessage,
+        );
+        listOfFileUrls.clear();
+      } else {
+        //announcement message only
+        newChannelAnnouncement(
+          token: token,
+          adminName: adminName,
+          announcementMessage: announcementMessage,
+        );
+      }
+    } else if (imagePicked != null) {
+      if (filePicked != null) {
+        // image and file only
+        listOfImagePath = imagePicked.paths.map((path) => File(path!)).toList();
+        // loop for each image
+        for (var image in listOfImagePath) {
+          await uploadImagesToFirebaseStorage(
+            image.path,
+            channelName.toString(),
+            announcementTime.toString(),
+          );
+        }
+        //file upload
+        listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
+        // loop for each file
+        for (var file in listOfFilePath) {
+          await uploadImagesToFirebaseStorage(
+            file.path,
+            channelName.toString(),
+            announcementTime.toString(),
+          );
+        }
+        listOfFileUrls.clear();
+        listOfImageUrls.clear();
+      } else {
+        //image only
+        listOfImagePath = imagePicked.paths.map((path) => File(path!)).toList();
+        // loop for each image
+        for (var image in listOfImagePath) {
+          await uploadImagesToFirebaseStorage(
+            image.path,
+            channelName.toString(),
+            announcementTime.toString(),
+          );
+        }
+        listOfImageUrls.clear();
+      }
+    } else if (filePicked != null) {
+      //file only
+      listOfFilePath = filePicked.paths.map((path) => File(path!)).toList();
+      // loop for each file
+      for (var file in listOfFilePath) {
+        await uploadImagesToFirebaseStorage(
+          file.path,
+          channelName.toString(),
+          announcementTime.toString(),
+        );
+      }
+      listOfFileUrls.clear();
+    }
   }
 }

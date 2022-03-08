@@ -1,12 +1,14 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-Widget buildChannelAnnouncementTile({
+Widget buildChannelMessageOnlyTile({
   required String announcementMessage,
   required Timestamp announcementCreatedAt,
 }) {
@@ -38,7 +40,7 @@ Widget buildChannelAnnouncementTile({
             Text(
               timeago.format(announcementCreatedAt.toDate(),
                   locale: 'en_short'),
-              textScaleFactor: 0.7,
+              textScaleFactor: 0.8,
               style: TextStyle(
                 color:
                     Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
@@ -46,6 +48,144 @@ Widget buildChannelAnnouncementTile({
             )
           ],
         ),
+      ),
+    ),
+  );
+}
+
+Widget buildChannelMessageAndImageTile({
+  required String announcementMessage,
+  required List announcementImageList,
+  required Timestamp announcementCreatedAt,
+}) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Get.isDarkMode
+            ? kTextFormFieldColorDarkTheme
+            : kTextFormFieldColorLightTheme,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          announcementImageList.length == 1
+              ? Image.network(announcementImageList.first)
+              : CarouselSlider(
+                  items: announcementImageList
+                      .map(
+                        (item) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 1.w),
+                          child: Image.network(
+                            item,
+                            fit: BoxFit.cover,
+                            width: Get.mediaQuery.size.width,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  options: CarouselOptions(
+                    height: Get.mediaQuery.size.height * .5,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 1,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 5),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 900),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
+          Padding(
+            padding: EdgeInsets.all(2.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LinkWell(
+                  announcementMessage,
+                  linkStyle: TextStyle(
+                    color: Get.theme.primaryColor,
+                  ),
+                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+                ),
+                Text(
+                  timeago.format(announcementCreatedAt.toDate(),
+                      locale: 'en_short'),
+                  textScaleFactor: 0.8,
+                  style: TextStyle(
+                    color: Get.isDarkMode
+                        ? kTextColorDarkTheme
+                        : kTextColorLightTheme,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildChannelMessageAndFileUrlTile({
+  required String announcementMessage,
+  required List announcementFileList,
+  required Timestamp announcementCreatedAt,
+}) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Get.isDarkMode
+            ? kTextFormFieldColorDarkTheme
+            : kTextFormFieldColorLightTheme,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Downloadable File Here 📁",
+                textScaleFactor: 1.2,
+                style: TextStyle(color: Get.theme.primaryColor),
+              ),
+            ),
+            onTap: () async {
+              final url = announcementFileList.first;
+              if (await canLaunch(url)) launch(url);
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.all(2.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LinkWell(
+                  announcementMessage,
+                  linkStyle: TextStyle(
+                    color: Get.theme.primaryColor,
+                  ),
+                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+                ),
+                Text(
+                  timeago.format(announcementCreatedAt.toDate(),
+                      locale: 'en_short'),
+                  textScaleFactor: 0.8,
+                  style: TextStyle(
+                    color: Get.isDarkMode
+                        ? kTextColorDarkTheme
+                        : kTextColorLightTheme,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     ),
   );

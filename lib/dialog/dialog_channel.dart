@@ -37,7 +37,10 @@ class DialogChannel extends GetxController {
           textAlign: TextAlign.center,
         ),
         onOkButtonPressed: () async {
-          await channel.deleteChannel(channelDocId, channelAvatarImage);
+          await channel.deleteChannel(
+            channelDocId,
+            channelAvatarImage,
+          );
           Get.back();
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
