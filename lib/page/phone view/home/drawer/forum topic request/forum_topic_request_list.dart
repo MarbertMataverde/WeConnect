@@ -22,7 +22,9 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
   final DialogForum forum = Get.put(DialogForum());
   //forum topic request stream
   final Stream<QuerySnapshot> topicRequestStream = FirebaseFirestore.instance
-      .collection('forum-topic-request')
+      .collection('forum')
+      .doc('topic-request')
+      .collection('all-request')
       .orderBy('requested-at', descending: false)
       .snapshots();
   @override
@@ -67,7 +69,21 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
                   dragDismissible: true,
                   children: [
                     SlidableAction(
-                      onPressed: (_) {},
+                      onPressed: (_) {
+                        forum.requestApprovalDialog(context,
+                            assetLocation: 'assets/gifs/question_mark.gif',
+                            title: 'Request Approval',
+                            description:
+                                'Are you sure about approving this topic request?',
+                            requestedBy: data.docs[index]['requested-by'],
+                            requesterProfileImageUrl: data.docs[index]
+                                ['requester-profile-image-url'],
+                            requesterUid: data.docs[index]['requester-uid'],
+                            topicTitle: data.docs[index]['topic-title'],
+                            topicDescription: data.docs[index]
+                                ['topic-description'],
+                            requestDocId: data.docs[index].id);
+                      },
                       backgroundColor: Get.theme.primaryColor,
                       foregroundColor: Colors.white,
                       icon: MdiIcons.publish,
@@ -99,6 +115,7 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
                             ['requester-profile-image-url'],
                         requestedBy: data.docs[index]['requested-by'],
                         requestedAt: data.docs[index]['requested-at'],
+                        requesterUid: data.docs[index]['requester-uid'],
                         topicTitle: data.docs[index]['topic-title'],
                         topicDescription: data.docs[index]['topic-description'],
                         //request dismissal

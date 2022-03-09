@@ -20,13 +20,16 @@ class RequestDetails extends StatelessWidget {
     required this.topicDescription,
     required this.requestedAt,
     required this.requestDocId,
+    required this.requesterUid,
   }) : super(key: key);
 
   final String requesterProfileImageUrl;
   final String requestedBy;
   final String topicTitle;
   final String topicDescription;
+  final String requesterUid;
   final Timestamp requestedAt;
+
   //request dismissal
   final String requestDocId;
   @override
@@ -68,7 +71,19 @@ class RequestDetails extends StatelessWidget {
             ),
             IconButton(
               tooltip: 'Publish Request🔥',
-              onPressed: () {},
+              onPressed: () async {
+                await forum.requestApprovalDialog(context,
+                    assetLocation: 'assets/gifs/question_mark.gif',
+                    title: 'Request Approval',
+                    description:
+                        'Are you sure about approving this topic request?',
+                    requestedBy: requestedBy,
+                    requesterProfileImageUrl: requesterProfileImageUrl,
+                    requesterUid: requesterUid,
+                    topicTitle: topicTitle,
+                    topicDescription: topicDescription,
+                    requestDocId: requestDocId);
+              },
               icon: Icon(
                 MdiIcons.publish,
                 color: Get.theme.primaryColor,

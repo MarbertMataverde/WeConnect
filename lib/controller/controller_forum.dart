@@ -9,6 +9,7 @@ import '../constant/constant_colors.dart';
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class ControllerForum extends GetxController {
+  //new request
   Future<void> forumTopicRequest({
     required String requestedBy,
     required String requesterProfileImageUrl,
@@ -16,15 +17,18 @@ class ControllerForum extends GetxController {
     required String topicTitle,
     required String topicDescription,
   }) async {
-    firestore.collection('forum-topic-request').doc().set({
+    firestore
+        .collection('forum')
+        .doc('topic-request')
+        .collection('all-request')
+        .doc()
+        .set({
       'topic-title': topicTitle,
       'topic-description': topicDescription,
-      'requester-uid': requesterUid,
       'requested-at': Timestamp.now(),
-      // 'request-accepted-at': Timestamp.now(),
       'requested-by': requestedBy,
+      'requester-uid': requesterUid,
       'requester-profile-image-url': requesterProfileImageUrl,
-      'votes': 0,
     }).whenComplete(() {
       Get.back();
       Get.showSnackbar(
@@ -44,7 +48,40 @@ class ControllerForum extends GetxController {
     });
   }
 
+  //request dismissal
   Future<void> dismissRequest({required requestDocId}) async {
-    firestore.collection('forum-topic-request').doc(requestDocId).delete();
+    firestore
+        .collection('forum')
+        .doc('topic-request')
+        .collection('all-request')
+        .doc(requestDocId)
+        .delete();
+  }
+
+  //request approval
+  Future<void> requestApproval({
+    required String requestedBy,
+    required String requesterProfileImageUrl,
+    required String requesterUid,
+    required String topicTitle,
+    required String topicDescription,
+    //request removal
+    required String requestDocId,
+  }) async {
+    firestore
+        .collection('forum')
+        .doc('approved-request')
+        .collection('all-approved-request')
+        .doc()
+        .set({
+      'topic-title': topicTitle,
+      'topic-description': topicDescription,
+      'requester-uid': requesterUid,
+      'request-accepted-at': Timestamp.now(),
+      'requested-by': requestedBy,
+      'requester-profile-image-url': requesterProfileImageUrl,
+      'votes': 0,
+    }).whenComplete(
+            () async => await dismissRequest(requestDocId: requestDocId));
   }
 }
