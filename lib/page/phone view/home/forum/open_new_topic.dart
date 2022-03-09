@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_getx.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
+import 'package:weconnect/controller/controller_forum.dart';
 import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../constant/constant_colors.dart';
@@ -21,6 +22,7 @@ class OpenNewTopic extends StatefulWidget {
 class _OpenNewTopicState extends State<OpenNewTopic> {
   final TextEditingController titleCtrlr = TextEditingController();
   final TextEditingController descriptionCtrlr = TextEditingController();
+  final ControllerForum forum = Get.put(ControllerForum());
   bool fieldIsValid = false;
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,15 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
               ),
               buildPublishRequestButton(
                 hint: 'Publish My Request 📣',
-                onClicked: () {},
+                onClicked: () async {
+                  await forum.forumTopicRequest(
+                      requestedBy: currentProfileName.toString(),
+                      requesterProfileImageUrl:
+                          currentProfileImageUrl.toString(),
+                      requesterUid: currentUserId.toString(),
+                      topicTitle: titleCtrlr.text,
+                      topicDescription: descriptionCtrlr.text);
+                },
                 isFormValid: fieldIsValid,
               ),
             ],
