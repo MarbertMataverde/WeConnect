@@ -83,23 +83,8 @@ Widget buildChannelMessageOnlyTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LinkWell(
-                  announcementMessage,
-                  linkStyle: TextStyle(
-                    color: Get.theme.primaryColor,
-                  ),
-                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
-                ),
-                Text(
-                  timeago.format(announcementCreatedAt.toDate(),
-                      locale: 'en_short'),
-                  textScaleFactor: 0.8,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                )
+                linkWell(announcementMessage),
+                timeAgoFormat(announcementCreatedAt),
               ],
             ),
           ),
@@ -126,46 +111,10 @@ Widget buildChannelImageOnly({
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : CarouselSlider(
-                  items: announcementImageList
-                      .map(
-                        (item) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: Get.mediaQuery.size.width,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: Get.mediaQuery.size.height * .5,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
+              : carouselSlider(announcementImageList),
           Padding(
             padding: EdgeInsets.all(2.w),
-            child: Text(
-              timeago.format(
-                announcementCreatedAt.toDate(),
-              ),
-              textScaleFactor: 0.8,
-              style: TextStyle(
-                color:
-                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              ),
-            ),
+            child: timeAgoFormat(announcementCreatedAt),
           )
         ],
       ),
@@ -209,15 +158,7 @@ Widget buildChannelFileOnly({
                 if (await canLaunch(url)) launch(url);
               },
             ),
-            Text(
-              timeago.format(announcementCreatedAt.toDate(),
-                  locale: 'en_short'),
-              textScaleFactor: 0.8,
-              style: TextStyle(
-                color:
-                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              ),
-            )
+            timeAgoFormat(announcementCreatedAt),
           ],
         ),
       ),
@@ -243,56 +184,14 @@ Widget buildChannelMessageAndImageTile({
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : CarouselSlider(
-                  items: announcementImageList
-                      .map(
-                        (item) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: Get.mediaQuery.size.width,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: Get.mediaQuery.size.height * .5,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
+              : carouselSlider(announcementImageList),
           Padding(
             padding: EdgeInsets.all(2.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LinkWell(
-                  announcementMessage,
-                  linkStyle: TextStyle(
-                    color: Get.theme.primaryColor,
-                  ),
-                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
-                ),
-                Text(
-                  timeago.format(announcementCreatedAt.toDate(),
-                      locale: 'en_short'),
-                  textScaleFactor: 0.8,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                )
+                linkWell(announcementMessage),
+                timeAgoFormat(announcementCreatedAt),
               ],
             ),
           ),
@@ -337,23 +236,8 @@ Widget buildChannelMessageAndFileUrlTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LinkWell(
-                  announcementMessage,
-                  linkStyle: TextStyle(
-                    color: Get.theme.primaryColor,
-                  ),
-                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
-                ),
-                Text(
-                  timeago.format(announcementCreatedAt.toDate(),
-                      locale: 'en_short'),
-                  textScaleFactor: 0.8,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                )
+                linkWell(announcementMessage),
+                timeAgoFormat(announcementCreatedAt),
               ],
             ),
           ),
@@ -381,34 +265,7 @@ Widget buildChannelImageAndFileUrlTile({
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : CarouselSlider(
-                  items: announcementImageList
-                      .map(
-                        (item) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: Get.mediaQuery.size.width,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: Get.mediaQuery.size.height * .5,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
+              : carouselSlider(announcementImageList),
           GestureDetector(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -428,16 +285,7 @@ Widget buildChannelImageAndFileUrlTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  timeago.format(announcementCreatedAt.toDate(),
-                      locale: 'en_short'),
-                  textScaleFactor: 0.8,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                )
+                timeAgoFormat(announcementCreatedAt),
               ],
             ),
           ),
@@ -466,34 +314,7 @@ Widget buildChannelAllHasDataTile({
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : CarouselSlider(
-                  items: announcementImageList
-                      .map(
-                        (item) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                            width: Get.mediaQuery.size.width,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: Get.mediaQuery.size.height * .5,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
+              : carouselSlider(announcementImageList),
           GestureDetector(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -513,28 +334,63 @@ Widget buildChannelAllHasDataTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LinkWell(
-                  announcementMessage,
-                  linkStyle: TextStyle(
-                    color: Get.theme.primaryColor,
-                  ),
-                  style: TextStyle(color: Get.textTheme.bodyMedium!.color),
-                ),
-                Text(
-                  timeago.format(announcementCreatedAt.toDate(),
-                      locale: 'en_short'),
-                  textScaleFactor: 0.8,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                )
+                linkWell(announcementMessage),
+                timeAgoFormat(announcementCreatedAt),
               ],
             ),
           ),
         ],
       ),
     ),
+  );
+}
+
+CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
+  return CarouselSlider(
+    items: announcementImageList
+        .map(
+          (item) => Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1.w),
+            child: Image.network(
+              item,
+              fit: BoxFit.cover,
+              width: Get.mediaQuery.size.width,
+            ),
+          ),
+        )
+        .toList(),
+    options: CarouselOptions(
+      height: Get.mediaQuery.size.height * .5,
+      aspectRatio: 16 / 9,
+      viewportFraction: 1,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      autoPlay: true,
+      autoPlayInterval: const Duration(seconds: 5),
+      autoPlayAnimationDuration: const Duration(milliseconds: 900),
+      autoPlayCurve: Curves.fastOutSlowIn,
+      enlargeCenterPage: true,
+      scrollDirection: Axis.horizontal,
+    ),
+  );
+}
+
+Text timeAgoFormat(Timestamp announcementCreatedAt) {
+  return Text(
+    timeago.format(announcementCreatedAt.toDate(), locale: 'en_short'),
+    textScaleFactor: 0.8,
+    style: TextStyle(
+      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+    ),
+  );
+}
+
+LinkWell linkWell(String announcementMessage) {
+  return LinkWell(
+    announcementMessage,
+    linkStyle: TextStyle(
+      color: Get.theme.primaryColor,
+    ),
+    style: TextStyle(color: Get.textTheme.bodyMedium!.color),
   );
 }
