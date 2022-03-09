@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/dialog/dialog_forum.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
 
 import '../../../../../constant/constant_colors.dart';
@@ -18,9 +19,12 @@ class ForumTopicRequestList extends StatefulWidget {
 }
 
 class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
-  //channel stream for professor or student
-  final Stream<QuerySnapshot> topicRequestStream =
-      FirebaseFirestore.instance.collection('forum-topic-request').snapshots();
+  final DialogForum forum = Get.put(DialogForum());
+  //forum topic request stream
+  final Stream<QuerySnapshot> topicRequestStream = FirebaseFirestore.instance
+      .collection('forum-topic-request')
+      .orderBy('requested-at', descending: false)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +74,16 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
                       label: 'Publish',
                     ),
                     SlidableAction(
-                      onPressed: (_) {},
+                      onPressed: (_) {
+                        forum.dismissRequestDialog(
+                          context,
+                          assetLocation: 'assets/gifs/question_mark.gif',
+                          title: 'Request Dismissal',
+                          description:
+                              'Are you sure about dismissing this request?',
+                          requestDocId: data.docs[index].id,
+                        );
+                      },
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                       icon: Icons.remove_circle_outline,
@@ -88,6 +101,8 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
                         requestedAt: data.docs[index]['requested-at'],
                         topicTitle: data.docs[index]['topic-title'],
                         topicDescription: data.docs[index]['topic-description'],
+                        //request dismissal
+                        requestDocId: data.docs[index].id,
                       ),
                     );
                   },

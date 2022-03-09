@@ -6,7 +6,10 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../../constant/constant_colors.dart';
+import '../../../../../dialog/dialog_forum.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';
+
+final DialogForum forum = Get.put(DialogForum());
 
 class RequestDetails extends StatelessWidget {
   const RequestDetails({
@@ -16,6 +19,7 @@ class RequestDetails extends StatelessWidget {
     required this.topicTitle,
     required this.topicDescription,
     required this.requestedAt,
+    required this.requestDocId,
   }) : super(key: key);
 
   final String requesterProfileImageUrl;
@@ -23,6 +27,8 @@ class RequestDetails extends StatelessWidget {
   final String topicTitle;
   final String topicDescription;
   final Timestamp requestedAt;
+  //request dismissal
+  final String requestDocId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +52,15 @@ class RequestDetails extends StatelessWidget {
           actions: [
             IconButton(
               tooltip: 'Dismiss Request❌',
-              onPressed: () {},
+              onPressed: () async {
+                await forum.dismissRequestDialog(
+                  context,
+                  assetLocation: 'assets/gifs/question_mark.gif',
+                  title: 'Request Dismissal',
+                  description: 'Are you sure about dismissing this request?',
+                  requestDocId: requestDocId,
+                );
+              },
               icon: const Icon(
                 Icons.remove_circle_outline,
                 color: Colors.red,

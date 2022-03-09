@@ -43,4 +43,8 @@ class ControllerForum extends GetxController {
       );
     });
   }
+
+  Future<void> dismissRequest({required requestDocId}) async {
+    firestore.collection('forum-topic-request').doc(requestDocId).delete();
+  }
 }
