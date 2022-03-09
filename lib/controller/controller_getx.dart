@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class ControllerGetX extends GetxController {
-  //channel text form file state
+  //channel box state
   bool textFieldEmptySend = true;
   bool textFieldEmptyUpload = true;
   bool filesEmpty = true;

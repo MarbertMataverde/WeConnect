@@ -17,7 +17,7 @@ void selectedItem(
       //Edit Personal Information
       Get.to(() => const EditAccount());
       break;
-    case 2:
+    case 3:
       //report list
       Get.to(() => const ReportList());
       break;

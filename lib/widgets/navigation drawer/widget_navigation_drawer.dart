@@ -79,9 +79,14 @@ class WidgetNavigationDrawer extends StatelessWidget {
                   //issue divider
                   namedDivider(dividerName: 'Issues'),
                   drawerItems(
+                    icon: Icons.topic_outlined,
+                    title: 'Forum Topic Request',
+                    onCliked: () => selectedItem(context, 2),
+                  ),
+                  drawerItems(
                     icon: Icons.report_outlined,
                     title: 'Reports',
-                    onCliked: () => selectedItem(context, 2),
+                    onCliked: () => selectedItem(context, 3),
                   ),
                 ],
               ),
