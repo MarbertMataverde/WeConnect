@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weconnect/page/phone%20view/home/drawer/forum%20topic%20request/forum_topic_request_list.dart';
 
 import '../../authentication/authentication_controller.dart';
 import '../../page/phone view/home/drawer/edit account/edit_account.dart';
@@ -16,6 +17,9 @@ void selectedItem(
     case 0:
       //Edit Personal Information
       Get.to(() => const EditAccount());
+      break;
+    case 2:
+      Get.to(() => const ForumTopicRequestList());
       break;
     case 3:
       //report list
