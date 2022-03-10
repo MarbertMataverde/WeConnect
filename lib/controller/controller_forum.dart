@@ -96,7 +96,7 @@ class ControllerForum extends GetxController {
         .collection('all-approved-request')
         .doc(topicDocId)
         .update({
-      'vote': FieldValue.arrayUnion(currentUid),
+      'votes': FieldValue.arrayUnion(currentUid),
     });
   }
 
@@ -111,7 +111,7 @@ class ControllerForum extends GetxController {
         .collection('all-approved-request')
         .doc(topicDocId)
         .update({
-      'vote': FieldValue.arrayRemove(currentUid),
+      'votes': FieldValue.arrayRemove(currentUid),
     });
   }
 }

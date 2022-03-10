@@ -24,12 +24,14 @@ class Forum extends StatefulWidget {
   State<Forum> createState() => _ForumState();
 }
 
+final Stream<QuerySnapshot> _forumTopicStream = FirebaseFirestore.instance
+    .collection('forum')
+    .doc('approved-request')
+    .collection('all-approved-request')
+    .orderBy('votes', descending: false)
+    .snapshots();
+
 class _ForumState extends State<Forum> {
-  final Stream<QuerySnapshot> _forumTopicStream = FirebaseFirestore.instance
-      .collection('forum')
-      .doc('approved-request')
-      .collection('all-approved-request')
-      .snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +90,7 @@ class _ForumState extends State<Forum> {
               return buildChannelTile(
                 topicOwnerName: data.docs[index]['requested-by'],
                 topicTitle: data.docs[index]['topic-title'],
-                topicVotes: data.docs[index]['vote'],
+                topicVotes: data.docs[index]['votes'],
                 topicAcceptedDate: data.docs[index]['request-accepted-at'],
                 channelDocId: data.docs[index].id,
                 onCliked: () {
@@ -101,7 +103,7 @@ class _ForumState extends State<Forum> {
                       topicDescription: data.docs[index]['topic-description'],
                       topicApprovedDate: data.docs[index]
                           ['request-accepted-at'],
-                      topicVotes: data.docs[index]['vote'],
+                      topicVotes: data.docs[index]['votes'],
                       topicDocId: data.docs[index].id,
                       requesterUid: data.docs[index]['requester-uid'],
                     ),
