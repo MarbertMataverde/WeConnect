@@ -80,8 +80,38 @@ class ControllerForum extends GetxController {
       'request-accepted-at': Timestamp.now(),
       'requested-by': requestedBy,
       'requester-profile-image-url': requesterProfileImageUrl,
-      'votes': 0,
+      'votes': [],
     }).whenComplete(
             () async => await dismissRequest(requestDocId: requestDocId));
+  }
+
+  //add vote
+  Future<void> addVote({
+    required String topicDocId,
+    required List currentUid,
+  }) async {
+    firestore
+        .collection('forum')
+        .doc('approved-request')
+        .collection('all-approved-request')
+        .doc(topicDocId)
+        .update({
+      'vote': FieldValue.arrayUnion(currentUid),
+    });
+  }
+
+  //remove vote
+  Future<void> removeVote({
+    required String topicDocId,
+    required List currentUid,
+  }) async {
+    firestore
+        .collection('forum')
+        .doc('approved-request')
+        .collection('all-approved-request')
+        .doc(topicDocId)
+        .update({
+      'vote': FieldValue.arrayRemove(currentUid),
+    });
   }
 }

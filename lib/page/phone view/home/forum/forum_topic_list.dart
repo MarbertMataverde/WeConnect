@@ -1,15 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:focused_menu/focused_menu.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+
+import 'package:weconnect/page/phone%20view/home/forum/forum_topic_details.dart';
 import 'package:weconnect/page/phone%20view/home/forum/open_new_topic.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../controller/controller_post_tile_pop_up_menu.dart';
+
 import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 
@@ -86,10 +88,25 @@ class _ForumState extends State<Forum> {
               return buildChannelTile(
                 topicOwnerName: data.docs[index]['requested-by'],
                 topicTitle: data.docs[index]['topic-title'],
-                topicVotes: data.docs[index]['votes'],
+                topicVotes: data.docs[index]['vote'],
                 topicAcceptedDate: data.docs[index]['request-accepted-at'],
                 channelDocId: data.docs[index].id,
-                onCliked: () {},
+                onCliked: () {
+                  Get.to(
+                    () => ForumTopicDetails(
+                      requesterProfileImageUrl: data.docs[index]
+                          ['requester-profile-image-url'],
+                      requestedBy: data.docs[index]['requested-by'],
+                      topicTitle: data.docs[index]['topic-title'],
+                      topicDescription: data.docs[index]['topic-description'],
+                      topicApprovedDate: data.docs[index]
+                          ['request-accepted-at'],
+                      topicVotes: data.docs[index]['vote'],
+                      topicDocId: data.docs[index].id,
+                      requesterUid: data.docs[index]['requester-uid'],
+                    ),
+                  );
+                },
               );
             },
           );
@@ -102,7 +119,7 @@ class _ForumState extends State<Forum> {
 Widget buildChannelTile({
   required String topicOwnerName,
   required String topicTitle,
-  required int topicVotes,
+  required List topicVotes,
   required Timestamp topicAcceptedDate,
   VoidCallback? onCliked,
   //deleting channel
@@ -136,7 +153,7 @@ Widget buildChannelTile({
             SizedBox(
               width: 3.w,
             ),
-            Text('$topicVotes Votes ❤'),
+            Text('${topicVotes.length} Votes ❤'),
             const Spacer(),
             Text(
               DateFormat('d MMM yyyy').format(

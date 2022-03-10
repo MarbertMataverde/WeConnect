@@ -63,6 +63,7 @@ dependencies:
   linkwell: ^2.0.6
   url_launcher: ^6.0.20
   intl: ^0.17.0
+  like_button: ^2.0.4
 
 dev_dependencies:
   flutter_test:
