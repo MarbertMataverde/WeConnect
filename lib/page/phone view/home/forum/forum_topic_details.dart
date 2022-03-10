@@ -8,7 +8,6 @@ import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
-import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';
@@ -111,11 +110,11 @@ class ForumTopicDetails extends StatelessWidget {
                         IconButton(
                           onPressed: () {},
                           splashRadius: 5.w,
-                          icon: Icon(
+                          icon: const Icon(
                             MdiIcons.commentText,
                           ),
                         ),
-                        Text(
+                        const Text(
                           '123',
                         ),
                         VerticalDivider(

@@ -136,7 +136,7 @@ class RequestDetails extends StatelessWidget {
                 Text(
                   topicTitle,
                   textScaleFactor: 1.3,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
