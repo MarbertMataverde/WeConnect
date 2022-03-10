@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:weconnect/page/phone%20view/home/forum/forum_topic_details.dart';
-import 'package:weconnect/page/phone%20view/home/forum/open_new_topic.dart';
+import '../../../phone%20view/home/forum/forum_topic_details.dart';
+import '../../../phone%20view/home/forum/open_new_topic.dart';
 
 import '../../../../constant/constant_colors.dart';
 

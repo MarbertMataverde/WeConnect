@@ -6,9 +6,9 @@ import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
-import 'package:weconnect/controller/controller_forum.dart';
-import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
+import '../../../../controller/controller_account_information.dart';
+import '../../../../controller/controller_forum.dart';
+import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';

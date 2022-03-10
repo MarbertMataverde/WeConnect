@@ -5,8 +5,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:weconnect/dialog/dialog_forum.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
+import '../../../../../dialog/dialog_forum.dart';
+import '../../../../phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';

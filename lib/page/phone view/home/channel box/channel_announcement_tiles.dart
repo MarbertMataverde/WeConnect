@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../../../constant/constant_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 channelTile({

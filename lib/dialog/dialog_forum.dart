@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_forum.dart';
+import '../controller/controller_forum.dart';
 
 import '../constant/constant_colors.dart';
 
