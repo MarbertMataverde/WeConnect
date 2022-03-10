@@ -198,4 +198,3 @@ Widget buildChannelTile({
     ),
   );
 }
-// channelDocId: data.docs[index].id,

@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../controller/controller_account_information.dart';
 import '../../phone%20view/home/channel%20box/channel_list.dart';
-import '../../phone%20view/home/forum/forum.dart';
+import 'forum/forum_topic_list.dart';
 import 'campus feed/campus_feed.dart';
 import 'colleges/ccs_feed.dart';
 import 'colleges/coa_feed.dart';
