@@ -150,13 +150,9 @@ Widget buildChannelTile({
           height: 1.h,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('54 Comments 💬'),
-            SizedBox(
-              width: 3.w,
-            ),
             Text('${topicVotes.length} Votes ❤'),
-            const Spacer(),
             Text(
               DateFormat('d MMM yyyy').format(
                 topicAcceptedDate.toDate(),
