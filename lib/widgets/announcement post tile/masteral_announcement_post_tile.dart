@@ -286,11 +286,7 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                       viewportFraction: 1,
                       initialPage: 0,
                       enableInfiniteScroll: true,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 5),
-                      autoPlayAnimationDuration:
-                          const Duration(milliseconds: 900),
-                      autoPlayCurve: Curves.fastOutSlowIn,
+                      autoPlay: false,
                       enlargeCenterPage: true,
                       scrollDirection: Axis.horizontal,
                     ),

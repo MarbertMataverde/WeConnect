@@ -281,7 +281,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                       viewportFraction: 1,
                       initialPage: 0,
                       enableInfiniteScroll: true,
-                      autoPlay: true,
+                      autoPlay: false,
                       autoPlayInterval: const Duration(seconds: 5),
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 900),
