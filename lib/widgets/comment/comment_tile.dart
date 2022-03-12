@@ -52,8 +52,8 @@ Widget buildCommentTile({
       child: ExpandableText(
         comment,
         maxLines: 3,
-        expandText: 'more',
-        collapseText: 'less',
+        expandText: 'read more 📖',
+        collapseText: 'collapse 📕',
         expandOnTextTap: true,
         collapseOnTextTap: true,
         animation: true,

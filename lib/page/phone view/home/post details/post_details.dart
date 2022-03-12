@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkwell/linkwell.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -110,10 +111,15 @@ class PostDetails extends StatelessWidget {
                   SizedBox(
                     height: 1.h,
                   ),
-                  Text(
+                  LinkWell(
                     postCaption,
                     style: TextStyle(
-                      fontSize: Get.textTheme.titleMedium!.fontSize,
+                      color: Get.isDarkMode
+                          ? kTextColorDarkTheme
+                          : kTextColorLightTheme,
+                    ),
+                    linkStyle: TextStyle(
+                      color: Get.theme.primaryColor,
                     ),
                   ),
                 ],

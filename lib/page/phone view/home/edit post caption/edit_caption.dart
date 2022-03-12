@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -48,6 +49,27 @@ class _EditCaptionState extends State<EditCaption> {
         title: const AppBarTitle(
           title: 'Edit Caption',
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              Get.focusScope!.unfocus();
+              await dialogs.postEditCaptionDialog(
+                context,
+                'assets/gifs/pencil_draw_erase.gif',
+                'Edit Caption 📝',
+                'Are you sure changing this caption? 🤔',
+                widget.docName,
+                widget.postDocId,
+                //this will check if the data of caption has change
+                updatedCaption == '' ? widget.recentCaption : updatedCaption,
+              );
+            },
+            icon: Icon(
+              MdiIcons.check,
+              color: Get.theme.primaryColor,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -75,9 +97,8 @@ class _EditCaptionState extends State<EditCaption> {
                       : kTextColorLightTheme,
                 ),
                 cursorColor: Get.theme.primaryColor,
+                keyboardType: TextInputType.multiline,
                 maxLines: null,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   hintStyle: TextStyle(
                     color: Get.isDarkMode
@@ -96,41 +117,6 @@ class _EditCaptionState extends State<EditCaption> {
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Get.theme.primaryColor),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2.h),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton.icon(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    backgroundColor: Get.isDarkMode
-                        ? kTextFormFieldColorDarkTheme
-                        : kTextFormFieldColorLightTheme,
-                    primary: Get.theme.primaryColor,
-                  ),
-                  onPressed: () async {
-                    Get.focusScope!.unfocus();
-                    await dialogs.postEditCaptionDialog(
-                      context,
-                      'assets/gifs/pencil_draw_erase.gif',
-                      'Edit Caption 📝',
-                      'Are you sure changing this caption? 🤔',
-                      widget.docName,
-                      widget.postDocId,
-                      //this will check if the data of caption has change
-                      updatedCaption == ''
-                          ? widget.recentCaption
-                          : updatedCaption,
-                    );
-                  },
-                  icon: const Icon(Icons.save),
-                  label: Text(
-                    'SAVE',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                    ),
                   ),
                 ),
               ),

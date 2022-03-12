@@ -175,7 +175,12 @@ class ForumTopicDetails extends StatelessWidget {
                   color: Get.theme.primaryColor,
                 ),
               ),
-              const Divider(),
+              Divider(
+                height: 2.h,
+                color: Get.isDarkMode
+                    ? kButtonColorDarkTheme
+                    : kButtonColorLightTheme,
+              ),
               // ignore: prefer_const_constructors
               TextButton.icon(
                 onPressed: () {

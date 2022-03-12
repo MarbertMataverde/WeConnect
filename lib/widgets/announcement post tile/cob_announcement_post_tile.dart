@@ -236,15 +236,16 @@ class CobAnnouncementPostTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ExpandableText(
               postCaption,
+              animationDuration: const Duration(milliseconds: 1500),
               style: TextStyle(
                 color:
                     Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
               ),
               maxLines: 3,
-              expandText: 'more',
+              expandText: 'read more 📖',
               expandOnTextTap: true,
               collapseOnTextTap: true,
-              collapseText: 'collapse',
+              collapseText: 'collapse 📕',
               animation: true,
               animationCurve: Curves.fastLinearToSlowEaseIn,
             ),
@@ -282,11 +283,14 @@ class CobAnnouncementPostTile extends StatelessWidget {
                         .toList(),
                     options: CarouselOptions(
                       height: Get.mediaQuery.size.height * .5,
-                      aspectRatio: 16 / 9,
                       viewportFraction: 1,
                       initialPage: 0,
-                      enableInfiniteScroll: true,
+                      enableInfiniteScroll: false,
                       autoPlay: false,
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 900),
+                      autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                       scrollDirection: Axis.horizontal,
                     ),
@@ -311,6 +315,9 @@ class CobAnnouncementPostTile extends StatelessWidget {
                           postDocId: postDocId,
                           collectionName: 'announcements',
                           docName: 'cob-feed',
+                          profileName: accountName,
+                          profileImageUrl: accountProfileImageUrl,
+                          postDescription: postCaption,
                         ),
                       );
                     },

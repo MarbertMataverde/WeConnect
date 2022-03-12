@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar%20title/appbar_title.dart';
 
@@ -67,37 +68,14 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                TextFormField(
-                  controller: _descriptionCtrlr,
-                  cursorColor: Get.theme.primaryColor,
-                  maxLines: null,
+                CustomTextFormField(
+                  ctrlr: _descriptionCtrlr,
+                  hint: 'Write post description here ✏',
+                  isPassword: false,
+                  minimumLine: 12,
+                  maxLine: null,
                   keyboardType: TextInputType.multiline,
-                  textCapitalization: TextCapitalization.sentences,
-                  style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                  decoration: InputDecoration(
-                    hintStyle: TextStyle(
-                      color: Get.isDarkMode
-                          ? kTextColorDarkTheme
-                          : kTextColorLightTheme,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 1.w),
-                    hintText: 'Write post description',
-                    //*Enabled Border
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Get.isDarkMode
-                              ? kTextColorDarkTheme
-                              : kTextColorLightTheme),
-                      borderRadius: BorderRadius.circular(2.sp),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Get.theme.primaryColor),
-                    ),
-                  ),
+                  validator: (_) {},
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

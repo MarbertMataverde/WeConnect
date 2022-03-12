@@ -24,8 +24,6 @@ class ForumCommentList extends StatefulWidget {
 }
 
 class ForumCommentListState extends State<ForumCommentList> {
-  DateFormat dateFormat = DateFormat('yyyy-MM-dd – kk:mm');
-
   final TextEditingController topicCommentCtrl = TextEditingController();
 
   final ControllerForum forum = Get.put(ControllerForum());
