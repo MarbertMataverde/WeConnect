@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../dialog/dialog_forum.dart';

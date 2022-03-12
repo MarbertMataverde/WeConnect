@@ -6,7 +6,7 @@ import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:weconnect/page/phone%20view/home/forum/forum_comment_list.dart';
+import '../../../phone%20view/home/forum/forum_comment_list.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
+import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar%20title/appbar_title.dart';
 

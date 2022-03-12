@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/comment/comment_form.dart';
+import 'comment_form.dart';
 import '../../constant/constant.dart';
 import '../../controller/controller_account_information.dart';
 
@@ -50,8 +50,6 @@ class _ShowAllCommentState extends State<ShowAllComment> {
 
   @override
   Widget build(BuildContext context) {
-    bool isExpanded = false;
-
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection(widget.collectionName)
         .doc(widget.docName)
