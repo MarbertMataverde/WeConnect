@@ -85,6 +85,27 @@ class ControllerForum extends GetxController {
             () async => await dismissRequest(requestDocId: requestDocId));
   }
 
+  Future<void> addTopicComment({
+    required String topicDocId,
+    required String commenterProfileImageUrl,
+    required String commenterProfileName,
+    required String commenterComment,
+  }) async {
+    firestore
+        .collection('forum')
+        .doc('approved-request')
+        .collection('all-approved-request')
+        .doc(topicDocId)
+        .collection('topic-comments')
+        .doc()
+        .set({
+      'commenter-profile-image-url': commenterProfileImageUrl,
+      'commenter-profile-name': commenterProfileName,
+      'commenter-comment': commenterComment,
+      'commented-date': Timestamp.now(),
+    });
+  }
+
   //add vote
   Future<void> addVote({
     required String topicDocId,

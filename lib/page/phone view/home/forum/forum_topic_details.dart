@@ -6,6 +6,8 @@ import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:weconnect/page/phone%20view/home/forum/forum_comment_list.dart';
+import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
 
@@ -39,8 +41,6 @@ class ForumTopicDetails extends StatelessWidget {
   final String topicDocId;
   //controller
   final TextEditingController commentCtrlr = TextEditingController();
-  //key
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     int likeCount = topicVotes.length;
@@ -63,198 +63,134 @@ class ForumTopicDetails extends StatelessWidget {
           title: 'Topic Details',
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(5.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: Get.mediaQuery.size.width * 0.07,
-                          backgroundImage:
-                              NetworkImage(requesterProfileImageUrl),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(5.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  //profile image
+                  CircleAvatar(
+                    radius: Get.mediaQuery.size.width * 0.07,
+                    backgroundColor: Colors.transparent,
+                    child: ClipOval(
+                      child: FadeInImage.assetNetwork(
+                        placeholder: randomAvatarImageAsset(),
+                        image: requesterProfileImageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        requestedBy,
+                        textScaleFactor: 1.2,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
                         ),
-                        SizedBox(
-                          width: 3.w,
+                      ),
+                      Text(
+                        DateFormat('d MMM yyyy').format(
+                          topicApprovedDate.toDate(),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              requestedBy,
-                              textScaleFactor: 1.2,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              DateFormat('d MMM yyyy').format(
-                                topicApprovedDate.toDate(),
-                              ),
-                              textScaleFactor: 0.7,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Get.isDarkMode
-                                    ? kTextColorDarkTheme
-                                    : kTextColorLightTheme,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          splashRadius: 5.w,
-                          icon: const Icon(
-                            MdiIcons.commentText,
-                          ),
-                        ),
-                        const Text(
-                          '123',
-                        ),
-                        VerticalDivider(
+                        textScaleFactor: 0.7,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
                           color: Get.isDarkMode
                               ? kTextColorDarkTheme
                               : kTextColorLightTheme,
                         ),
-                        LikeButton(
-                          size: 20.sp,
-                          circleColor: const CircleColor(
-                              start: Colors.yellow, end: Colors.cyan),
-                          bubblesColor: BubblesColor(
-                            dotPrimaryColor: Get.theme.primaryColor,
-                            dotSecondaryColor: Colors.red,
-                          ),
-                          likeBuilder: (isLiked) => Icon(
-                            MdiIcons.heart,
-                            color: isLiked ? Colors.red : Colors.grey,
-                            size: 20.sp,
-                          ),
-                          likeCountPadding: EdgeInsets.only(left: 2.5.w),
-                          likeCount: likeCount,
-                          countBuilder: (count, isLiked, text) {
-                            final color = isLiked ? Colors.red : Colors.grey;
-                            return Text(
-                              text,
-                              style: TextStyle(
-                                color: color,
-                              ),
-                            );
-                          },
-                          isLiked: topicVotes.contains(currentUserId),
-                          onTap: (isLiked) async {
-                            isLiked
-                                ? await forum.removeVote(
-                                    topicDocId: topicDocId,
-                                    currentUid: [currentUserId],
-                                  )
-                                : await forum.addVote(
-                                    topicDocId: topicDocId,
-                                    currentUid: [currentUserId],
-                                  );
-                            return !isLiked;
-                          },
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  LikeButton(
+                    size: 20.sp,
+                    circleColor: const CircleColor(
+                        start: Colors.yellow, end: Colors.cyan),
+                    bubblesColor: BubblesColor(
+                      dotPrimaryColor: Get.theme.primaryColor,
+                      dotSecondaryColor: Colors.red,
+                    ),
+                    likeBuilder: (isLiked) => Icon(
+                      MdiIcons.heart,
+                      color: isLiked ? Colors.red : Colors.grey,
+                      size: 20.sp,
+                    ),
+                    likeCountPadding: EdgeInsets.only(left: 2.5.w),
+                    likeCount: likeCount,
+                    countBuilder: (count, isLiked, text) {
+                      final color = isLiked ? Colors.red : Colors.grey;
+                      return Text(
+                        text,
+                        style: TextStyle(
+                          color: color,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Text(
-                      topicTitle,
-                      textScaleFactor: 1.3,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    LinkWell(
-                      topicDescription,
-                      style: TextStyle(
-                        color: Get.isDarkMode
-                            ? kTextColorDarkTheme
-                            : kTextColorLightTheme,
-                      ),
-                      linkStyle: TextStyle(
-                        color: Get.theme.primaryColor,
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                    isLiked: topicVotes.contains(currentUserId),
+                    onTap: (isLiked) async {
+                      isLiked
+                          ? await forum.removeVote(
+                              topicDocId: topicDocId,
+                              currentUid: [currentUserId],
+                            )
+                          : await forum.addVote(
+                              topicDocId: topicDocId,
+                              currentUid: [currentUserId],
+                            );
+                      return !isLiked;
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Text(
+                topicTitle,
+                textScaleFactor: 1.3,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-          ),
-          buildNewComment(),
-        ],
-      ),
-    );
-  }
-
-  Form buildNewComment() {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              if (value.isEmpty) {
-                return 'Please Enter Comment 📝';
-              }
-            }
-            return null;
-          },
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          textCapitalization: TextCapitalization.sentences,
-          style: TextStyle(
-            color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-            fontSize: 10.sp,
-          ),
-          autofocus: false,
-          controller: commentCtrlr,
-          //*Making the text multiline
-          maxLines: 12,
-          minLines: 1,
-          keyboardType: TextInputType.multiline,
-          //*Decoration
-          textAlign: TextAlign.left,
-          decoration: InputDecoration(
-            //*Making the text padding to zero
-            contentPadding: const EdgeInsets.only(left: 10),
-            //*Hint Text
-            hintText: 'Write your comment here ✏',
-            suffixIcon: IconButton(
-              splashColor: Colors.white,
-              color:
-                  Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              onPressed: () async {},
-              icon: const Icon(Icons.send_rounded),
-            ),
-            hintStyle: TextStyle(
-              color:
-                  Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              fontWeight: FontWeight.w700,
-              fontSize: 10.sp,
-            ),
-            //*Filled Color
-            filled: true,
-            fillColor: Get.isDarkMode
-                ? kTextFormFieldColorDarkTheme
-                : kTextFormFieldColorLightTheme,
-            //*Enabled Border
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
+              SizedBox(
+                height: 1.h,
+              ),
+              LinkWell(
+                topicDescription,
+                style: TextStyle(
+                  color: Get.isDarkMode
+                      ? kTextColorDarkTheme
+                      : kTextColorLightTheme,
+                ),
+                linkStyle: TextStyle(
+                  color: Get.theme.primaryColor,
+                ),
+              ),
+              const Divider(),
+              // ignore: prefer_const_constructors
+              TextButton.icon(
+                onPressed: () {
+                  Get.to(() => ForumCommentList(
+                        topicDocId: topicDocId,
+                      ));
+                },
+                style: TextButton.styleFrom(
+                  primary: Get.theme.primaryColor,
+                  fixedSize: Size.fromWidth(100.w),
+                ),
+                icon: const Icon(MdiIcons.commentOutline),
+                label: const Text('Write Comment'),
+              )
+            ],
           ),
         ),
       ),

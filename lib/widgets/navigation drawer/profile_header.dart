@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../constant/constant.dart';
+
 Widget drawerProfileHeader({
   required String profileImageUrl,
   required String profileName,
@@ -11,43 +13,41 @@ Widget drawerProfileHeader({
     onTap: onCliked,
     child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
-      child: SizedBox(
-        width: 100.w,
-        height: 10.h,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  profileName,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                profileName,
+                textScaleFactor: 1.1,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  profileAccountCollegeType,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 8.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+              ),
+              Text(
+                profileAccountCollegeType,
+                textScaleFactor: 0.7,
+                style: const TextStyle(),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: 1.w,
+          ),
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: ClipOval(
+              child: FadeInImage.assetNetwork(
+                placeholder: randomAvatarImageAsset(),
+                image: profileImageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
-            SizedBox(
-              width: 1.w,
-            ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(profileImageUrl),
-              radius: 4.h,
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );

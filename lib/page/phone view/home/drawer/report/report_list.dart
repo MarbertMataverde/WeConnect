@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../../../constant/constant.dart';
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_report.dart';
 import '../../../../../widgets/appbar title/appbar_title.dart';
@@ -122,8 +123,14 @@ class ReportList extends StatelessWidget {
                         ));
                   },
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        data.docs[index]['reporter-profile-image-url']),
+                    backgroundColor: Colors.transparent,
+                    child: ClipOval(
+                      child: FadeInImage.assetNetwork(
+                        placeholder: randomAvatarImageAsset(),
+                        image: data.docs[index]['reporter-profile-image-url'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   title: Text(data.docs[index]['reporter-name']),
                   subtitle: Text(

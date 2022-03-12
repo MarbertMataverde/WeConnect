@@ -87,12 +87,11 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                 return ListView.builder(
                   itemCount: data.size,
                   itemBuilder: (context, index) {
-                    return CommentTile(
-                      profileName: data.docs[index]['profile-name'],
-                      profileUrl: data.docs[index]['profile-url'],
-                      comment: data.docs[index]['comment'],
-                      createdAt: data.docs[index]['created-at'],
-                    );
+                    return buildCommentTile(
+                        profileImageUrl: data.docs[index]['profile-url'],
+                        profileName: data.docs[index]['profile-name'],
+                        commentedDate: data.docs[index]['created-at'],
+                        comment: data.docs[index]['comment']);
                   },
                 );
               },

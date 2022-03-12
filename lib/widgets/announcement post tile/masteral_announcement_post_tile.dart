@@ -10,12 +10,13 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../constant/constant.dart';
 import '../../constant/constant_colors.dart';
 import '../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../dialog/dialog_post_tile_.dart';
 import '../../page/phone view/home/edit post caption/edit_caption.dart';
 import '../../page/phone view/home/post details/post_details.dart';
-import '../post comment (Write and Show)/comment_write_show.dart';
+import '../comment/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
 
@@ -90,8 +91,14 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                   children: [
                     //profile image
                     CircleAvatar(
-                      radius: 14.sp,
-                      backgroundImage: NetworkImage(accountProfileImageUrl),
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: FadeInImage.assetNetwork(
+                          placeholder: randomAvatarImageAsset(),
+                          image: accountProfileImageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: 3.w,
@@ -248,7 +255,11 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                         postMedia: postMedia,
                         postCaption: postCaption,
                       )),
-                  child: Image.network(postMedia.first),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: kPostImagePlaceholder,
+                    image: postMedia.first,
+                    fit: BoxFit.cover,
+                  ),
                 )
               : GestureDetector(
                   onTap: () => Get.to(() => PostDetails(
@@ -260,8 +271,9 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                         .map(
                           (item) => Padding(
                             padding: EdgeInsets.symmetric(horizontal: 1.w),
-                            child: Image.network(
-                              item,
+                            child: FadeInImage.assetNetwork(
+                              placeholder: kPostImagePlaceholder,
+                              image: item,
                               fit: BoxFit.cover,
                               width: Get.mediaQuery.size.width,
                             ),
