@@ -33,14 +33,19 @@ class XlsxAccessCodeGenerator extends GetxController {
     for (var i = 0; i < int.parse(_accessCodeController); i++) {
       // this will track the current generated access code
       generatedAccessCodeTracker = getRandomString(9);
+      //this will put each generated access code to our firestore database
+      //as document so that we can easily check the access code if existing or not
       firestore
           .collection(_collectionName)
           .doc(generatedAccessCodeTracker)
           .set({});
+      //adding each generated access code to excel sheet row by row
       sheet.getRangeByName('A${i + 1}').setText(generatedAccessCodeTracker);
     }
     final List<int> bytes = workbook.saveAsStream();
     workbook.dispose();
+    //this is responsible for the excel file to automaticaly downloaded to downloads
+    // directory in user machine
     AnchorElement(
         href:
             'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')

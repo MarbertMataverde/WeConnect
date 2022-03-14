@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/dialog/dialog_access_code_generator.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
 import '../../../constant/constant_colors.dart';
-import '../../../utils/utils_xlsx_access_code_generator.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 import 'home_professor_axcode.dart';
@@ -16,9 +16,9 @@ const String _collectionName = 'student-access-code';
 const String _studentAccessCodeFileName = 'GeneratedStudentsAccessCode';
 final TextEditingController _studentAxCodeCtrlr = TextEditingController();
 
+//dependencies
+final dialog = Get.put(DialogAccessCodeGenerator());
 final authentication = Get.put(Authentication());
-final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
-
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
 
@@ -70,6 +70,7 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
                 child: CustomTextFormField(
                   ctrlr: _studentAxCodeCtrlr,
                   hint: 'Number of access code..',
+                  maxCharLength: 4,
                   isPassword: kFalse,
                   inputFormater: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -96,12 +97,18 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
                         });
                         final _isValid =
                             _validationKey.currentState!.validate();
+
                         if (_isValid == true) {
-                          await xlsxAccessCodeGenerator
-                              .createAccessCodeExcelFile(
-                            _collectionName,
-                            _studentAxCodeCtrlr.text,
-                            _studentAccessCodeFileName,
+                          await dialog.accessCodeConfirmationDialog(
+                            context,
+                            assetLocation: 'assets/gifs/question_mark.gif',
+                            title: 'Access Code Generation',
+                            description:
+                                'Are you sure you want to generate \n${_studentAxCodeCtrlr.text} access code for students?',
+                            collectionName: _collectionName,
+                            studentAxCodeCtrlr: _studentAxCodeCtrlr.text,
+                            studentAccessCodeFileName:
+                                _studentAccessCodeFileName,
                           );
                         }
                         setState(() {

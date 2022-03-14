@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.suffixWidget,
     this.inputAction,
+    this.maxCharLength,
   }) : super(key: key);
   //?controller
   final TextEditingController ctrlr;
@@ -43,6 +44,8 @@ class CustomTextFormField extends StatelessWidget {
   //?suffix widget
   final Widget? suffixWidget;
   final TextInputAction? inputAction;
+  // max char length of the text field
+  final int? maxCharLength;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
       textInputAction: inputAction,
       minLines: minimumLine,
       maxLines: maxLine,
+      maxLength: maxCharLength,
       validator: validator,
       inputFormatters: inputFormater,
       keyboardType: keyboardType,

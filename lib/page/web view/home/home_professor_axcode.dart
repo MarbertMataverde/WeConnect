@@ -7,7 +7,7 @@ import '../../../constant/constant.dart';
 import '../../../constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
-import '../../../utils/utils_xlsx_access_code_generator.dart';
+import '../../../dialog/dialog_access_code_generator.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 
@@ -15,8 +15,9 @@ const String _collectionName = 'professor-access-code';
 const String _professorAccessCodeFileName = 'GeneratedProfessorsAccessCode';
 final TextEditingController _professorAxCodeCtrlr = TextEditingController();
 
+//dependencies
+final dialog = Get.put(DialogAccessCodeGenerator());
 final authentication = Get.put(Authentication());
-final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
@@ -70,6 +71,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                 child: CustomTextFormField(
                   ctrlr: _professorAxCodeCtrlr,
                   hint: 'Number of access code..',
+                  maxCharLength: 4,
                   isPassword: kFalse,
                   inputFormater: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -97,11 +99,16 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                         final _isValid =
                             _validationKey.currentState!.validate();
                         if (_isValid == true) {
-                          await xlsxAccessCodeGenerator
-                              .createAccessCodeExcelFile(
-                            _collectionName,
-                            _professorAxCodeCtrlr.text,
-                            _professorAccessCodeFileName,
+                          await dialog.accessCodeConfirmationDialog(
+                            context,
+                            assetLocation: 'assets/gifs/question_mark.gif',
+                            title: 'Access Code Generation',
+                            description:
+                                'Are you sure you want to generate \n${_professorAxCodeCtrlr.text} access code for students?',
+                            collectionName: _collectionName,
+                            studentAxCodeCtrlr: _professorAxCodeCtrlr.text,
+                            studentAccessCodeFileName:
+                                _professorAccessCodeFileName,
                           );
                         }
                         setState(() {
