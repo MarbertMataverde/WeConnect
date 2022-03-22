@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../controller/controller_account_information.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/announcement post tile/cob_announcement_post_tile.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -38,16 +39,7 @@ class _CobFeedState extends State<CobFeed> {
                     currentAccountType == 'accountTypeRegistrarAdmin' ||
                     currentAccountType == 'accountTypeProfessor') ||
                 currentStudentCollege != 'College of Business',
-            child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  MdiIcons.arrowLeft,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
-                )),
+            child: buildAppbarBackButton(),
           ),
           centerTitle: true,
           title: const AppBarTitle(

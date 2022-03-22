@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sizer/sizer.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'ccs_feed.dart';
 import 'coa_feed.dart';

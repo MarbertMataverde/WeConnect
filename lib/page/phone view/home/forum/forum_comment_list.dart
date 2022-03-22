@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../controller/controller_forum.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/comment/comment_tile.dart';
-import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_account_information.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/comment/comment_form.dart';
 
 class ForumCommentList extends StatefulWidget {
@@ -43,16 +42,7 @@ class ForumCommentListState extends State<ForumCommentList> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Comments',

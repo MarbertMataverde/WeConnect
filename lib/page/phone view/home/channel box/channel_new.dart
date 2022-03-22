@@ -11,10 +11,10 @@ import 'package:sizer/sizer.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
 
 //random character generator
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';

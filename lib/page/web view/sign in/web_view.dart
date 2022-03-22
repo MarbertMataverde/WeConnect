@@ -61,6 +61,7 @@ class _WebViewState extends State<WebView> {
                 child: Column(
                   children: [
                     CustomTextFormField(
+                      maxLine: 1,
                       ctrlr: _emailCtrlr,
                       hint: 'Email',
                       isPassword: kFalse,

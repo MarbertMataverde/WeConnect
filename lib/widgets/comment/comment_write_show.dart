@@ -5,15 +5,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:linkwell/linkwell.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import '../appbar/appbar_back.dart';
+import '../appbar/appbar_title.dart';
 import 'comment_form.dart';
 import '../../constant/constant.dart';
 import '../../controller/controller_account_information.dart';
 
 import '../../constant/constant_colors.dart';
 import '../../controller/controller_write_post_comment.dart';
-import '../appbar title/appbar_title.dart';
 import 'comment_tile.dart';
 
 class ShowAllComment extends StatefulWidget {
@@ -62,16 +62,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Comments',

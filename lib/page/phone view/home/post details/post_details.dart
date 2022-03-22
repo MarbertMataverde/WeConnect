@@ -2,11 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linkwell/linkwell.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import 'image_details.dart';
 
 class PostDetails extends StatelessWidget {
@@ -23,16 +23,7 @@ class PostDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Post Details',

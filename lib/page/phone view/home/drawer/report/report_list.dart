@@ -4,11 +4,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import '../../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../../constant/constant.dart';
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_report.dart';
-import '../../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 import 'detailed_report.dart';
 
 final Stream<QuerySnapshot> reportStream = FirebaseFirestore.instance
@@ -28,16 +29,7 @@ class ReportList extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Report List',

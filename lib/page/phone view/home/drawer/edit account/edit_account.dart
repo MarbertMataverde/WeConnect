@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../../widgets/appbar/appbar_back.dart';
 import '../../../../../controller/controller_account_information.dart';
 
 import '../../../../../constant/constant_colors.dart';
-import '../../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 
 class EditAccount extends StatefulWidget {
   const EditAccount({Key? key}) : super(key: key);
@@ -44,16 +45,7 @@ class _EditAccountState extends State<EditAccount> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Edit Account',

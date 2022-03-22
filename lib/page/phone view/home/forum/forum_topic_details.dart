@@ -6,13 +6,14 @@ import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
 
 import '../../../../../constant/constant_colors.dart';
-import '../../../../../widgets/appbar title/appbar_title.dart';
 
 final ControllerForum forum = Get.put(ControllerForum());
 
@@ -48,16 +49,7 @@ class ForumTopicDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Topic Details',

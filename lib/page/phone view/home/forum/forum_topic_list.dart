@@ -7,12 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_topic_details.dart';
 import '../../../phone%20view/home/forum/open_new_topic.dart';
 
 import '../../../../constant/constant_colors.dart';
 
-import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 
 class Forum extends StatefulWidget {

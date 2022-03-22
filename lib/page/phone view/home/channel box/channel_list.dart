@@ -5,6 +5,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/channel%20box/channel_inside.dart';
 import '../../../phone%20view/home/channel%20box/channel_join.dart';
 import '../../../../controller/controller_account_information.dart';
@@ -13,7 +14,6 @@ import '../../../../dialog/dialog_channel.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_channel.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'channel_new.dart';
 

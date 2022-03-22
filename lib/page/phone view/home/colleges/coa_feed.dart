@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/coa_announcement_post_tile.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 

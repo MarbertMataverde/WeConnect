@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../dialog/dialog_channel.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/channel%20box/channel_announcement_tiles.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
@@ -14,7 +16,6 @@ import '../../../phone%20view/home/channel%20box/channel_settings.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
-import '../../../../widgets/appbar title/appbar_title.dart';
 
 class ChannelInside extends StatefulWidget {
   const ChannelInside(
@@ -75,16 +76,7 @@ class _ChannelInsideState extends State<ChannelInside> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: AppBarTitle(
           title: widget.channelName,

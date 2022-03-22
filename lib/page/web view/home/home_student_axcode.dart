@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/dialog/dialog_access_code_generator.dart';
+import '../../../dialog/dialog_access_code_generator.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';

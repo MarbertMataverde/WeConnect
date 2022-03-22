@@ -5,11 +5,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import '../../../../../widgets/appbar/appbar_back.dart';
 import '../../../../../dialog/dialog_forum.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 import '../../../../phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
 
 import '../../../../../constant/constant_colors.dart';
-import '../../../../../widgets/appbar title/appbar_title.dart';
 
 class ForumTopicRequestList extends StatefulWidget {
   const ForumTopicRequestList({Key? key}) : super(key: key);
@@ -33,16 +34,7 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Topic Request',

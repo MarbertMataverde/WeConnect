@@ -2,12 +2,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
+import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar%20title/appbar_title.dart';
 
 import '../../../../controller/controller_create_post.dart';
 
@@ -47,16 +47,7 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
+        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Create Post',

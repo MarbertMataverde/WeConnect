@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import '../../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../dialog/dialog_forum.dart';
-import '../../../../../widgets/appbar title/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 
 final DialogForum forum = Get.put(DialogForum());
 
@@ -38,16 +39,7 @@ class RequestDetails extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                MdiIcons.arrowLeft,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              )),
+          leading: buildAppbarBackButton(),
           centerTitle: true,
           title: const AppBarTitle(
             title: 'Request Details',
