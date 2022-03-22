@@ -98,7 +98,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
               title: 'About',
               icon: MdiIcons.accountQuestionOutline,
               onCliked: () {
-                selectedItem(context, 3);
+                selectedItem(context, 5);
               },
             ),
             drawerItems(
