@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/about/about.dart';
+import 'package:weconnect/page/phone%20view/home/drawer/gallery/gallery.dart';
 import '../../page/phone%20view/home/drawer/forum%20topic%20request/forum_topic_request_list.dart';
 
 import '../../authentication/authentication_controller.dart';
@@ -29,6 +30,10 @@ void selectedItem(
     case 5:
       //about
       Get.to(() => const About());
+      break;
+    case 6:
+      //gallery
+      Get.to(() => const Gallery());
       break;
     case 10:
       authentication.signOut();

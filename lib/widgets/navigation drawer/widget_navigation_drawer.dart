@@ -105,7 +105,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
               title: 'Gallery',
               icon: MdiIcons.imageFrame,
               onCliked: () {
-                selectedItem(context, 4);
+                selectedItem(context, 6);
               },
             ),
             drawerItems(
