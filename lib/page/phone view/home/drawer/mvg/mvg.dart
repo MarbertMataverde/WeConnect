@@ -1,6 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/widgets/appbar/appbar_back.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
@@ -58,14 +60,17 @@ Widget _buildTitle({
   required String title,
 }) {
   return DefaultTextStyle(
-    style: TextStyle(color: Colors.black, fontSize: 20.sp),
+    style: TextStyle(
+      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+      fontSize: 20.sp,
+    ),
     child: AnimatedTextKit(
       isRepeatingAnimation: false,
       animatedTexts: [
         TyperAnimatedText(title, speed: const Duration(milliseconds: 150)),
       ],
       onTap: () {
-        print("Tap Event");
+        debugPrint("Tap Event");
       },
     ),
   );
@@ -76,8 +81,8 @@ Widget _buildAnimatedText({
   required Duration duration,
 }) {
   return DefaultTextStyle(
-    style: const TextStyle(
-      color: Colors.black,
+    style: TextStyle(
+      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
     ),
     child: AnimatedTextKit(
       isRepeatingAnimation: false,
@@ -85,7 +90,7 @@ Widget _buildAnimatedText({
         TypewriterAnimatedText(content, speed: duration),
       ],
       onTap: () {
-        print("Tap Event");
+        debugPrint("Tap Event");
       },
     ),
   );
