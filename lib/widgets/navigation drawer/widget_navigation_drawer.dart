@@ -112,7 +112,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
               title: 'Vision Mission Goals',
               icon: MdiIcons.target,
               onCliked: () {
-                selectedItem(context, 5);
+                selectedItem(context, 7);
               },
             ),
             drawerItems(
