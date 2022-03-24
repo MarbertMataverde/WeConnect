@@ -4,7 +4,6 @@ import 'package:weconnect/page/phone%20view/home/drawer/MVG/mvg.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/about/about.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/gallery/gallery.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/student%20downloadable%20forms/downloadable_forms.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/terms%20and%20condition/terms_and_condition.dart';
 import '../../page/phone%20view/home/drawer/forum%20topic%20request/forum_topic_request_list.dart';
 
 import '../../authentication/authentication_controller.dart';
@@ -45,9 +44,6 @@ void selectedItem(
     case 8:
       //Downlodable forms
       Get.to(() => const DownloadForms());
-      break;
-    case 9:
-      Get.to(() => const TermsAndCondition());
       break;
     case 10:
       authentication.signOut();
