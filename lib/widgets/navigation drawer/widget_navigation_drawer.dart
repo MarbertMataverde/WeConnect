@@ -129,14 +129,7 @@ class WidgetNavigationDrawer extends StatelessWidget {
               title: 'Terms and Condition',
               icon: MdiIcons.fileOutline,
               onCliked: () {
-                selectedItem(context, 7);
-              },
-            ),
-            drawerItems(
-              title: 'Privacy Policy',
-              icon: MdiIcons.shieldAccountVariantOutline,
-              onCliked: () {
-                selectedItem(context, 8);
+                selectedItem(context, 9);
               },
             ),
             drawerItems(
