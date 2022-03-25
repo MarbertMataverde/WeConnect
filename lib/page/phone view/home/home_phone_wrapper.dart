@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../controller/controller_account_information.dart';
 import '../../phone%20view/home/channel%20box/channel_list.dart';
@@ -71,31 +72,35 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
     ];
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
-        items: [
-          SalomonBottomBarItem(
-            icon: const Icon(MdiIcons.newspaperVariantOutline),
-            title: const Text("Campus Feed"),
-            selectedColor: Colors.blue,
+      bottomNavigationBar: GNav(
+        activeColor: Theme.of(context).primaryColor,
+        padding: EdgeInsets.all(5.w),
+        color: Theme.of(context).iconTheme.color,
+        gap: 2.w,
+        curve: Curves.easeInOutCubicEmphasized,
+        duration: const Duration(milliseconds: 200),
+        tabs: const [
+          GButton(
+            icon: Iconsax.home,
+            text: 'Campus',
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(MdiIcons.newspaperVariantMultipleOutline),
-            title: const Text("College Feed"),
-            selectedColor: Colors.orange,
+          GButton(
+            icon: Iconsax.teacher,
+            text: 'College',
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(MdiIcons.messageBulleted),
-            title: const Text("Channel Box"),
-            selectedColor: Colors.teal,
+          GButton(
+            icon: Iconsax.direct,
+            text: 'Channels',
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(MdiIcons.forumOutline),
-            title: const Text("Forum"),
-            selectedColor: Colors.cyan,
+          GButton(
+            icon: Iconsax.messages_3,
+            text: 'Forum',
           ),
         ],
+        selectedIndex: _currentIndex,
+        onTabChange: (index) {
+          setState(() => _currentIndex = index);
+        },
       ),
     );
   }

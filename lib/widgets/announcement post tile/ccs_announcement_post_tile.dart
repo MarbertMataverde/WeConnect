@@ -133,6 +133,7 @@ class CcsAnnouncementPostTile extends StatelessWidget {
                 collapseText: 'collapse 📕',
                 animation: true,
                 animationCurve: Curves.fastLinearToSlowEaseIn,
+                linkColor: Theme.of(context).primaryColor,
               ),
             ),
             postMedia.length == 1
@@ -193,7 +194,6 @@ class CcsAnnouncementPostTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         LikeButton(
-          size: 20.sp,
           circleColor:
               const CircleColor(start: Colors.yellow, end: Colors.cyan),
           bubblesColor: BubblesColor(
@@ -251,11 +251,9 @@ class CcsAnnouncementPostTile extends StatelessWidget {
               );
             },
             icon: const Icon(Iconsax.message_add),
-            label: Text(
+            label: const Text(
               'Say something...',
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 10.sp,
                 fontWeight: FontWeight.w400,
               ),
             ),
