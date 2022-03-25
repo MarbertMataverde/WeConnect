@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/campus_announcement_post_tile.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -29,21 +27,9 @@ class _CampusFeedState extends State<CampusFeed> {
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                MdiIcons.bellOutline,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              )),
-          centerTitle: true,
-          title: const AppBarTitle(
-            title: 'Campus Feed',
-          ),
+        appBar: buildAppBar(
+          context: context,
+          title: 'Campus Feed',
           actions: [
             Visibility(
               visible: currentAccountType == 'accountTypeCampusAdmin' ||
@@ -58,10 +44,8 @@ class _CampusFeedState extends State<CampusFeed> {
                   );
                 },
                 icon: Icon(
-                  MdiIcons.cardPlusOutline,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.add_square,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
             ),
@@ -72,10 +56,8 @@ class _CampusFeedState extends State<CampusFeed> {
                     Scaffold.of(context).openEndDrawer();
                   },
                   icon: Icon(
-                    MdiIcons.menu,
-                    color: Get.isDarkMode
-                        ? kButtonColorDarkTheme
-                        : kButtonColorLightTheme,
+                    Iconsax.menu,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                 );
               }),
@@ -112,10 +94,31 @@ class _CampusFeedState extends State<CampusFeed> {
                   media: _imageList,
                   //account type
                   accountType: currentAccountType.toString(),
+                  //announcement list of votes
+                  announcementVotes: data.docs[index]['votes'],
                 );
               },
             );
           },
         ),
       );
+}
+
+buildAppBar({
+  required context,
+  required String title,
+  List<Widget>? actions,
+}) {
+  return AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0.0,
+    title: Text(
+      title,
+      textScaleFactor: 1.3,
+      style: TextStyle(
+        color: Theme.of(context).primaryColor,
+      ),
+    ),
+    actions: actions,
+  );
 }

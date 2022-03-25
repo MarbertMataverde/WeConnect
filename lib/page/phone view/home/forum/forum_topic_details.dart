@@ -6,6 +6,7 @@ import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../controller/controller_vote.dart';
 import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';
@@ -130,11 +131,17 @@ class ForumTopicDetails extends StatelessWidget {
                     isLiked: topicVotes.contains(currentUserId),
                     onTap: (isLiked) async {
                       isLiked
-                          ? await forum.removeVote(
+                          ? await removeVote(
+                              collection: 'forum',
+                              docName: 'approved-request',
+                              subCollection: 'all-approved-request',
                               topicDocId: topicDocId,
                               currentUid: [currentUserId],
                             )
-                          : await forum.addVote(
+                          : await addVote(
+                              collection: 'forum',
+                              docName: 'approved-request',
+                              subCollection: 'all-approved-request',
                               topicDocId: topicDocId,
                               currentUid: [currentUserId],
                             );

@@ -64,6 +64,7 @@ dependencies:
   url_launcher: ^6.0.20
   intl: ^0.17.0
   like_button: ^2.0.4
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

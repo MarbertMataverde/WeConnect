@@ -41,7 +41,8 @@ class ControllerCreatePost extends GetxController {
           'account-name': _accountName,
           'account-profile-image-url': _accountProfileImageUrl,
           'post-created-at': DateTime.now(),
-          'storage-fileName': _dateTimeNow
+          'storage-fileName': _dateTimeNow,
+          'votes': [],
         })
         .whenComplete(() => {
               Get.back(),
@@ -72,7 +73,8 @@ class ControllerCreatePost extends GetxController {
           'account-name': _accountName,
           'account-profile-image-url': _accountProfileImageUrl,
           'post-created-at': DateTime.now(),
-          'storage-fileName': _dateTimeNow
+          'storage-fileName': _dateTimeNow,
+          'votes': [],
         })
         .whenComplete(() => {
               Get.back(),

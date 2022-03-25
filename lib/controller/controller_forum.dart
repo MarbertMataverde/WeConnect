@@ -105,34 +105,4 @@ class ControllerForum extends GetxController {
       'commented-date': Timestamp.now(),
     });
   }
-
-  //add vote
-  Future<void> addVote({
-    required String topicDocId,
-    required List currentUid,
-  }) async {
-    firestore
-        .collection('forum')
-        .doc('approved-request')
-        .collection('all-approved-request')
-        .doc(topicDocId)
-        .update({
-      'votes': FieldValue.arrayUnion(currentUid),
-    });
-  }
-
-  //remove vote
-  Future<void> removeVote({
-    required String topicDocId,
-    required List currentUid,
-  }) async {
-    firestore
-        .collection('forum')
-        .doc('approved-request')
-        .collection('all-approved-request')
-        .doc(topicDocId)
-        .update({
-      'votes': FieldValue.arrayRemove(currentUid),
-    });
-  }
 }
