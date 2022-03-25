@@ -35,10 +35,8 @@ class _CcsFeedState extends State<CcsFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: Visibility(
-            visible: (currentAccountType == 'accountTypeCampusAdmin' ||
-                    currentAccountType == 'accountTypeRegistrarAdmin' ||
-                    currentAccountType == 'accountTypeProfessor') ||
-                currentStudentCollege != 'College of Computer Studies',
+            visible: !(currentAccountType == 'accountTypeCcsAdmin' ||
+                currentStudentCollege == 'College of Computer Studies'),
             child: buildAppbarBackButton(),
           ),
           centerTitle: true,
@@ -112,6 +110,8 @@ class _CcsFeedState extends State<CcsFeed> {
                   media: _imageList,
                   //account type
                   accountType: currentAccountType.toString(),
+                  //announcement list of votes
+                  announcementVotes: data.docs[index]['votes'],
                 );
               },
             );

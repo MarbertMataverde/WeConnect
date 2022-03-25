@@ -4,26 +4,22 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:like_button/like_button.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/controller/controller_account_information.dart';
 
 import '../../constant/constant.dart';
-import '../../constant/constant_colors.dart';
 import '../../controller/controller_post_tile_pop_up_menu.dart';
+import '../../controller/controller_vote.dart';
 import '../../dialog/dialog_post_tile_.dart';
 import '../../page/phone view/home/edit post caption/edit_caption.dart';
 import '../../page/phone view/home/post details/post_details.dart';
 import '../comment/comment_write_show.dart';
 
 DateFormat dateFormat = DateFormat("MMM-dd");
-
-//account type
-final box = GetStorage();
-
-//pop up based on account type
 
 //dialogs
 final dialogs = Get.put(DialogPostTile());
@@ -41,6 +37,7 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
     required this.postDocId,
     required this.media,
     required this.accountType,
+    required this.announcementVotes,
   }) : super(key: key);
   //when announcement post created
   final Timestamp postCreatedAt;
@@ -63,278 +60,304 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
   final List media;
 
   final String accountType;
-
-  //editign caption
-  //announcement type doc name
-  // same as announcementTypeDoc
-  //
-  //announcement doc id
-  //same as postDocId
-  //
-  //recent description
-  //same as postDescriotion
+  //list of voters uid
+  final List announcementVotes;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    //profile image
-                    CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: ClipOval(
+    return Padding(
+      padding: EdgeInsets.only(bottom: 2.h, left: 2.w, right: 2.w),
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      //profile image
+                      Container(
+                        height: 10.w,
+                        width: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2.w),
+                          color: Colors.transparent,
+                        ),
                         child: FadeInImage.assetNetwork(
                           placeholder: randomAvatarImageAsset(),
                           image: accountProfileImageUrl,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //account name
-                        Text(
-                          accountName,
-                          style: TextStyle(
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        //when post created with time ago format
-                        Text(
-                          timeago.format(postCreatedAt.toDate()),
-                          style: TextStyle(
-                            fontSize: 9.sp,
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                FocusedMenuHolder(
-                  menuWidth: MediaQuery.of(context).size.width * 0.50,
-                  blurSize: 1.0,
-                  menuItemExtent: 5.h,
-                  menuBoxDecoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.all(Radius.circular(1.w))),
-                  duration: const Duration(milliseconds: 100),
-                  animateMenuItems: false,
-                  blurBackgroundColor: Colors.black,
-                  openWithTap: true,
-                  menuOffset: 1.h,
-                  onPressed: () {},
-                  menuItems: accountType == 'accountTypeMasteralAdmin'
-                      ?
-                      //menu item for campus and registrar admin
-                      [
-                          focusMenuItem(
-                            'Details',
-                            MdiIcons.details,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => PostDetails(
-                                  postMedia: postMedia,
-                                  postCaption: postCaption,
-                                ),
-                              );
-                            },
-                          ),
-                          focusMenuItem(
-                            'Edit Caption',
-                            MdiIcons.pencil,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => EditCaption(
-                                  docName: announcementTypeDoc,
-                                  postDocId: postDocId,
-                                  recentCaption: postCaption,
-                                ),
-                              );
-                            },
-                          ),
-                          focusMenuItem(
-                            'Delete',
-                            Icons.delete_outlined,
-                            Colors.red,
-                            () {
-                              //dialog for deletion of post
-                              dialogs.deletePostDialog(
-                                context,
-                                'assets/gifs/question_mark.gif',
-                                'Delete Post 🗑',
-                                'Are you sure? your about to delete this post? 🤔',
-                                announcementTypeDoc,
-                                postDocId,
-                                postMedia,
-                              );
-                            },
-                          ),
-                        ]
-                      :
-                      //menu item for professors and students
-                      [
-                          focusMenuItem(
-                            'Details',
-                            MdiIcons.details,
-                            Colors.black54,
-                            () {
-                              Get.to(
-                                () => PostDetails(
-                                  postMedia: postMedia,
-                                  postCaption: postCaption,
-                                ),
-                              );
-                            },
-                          ),
-                          focusMenuItem(
-                            'Report',
-                            Icons.report_outlined,
-                            Colors.red,
-                            () {
-                              dialogs.reportPostDialog(
-                                reportType: 'masteral-feed',
-                                reportDocumentId: postDocId,
-                              );
-                            },
-                          ),
-                        ],
-                  child: Icon(
-                    Icons.more_vert_rounded,
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                    size: 13.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ExpandableText(
-              postCaption,
-              animationDuration: const Duration(milliseconds: 1500),
-              style: TextStyle(
-                color:
-                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              ),
-              maxLines: 3,
-              expandText: 'read more 📖',
-              expandOnTextTap: true,
-              collapseOnTextTap: true,
-              collapseText: 'collapse 📕',
-              animation: true,
-              animationCurve: Curves.fastLinearToSlowEaseIn,
-            ),
-          ),
-          postMedia.length == 1
-              ? GestureDetector(
-                  onTap: () => Get.to(() => PostDetails(
-                        postMedia: postMedia,
-                        postCaption: postCaption,
-                      )),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: kPostImagePlaceholder,
-                    image: postMedia.first,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              : GestureDetector(
-                  onTap: () => Get.to(() => PostDetails(
-                        postMedia: postMedia,
-                        postCaption: postCaption,
-                      )),
-                  child: CarouselSlider(
-                    items: postMedia
-                        .map(
-                          (item) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 1.w),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: kPostImagePlaceholder,
-                              image: item,
-                              fit: BoxFit.cover,
-                              width: Get.mediaQuery.size.width,
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //account name
+                          Text(
+                            accountName,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        )
-                        .toList(),
-                    options: CarouselOptions(
-                      height: Get.mediaQuery.size.height * .5,
-                      viewportFraction: 1,
-                      initialPage: 0,
-                      enableInfiniteScroll: false,
-                      autoPlay: false,
-                      autoPlayInterval: const Duration(seconds: 5),
-                      autoPlayAnimationDuration:
-                          const Duration(milliseconds: 900),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                    ),
+                          //when post created with time ago format
+                          Text(
+                            timeago.format(postCreatedAt.toDate()),
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Align(
-                  alignment: Alignment.center,
-                  child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                      primary: Get.isDarkMode
-                          ? kTextColorDarkTheme
-                          : kTextColorLightTheme,
+                  meneHolder(context),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpandableText(
+                postCaption,
+                animationDuration: const Duration(milliseconds: 1500),
+                maxLines: 3,
+                expandText: 'read more 📖',
+                expandOnTextTap: true,
+                collapseOnTextTap: true,
+                collapseText: 'collapse 📕',
+                animation: true,
+                animationCurve: Curves.fastLinearToSlowEaseIn,
+              ),
+            ),
+            postMedia.length == 1
+                ? GestureDetector(
+                    onTap: () => Get.to(() => PostDetails(
+                          postMedia: postMedia,
+                          postCaption: postCaption,
+                        )),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: kPostImagePlaceholder,
+                      image: postMedia.first,
+                      fit: BoxFit.contain,
                     ),
-                    onPressed: () {
-                      Get.to(
-                        () => ShowAllComment(
-                          postDocId: postDocId,
-                          collectionName: 'announcements',
-                          docName: 'campus-feed',
-                          profileName: accountName,
-                          profileImageUrl: accountProfileImageUrl,
-                          postDescription: postCaption,
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.message),
-                    label: Text(
-                      'Write and show comments',
-                      style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w400,
+                  )
+                : GestureDetector(
+                    onTap: () => Get.to(() => PostDetails(
+                          postMedia: postMedia,
+                          postCaption: postCaption,
+                        )),
+                    child: CarouselSlider(
+                      items: postMedia
+                          .map(
+                            (item) => Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 1.w),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: kPostImagePlaceholder,
+                                image: item,
+                                fit: BoxFit.cover,
+                                width: Get.mediaQuery.size.width,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      options: CarouselOptions(
+                        height: Get.mediaQuery.size.height * .5,
+                        viewportFraction: 1,
+                        initialPage: 0,
+                        enableInfiniteScroll: false,
+                        autoPlay: false,
+                        autoPlayInterval: const Duration(seconds: 5),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 900),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.horizontal,
                       ),
                     ),
                   ),
+            saySomething(context: context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  saySomething({required context}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        LikeButton(
+          size: 20.sp,
+          circleColor:
+              const CircleColor(start: Colors.yellow, end: Colors.cyan),
+          bubblesColor: BubblesColor(
+            dotPrimaryColor: Get.theme.primaryColor,
+            dotSecondaryColor: Colors.red,
+          ),
+          likeBuilder: (isLiked) => Icon(
+            announcementVotes.isEmpty ? Iconsax.heart : Iconsax.lovely,
+            color: isLiked ? Colors.red : Colors.grey,
+          ),
+          likeCountPadding: EdgeInsets.only(left: 2.5.w),
+          likeCount: announcementVotes.length,
+          countBuilder: (count, isLiked, text) {
+            final color = isLiked ? Colors.red : Colors.grey;
+            return Text(
+              text,
+              style: TextStyle(
+                color: color,
+              ),
+            );
+          },
+          isLiked: announcementVotes.contains(currentUserId),
+          onTap: (isLiked) async {
+            isLiked
+                ? await removeVote(
+                    collection: 'announcements',
+                    docName: 'masteral-feed',
+                    subCollection: 'post',
+                    topicDocId: postDocId,
+                    currentUid: [currentUserId],
+                  )
+                : await addVote(
+                    collection: 'announcements',
+                    docName: 'masteral-feed',
+                    subCollection: 'post',
+                    topicDocId: postDocId,
+                    currentUid: [currentUserId],
+                  );
+            return !isLiked;
+          },
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: TextButton.icon(
+            onPressed: () {
+              Get.to(
+                () => ShowAllComment(
+                  postDocId: postDocId,
+                  collectionName: 'announcements',
+                  docName: 'masteral-feed',
+                  profileName: accountName,
+                  profileImageUrl: accountProfileImageUrl,
+                  postDescription: postCaption,
                 ),
+              );
+            },
+            icon: const Icon(Iconsax.message_add),
+            label: Text(
+              'Say something...',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  FocusedMenuHolder meneHolder(BuildContext context) {
+    return FocusedMenuHolder(
+      menuWidth: Get.mediaQuery.size.width * 0.50,
+      blurSize: 1.0,
+      menuItemExtent: 5.h,
+      menuBoxDecoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.all(Radius.circular(1.w))),
+      duration: const Duration(milliseconds: 100),
+      animateMenuItems: false,
+      blurBackgroundColor: Colors.black,
+      openWithTap: true,
+      menuOffset: 1.h,
+      onPressed: () {},
+      menuItems: accountType == 'accountTypeMasteralAdmin'
+          ?
+          //menu item for campus and registrar admin
+          [
+              focusMenuItem(
+                'Details',
+                Iconsax.firstline,
+                Colors.black54,
+                () {
+                  Get.to(
+                    () => PostDetails(
+                      postMedia: postMedia,
+                      postCaption: postCaption,
+                    ),
+                  );
+                },
+              ),
+              focusMenuItem(
+                'Edit Caption',
+                Iconsax.edit,
+                Colors.black54,
+                () {
+                  Get.to(
+                    () => EditCaption(
+                      docName: announcementTypeDoc,
+                      postDocId: postDocId,
+                      recentCaption: postCaption,
+                    ),
+                  );
+                },
+              ),
+              focusMenuItem(
+                'Delete',
+                Iconsax.trash,
+                Colors.red,
+                () {
+                  //dialog for deletion of post
+                  dialogs.deletePostDialog(
+                    context,
+                    'assets/gifs/question_mark.gif',
+                    'Delete Post 🗑',
+                    'Are you sure? your about to delete this post? 🤔',
+                    announcementTypeDoc,
+                    postDocId,
+                    postMedia,
+                  );
+                },
+              ),
+            ]
+          :
+          //menu item for professors and students
+          [
+              focusMenuItem(
+                'Details',
+                Iconsax.firstline,
+                Colors.black54,
+                () {
+                  Get.to(
+                    () => PostDetails(
+                      postMedia: postMedia,
+                      postCaption: postCaption,
+                    ),
+                  );
+                },
+              ),
+              focusMenuItem(
+                'Report',
+                Iconsax.danger,
+                Colors.red,
+                () {
+                  dialogs.reportPostDialog(
+                    reportType: 'masteral-feed',
+                    reportDocumentId: postDocId,
+                  );
+                },
               ),
             ],
-          ),
-        ],
+      child: const Icon(
+        Iconsax.more,
       ),
     );
   }

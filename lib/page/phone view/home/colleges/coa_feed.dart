@@ -33,11 +33,8 @@ class _CoaFeedState extends State<CoaFeed> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: Visibility(
-            //arrow left college admin bug
-            visible: (currentAccountType == 'accountTypeCampusAdmin' ||
-                    currentAccountType == 'accountTypeRegistrarAdmin' ||
-                    currentAccountType == 'accountTypeProfessor') ||
-                currentStudentCollege != 'College of Accountancy',
+            visible: !(currentAccountType == 'accountTypeCoaAdmin' ||
+                currentStudentCollege == 'College of Accountancy'),
             child: IconButton(
                 onPressed: () {
                   Get.back();
@@ -120,6 +117,8 @@ class _CoaFeedState extends State<CoaFeed> {
                   media: _imageList,
                   //accountType
                   accountType: currentAccountType.toString(),
+                  //announcement list of votes
+                  announcementVotes: data.docs[index]['votes'],
                 );
               },
             );

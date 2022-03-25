@@ -7,7 +7,6 @@ import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/constant/constant_forms_url.dart';
 import 'package:weconnect/widgets/appbar/appbar_back.dart';
 
-import '../../../../../widgets/announcement post tile/campus_announcement_post_tile.dart';
 import '../../../../../widgets/appbar/appbar_title.dart';
 
 class DownloadForms extends StatelessWidget {
@@ -143,5 +142,18 @@ Future openBrowserURL({
       forceWebView: inApp, // android
       enableJavaScript: true, // android
     );
+  }
+}
+
+Future openBroweserUrl({
+  required String url,
+  bool inApp = false,
+}) async {
+  if (await canLaunch(url)) {
+    await launch(url,
+        forceSafariVC: inApp, // ios
+        forceWebView: inApp, //android
+        enableJavaScript: true //android
+        );
   }
 }

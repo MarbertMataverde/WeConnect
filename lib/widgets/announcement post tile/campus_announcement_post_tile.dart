@@ -7,14 +7,11 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:like_button/like_button.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:url_launcher/url_launcher.dart';
 import 'package:weconnect/controller/controller_account_information.dart';
 
 import '../../constant/constant.dart';
-import '../../constant/constant_colors.dart';
 import '../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../controller/controller_vote.dart';
 import '../../dialog/dialog_post_tile_.dart';
@@ -337,7 +334,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
           [
               focusMenuItem(
                 'Details',
-                MdiIcons.details,
+                Iconsax.firstline,
                 Colors.black54,
                 () {
                   Get.to(
@@ -350,7 +347,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
               ),
               focusMenuItem(
                 'Report',
-                Icons.report_outlined,
+                Iconsax.danger,
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
@@ -364,18 +361,5 @@ class CampusAnnouncementPostTile extends StatelessWidget {
         Iconsax.more,
       ),
     );
-  }
-}
-
-Future openBroweserUrl({
-  required String url,
-  bool inApp = false,
-}) async {
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: inApp, // ios
-        forceWebView: inApp, //android
-        enableJavaScript: true //android
-        );
   }
 }
