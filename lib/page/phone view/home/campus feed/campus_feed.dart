@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/campus_announcement_post_tile.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -102,23 +103,4 @@ class _CampusFeedState extends State<CampusFeed> {
           },
         ),
       );
-}
-
-buildAppBar({
-  required context,
-  required String title,
-  List<Widget>? actions,
-}) {
-  return AppBar(
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
-    title: Text(
-      title,
-      textScaleFactor: 1.3,
-      style: TextStyle(
-        color: Theme.of(context).primaryColor,
-      ),
-    ),
-    actions: actions,
-  );
 }

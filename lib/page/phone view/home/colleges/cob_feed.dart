@@ -2,14 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
 import '../../../../controller/controller_account_information.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/announcement post tile/cob_announcement_post_tile.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -31,17 +29,20 @@ class _CobFeedState extends State<CobFeed> {
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+        appBar: buildAppBar(
+          context: context,
+          title: 'Cob Feed',
           leading: Visibility(
             visible: !(currentAccountType == 'accountTypeCobAdmin' ||
                 currentStudentCollege == 'College of Business'),
-            child: buildAppbarBackButton(),
-          ),
-          centerTitle: true,
-          title: const AppBarTitle(
-            title: 'COB Feed',
+            child: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(
+                  Iconsax.arrow_left_1,
+                  color: Theme.of(context).iconTheme.color,
+                )),
           ),
           actions: [
             Visibility(
@@ -56,10 +57,8 @@ class _CobFeedState extends State<CobFeed> {
                   );
                 },
                 icon: Icon(
-                  MdiIcons.cardPlusOutline,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.add_square,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
             ),
@@ -70,10 +69,8 @@ class _CobFeedState extends State<CobFeed> {
                     Scaffold.of(context).openEndDrawer();
                   },
                   icon: Icon(
-                    MdiIcons.menu,
-                    color: Get.isDarkMode
-                        ? kButtonColorDarkTheme
-                        : kButtonColorLightTheme,
+                    Iconsax.menu,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                 );
               }),

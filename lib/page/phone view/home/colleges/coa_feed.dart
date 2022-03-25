@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/coa_announcement_post_tile.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -29,9 +28,9 @@ class _CoaFeedState extends State<CoaFeed> {
   @override
   Widget build(BuildContext context) => Scaffold(
         endDrawer: const WidgetNavigationDrawer(),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+        appBar: buildAppBar(
+          context: context,
+          title: 'COA Feed',
           leading: Visibility(
             visible: !(currentAccountType == 'accountTypeCoaAdmin' ||
                 currentStudentCollege == 'College of Accountancy'),
@@ -40,15 +39,9 @@ class _CoaFeedState extends State<CoaFeed> {
                   Get.back();
                 },
                 icon: Icon(
-                  MdiIcons.arrowLeft,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.arrow_left_1,
+                  color: Theme.of(context).iconTheme.color,
                 )),
-          ),
-          centerTitle: true,
-          title: const AppBarTitle(
-            title: 'COA Feed',
           ),
           actions: [
             Visibility(
@@ -63,10 +56,8 @@ class _CoaFeedState extends State<CoaFeed> {
                   );
                 },
                 icon: Icon(
-                  MdiIcons.cardPlusOutline,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.add_square,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
             ),
@@ -77,10 +68,8 @@ class _CoaFeedState extends State<CoaFeed> {
                     Scaffold.of(context).openEndDrawer();
                   },
                   icon: Icon(
-                    MdiIcons.menu,
-                    color: Get.isDarkMode
-                        ? kButtonColorDarkTheme
-                        : kButtonColorLightTheme,
+                    Iconsax.menu,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                 );
               }),

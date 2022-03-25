@@ -1,11 +1,11 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
 import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'ccs_feed.dart';
 import 'coa_feed.dart';
@@ -24,13 +24,9 @@ class _SelectCollegeFeedState extends State<SelectCollegeFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const WidgetNavigationDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Select College Feed',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Select College',
         actions: [
           Builder(
             builder: ((context) {
@@ -39,16 +35,39 @@ class _SelectCollegeFeedState extends State<SelectCollegeFeed> {
                   Scaffold.of(context).openEndDrawer();
                 },
                 icon: Icon(
-                  MdiIcons.menu,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.menu,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               );
             }),
           ),
         ],
       ),
+      // AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0.0,
+      //   centerTitle: true,
+      //   title: const AppBarTitle(
+      //     title: 'Select College Feed',
+      //   ),
+      //   actions: [
+      //     Builder(
+      //       builder: ((context) {
+      //         return IconButton(
+      //           onPressed: () {
+      //             Scaffold.of(context).openEndDrawer();
+      //           },
+      //           icon: Icon(
+      //             MdiIcons.menu,
+      //             color: Get.isDarkMode
+      //                 ? kButtonColorDarkTheme
+      //                 : kButtonColorLightTheme,
+      //           ),
+      //         );
+      //       }),
+      //     ),
+      //   ],
+      // ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
