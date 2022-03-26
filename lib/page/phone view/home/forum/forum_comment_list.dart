@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../controller/controller_forum.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/comment/comment_tile.dart';
@@ -42,7 +41,6 @@ class ForumCommentListState extends State<ForumCommentList> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Comments',

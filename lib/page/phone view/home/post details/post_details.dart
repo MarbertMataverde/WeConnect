@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
@@ -23,7 +22,6 @@ class PostDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Post Details',

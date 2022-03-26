@@ -5,7 +5,6 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weconnect/constant/constant_colors.dart';
 import 'package:weconnect/constant/constant_forms_url.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
 
@@ -18,7 +17,6 @@ class DownloadForms extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: buildAppbarBackButton(),
         title: const AppBarTitle(title: 'Forms'),
         centerTitle: true,
       ),

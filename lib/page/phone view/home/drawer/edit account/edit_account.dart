@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../widgets/appbar/appbar_back.dart';
 import '../../../../../controller/controller_account_information.dart';
 
 import '../../../../../constant/constant_colors.dart';
@@ -45,7 +44,6 @@ class _EditAccountState extends State<EditAccount> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Edit Account',

@@ -7,7 +7,6 @@ import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../../../controller/controller_vote.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';
 import '../../../../constant/constant.dart';
@@ -50,7 +49,6 @@ class ForumTopicDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Topic Details',

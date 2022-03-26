@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/appbar_back.dart';
 
 import '../../../../constant/constant.dart';
-import '../../../../constant/constant_colors.dart';
-import '../../../../constant/constant_login_page.dart';
 import '../../../../utils/utils_access_code_checker.dart';
 import '../../../../widgets/button/custom_button.dart';
+import '../../../../widgets/global spinkit/global_spinkit.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 import '../professor sign up/prof_axcode_checker.dart';
 
@@ -34,10 +33,13 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kLoginLoginAppBarBackButton,
+      appBar: buildAppbarBackButton(
+        context: context,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
+            top: 2.h,
             left: kPagePaddingHorizontal.w,
             right: kPagePaddingHorizontal.w,
           ),
@@ -46,17 +48,16 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
             children: [
               Text(
                 'Student Sign Up 👨🏻‍🎓',
+                textScaleFactor: 1.7,
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  color: Get.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'Please type your access code to continue',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                ),
+              SizedBox(height: 1.h),
+              const Text(
+                'Enter your access code to continue',
+                textScaleFactor: 0.9,
               ),
               SizedBox(height: 2.h),
               Form(
@@ -75,12 +76,7 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
@@ -99,32 +95,25 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                           isLoading = false;
                         });
                       },
-                      text: 'Continue',
+                      text: 'CONTINUE',
                     ),
+              SizedBox(height: 1.h),
               Row(
                 children: [
-                  Flexible(
-                    child: Text(
-                      'Sign up as',
-                      style: TextStyle(
-                        color: Get.isDarkMode
-                            ? kTextColorDarkTheme
-                            : kTextColorLightTheme,
-                      ),
-                    ),
+                  const Text(
+                    'Sign up as',
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.off(() => const ProfessorAxCodeChecker());
-                      },
-                      child: Text(
-                        'Professor',
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          color: Get.theme.primaryColor,
-                        ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () {
+                      Get.off(() => const ProfessorAxCodeChecker());
+                    },
+                    child: Text(
+                      'Professor',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),

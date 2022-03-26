@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
 import 'reported_post_tile.dart';
@@ -39,7 +38,6 @@ class DetailedReport extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Detailed Report',

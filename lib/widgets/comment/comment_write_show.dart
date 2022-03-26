@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import '../appbar/appbar_back.dart';
 import '../appbar/appbar_title.dart';
 import 'comment_form.dart';
 import '../../constant/constant.dart';
@@ -62,7 +61,6 @@ class _ShowAllCommentState extends State<ShowAllComment> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Comments',

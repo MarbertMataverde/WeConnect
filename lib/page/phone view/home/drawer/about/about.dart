@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
 import 'package:weconnect/widgets/appbar/appbar_title.dart';
 
 import '../../../../../constant/constant_colors.dart';
@@ -15,7 +14,6 @@ class About extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          leading: buildAppbarBackButton(),
           title: const AppBarTitle(title: 'About'),
           centerTitle: true,
         ),

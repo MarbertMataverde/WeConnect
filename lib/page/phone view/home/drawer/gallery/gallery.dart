@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
 import 'package:weconnect/widgets/appbar/appbar_title.dart';
 
 class Gallery extends StatelessWidget {
@@ -14,7 +13,6 @@ class Gallery extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          leading: buildAppbarBackButton(),
           title: const AppBarTitle(title: 'Gallery'),
           centerTitle: true,
         ),

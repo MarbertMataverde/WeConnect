@@ -5,7 +5,6 @@ import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
 import '../../../constant/constant_colors.dart';
-import '../../../constant/constant_login_page.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 
@@ -30,7 +29,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kLoginLoginAppBarBackButton,
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(

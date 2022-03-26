@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
@@ -29,7 +28,6 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Open Topic',

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
-import '../../constant/constant_colors.dart';
-
-Widget buildAppbarBackButton() {
-  return IconButton(
-    onPressed: () {
-      Get.back();
-    },
-    icon: Icon(
-      Icons.arrow_back_rounded,
-      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+AppBar buildAppbarBackButton({required context}) {
+  return AppBar(
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    leading: IconButton(
+      onPressed: () {
+        Get.back();
+      },
+      icon: Icon(
+        Iconsax.arrow_square_left,
+        color: Theme.of(context).iconTheme.color,
+      ),
     ),
   );
 }

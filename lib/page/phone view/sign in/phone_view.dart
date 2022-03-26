@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
@@ -7,6 +6,7 @@ import '../../../constant/constant.dart';
 
 import '../../../controller/controller_account_information.dart';
 import '../../../widgets/button/custom_button.dart';
+import '../../../widgets/global spinkit/global_spinkit.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 import '../forgot password/forgot_password.dart';
 import '../sign up/student sign up/stud_axcode_checker.dart';
@@ -46,7 +46,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
               Get.to(() => const StudentAxCodeChecker());
             },
             child: Text(
-              'Sign Up',
+              'SIGN UP',
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
@@ -138,10 +138,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSquareCircle(
-                      color: Theme.of(context).primaryColor,
-                      size: MediaQuery.of(context).size.width * 0.1,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {

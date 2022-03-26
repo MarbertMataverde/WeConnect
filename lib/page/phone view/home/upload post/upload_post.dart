@@ -4,7 +4,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../constant/constant_colors.dart';
@@ -47,7 +46,6 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Create Post',

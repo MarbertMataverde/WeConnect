@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
 
@@ -16,7 +15,6 @@ class MVG extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          leading: buildAppbarBackButton(),
           title: const AppBarTitle(title: 'URS M-V-G'),
           centerTitle: true,
         ),

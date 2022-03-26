@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../dialog/dialog_channel.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
@@ -76,7 +75,6 @@ class _ChannelInsideState extends State<ChannelInside> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: AppBarTitle(
           title: widget.channelName,

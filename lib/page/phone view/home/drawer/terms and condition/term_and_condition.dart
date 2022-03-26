@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
 import 'package:weconnect/widgets/appbar/appbar_title.dart';
 
 class TermsAndCondition extends StatelessWidget {
@@ -11,7 +10,6 @@ class TermsAndCondition extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: buildAppbarBackButton(),
         title: const AppBarTitle(title: 'Terms & Condition'),
         centerTitle: true,
       ),

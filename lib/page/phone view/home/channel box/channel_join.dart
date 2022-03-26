@@ -5,7 +5,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_back.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
@@ -41,7 +40,6 @@ class _ChannelJoinState extends State<ChannelJoin> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: buildAppbarBackButton(),
         centerTitle: true,
         title: const AppBarTitle(
           title: 'Join Channel',
