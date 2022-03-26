@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../constant/constant_colors.dart';
+import '../../constant/constant_login_page.dart';
 
 Form buildCommentForm({
+  required BuildContext context,
   required Key formKey,
   required void Function()? onSend,
   required TextEditingController textEditingCtrlr,
@@ -23,7 +24,7 @@ Form buildCommentForm({
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textCapitalization: TextCapitalization.sentences,
       style: TextStyle(
-        color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+        color: Theme.of(context).textTheme.labelMedium!.color,
         fontSize: 10.sp,
       ),
       autofocus: false,
@@ -35,34 +36,34 @@ Form buildCommentForm({
       textAlign: TextAlign.left,
       //*Decoration
       decoration: InputDecoration(
-        //*Making the text padding to zero
-        contentPadding: EdgeInsets.only(left: 1.h, top: 2.h),
-        //*Hint Text
-        hintText: 'Write your comment here ✏',
-        suffixIcon: IconButton(
-          splashColor: Colors.white,
-          color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-          onPressed: onSend,
-          icon: const Icon(Icons.send_rounded),
+        errorStyle: TextStyle(
+          color: Theme.of(context).primaryColor.withAlpha(180),
         ),
+        //*Hint Text
+        hintText: 'Say something...',
+        suffixIcon: IconButton(
+            onPressed: onSend,
+            splashRadius: 1,
+            icon: Icon(
+              Iconsax.send_2,
+              color: Theme.of(context).primaryColor,
+            )),
+
         hintStyle: TextStyle(
-          color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-          fontWeight: FontWeight.w700,
-          fontSize: 10.sp,
+          color: Theme.of(context).textTheme.labelMedium!.color,
         ),
         //*Filled Color
         filled: true,
-        fillColor: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+        fillColor: Theme.of(context).primaryColor.withAlpha(15),
         //*Enabled Border
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
+        border: kLoginPageTextFormFieldOutlineInputBorder,
       ),
     ),
   );
 }
+
+//!input border style
+InputBorder kLoginPageTextFormFieldOutlineInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(kTextFormFieldRadius),
+  borderSide: BorderSide.none,
+);

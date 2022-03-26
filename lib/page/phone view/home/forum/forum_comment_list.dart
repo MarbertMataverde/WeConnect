@@ -65,6 +65,7 @@ class ForumCommentListState extends State<ForumCommentList> {
                   itemCount: data.size,
                   itemBuilder: (context, index) {
                     return buildCommentTile(
+                      context: context,
                       profileName: data.docs[index]['commenter-profile-name'],
                       profileImageUrl: data.docs[index]
                           ['commenter-profile-image-url'],
@@ -77,6 +78,7 @@ class ForumCommentListState extends State<ForumCommentList> {
             ),
           ),
           buildCommentForm(
+              context: context,
               formKey: _formKey,
               onSend: () async {
                 final _isValid = _formKey.currentState!.validate();

@@ -3,15 +3,15 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import '../appbar/appbar_title.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'comment_form.dart';
 import '../../constant/constant.dart';
 import '../../controller/controller_account_information.dart';
 
-import '../../constant/constant_colors.dart';
 import '../../controller/controller_write_post_comment.dart';
 import 'comment_tile.dart';
 
@@ -58,13 +58,17 @@ class _ShowAllCommentState extends State<ShowAllComment> {
         .orderBy('created-at', descending: true)
         .snapshots();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Comments',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Comments',
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            )),
       ),
       body: Stack(
         children: [
@@ -77,8 +81,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                 ),
                 child: SingleChildScrollView(
                   child: ListTile(
-                    leading: //profile image
-                        CircleAvatar(
+                    leading: CircleAvatar(
                       backgroundColor: Colors.transparent,
                       child: ClipOval(
                         child: FadeInImage.assetNetwork(
@@ -90,18 +93,22 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                     ),
                     title: Text(
                       widget.profileName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyMedium!.color,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     subtitle: widget.postDescription.length < 600
                         ? LinkWell(
                             widget.postDescription,
                             style: TextStyle(
-                              color: Get.isDarkMode
-                                  ? kTextColorDarkTheme
-                                  : kTextColorLightTheme,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .color,
                             ),
                             linkStyle: TextStyle(
-                              color: Get.theme.primaryColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           )
                         : ExpandableText(
@@ -109,9 +116,10 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                             animationDuration:
                                 const Duration(milliseconds: 1500),
                             style: TextStyle(
-                              color: Get.isDarkMode
-                                  ? kTextColorDarkTheme
-                                  : kTextColorLightTheme,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .color,
                             ),
                             maxLines: 5,
                             expandText: 'read more 📖',
@@ -120,15 +128,14 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                             collapseText: 'collapse 📕',
                             animation: true,
                             animationCurve: Curves.fastLinearToSlowEaseIn,
+                            linkColor: Theme.of(context).primaryColor,
                           ),
                   ),
                 ),
               ),
               Divider(
                 height: 2.h,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
+                color: Theme.of(context).textTheme.labelMedium!.color,
               ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
@@ -148,6 +155,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                       itemCount: data.size,
                       itemBuilder: (context, index) {
                         return buildCommentTile(
+                            context: context,
                             profileImageUrl: data.docs[index]['profile-url'],
                             profileName: data.docs[index]['profile-name'],
                             commentedDate: data.docs[index]['created-at'],
@@ -162,27 +170,29 @@ class _ShowAllCommentState extends State<ShowAllComment> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              color: Get.theme.scaffoldBackgroundColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: buildCommentForm(
-                  formKey: _formKey,
-                  onSend: () async {
-                    final _isValid = _formKey.currentState!.validate();
+                context: context,
+                formKey: _formKey,
+                onSend: () async {
+                  final _isValid = _formKey.currentState!.validate();
 
-                    if (_isValid == true) {
-                      await _addComment.writeCommentToCampusPost(
-                        widget.collectionName, //? COLLECTION NAME
-                        widget.docName, //? DOCUMENT NAME
-                        _commentController.text,
-                        currentProfileImageUrl.toString(),
-                        currentProfileName.toString(),
-                        widget.postDocId,
-                        Timestamp.now(),
-                      );
-                      _commentController.clear();
-                      Get.focusScope!.unfocus();
-                    }
-                  },
-                  textEditingCtrlr: _commentController),
+                  if (_isValid == true) {
+                    await _addComment.writeCommentToCampusPost(
+                      widget.collectionName, //? COLLECTION NAME
+                      widget.docName, //? DOCUMENT NAME
+                      _commentController.text,
+                      currentProfileImageUrl.toString(),
+                      currentProfileName.toString(),
+                      widget.postDocId,
+                      Timestamp.now(),
+                    );
+                    _commentController.clear();
+                    Get.focusScope!.unfocus();
+                  }
+                },
+                textEditingCtrlr: _commentController,
+              ),
             ),
           ),
         ],

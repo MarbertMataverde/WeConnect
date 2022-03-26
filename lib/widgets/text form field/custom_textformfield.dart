@@ -72,7 +72,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         suffixIcon: suffixWidget,
         filled: kTrue,
-        fillColor: Theme.of(context).primaryColor.withAlpha(10),
+        fillColor: Theme.of(context).primaryColor.withAlpha(15),
         hintText: hint,
         hintStyle:
             TextStyle(color: Theme.of(context).textTheme.labelMedium!.color),
