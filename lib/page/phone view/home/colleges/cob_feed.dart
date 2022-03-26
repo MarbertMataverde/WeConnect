@@ -31,7 +31,7 @@ class _CobFeedState extends State<CobFeed> {
         endDrawer: const WidgetNavigationDrawer(),
         appBar: buildAppBar(
           context: context,
-          title: 'Cob Feed',
+          title: 'COB Feed',
           leading: Visibility(
             visible: !(currentAccountType == 'accountTypeCobAdmin' ||
                 currentStudentCollege == 'College of Business'),
@@ -40,7 +40,7 @@ class _CobFeedState extends State<CobFeed> {
                   Get.back();
                 },
                 icon: Icon(
-                  Iconsax.arrow_left_1,
+                  Iconsax.arrow_square_left,
                   color: Theme.of(context).iconTheme.color,
                 )),
           ),

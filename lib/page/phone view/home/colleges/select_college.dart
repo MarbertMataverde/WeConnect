@@ -1,14 +1,9 @@
-import 'dart:ui';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'ccs_feed.dart';
 import 'coa_feed.dart';
@@ -74,10 +69,8 @@ class _SelectCollegeFeedState extends State<SelectCollegeFeed> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Container(
-                color:
-                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
-              ),
+              child:
+                  Container(color: const Color(0xff0B182F).withOpacity(0.65)),
             ),
           ),
           GestureDetector(

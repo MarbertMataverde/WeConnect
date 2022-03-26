@@ -100,10 +100,6 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                         });
                       },
                       text: 'Continue',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
               Row(
                 children: [

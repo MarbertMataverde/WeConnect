@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
-import '../../../constant/constant_colors.dart';
 
 import '../../../controller/controller_account_information.dart';
 import '../../../widgets/button/custom_button.dart';
@@ -49,8 +48,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
             child: Text(
               'Sign Up',
               style: TextStyle(
-                fontSize: 12.sp,
-                color: Get.theme.primaryColor,
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -67,18 +65,17 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome Back ✨',
+                'Hola Giants 👋🏻',
+                textScaleFactor: 2,
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  color: Get.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'Please sign in to your account',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                ),
+              SizedBox(height: 1.h),
+              const Text(
+                'Enter your credentials to access your account.',
+                textScaleFactor: 0.9,
               ),
               SizedBox(height: 2.h),
               Form(
@@ -96,10 +93,10 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
-                          return 'Please Enter Your Email😊';
+                          return 'Please Enter Your Email 💌';
                         }
                         if (!_isEmailValid) {
-                          return 'Invalid Email😐';
+                          return 'Invalid Email 😐';
                         }
                         return null;
                       },
@@ -113,10 +110,10 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Password🔐';
+                          return 'Please Enter Password 🔐';
                         }
                         if (value.toString().length < 8) {
-                          return 'Password Should Be Longer or Equal to 8 characters👌';
+                          return 'Password Should Be Longer or Equal to 8 characters 👌';
                         }
                         return null;
                       },
@@ -132,20 +129,18 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                   },
                   child: Text(
                     'Forgot Password',
+                    textScaleFactor: 0.9,
                     style: TextStyle(
-                      fontSize: 10.sp,
-                      color: Get.theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
+                  ? SpinKitSquareCircle(
+                      color: Theme.of(context).primaryColor,
+                      size: MediaQuery.of(context).size.width * 0.1,
                     )
                   : CustomButton(
                       onPress: () async {
@@ -166,11 +161,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                           isLoading = false;
                         });
                       },
-                      text: 'Sign In',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
+                      text: 'SIGN IN',
                     ),
             ],
           ),

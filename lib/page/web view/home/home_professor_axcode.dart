@@ -116,10 +116,6 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                         });
                       },
                       text: 'Generate',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
               Row(
                 children: [

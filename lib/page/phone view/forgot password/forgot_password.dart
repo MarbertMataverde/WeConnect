@@ -132,10 +132,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         });
                       },
                       text: 'Reset Now ⚡',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
             ],
           ),

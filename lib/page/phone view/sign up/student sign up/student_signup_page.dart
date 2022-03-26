@@ -261,10 +261,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                         });
                       },
                       text: 'Create⚡',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
             ],
           ),

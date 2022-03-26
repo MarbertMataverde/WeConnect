@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../authentication/authentication_controller.dart';
 import '../../../../constant/constant.dart';
-import '../../../../constant/constant_colors.dart';
 import '../../../../widgets/button/custom_button.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
@@ -223,10 +222,6 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                         });
                       },
                       text: 'Create⚡',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
             ],
           ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 import '../../constant/constant.dart';
-import '../../constant/constant_colors.dart';
 import '../../constant/constant_login_page.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -61,23 +59,28 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: isPassword,
       autovalidateMode: autovalidateMode,
       onChanged: onChanged,
-      style: kLoginPageTextFormFieldTextStyle,
-      cursorColor: Get.isDarkMode
-          ? kTextFormFieldCursorColorDarkTheme
-          : kTextFormFieldCursorColorLightTheme,
+      style: TextStyle(
+        color: Theme.of(context).textTheme.labelMedium!.color,
+      ),
+      cursorColor: Theme.of(context).primaryColor,
       decoration: InputDecoration(
         errorStyle: TextStyle(
-          color: Get.theme.primaryColor.withAlpha(180),
+          color: Theme.of(context).primaryColor.withAlpha(180),
         ),
         suffixIcon: suffixWidget,
         filled: kTrue,
-        fillColor: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+        fillColor: Theme.of(context).primaryColor.withAlpha(10),
         hintText: hint,
+        hintStyle:
+            TextStyle(color: Theme.of(context).textTheme.labelMedium!.color),
         border: kLoginPageTextFormFieldOutlineInputBorder,
-        focusedBorder: kLoginPageTextFormFieldFocusedBorder,
       ),
     );
   }
 }
+
+//!input border style
+InputBorder kLoginPageTextFormFieldOutlineInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(kTextFormFieldRadius),
+  borderSide: BorderSide.none,
+);

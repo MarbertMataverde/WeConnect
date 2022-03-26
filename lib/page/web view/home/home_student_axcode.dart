@@ -116,10 +116,6 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
                         });
                       },
                       text: 'Generate',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
               Row(
                 children: [

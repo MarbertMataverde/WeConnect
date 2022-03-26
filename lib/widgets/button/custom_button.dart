@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
     required this.text,
-    required this.textColor,
-    this.bgColor,
     this.borderSide,
     required this.onPress,
   }) : super(key: key);
   final String text;
-  final Color textColor;
-  final Color? bgColor;
+
   final BorderSide? borderSide;
   final dynamic onPress;
 
@@ -25,14 +21,15 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: textColor,
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
           ),
         ),
         onPressed: onPress,
         style: TextButton.styleFrom(
           side: borderSide,
-          backgroundColor: bgColor,
-          primary: Get.theme.primaryColor,
+          backgroundColor: Theme.of(context).primaryColor.withAlpha(30),
+          primary: Theme.of(context).primaryColor,
         ),
       ),
     );

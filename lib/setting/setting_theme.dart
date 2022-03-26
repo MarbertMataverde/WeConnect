@@ -7,6 +7,7 @@ final lightThemeData = ThemeData(
   iconTheme: const IconThemeData(color: Color(0xff0B182F)),
   cardColor: const Color(0xffffffff),
   textTheme: const TextTheme(
+    labelMedium: TextStyle(color: Color.fromARGB(200, 11, 24, 47)),
     bodySmall: TextStyle(color: Color(0xff0B182F)),
     bodyMedium: TextStyle(color: Color(0xff0B182F)),
     bodyLarge: TextStyle(color: Color(0xff0B182F)),
@@ -36,9 +37,10 @@ final darkThemeData = ThemeData(
   iconTheme: const IconThemeData(color: Colors.white),
   cardColor: const Color(0xff0B182F),
   textTheme: const TextTheme(
-    bodySmall: TextStyle(color: Colors.white),
-    bodyMedium: TextStyle(color: Colors.white),
-  ),
+      labelMedium: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
+      bodySmall: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
+      bodyLarge: TextStyle(color: Colors.white)),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(

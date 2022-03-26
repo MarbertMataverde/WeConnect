@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../constant/constant.dart';
-import '../../../../constant/constant_colors.dart';
 import '../../../../constant/constant_login_page.dart';
 import '../../../../utils/utils_access_code_checker.dart';
 import '../../../../widgets/button/custom_button.dart';
@@ -97,10 +96,6 @@ class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
                         });
                       },
                       text: 'Continue',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
             ],
           ),

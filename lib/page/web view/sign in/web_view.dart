@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../constant/constant.dart';
-import '../../../constant/constant_colors.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../widgets/button/custom_button.dart';
@@ -138,10 +137,6 @@ class _WebViewState extends State<WebView> {
                         });
                       },
                       text: 'Sign In',
-                      textColor: Get.theme.primaryColor,
-                      bgColor: Get.isDarkMode
-                          ? kTextFormFieldColorDarkTheme
-                          : kTextFormFieldColorLightTheme,
                     ),
             ],
           ),

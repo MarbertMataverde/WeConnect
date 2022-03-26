@@ -39,7 +39,7 @@ class _MasteralFeedState extends State<MasteralFeed> {
                   Get.back();
                 },
                 icon: Icon(
-                  Iconsax.arrow_left_1,
+                  Iconsax.arrow_square_left,
                   color: Theme.of(context).iconTheme.color,
                 )),
           ),

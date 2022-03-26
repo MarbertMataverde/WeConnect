@@ -15,18 +15,7 @@ TextStyle kLoginPageTextFormFieldTextStyle = TextStyle(
       : kTextFormFieldTextColorLightTheme,
   fontSize: 14,
 );
-//!input border style
-InputBorder kLoginPageTextFormFieldOutlineInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.circular(kTextFormFieldRadius),
-  borderSide: BorderSide.none,
-);
-InputBorder kLoginPageTextFormFieldFocusedBorder = OutlineInputBorder(
-  borderSide: BorderSide(
-    color: Get.theme.primaryColor,
-    width: kTextFormFieldFocusedBorderWidth,
-  ),
-  borderRadius: BorderRadius.circular(kTextFormFieldRadius),
-);
+
 
 AppBar kLoginLoginAppBarBackButton = AppBar(
   backgroundColor: Colors.transparent,
