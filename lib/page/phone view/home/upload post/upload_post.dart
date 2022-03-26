@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
@@ -59,35 +60,40 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: uploadButtonEnable && result != null
-                ? () async {
-                    setState(() {
-                      isLoading = true;
-                    });
-                    SharedPreferences _sp =
-                        await SharedPreferences.getInstance();
-                    await _createPost.dataChecker(
-                      result,
-                      widget.collectionName,
-                      _descriptionCtrlr.text,
-                      _sp.get('currentProfileName') as String,
-                      _sp.get('currentProfileImageUrl') as String,
-                      _sp.get('accountType') as String,
-                      widget.docName,
-                    );
-                    setState(() {
-                      isLoading = false;
-                    });
-                  }
-                : null,
-            icon: Icon(
-              Iconsax.direct_send,
-              color: uploadButtonEnable && result != null
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).disabledColor,
-            ),
-          )
+          isLoading
+              ? Padding(
+                  padding: EdgeInsets.only(right: 5.w),
+                  child: buildGlobalSpinkit(context: context),
+                )
+              : IconButton(
+                  onPressed: uploadButtonEnable && result != null
+                      ? () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          SharedPreferences _sp =
+                              await SharedPreferences.getInstance();
+                          await _createPost.dataChecker(
+                            result,
+                            widget.collectionName,
+                            _descriptionCtrlr.text,
+                            _sp.get('currentProfileName') as String,
+                            _sp.get('currentProfileImageUrl') as String,
+                            _sp.get('accountType') as String,
+                            widget.docName,
+                          );
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      : null,
+                  icon: Icon(
+                    Iconsax.direct_send,
+                    color: uploadButtonEnable && result != null
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).disabledColor,
+                  ),
+                )
         ],
       ),
       body: SafeArea(

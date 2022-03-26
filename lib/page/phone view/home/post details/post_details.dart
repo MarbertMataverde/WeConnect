@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import 'image_details.dart';
 
 class PostDetails extends StatelessWidget {
@@ -19,12 +19,17 @@ class PostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Post Details',
+      appBar: buildAppBar(
+        context: context,
+        title: 'Post Details',
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -90,11 +95,11 @@ class PostDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Description',
+                    textScaleFactor: 1.3,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Get.textTheme.titleMedium!.fontSize,
                     ),
                   ),
                   SizedBox(
@@ -103,12 +108,10 @@ class PostDetails extends StatelessWidget {
                   LinkWell(
                     postCaption,
                     style: TextStyle(
-                      color: Get.isDarkMode
-                          ? kTextColorDarkTheme
-                          : kTextColorLightTheme,
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
                     ),
                     linkStyle: TextStyle(
-                      color: Get.theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
