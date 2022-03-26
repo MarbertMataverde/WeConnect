@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 
 import '../../../../../constant/constant_colors.dart';
 

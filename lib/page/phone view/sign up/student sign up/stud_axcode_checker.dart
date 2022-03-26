@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../constant/constant.dart';
 import '../../../../utils/utils_access_code_checker.dart';

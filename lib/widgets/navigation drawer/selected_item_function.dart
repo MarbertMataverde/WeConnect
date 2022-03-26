@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/MVG/mvg.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/about/about.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/gallery/gallery.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/student%20downloadable%20forms/downloadable_forms.dart';
+import '../../page/phone%20view/home/drawer/MVG/mvg.dart';
+import '../../page/phone%20view/home/drawer/about/about.dart';
+import '../../page/phone%20view/home/drawer/gallery/gallery.dart';
+import '../../page/phone%20view/home/drawer/student%20downloadable%20forms/downloadable_forms.dart';
 import '../../page/phone%20view/home/drawer/forum%20topic%20request/forum_topic_request_list.dart';
 
 import '../../authentication/authentication_controller.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../controller/controller_account_information.dart';
 
 import '../../../../widgets/announcement post tile/masteral_announcement_post_tile.dart';

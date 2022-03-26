@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'ccs_feed.dart';

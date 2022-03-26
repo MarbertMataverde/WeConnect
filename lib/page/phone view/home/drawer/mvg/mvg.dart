@@ -2,7 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/constant/constant_colors.dart';
+import '../../../../../constant/constant_colors.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
 

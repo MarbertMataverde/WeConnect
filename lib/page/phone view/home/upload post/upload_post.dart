@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../controller/controller_create_post.dart';

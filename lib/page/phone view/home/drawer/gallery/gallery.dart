@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 
 class Gallery extends StatelessWidget {
   const Gallery({Key? key}) : super(key: key);

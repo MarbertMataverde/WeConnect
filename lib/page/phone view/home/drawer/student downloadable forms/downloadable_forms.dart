@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:weconnect/constant/constant_colors.dart';
-import 'package:weconnect/constant/constant_forms_url.dart';
+import '../../../../../constant/constant_colors.dart';
+import '../../../../../constant/constant_forms_url.dart';
 
 import '../../../../../widgets/appbar/appbar_title.dart';
 

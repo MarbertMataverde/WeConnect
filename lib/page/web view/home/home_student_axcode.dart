@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
+import '../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../dialog/dialog_access_code_generator.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
-import '../../../constant/constant_colors.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 import 'home_professor_axcode.dart';

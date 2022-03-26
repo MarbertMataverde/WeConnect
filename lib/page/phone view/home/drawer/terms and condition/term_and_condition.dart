@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weconnect/widgets/appbar/appbar_title.dart';
+import '../../../../../widgets/appbar/appbar_title.dart';
 
 class TermsAndCondition extends StatelessWidget {
   const TermsAndCondition({Key? key}) : super(key: key);

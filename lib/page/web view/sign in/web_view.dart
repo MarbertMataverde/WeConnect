@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
+import '../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../constant/constant.dart';
 
 import '../../../authentication/authentication_controller.dart';
