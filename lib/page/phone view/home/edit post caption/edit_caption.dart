@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../dialog/dialog_post_tile_.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 
 //dialogs
 final dialogs = Get.put(DialogPostTile());
@@ -31,12 +31,17 @@ class _EditCaptionState extends State<EditCaption> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Edit Caption',
+      appBar: buildAppBar(
+        context: context,
+        title: 'Edit Caption',
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
         actions: [
           IconButton(
@@ -54,8 +59,8 @@ class _EditCaptionState extends State<EditCaption> {
               );
             },
             icon: Icon(
-              MdiIcons.check,
-              color: Get.theme.primaryColor,
+              Iconsax.tick_square,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ],
@@ -66,48 +71,15 @@ class _EditCaptionState extends State<EditCaption> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Edit Description',
-                style: TextStyle(
-                  color: Get.theme.primaryColor,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 2.h),
-              TextFormField(
+              CustomTextFormField(
                 initialValue: widget.recentCaption,
+                minimumLine: 12,
+                maxLine: null,
                 onChanged: (value) {
                   updatedCaption = value.toString();
                 },
-                style: TextStyle(
-                  color: Get.isDarkMode
-                      ? kTextColorDarkTheme
-                      : kTextColorLightTheme,
-                ),
-                cursorColor: Get.theme.primaryColor,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 1.w),
-                  hintText: 'Write post description',
-                  //*Enabled Border
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Get.isDarkMode
-                            ? kTextColorDarkTheme
-                            : kTextColorLightTheme),
-                    borderRadius: BorderRadius.circular(2.sp),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Get.theme.primaryColor),
-                  ),
-                ),
+                isPassword: false,
+                validator: (_) {},
               ),
             ],
           ),

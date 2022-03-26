@@ -7,8 +7,8 @@ import '../../constant/constant_login_page.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
-    required this.ctrlr,
-    required this.hint,
+    this.ctrlr,
+    this.hint,
     required this.isPassword,
     this.keyboardType,
     required this.validator,
@@ -20,11 +20,12 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixWidget,
     this.inputAction,
     this.maxCharLength,
+    this.initialValue,
   }) : super(key: key);
   //?controller
-  final TextEditingController ctrlr;
+  final TextEditingController? ctrlr;
   //?hint
-  final String hint;
+  final String? hint;
   //?it is password or not
   final bool isPassword;
   final TextInputType? keyboardType;
@@ -44,10 +45,12 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputAction? inputAction;
   // max char length of the text field
   final int? maxCharLength;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       textInputAction: inputAction,
       minLines: minimumLine,
       maxLines: maxLine,
