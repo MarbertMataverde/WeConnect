@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../authentication/authentication_controller.dart';
@@ -20,20 +21,25 @@ class _HomeWrapperState extends State<HomeWebWrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.transparent,
-        elevation: 0.0,
         centerTitle: true,
-        title: const Text('WeConnect'),
+        title: Text(
+          'WeConnect',
+          textScaleFactor: 1.5,
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
               authentication.signOut();
             },
             icon: Icon(
-              MdiIcons.logout,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
+              Iconsax.logout,
+              color: Theme.of(context).iconTheme.color,
             ),
           )
         ],

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../constant/constant.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
-
-final TextEditingController _emailCtrlr = TextEditingController();
-final TextEditingController _passwordCtrlr = TextEditingController();
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
@@ -26,33 +23,35 @@ class WebView extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebView> {
+  final TextEditingController _emailCtrlr = TextEditingController();
+  final TextEditingController _passwordCtrlr = TextEditingController();
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SizedBox(
           height: Get.mediaQuery.size.height,
-          width: Get.mediaQuery.size.width * 0.3,
+          width: Get.mediaQuery.size.width * 0.35,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
                 child: Text(
-                  'Welcome Back Admin!',
+                  'Welcome Back Admin 👋🏻',
+                  textScaleFactor: 2,
                   style: TextStyle(
-                    color: Get.theme.primaryColor,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
                   ),
                 ),
               ),
-              const Flexible(
-                child: Text(
-                  'Please sign in to your account',
-                  style: TextStyle(fontSize: 15),
-                ),
+              SizedBox(height: 1.h),
+              const Text(
+                'Enter your credentials to access your account.',
+                textScaleFactor: 0.9,
               ),
               SizedBox(height: 2.h),
               Form(
@@ -69,7 +68,7 @@ class _WebViewState extends State<WebView> {
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
-                          return 'Please Enter Your Email 😊';
+                          return 'Please Enter Your Email 💌';
                         }
                         if (!_isEmailValid) {
                           return 'Invalid Email 😐';
@@ -103,19 +102,14 @@ class _WebViewState extends State<WebView> {
                   child: Text(
                     'Need Support 👨‍💻',
                     style: TextStyle(
-                      color: Get.theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
@@ -136,7 +130,7 @@ class _WebViewState extends State<WebView> {
                           isLoading = false;
                         });
                       },
-                      text: 'Sign In',
+                      text: 'SIGN IN',
                     ),
             ],
           ),

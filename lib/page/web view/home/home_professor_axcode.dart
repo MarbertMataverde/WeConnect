@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/appbar_back.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../constant/constant.dart';
 import '../../../constant/constant_colors.dart';
 
@@ -40,29 +42,23 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
       body: Center(
         child: SizedBox(
           height: Get.mediaQuery.size.height,
-          width: Get.mediaQuery.size.width * 0.3,
+          width: Get.mediaQuery.size.width * 0.35,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  'Generate Access Code',
-                  style: TextStyle(
-                    color: Get.theme.primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
+              Text(
+                'Generate Access Code',
+                textScaleFactor: 1.5,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const Flexible(
-                child: Text(
-                  'For Professors',
-                  style: TextStyle(
-                    fontSize: 15,
-                    height: 0.5,
-                    fontWeight: FontWeight.bold,
-                  ),
+              const Text(
+                'For Professors',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 2.h),
@@ -85,12 +81,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
@@ -104,7 +95,7 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                             assetLocation: 'assets/gifs/question_mark.gif',
                             title: 'Access Code Generation',
                             description:
-                                'Are you sure you want to generate \n${_professorAxCodeCtrlr.text} access code for students?',
+                                'Are you sure you want to generate ${_professorAxCodeCtrlr.text} access code for professors?',
                             collectionName: _collectionName,
                             studentAxCodeCtrlr: _professorAxCodeCtrlr.text,
                             studentAccessCodeFileName:
@@ -115,36 +106,8 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
                           isLoading = false;
                         });
                       },
-                      text: 'Generate',
+                      text: 'GENERATE',
                     ),
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Go',
-                      style: TextStyle(
-                        color: Get.isDarkMode
-                            ? kTextColorDarkTheme
-                            : kTextColorLightTheme,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text(
-                        'Back',
-                        style: TextStyle(
-                          color: Get.theme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),
