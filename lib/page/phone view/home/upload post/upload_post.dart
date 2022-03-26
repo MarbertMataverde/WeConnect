@@ -2,9 +2,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../constant/constant_colors.dart';
 
@@ -43,13 +44,44 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Create Post',
+      appBar: buildAppBar(
+        context: context,
+        title: 'New Post',
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              setState(() {
+                isLoading = true;
+              });
+              SharedPreferences _sp = await SharedPreferences.getInstance();
+              await _createPost.dataChecker(
+                result,
+                widget.collectionName,
+                _descriptionCtrlr.text,
+                _sp.get('currentProfileName') as String,
+                _sp.get('currentProfileImageUrl') as String,
+                _sp.get('accountType') as String,
+                widget.docName,
+              );
+              setState(() {
+                isLoading = false;
+              });
+            },
+            icon: Icon(
+              Iconsax.direct_send,
+              color: Theme.of(context).iconTheme.color,
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -57,14 +89,28 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CustomTextFormField(
-                  ctrlr: _descriptionCtrlr,
-                  hint: 'Write post description here ✏',
-                  isPassword: false,
-                  minimumLine: 12,
-                  maxLine: null,
-                  keyboardType: TextInputType.multiline,
-                  validator: (_) {},
+                Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    CustomTextFormField(
+                      ctrlr: _descriptionCtrlr,
+                      hint: 'Announcement Description...',
+                      isPassword: false,
+                      minimumLine: 12,
+                      maxLine: null,
+                      keyboardType: TextInputType.multiline,
+                      validator: (_) {},
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        pickImages();
+                      },
+                      icon: Icon(
+                        Iconsax.gallery_add,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
