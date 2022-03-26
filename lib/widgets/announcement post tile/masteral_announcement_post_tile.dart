@@ -142,9 +142,8 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                           postMedia: postMedia,
                           postCaption: postCaption,
                         )),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: kPostImagePlaceholder,
-                      image: postMedia.first,
+                    child: Image.network(
+                      postMedia.first,
                       fit: BoxFit.contain,
                     ),
                   )
