@@ -6,6 +6,7 @@ final lightThemeData = ThemeData(
   scaffoldBackgroundColor: const Color(0xffffffff),
   iconTheme: const IconThemeData(color: Color(0xff0B182F)),
   cardColor: const Color(0xffffffff),
+  disabledColor: const Color(0xff172A46),
   textTheme: const TextTheme(
     labelMedium: TextStyle(color: Color.fromARGB(200, 11, 24, 47)),
     bodySmall: TextStyle(color: Color(0xff0B182F)),
@@ -36,6 +37,7 @@ final darkThemeData = ThemeData(
   scaffoldBackgroundColor: const Color(0xff0B182F),
   iconTheme: const IconThemeData(color: Colors.white),
   cardColor: const Color(0xff0B182F),
+  disabledColor: const Color.fromARGB(169, 251, 251, 251),
   textTheme: const TextTheme(
       labelMedium: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
       bodySmall: TextStyle(color: Colors.white),

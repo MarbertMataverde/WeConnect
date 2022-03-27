@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../phone%20view/home/channel%20box/channel_inside.dart';
 import '../../../phone%20view/home/channel%20box/channel_join.dart';
 import '../../../../controller/controller_account_information.dart';
@@ -44,13 +45,9 @@ class _ChannelListState extends State<ChannelList> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const WidgetNavigationDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Channel List',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Channels',
         actions: [
           Visibility(
             visible: currentAccountType == 'accountTypeProfessor',
@@ -60,10 +57,8 @@ class _ChannelListState extends State<ChannelList> {
                 Get.to(() => const ChannelNew());
               },
               icon: Icon(
-                MdiIcons.messagePlusOutline,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
+                Iconsax.message_add,
+                color: Theme.of(context).iconTheme.color,
               ),
             ),
           ),
@@ -75,10 +70,8 @@ class _ChannelListState extends State<ChannelList> {
                 Get.to(() => const ChannelJoin());
               },
               icon: Icon(
-                MdiIcons.shapeRectanglePlus,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
+                Iconsax.message_add,
+                color: Theme.of(context).iconTheme.color,
               ),
             ),
           ),
@@ -89,10 +82,8 @@ class _ChannelListState extends State<ChannelList> {
                   Scaffold.of(context).openEndDrawer();
                 },
                 icon: Icon(
-                  MdiIcons.menu,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
+                  Iconsax.menu,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               );
             }),
@@ -109,13 +100,14 @@ class _ChannelListState extends State<ChannelList> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SpinKitSpinningLines(color: Get.theme.primaryColor);
+            return buildGlobalSpinkit(context: context);
           }
           final data = snapshot.requireData;
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
               return buildChannelTile(
+                context: context,
                 channelAvatarImage: data.docs[index]['channel-avatar-image'],
                 channelAdminName: data.docs[index]['channel-admin-name'],
                 channelName: data.docs[index]['channel-name'],
@@ -139,6 +131,7 @@ class _ChannelListState extends State<ChannelList> {
 }
 
 Widget buildChannelTile({
+  required BuildContext context,
   required String channelAvatarImage, // used both for creating and deleting
   required String channelAdminName,
   required String channelName,
@@ -151,12 +144,25 @@ Widget buildChannelTile({
     child: ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(channelAvatarImage),
+        radius: 10.w,
+        backgroundImage: NetworkImage(
+          channelAvatarImage,
+        ),
       ),
       title: Text(
         channelName,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          color: Theme.of(context).textTheme.bodyMedium!.color,
+        ),
       ),
-      subtitle: Text(channelAdminName),
+      subtitle: Text(
+        channelAdminName,
+        style: TextStyle(
+          color: Theme.of(context).textTheme.labelMedium!.color,
+        ),
+      ),
       trailing: Visibility(
         visible: currentAccountType.toString() == 'accountTypeProfessor',
         child: FocusedMenuHolder(
@@ -175,7 +181,7 @@ Widget buildChannelTile({
           menuItems: [
             focusMenuItem(
               'Delete Channel',
-              MdiIcons.deleteOutline,
+              Iconsax.trash,
               Colors.red,
               () => channelDialog.deleteChannelDialog(
                 Get.context,
@@ -188,11 +194,8 @@ Widget buildChannelTile({
               ),
             )
           ],
-          child: Icon(
-            MdiIcons.dotsVerticalCircleOutline,
-            color:
-                Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-          ),
+          child: Icon(Iconsax.more_square,
+              color: Theme.of(context).iconTheme.color),
         ),
       ),
     ),

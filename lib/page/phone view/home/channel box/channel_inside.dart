@@ -3,7 +3,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
+import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../dialog/dialog_channel.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
@@ -72,12 +76,17 @@ class _ChannelInsideState extends State<ChannelInside> {
         .orderBy('announcement-created-at', descending: false)
         .snapshots();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: AppBarTitle(
-          title: widget.channelName,
+      appBar: buildAppBar(
+        context: context,
+        title: widget.channelName,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
         actions: [
           IconButton(
@@ -88,10 +97,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                     ));
               },
               icon: Icon(
-                Icons.settings_outlined,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
+                Iconsax.setting,
+                color: Theme.of(context).iconTheme.color,
               ))
         ],
       ),
@@ -107,7 +114,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SpinKitSpinningLines(color: Get.theme.primaryColor);
+                  return buildGlobalSpinkit(context: context);
                 }
                 final data = snapshot.requireData;
                 return SingleChildScrollView(
@@ -136,13 +143,13 @@ class _ChannelInsideState extends State<ChannelInside> {
             visible: currentAccountType == 'accountTypeProfessor',
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: Get.mediaQuery.size.height * 0.01),
+                  vertical: MediaQuery.of(context).size.height * 0.01),
               child: Row(
                 children: [
                   Form(
                     autovalidateMode: AutovalidateMode.always,
                     child: SizedBox(
-                      width: Get.mediaQuery.size.width,
+                      width: MediaQuery.of(context).size.width,
                       child: Row(
                         children: [
                           GetBuilder<ControllerGetX>(builder: (controller) {
@@ -152,41 +159,39 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       GetBuilder<ControllerGetX>(
                                           builder: (selectFileController) {
                                         return IconButton(
-                                            splashRadius:
-                                                Get.mediaQuery.size.width *
-                                                    0.05,
-                                            onPressed: selectFileController
-                                                    .fileIconButtonEnable
-                                                ? () {
-                                                    selectFile()
-                                                        .whenComplete(() {
-                                                      if (pickedFile != null) {
-                                                        getxContoller
-                                                            .emptyFilesForSendButton(
-                                                                false);
-                                                        getxContoller
-                                                            .reEnableSelectImageIconButton(
-                                                                false);
-                                                      } else {
-                                                        getxContoller
-                                                            .emptyFilesForSendButton(
-                                                                true);
-                                                        getxContoller
-                                                            .reEnableSelectImageIconButton(
-                                                                true);
-                                                      }
-                                                    });
-                                                  }
-                                                : null,
-                                            icon: Icon(
-                                              MdiIcons.filePlusOutline,
+                                          splashRadius:
+                                              Get.mediaQuery.size.width * 0.05,
+                                          onPressed: selectFileController
+                                                  .fileIconButtonEnable
+                                              ? () {
+                                                  selectFile().whenComplete(() {
+                                                    if (pickedFile != null) {
+                                                      getxContoller
+                                                          .emptyFilesForSendButton(
+                                                              false);
+                                                      getxContoller
+                                                          .reEnableSelectImageIconButton(
+                                                              false);
+                                                    } else {
+                                                      getxContoller
+                                                          .emptyFilesForSendButton(
+                                                              true);
+                                                      getxContoller
+                                                          .reEnableSelectImageIconButton(
+                                                              true);
+                                                    }
+                                                  });
+                                                }
+                                              : null,
+                                          icon: Icon(Iconsax.document_text,
                                               color: selectFileController
                                                       .fileIconButtonEnable
-                                                  ? Get.isDarkMode
-                                                      ? kButtonColorDarkTheme
-                                                      : kButtonColorLightTheme
-                                                  : Get.theme.disabledColor,
-                                            ));
+                                                  ? Theme.of(context)
+                                                      .iconTheme
+                                                      .color
+                                                  : Theme.of(context)
+                                                      .disabledColor),
+                                        );
                                       }),
                                       GetBuilder<ControllerGetX>(
                                           builder: (selectImageController) {
@@ -218,13 +223,14 @@ class _ChannelInsideState extends State<ChannelInside> {
                                                   }
                                                 : null,
                                             icon: Icon(
-                                              MdiIcons.fileImagePlusOutline,
+                                              Iconsax.gallery_add,
                                               color: selectImageController
                                                       .imageIconButtonEnable
-                                                  ? Get.isDarkMode
-                                                      ? kButtonColorDarkTheme
-                                                      : kButtonColorLightTheme
-                                                  : Get.theme.disabledColor,
+                                                  ? Theme.of(context)
+                                                      .iconTheme
+                                                      .color
+                                                  : Theme.of(context)
+                                                      .disabledColor,
                                             ));
                                       }),
                                     ],
@@ -234,12 +240,19 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       getxContoller
                                           .emptyTextFieldForUploadButton(true);
                                     },
-                                    icon: const Icon(
-                                      MdiIcons.arrowRightDropCircleOutline,
-                                    ));
+                                    icon: Icon(
+                                      Iconsax.arrow_right,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                  );
                           }),
                           Expanded(
-                            child: buildAnnouncementTextFormField(
+                            child: CustomTextFormField(
+                              ctrlr: announcementCtrlr,
+                              isPassword: false,
+                              minimumLine: 1,
+                              maxLine: 5,
+                              hint: 'Write Announcement...',
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   getxContoller.emptyTextFieldForSendButton(
@@ -254,7 +267,6 @@ class _ChannelInsideState extends State<ChannelInside> {
                                 }
                                 return null;
                               },
-                              ctrlr: announcementCtrlr,
                             ),
                           ),
                           GetBuilder<ControllerGetX>(builder: (controller) {
@@ -287,11 +299,14 @@ class _ChannelInsideState extends State<ChannelInside> {
                                           .reEnableSelectImageIconButton(true);
                                     },
                               icon: Icon(
-                                MdiIcons.sendOutline,
+                                controller.filesEmpty &&
+                                        controller.textFieldEmptySend
+                                    ? Iconsax.send_1
+                                    : Iconsax.send_2,
                                 color: controller.filesEmpty &&
                                         controller.textFieldEmptySend
-                                    ? Get.theme.disabledColor
-                                    : Get.theme.primaryColor,
+                                    ? Theme.of(context).disabledColor
+                                    : Theme.of(context).primaryColor,
                               ),
                             );
                           }),
@@ -307,33 +322,4 @@ class _ChannelInsideState extends State<ChannelInside> {
       ),
     );
   }
-}
-
-Widget buildAnnouncementTextFormField({
-  required String? Function(String?)? validator,
-  required TextEditingController ctrlr,
-}) {
-  return TextFormField(
-    minLines: 1,
-    maxLines: 5,
-    validator: validator,
-    keyboardType: TextInputType.text,
-    controller: ctrlr,
-    style: kLoginPageTextFormFieldTextStyle,
-    cursorColor: Get.isDarkMode
-        ? kTextFormFieldCursorColorDarkTheme
-        : kTextFormFieldCursorColorLightTheme,
-    decoration: InputDecoration(
-      errorStyle: TextStyle(
-        color: Get.theme.primaryColor.withAlpha(180),
-      ),
-      filled: kTrue,
-      fillColor: Get.isDarkMode
-          ? kTextFormFieldColorDarkTheme
-          : kTextFormFieldColorLightTheme,
-      hintText: 'Write announcement 🔥',
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-    ),
-  );
 }

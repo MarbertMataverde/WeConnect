@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 
 import '../../../../controller/controller_account_information.dart';
 import '../../../../widgets/announcement post tile/coa_announcement_post_tile.dart';
+import '../../../../widgets/global spinkit/global_spinkit.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import '../upload post/upload_post.dart';
 
@@ -86,7 +86,7 @@ class _CoaFeedState extends State<CoaFeed> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return SpinKitSpinningLines(color: Get.theme.primaryColor);
+              return buildGlobalSpinkit(context: context);
             }
             final data = snapshot.requireData;
             return ListView.builder(

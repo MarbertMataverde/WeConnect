@@ -3,15 +3,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
 import '../../../../constant/constant_colors.dart';
@@ -70,31 +71,23 @@ class _ChannelNewState extends State<ChannelNew> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+      appBar: buildAppBar(
+        context: context,
+        title: 'New Channel',
         leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              MdiIcons.arrowLeft,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
-            )),
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Create New Channel',
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
         actions: [
           isCreating
               ? Padding(
                   padding: EdgeInsets.only(right: 2.5.w),
-                  child: SpinKitSpinningLines(
-                    color: Get.theme.primaryColor,
-                    size: Get.mediaQuery.size.width * 0.08,
-                  ),
+                  child: buildGlobalSpinkit(context: context),
                 )
               : IconButton(
                   onPressed: checkIconButtonIsEnable && selectedImage != null
@@ -115,12 +108,10 @@ class _ChannelNewState extends State<ChannelNew> {
                         }
                       : null,
                   icon: Icon(
-                    MdiIcons.check,
+                    Iconsax.tick_square,
                     color: checkIconButtonIsEnable && selectedImage != null
-                        ? Get.theme.primaryColor
-                        : Get.isDarkMode
-                            ? kButtonColorDarkTheme
-                            : kButtonColorLightTheme,
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).disabledColor,
                   ),
                 ),
         ],
@@ -130,40 +121,34 @@ class _ChannelNewState extends State<ChannelNew> {
         child: Column(
           children: [
             selectedImage != null
-                ? ClipOval(
-                    child: Material(
-                      color: Get.theme.primaryColor, // Button color
-                      child: InkWell(
-                        splashColor:
-                            Get.theme.dialogBackgroundColor, // Splash color
-                        onTap: () {
-                          pickImage();
-                        },
-                        child: Image.file(
-                          selectedImage!,
-                          width: Get.mediaQuery.size.width * 0.25,
-                          height: Get.mediaQuery.size.width * 0.25,
-                          fit: BoxFit.cover,
-                        ),
+                ? GestureDetector(
+                    onTap: () {
+                      pickImage();
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.w),
+                      child: Image.file(
+                        selectedImage!,
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   )
-                : ClipOval(
-                    child: Material(
-                      color: Get.theme.primaryColor, // Button color
-                      child: InkWell(
-                        splashColor:
-                            Get.theme.dialogBackgroundColor, // Splash color
-                        onTap: () {
-                          pickImage();
-                        },
-                        child: SizedBox(
-                          width: Get.mediaQuery.size.width * 0.25,
-                          height: Get.mediaQuery.size.width * 0.25,
-                          child: Icon(
-                            MdiIcons.camera,
-                            size: 10.w,
-                          ),
+                : Material(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(5.w),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5.w),
+                      onTap: () {
+                        pickImage();
+                      },
+                      child: SizedBox(
+                        width: Get.mediaQuery.size.width * 0.25,
+                        height: Get.mediaQuery.size.width * 0.25,
+                        child: Icon(
+                          Iconsax.gallery_add,
+                          size: 10.w,
                         ),
                       ),
                     ),
@@ -217,7 +202,7 @@ class _ChannelNewState extends State<ChannelNew> {
                           onPressed: () {
                             channelJoinTokenCtrlr.text = getRandomString(7);
                           },
-                          icon: const Icon(Icons.generating_tokens_outlined),
+                          icon: const Icon(Iconsax.text_block),
                         ),
                       ),
                       Expanded(
@@ -233,7 +218,7 @@ class _ChannelNewState extends State<ChannelNew> {
                                       GetSnackBar(
                                         icon: Icon(
                                           MdiIcons.checkBold,
-                                          color: Get.theme.primaryColor,
+                                          color: Theme.of(context).primaryColor,
                                         ),
                                         margin: EdgeInsets.all(2.w),
                                         borderRadius: 1.w,
@@ -247,7 +232,7 @@ class _ChannelNewState extends State<ChannelNew> {
                                   );
                                 }
                               : null,
-                          icon: const Icon(Icons.copy_outlined),
+                          icon: const Icon(Iconsax.copy),
                         ),
                       ),
                     ],

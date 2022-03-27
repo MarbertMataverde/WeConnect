@@ -118,7 +118,7 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                         keyboardType: TextInputType.multiline,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Description name is required 📜';
+                            return 'Description is required 📜';
                           }
                         },
                       ),
