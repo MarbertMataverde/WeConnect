@@ -1,24 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../dialog/dialog_channel.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
-import '../../../phone%20view/home/channel%20box/channel_announcement_tiles.dart';
-import '../../../../constant/constant.dart';
+import 'channel_announcement_tiles.dart';
+import 'copy.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_getx.dart';
 import '../../../phone%20view/home/channel%20box/channel_settings.dart';
-
-import '../../../../constant/constant_colors.dart';
-import '../../../../constant/constant_login_page.dart';
 
 class ChannelInside extends StatefulWidget {
   const ChannelInside(
@@ -124,7 +118,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: data.size,
                     itemBuilder: (context, index) {
-                      return channelTile(
+                      return buildAnnouncementChannelTile(
+                          context: context,
                           announcementMessage: data.docs[index]
                               ['announcement-message'],
                           announcementFileList: data.docs[index]
@@ -276,7 +271,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       controller.textFieldEmptySend
                                   ? null
                                   : () async {
-                                      channel.uploadAnnouncement(
+                                      await channel.uploadAnnouncement(
                                         token: widget.token,
                                         channelName: widget.channelName,
                                         adminName:

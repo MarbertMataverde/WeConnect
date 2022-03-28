@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
@@ -13,7 +12,6 @@ import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../../../dialog/dialog_channel.dart';
 
-import '../../../../constant/constant_colors.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 import 'channel_new.dart';
