@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../page/phone%20view/home/drawer/MVG/mvg.dart';
+import '../../page/phone view/home/drawer/mvg/mvg.dart';
 import '../../page/phone%20view/home/drawer/about/about.dart';
 import '../../page/phone%20view/home/drawer/gallery/gallery.dart';
 import '../../page/phone%20view/home/drawer/student%20downloadable%20forms/downloadable_forms.dart';

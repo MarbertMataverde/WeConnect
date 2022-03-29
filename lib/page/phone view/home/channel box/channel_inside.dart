@@ -3,13 +3,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:weconnect/page/phone%20view/home/channel%20box/channel_announcement_tile.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../dialog/dialog_channel.dart';
-import 'channel_announcement_tiles.dart';
-import 'copy.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_getx.dart';
 import '../../../phone%20view/home/channel%20box/channel_settings.dart';
@@ -35,7 +34,19 @@ class ChannelInside extends StatefulWidget {
 
 class _ChannelInsideState extends State<ChannelInside> {
   //controllers
-  final TextEditingController announcementCtrlr = TextEditingController();
+  late TextEditingController announcementCtrlr;
+  @override
+  void initState() {
+    super.initState();
+    announcementCtrlr = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    announcementCtrlr;
+  }
+
   final getxContoller = Get.put(ControllerGetX());
   //image picker
   FilePickerResult? pickedImage;
@@ -56,9 +67,6 @@ class _ChannelInsideState extends State<ChannelInside> {
       type: FileType.custom,
     );
   }
-
-  //is focused?
-  bool isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +105,7 @@ class _ChannelInsideState extends State<ChannelInside> {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
@@ -118,11 +127,11 @@ class _ChannelInsideState extends State<ChannelInside> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: data.size,
                     itemBuilder: (context, index) {
-                      return buildAnnouncementChannelTile(
+                      return channelTile(
                           context: context,
                           announcementMessage: data.docs[index]
                               ['announcement-message'],
-                          announcementFileList: data.docs[index]
+                          fileUrl: data.docs[index]
                               ['announcement-file-urls'],
                           announcementImageList: data.docs[index]
                               ['announcement-image-urls'],

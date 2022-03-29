@@ -6,6 +6,7 @@ import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:weconnect/page/phone%20view/home/channel%20box/channel_annoucnement_clicked.dart';
 
 import '../../../../constant/constant_colors.dart';
 
@@ -13,30 +14,33 @@ channelTile({
   required BuildContext context,
   required String announcementMessage,
   required List announcementImageList,
-  required List announcementFileList,
+  required List fileUrl,
   required Timestamp announcementCreatedAt,
 }) {
   if (announcementMessage.isNotEmpty) {
     if (announcementImageList.isNotEmpty) {
-      if (announcementFileList.isNotEmpty) {
+      if (fileUrl.isNotEmpty) {
         // all field has data
         return buildChannelAllHasDataTile(
+            context: context,
             announcementMessage: announcementMessage,
-            announcementFileList: announcementFileList,
+            fileUrl: fileUrl,
             announcementImageList: announcementImageList,
             announcementCreatedAt: announcementCreatedAt);
       } else {
         //announcement message and image only
         return buildChannelMessageAndImageTile(
+            context: context,
             announcementMessage: announcementMessage,
             announcementImageList: announcementImageList,
             announcementCreatedAt: announcementCreatedAt);
       }
-    } else if (announcementFileList.isNotEmpty) {
+    } else if (fileUrl.isNotEmpty) {
       //announcement message and file only
       return buildChannelMessageAndFileUrlTile(
+          context: context,
           announcementMessage: announcementMessage,
-          announcementFileList: announcementFileList,
+          fileUrl: fileUrl,
           announcementCreatedAt: announcementCreatedAt);
     } else {
       //announcement message only
@@ -46,22 +50,25 @@ channelTile({
           announcementCreatedAt: announcementCreatedAt);
     }
   } else if (announcementImageList.isNotEmpty) {
-    if (announcementFileList.isNotEmpty) {
+    if (fileUrl.isNotEmpty) {
       // image and file only
       return buildChannelImageAndFileUrlTile(
-          announcementFileList: announcementFileList,
+          context: context,
+          fileUrl: fileUrl,
           announcementImageList: announcementImageList,
           announcementCreatedAt: announcementCreatedAt);
     } else {
       //image only
       return buildChannelImageOnly(
+          context: context,
           announcementImageList: announcementImageList,
           announcementCreatedAt: announcementCreatedAt);
     }
-  } else if (announcementFileList.isNotEmpty) {
+  } else if (fileUrl.isNotEmpty) {
     //file only
     return buildChannelFileOnly(
-        announcementFileList: announcementFileList,
+        context: context,
+        fileUrl: fileUrl,
         announcementCreatedAt: announcementCreatedAt);
   }
 }
@@ -75,92 +82,86 @@ Widget buildChannelMessageOnlyTile({
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withAlpha(15),
+        color: Theme.of(context).primaryColor.withAlpha(30),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(2.w),
+          bottomRight: Radius.circular(2.w),
+          bottomLeft: Radius.circular(2.w),
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(2.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                linkWell(announcementMessage),
-                timeAgoFormat(announcementCreatedAt),
-              ],
-            ),
-          ),
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(2.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            linkWell(
+                context: context, announcementMessage: announcementMessage),
+            announcementTime(context, announcementCreatedAt),
+          ],
+        ),
       ),
     ),
   );
 }
 
 Widget buildChannelImageOnly({
+  required BuildContext context,
   required List announcementImageList,
   required Timestamp announcementCreatedAt,
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          announcementImageList.length == 1
-              ? Image.network(announcementImageList.first)
-              : carouselSlider(announcementImageList),
-          Padding(
-            padding: EdgeInsets.all(2.w),
-            child: timeAgoFormat(announcementCreatedAt),
-          )
-        ],
-      ),
+    child: Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        announcementImageList.length == 1
+            ? singleImage(announcementImageList)
+            : carouselSlider(announcementImageList),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: announcementTime(context, announcementCreatedAt),
+        ),
+      ],
     ),
   );
 }
 
 Widget buildChannelFileOnly({
-  required List announcementFileList,
+  required BuildContext context,
+  required List fileUrl,
   required Timestamp announcementCreatedAt,
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor.withAlpha(30),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(5.w),
-          topRight: Radius.circular(5.w),
-          bottomRight: Radius.circular(5.w),
+          topRight: Radius.circular(2.w),
+          bottomRight: Radius.circular(2.w),
+          bottomLeft: Radius.circular(2.w),
+          topLeft: Radius.circular(2.w),
         ),
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
       ),
       child: Padding(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(2.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Downloadable File Here 📁",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(color: Get.theme.primaryColor),
+              child: Text(
+                getFileName(fileUrl.first),
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               onTap: () async {
-                final url = announcementFileList.first;
+                final url = fileUrl.first;
                 if (await canLaunch(url)) launch(url);
               },
             ),
-            timeAgoFormat(announcementCreatedAt),
+            announcementTime(context, announcementCreatedAt),
           ],
         ),
       ),
@@ -169,31 +170,39 @@ Widget buildChannelFileOnly({
 }
 
 Widget buildChannelMessageAndImageTile({
+  required BuildContext context,
   required String announcementMessage,
   required List announcementImageList,
   required Timestamp announcementCreatedAt,
 }) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+  return GestureDetector(
+    onTap: () => Get.to(
+      () => ChannelTileCliked(
+        announcementImageList: announcementImageList,
+        announcementMessage: announcementMessage,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      transition: Transition.downToUp,
+      duration: const Duration(milliseconds: 700),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
+      child: Stack(
+        alignment: Alignment.bottomLeft,
         children: [
           announcementImageList.length == 1
-              ? Image.network(announcementImageList.first)
+              ? singleImage(announcementImageList)
               : carouselSlider(announcementImageList),
           Padding(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(3.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                linkWell(announcementMessage),
-                timeAgoFormat(announcementCreatedAt),
+                linkWell(
+                  maxLines: 3,
+                  context: context,
+                  announcementMessage: announcementMessage,
+                ),
+                announcementTime(context, announcementCreatedAt)
               ],
             ),
           ),
@@ -204,53 +213,55 @@ Widget buildChannelMessageAndImageTile({
 }
 
 Widget buildChannelMessageAndFileUrlTile({
+  required BuildContext context,
   required String announcementMessage,
-  required List announcementFileList,
+  required List fileUrl,
   required Timestamp announcementCreatedAt,
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+        color: Theme.of(context).primaryColor.withAlpha(30),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(2.w),
+          bottomRight: Radius.circular(2.w),
+          bottomLeft: Radius.circular(2.w),
+          topLeft: Radius.circular(2.w),
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: EdgeInsets.all(3.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            linkWell(
+                context: context, announcementMessage: announcementMessage),
+            SizedBox(height: 1.h),
+            GestureDetector(
               child: Text(
-                "Downloadable File Here 📁",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Get.theme.primaryColor),
+                getFileName(fileUrl.first),
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+              onTap: () async {
+                final url = fileUrl.first;
+                if (await canLaunch(url)) launch(url);
+              },
             ),
-            onTap: () async {
-              final url = announcementFileList.first;
-              if (await canLaunch(url)) launch(url);
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.all(2.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                linkWell(announcementMessage),
-                timeAgoFormat(announcementCreatedAt),
-              ],
-            ),
-          ),
-        ],
+            announcementTime(context, announcementCreatedAt),
+          ],
+        ),
       ),
     ),
   );
 }
 
 Widget buildChannelImageAndFileUrlTile({
-  required List announcementFileList,
+  required BuildContext context,
+  required List fileUrl,
   required List announcementImageList,
   required Timestamp announcementCreatedAt,
 }) {
@@ -278,7 +289,7 @@ Widget buildChannelImageAndFileUrlTile({
               ),
             ),
             onTap: () async {
-              final url = announcementFileList.first;
+              final url = fileUrl.first;
               if (await canLaunch(url)) launch(url);
             },
           ),
@@ -287,7 +298,10 @@ Widget buildChannelImageAndFileUrlTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                timeAgoFormat(announcementCreatedAt),
+                timeAgoFormat(
+                  context: context,
+                  announcementCreatedAt: announcementCreatedAt,
+                ),
               ],
             ),
           ),
@@ -298,8 +312,9 @@ Widget buildChannelImageAndFileUrlTile({
 }
 
 Widget buildChannelAllHasDataTile({
+  required BuildContext context,
   required String announcementMessage,
-  required List announcementFileList,
+  required List fileUrl,
   required List announcementImageList,
   required Timestamp announcementCreatedAt,
 }) {
@@ -327,7 +342,7 @@ Widget buildChannelAllHasDataTile({
               ),
             ),
             onTap: () async {
-              final url = announcementFileList.first;
+              final url = fileUrl.first;
               if (await canLaunch(url)) launch(url);
             },
           ),
@@ -336,8 +351,12 @@ Widget buildChannelAllHasDataTile({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                linkWell(announcementMessage),
-                timeAgoFormat(announcementCreatedAt),
+                linkWell(
+                    context: context, announcementMessage: announcementMessage),
+                timeAgoFormat(
+                  context: context,
+                  announcementCreatedAt: announcementCreatedAt,
+                ),
               ],
             ),
           ),
@@ -352,13 +371,15 @@ CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
     items: announcementImageList
         .map(
           (item) => Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.w),
-            child: Image.network(
-              item,
-              fit: BoxFit.cover,
-              width: Get.mediaQuery.size.width,
-            ),
-          ),
+              padding: EdgeInsets.symmetric(horizontal: 1.w),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(2.w),
+                child: Image.network(
+                  item,
+                  width: 100.w,
+                  fit: BoxFit.fitWidth,
+                ),
+              )),
         )
         .toList(),
     options: CarouselOptions(
@@ -366,7 +387,7 @@ CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
       aspectRatio: 16 / 9,
       viewportFraction: 1,
       initialPage: 0,
-      enableInfiniteScroll: true,
+      enableInfiniteScroll: false,
       autoPlay: true,
       autoPlayInterval: const Duration(seconds: 5),
       autoPlayAnimationDuration: const Duration(milliseconds: 900),
@@ -377,22 +398,54 @@ CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
   );
 }
 
-Text timeAgoFormat(Timestamp announcementCreatedAt) {
+Text timeAgoFormat({
+  required BuildContext context,
+  required Timestamp announcementCreatedAt,
+}) {
   return Text(
     timeago.format(announcementCreatedAt.toDate(), locale: 'en_short'),
     textScaleFactor: 0.8,
-    style: TextStyle(
-      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+    style: TextStyle(color: Theme.of(context).textTheme.labelMedium!.color),
+  );
+}
+
+LinkWell linkWell({
+  required BuildContext context,
+  required String announcementMessage,
+  int? maxLines,
+}) {
+  return LinkWell(
+    announcementMessage,
+    maxLines: maxLines,
+    overflow: TextOverflow.fade,
+    linkStyle: TextStyle(color: Theme.of(context).primaryColor),
+    style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+  );
+}
+
+Align announcementTime(context, Timestamp announcementCreatedAt) {
+  return Align(
+    alignment: Alignment.centerRight,
+    child: timeAgoFormat(
+      context: context,
+      announcementCreatedAt: announcementCreatedAt,
     ),
   );
 }
 
-LinkWell linkWell(String announcementMessage) {
-  return LinkWell(
-    announcementMessage,
-    linkStyle: TextStyle(
-      color: Get.theme.primaryColor,
-    ),
-    style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+ClipRRect singleImage(List<dynamic> announcementImageList) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(2.w),
+    child: Image.network(announcementImageList.first),
   );
+}
+
+//this will get the file name in the firebase storage download link
+String getFileName(String url) {
+  RegExp regExp = RegExp(r'.+(\/|%2F)(.+)\?.+');
+  //This Regex won't work if you remove ?alt...token
+  var matches = regExp.allMatches(url);
+
+  var match = matches.elementAt(0);
+  return Uri.decodeFull(match.group(2)!);
 }
