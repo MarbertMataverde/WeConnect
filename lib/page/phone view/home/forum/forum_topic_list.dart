@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_topic_details.dart';
 import '../../../phone%20view/home/forum/open_new_topic.dart';
-
-import '../../../../constant/constant_colors.dart';
 
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
 
@@ -36,13 +34,9 @@ class _ForumState extends State<Forum> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const WidgetNavigationDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Campus Forum',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Forum',
         actions: [
           IconButton(
             tooltip: 'Open New Topic🔥',
@@ -50,10 +44,8 @@ class _ForumState extends State<Forum> {
               Get.to(() => const OpenNewTopic());
             },
             icon: Icon(
-              MdiIcons.textBoxPlusOutline,
-              color: Get.isDarkMode
-                  ? kButtonColorDarkTheme
-                  : kButtonColorLightTheme,
+              Iconsax.message_add_1,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           Builder(
@@ -62,12 +54,8 @@ class _ForumState extends State<Forum> {
                 onPressed: () {
                   Scaffold.of(context).openEndDrawer();
                 },
-                icon: Icon(
-                  MdiIcons.menu,
-                  color: Get.isDarkMode
-                      ? kButtonColorDarkTheme
-                      : kButtonColorLightTheme,
-                ),
+                icon: Icon(Iconsax.menu,
+                    color: Theme.of(context).iconTheme.color),
               );
             }),
           ),
@@ -81,13 +69,14 @@ class _ForumState extends State<Forum> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SpinKitSpinningLines(color: Get.theme.primaryColor);
+            return buildGlobalSpinkit(context: context);
           }
           final data = snapshot.requireData;
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
               return buildChannelTile(
+                context: context,
                 topicOwnerName: data.docs[index]['requested-by'],
                 topicTitle: data.docs[index]['topic-title'],
                 topicVotes: data.docs[index]['votes'],
@@ -119,6 +108,7 @@ class _ForumState extends State<Forum> {
 }
 
 Widget buildChannelTile({
+  required BuildContext context,
   required String topicOwnerName,
   required String topicTitle,
   required List topicVotes,
@@ -127,41 +117,79 @@ Widget buildChannelTile({
   //deleting channel
   required String channelDocId,
 }) {
-  return ListTile(
-    enableFeedback: true,
-    onTap: onCliked,
-    contentPadding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.5.h),
-    title: Text(
-      topicTitle,
-      textScaleFactor: 1.1,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: Get.theme.primaryColor),
-    ),
-    subtitle: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          topicOwnerName,
-          textScaleFactor: 0.9,
-          style: const TextStyle(height: 0.8),
-        ),
-        SizedBox(
-          height: 1.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('${topicVotes.length} Votes ❤'),
-            Text(
-              DateFormat('d MMM yyyy').format(
-                topicAcceptedDate.toDate(),
-              ),
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+    child: Card(
+      child: InkWell(
+        onTap: onCliked,
+        borderRadius: BorderRadius.circular(4),
+        child: ListTile(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.5.h),
+          title: Text(
+            topicTitle,
+            textScaleFactor: 1.1,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w500,
             ),
-          ],
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                topicOwnerName,
+                textScaleFactor: 0.9,
+                style: TextStyle(
+                  height: 1.2,
+                  color: Theme.of(context).textTheme.labelMedium!.color,
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: '${topicVotes.length} ',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyMedium!.color,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: 'Votes ',
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .color,
+                              )),
+                          const TextSpan(
+                              text: '❤',
+                              style: TextStyle(
+                                color: Colors.red,
+                              )),
+                        ]),
+                  ),
+                  Text(
+                    DateFormat('d MMM yyyy').format(
+                      topicAcceptedDate.toDate(),
+                    ),
+                    textScaleFactor: 0.8,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.labelMedium!.color,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     ),
-    textColor: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
   );
 }
