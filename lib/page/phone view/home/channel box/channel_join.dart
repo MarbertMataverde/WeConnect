@@ -1,20 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
-
-import '../../../../constant/constant_colors.dart';
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
