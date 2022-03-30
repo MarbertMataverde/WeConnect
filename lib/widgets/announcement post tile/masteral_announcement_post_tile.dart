@@ -343,7 +343,7 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
               ),
               focusMenuItem(
                 'Report',
-                Iconsax.danger,
+                Iconsax.warning_2,
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
