@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
@@ -37,21 +40,22 @@ class _ChannelJoinState extends State<ChannelJoin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Join Channel',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Join Channel',
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            )),
         actions: [
           isJoining
               ? Padding(
                   padding: EdgeInsets.only(right: 2.5.w),
-                  child: SpinKitSpinningLines(
-                    color: Get.theme.primaryColor,
-                    size: Get.mediaQuery.size.width * 0.08,
-                  ),
+                  child: buildGlobalSpinkit(context: context),
                 )
               : IconButton(
                   onPressed: checkIconButtonIsEnable
@@ -68,12 +72,10 @@ class _ChannelJoinState extends State<ChannelJoin> {
                         }
                       : null,
                   icon: Icon(
-                    MdiIcons.check,
+                    Iconsax.tick_square,
                     color: checkIconButtonIsEnable
-                        ? Get.theme.primaryColor
-                        : Get.isDarkMode
-                            ? kButtonColorDarkTheme
-                            : kButtonColorLightTheme,
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).disabledColor,
                   ),
                 ),
         ],
