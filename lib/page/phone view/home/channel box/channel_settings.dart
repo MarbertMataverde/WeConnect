@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
-import '../../../../constant/constant_colors.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
+import '../../../../widgets/snakbar/snakbar.dart';
 
 class ChannelSettings extends StatelessWidget {
   const ChannelSettings(
-      {Key? key, required this.channelAvatarImage, required this.channelName})
+      {Key? key,
+      required this.channelAvatarImage,
+      required this.channelName,
+      required this.channelToken})
       : super(key: key);
 
   final String channelAvatarImage;
   final String channelName;
+  final String channelToken;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Settings',
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.delete_outline,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              ))
-        ],
+      appBar: buildAppBar(
+        context: context,
+        title: 'Settings',
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            )),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: Get.mediaQuery.size.width * 0.15,
+            radius: MediaQuery.of(context).size.width * 0.15,
             backgroundImage: NetworkImage(channelAvatarImage),
           ),
           SizedBox(
-            height: Get.mediaQuery.size.height * 0.01,
+            height: MediaQuery.of(context).size.height * 0.01,
           ),
           Text(
             channelName,
@@ -53,18 +53,38 @@ class ChannelSettings extends StatelessWidget {
             child: ListView(
               children: [
                 buildListItem(
+                  context: context,
+                  title: channelToken,
+                  icon: Iconsax.copy,
+                  iconColor: Theme.of(context).primaryColor,
+                  onCliked: () {
+                    Clipboard.setData(ClipboardData(text: channelToken)).then(
+                      (value) => Get.showSnackbar(
+                        globalSnackBar(
+                          context: context,
+                          message: 'Token copied to clipboard',
+                          icon: Iconsax.copy,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                buildListItem(
+                  context: context,
                   title: 'Change Channel Name',
-                  icon: Icons.abc,
+                  icon: Iconsax.edit_2,
                   onCliked: () {},
                 ),
                 buildListItem(
+                  context: context,
                   title: 'Change Channel Avatar Image',
-                  icon: MdiIcons.imageOutline,
+                  icon: Iconsax.gallery_edit,
                   onCliked: () {},
                 ),
                 buildListItem(
+                  context: context,
                   title: 'Members',
-                  icon: MdiIcons.accountMultipleOutline,
+                  icon: Iconsax.profile_2user,
                   onCliked: () {},
                 ),
               ],
@@ -74,26 +94,23 @@ class ChannelSettings extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget buildListItem({
-  required String title,
-  required IconData icon,
-  VoidCallback? onCliked,
-}) {
-  return ListTile(
-    contentPadding:
-        EdgeInsets.symmetric(horizontal: Get.mediaQuery.size.width * 0.05),
-    trailing: Icon(
-      icon,
-      color: Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-    ),
-    title: Text(
-      title,
-      style: TextStyle(
-        color: Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+  GetSnackBar globalSnackBar({
+    required BuildContext context,
+    required String message,
+    required IconData icon,
+  }) {
+    return GetSnackBar(
+      icon: Icon(
+        icon,
+        color: Theme.of(context).primaryColor,
       ),
-    ),
-    onTap: onCliked,
-  );
+      margin: EdgeInsets.all(2.w),
+      borderRadius: 1.w,
+      backgroundColor: Theme.of(context).primaryColor.withAlpha(10),
+      message: message,
+      duration: const Duration(seconds: 1),
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+    );
+  }
 }

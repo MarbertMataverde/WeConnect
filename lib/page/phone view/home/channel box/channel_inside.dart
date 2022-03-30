@@ -94,6 +94,7 @@ class _ChannelInsideState extends State<ChannelInside> {
           IconButton(
               onPressed: () {
                 Get.to(() => ChannelSettings(
+                      channelToken: widget.token,
                       channelAvatarImage: widget.channelAvatarImage,
                       channelName: widget.channelName,
                     ));
@@ -131,8 +132,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                           context: context,
                           announcementMessage: data.docs[index]
                               ['announcement-message'],
-                          fileUrl: data.docs[index]
-                              ['announcement-file-urls'],
+                          fileUrl: data.docs[index]['announcement-file-urls'],
                           announcementImageList: data.docs[index]
                               ['announcement-image-urls'],
                           announcementCreatedAt: data.docs[index]
