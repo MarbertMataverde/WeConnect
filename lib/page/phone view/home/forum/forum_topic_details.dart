@@ -47,7 +47,7 @@ class ForumTopicDetails extends StatefulWidget {
 class _ForumTopicDetailsState extends State<ForumTopicDetails> {
   //controller
   final TextEditingController commentCtrlr = TextEditingController();
-  bool isFabVisible = false;
+  bool isFabVisible = true;
 
   @override
   Widget build(BuildContext context) {
