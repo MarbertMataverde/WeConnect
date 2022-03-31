@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../controller/controller_forum.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/comment/comment_tile.dart';
@@ -38,13 +41,17 @@ class ForumCommentListState extends State<ForumCommentList> {
         .orderBy('commented-date', descending: true)
         .snapshots();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Comments',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Comments',
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            )),
       ),
       body: Column(
         children: [
@@ -58,7 +65,7 @@ class ForumCommentListState extends State<ForumCommentList> {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SpinKitSpinningLines(color: Get.theme.primaryColor);
+                  return buildGlobalSpinkit(context: context);
                 }
                 final data = snapshot.requireData;
                 return ListView.builder(
