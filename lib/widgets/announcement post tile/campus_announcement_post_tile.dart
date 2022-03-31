@@ -196,7 +196,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
           circleColor:
               const CircleColor(start: Colors.yellow, end: Colors.cyan),
           bubblesColor: BubblesColor(
-            dotPrimaryColor: Get.theme.primaryColor,
+            dotPrimaryColor: Theme.of(context).primaryColor,
             dotSecondaryColor: Colors.red,
           ),
           likeBuilder: (isLiked) => Icon(

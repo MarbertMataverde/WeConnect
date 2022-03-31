@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../controller/controller_vote.dart';
 import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';
@@ -17,8 +20,8 @@ import '../../../../../constant/constant_colors.dart';
 
 final ControllerForum forum = Get.put(ControllerForum());
 
-class ForumTopicDetails extends StatelessWidget {
-  ForumTopicDetails({
+class ForumTopicDetails extends StatefulWidget {
+  const ForumTopicDetails({
     Key? key,
     required this.requesterProfileImageUrl,
     required this.requestedBy,
@@ -40,162 +43,188 @@ class ForumTopicDetails extends StatelessWidget {
 
   //request dismissal
   final String topicDocId;
+
+  @override
+  State<ForumTopicDetails> createState() => _ForumTopicDetailsState();
+}
+
+class _ForumTopicDetailsState extends State<ForumTopicDetails> {
   //controller
   final TextEditingController commentCtrlr = TextEditingController();
+  bool isFabVisible = false;
+
   @override
   Widget build(BuildContext context) {
-    int likeCount = topicVotes.length;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
-          title: 'Topic Details',
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: 'Details',
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            )),
+        actions: currentAccountType == 'accountTypeCampusAdmin' ||
+                currentAccountType == 'accountTypeRegistrarAdmin'
+            ? [
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Iconsax.trash,
+                      color: Colors.red.shade300,
+                    )),
+              ]
+            : null,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(5.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  //profile image
-                  CircleAvatar(
-                    radius: Get.mediaQuery.size.width * 0.07,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: FadeInImage.assetNetwork(
-                        placeholder: randomAvatarImageAsset(),
-                        image: requesterProfileImageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        requestedBy,
-                        textScaleFactor: 1.2,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
+      body: NotificationListener<UserScrollNotification>(
+        onNotification: (notification) {
+          if (notification.direction == ScrollDirection.forward) {
+            setState(() => isFabVisible = true);
+          } else if (notification.direction == ScrollDirection.reverse) {
+            setState(() => isFabVisible = false);
+          }
+          return true;
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(5.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    //profile image
+                    CircleAvatar(
+                      radius: Get.mediaQuery.size.width * 0.07,
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: FadeInImage.assetNetwork(
+                          placeholder: randomAvatarImageAsset(),
+                          image: widget.requesterProfileImageUrl,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        DateFormat('d MMM yyyy').format(
-                          topicApprovedDate.toDate(),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.requestedBy,
+                          textScaleFactor: 1.2,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
+                          ),
                         ),
-                        textScaleFactor: 0.7,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Get.isDarkMode
-                              ? kTextColorDarkTheme
-                              : kTextColorLightTheme,
+                        Text(
+                          DateFormat('d MMM yyyy').format(
+                            widget.topicApprovedDate.toDate(),
+                          ),
+                          textScaleFactor: 0.8,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Theme.of(context).textTheme.labelMedium!.color,
+                          ),
                         ),
+                      ],
+                    ),
+                    const Spacer(),
+                    LikeButton(
+                      circleColor: const CircleColor(
+                          start: Colors.yellow, end: Colors.cyan),
+                      bubblesColor: BubblesColor(
+                        dotPrimaryColor: Get.theme.primaryColor,
+                        dotSecondaryColor: Colors.red,
                       ),
-                    ],
-                  ),
-                  const Spacer(),
-                  LikeButton(
-                    size: 20.sp,
-                    circleColor: const CircleColor(
-                        start: Colors.yellow, end: Colors.cyan),
-                    bubblesColor: BubblesColor(
-                      dotPrimaryColor: Get.theme.primaryColor,
-                      dotSecondaryColor: Colors.red,
+                      likeBuilder: (isLiked) => Icon(
+                        widget.topicVotes.isEmpty
+                            ? Iconsax.heart
+                            : Iconsax.lovely,
+                        color: isLiked ? Colors.red : Colors.grey,
+                        size: 20.sp,
+                      ),
+                      likeCountPadding: EdgeInsets.only(left: 2.5.w),
+                      likeCount: widget.topicVotes.length,
+                      countBuilder: (count, isLiked, text) {
+                        final color = isLiked ? Colors.red : Colors.grey;
+                        return Text(
+                          text,
+                          style: TextStyle(
+                            color: color,
+                          ),
+                        );
+                      },
+                      isLiked: widget.topicVotes.contains(currentUserId),
+                      onTap: (isLiked) async {
+                        isLiked
+                            ? await removeVote(
+                                collection: 'forum',
+                                docName: 'approved-request',
+                                subCollection: 'all-approved-request',
+                                topicDocId: widget.topicDocId,
+                                currentUid: [currentUserId],
+                              )
+                            : await addVote(
+                                collection: 'forum',
+                                docName: 'approved-request',
+                                subCollection: 'all-approved-request',
+                                topicDocId: widget.topicDocId,
+                                currentUid: [currentUserId],
+                              );
+                        return !isLiked;
+                      },
                     ),
-                    likeBuilder: (isLiked) => Icon(
-                      MdiIcons.heart,
-                      color: isLiked ? Colors.red : Colors.grey,
-                      size: 20.sp,
-                    ),
-                    likeCountPadding: EdgeInsets.only(left: 2.5.w),
-                    likeCount: likeCount,
-                    countBuilder: (count, isLiked, text) {
-                      final color = isLiked ? Colors.red : Colors.grey;
-                      return Text(
-                        text,
-                        style: TextStyle(
-                          color: color,
-                        ),
-                      );
-                    },
-                    isLiked: topicVotes.contains(currentUserId),
-                    onTap: (isLiked) async {
-                      isLiked
-                          ? await removeVote(
-                              collection: 'forum',
-                              docName: 'approved-request',
-                              subCollection: 'all-approved-request',
-                              topicDocId: topicDocId,
-                              currentUid: [currentUserId],
-                            )
-                          : await addVote(
-                              collection: 'forum',
-                              docName: 'approved-request',
-                              subCollection: 'all-approved-request',
-                              topicDocId: topicDocId,
-                              currentUid: [currentUserId],
-                            );
-                      return !isLiked;
-                    },
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(
+                  widget.topicTitle,
+                  textScaleFactor: 1.3,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(
-                topicTitle,
-                textScaleFactor: 1.3,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              LinkWell(
-                topicDescription,
-                style: TextStyle(
-                  color: Get.isDarkMode
-                      ? kTextColorDarkTheme
-                      : kTextColorLightTheme,
+                SizedBox(
+                  height: 1.h,
                 ),
-                linkStyle: TextStyle(
-                  color: Get.theme.primaryColor,
+                LinkWell(
+                  widget.topicDescription,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
+                  ),
+                  linkStyle: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
-              ),
-              Divider(
-                height: 2.h,
-                color: Get.isDarkMode
-                    ? kButtonColorDarkTheme
-                    : kButtonColorLightTheme,
-              ),
-              // ignore: prefer_const_constructors
-              TextButton.icon(
-                onPressed: () {
-                  Get.to(() => ForumCommentList(
-                        topicDocId: topicDocId,
-                      ));
-                },
-                style: TextButton.styleFrom(
-                  primary: Get.theme.primaryColor,
-                  fixedSize: Size.fromWidth(100.w),
-                ),
-                icon: const Icon(MdiIcons.commentOutline),
-                label: const Text('Write Comment'),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
+      floatingActionButton: isFabVisible
+          ? FloatingActionButton(
+              backgroundColor: Theme.of(context).primaryColor,
+              child: const Icon(Iconsax.message_add),
+              onPressed: () {
+                Get.to(
+                  () => ForumCommentList(
+                    topicDocId: widget.topicDocId,
+                  ),
+                );
+              },
+            )
+          : null,
     );
   }
 }
