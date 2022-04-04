@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../constant/constant_colors.dart';
-
 Widget drawerItems({
+  required BuildContext context,
   required String title,
   required IconData icon,
   VoidCallback? onCliked,
@@ -14,14 +12,10 @@ Widget drawerItems({
     child: ListTile(
       trailing: Icon(
         icon,
-        color: Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
+        color: Theme.of(context).iconTheme.color,
       ),
       title: Text(
         title,
-        style: TextStyle(
-          color:
-              Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
-        ),
       ),
       onTap: onCliked,
     ),

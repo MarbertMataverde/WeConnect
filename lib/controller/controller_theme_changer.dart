@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ControllerChangeTheme extends GetxController {
-  void toggleChangeTheme() {
+  void toggleChangeTheme() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     if (Get.isDarkMode) {
-      Get.changeTheme(ThemeData.light());
+      sharedPreferences.setString('theme', 'light');
     } else {
-      Get.changeTheme(ThemeData.dark());
+      sharedPreferences.setString('theme', 'dark');
     }
     update();
   }

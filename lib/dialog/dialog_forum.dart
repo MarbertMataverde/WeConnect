@@ -22,7 +22,7 @@ class DialogForum extends GetxController {
     showDialog(
       context: _context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(_context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,

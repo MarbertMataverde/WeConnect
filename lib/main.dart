@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/setting/them_config.dart';
 
 import 'firebase_options.dart';
 import 'page/phone view/sign in/phone_view.dart';
@@ -29,6 +30,9 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     getAccountInformation();
+    currentTheme.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -46,7 +50,7 @@ class _InitialPageState extends State<InitialPage> {
           debugShowCheckedModeBanner: false,
           theme: lightThemeData,
           darkTheme: darkThemeData,
-          themeMode: ThemeMode.light,
+          themeMode: currentTheme.currentTheme(),
           defaultTransition: Transition.fadeIn,
           home: SafeArea(
             child: LayoutBuilder(

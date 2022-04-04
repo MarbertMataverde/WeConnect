@@ -22,6 +22,7 @@ String? currentProfileName;
 String? currentProfileImageUrl;
 String? currentUserId;
 bool? isSignedIn;
+String? userThemePreference = 'light'; // default  light
 
 class ControllerAccountInformation extends GetxController {
   Future getter(String _currentUid) async {
