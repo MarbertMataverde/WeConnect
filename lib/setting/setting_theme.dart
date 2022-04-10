@@ -10,7 +10,7 @@ final lightThemeData = ThemeData(
     color: Color(0xffffffff),
     shadowColor: Color.fromARGB(70, 0, 0, 0),
   ),
-  disabledColor: const Color(0xff172A46),
+  disabledColor: const Color.fromARGB(255, 160, 160, 160),
   textTheme: const TextTheme(
     labelMedium: TextStyle(color: Color.fromARGB(200, 11, 24, 47)),
     bodySmall: TextStyle(color: Color(0xff0B182F)),
@@ -46,7 +46,7 @@ final darkThemeData = ThemeData(
     color: Color(0xff0B182F),
     shadowColor: Color.fromARGB(70, 255, 255, 255),
   ),
-  disabledColor: const Color.fromARGB(169, 251, 251, 251),
+  disabledColor: const Color.fromARGB(255, 95, 95, 95),
   textTheme: const TextTheme(
       labelMedium: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
       bodySmall: TextStyle(color: Colors.white),
