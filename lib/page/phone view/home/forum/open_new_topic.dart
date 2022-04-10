@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
-import '../../../../widgets/appbar/appbar_title.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
-
 
 // Validation Key
 final _validationKey = GlobalKey<FormState>();
@@ -25,14 +25,40 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const AppBarTitle(
+      appBar: buildAppBar(
+          context: context,
           title: 'Open Topic',
-        ),
-      ),
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            ),
+          ),
+          actions: [
+            IconButton(
+              tooltip: 'Send Request',
+              onPressed: fieldIsValid
+                  ? () async {
+                      await forum.forumTopicRequest(
+                          requestedBy: currentProfileName.toString(),
+                          requesterProfileImageUrl:
+                              currentProfileImageUrl.toString(),
+                          requesterUid: currentUserId.toString(),
+                          topicTitle: titleCtrlr.text,
+                          topicDescription: descriptionCtrlr.text);
+                    }
+                  : null,
+              icon: Icon(
+                Iconsax.direct_send,
+                color: fieldIsValid
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).disabledColor,
+              ),
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
@@ -83,40 +109,10 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
               SizedBox(
                 height: 1.h,
               ),
-              buildPublishRequestButton(
-                hint: 'Publish My Request 📣',
-                onClicked: () async {
-                  await forum.forumTopicRequest(
-                      requestedBy: currentProfileName.toString(),
-                      requesterProfileImageUrl:
-                          currentProfileImageUrl.toString(),
-                      requesterUid: currentUserId.toString(),
-                      topicTitle: titleCtrlr.text,
-                      topicDescription: descriptionCtrlr.text);
-                },
-                isFormValid: fieldIsValid,
-              ),
             ],
           ),
         ),
       ),
     );
   }
-}
-
-TextButton buildPublishRequestButton({
-  required VoidCallback onClicked,
-  required String hint,
-  required bool isFormValid,
-}) {
-  return TextButton(
-      style: TextButton.styleFrom(
-        primary: isFormValid ? Colors.white : Get.theme.disabledColor,
-        backgroundColor: isFormValid ? Get.theme.primaryColor : null,
-      ),
-      onPressed: isFormValid ? onClicked : null,
-      child: Text(
-        hint,
-        textScaleFactor: 1.1,
-      ));
 }
