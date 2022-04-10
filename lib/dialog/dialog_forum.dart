@@ -23,6 +23,12 @@ class DialogForum extends GetxController {
       context: _context,
       builder: (_) => AssetGiffDialog(
         buttonOkColor: Theme.of(_context).primaryColor,
+        buttonOkText: const Text(
+          'Yes',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -41,18 +47,20 @@ class DialogForum extends GetxController {
           await forum.dismissRequest(requestDocId: requestDocId);
           Get.back();
           Get.back();
-          Get.showSnackbar(GetSnackBar(
-            icon: Icon(
-              MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+          Get.showSnackbar(
+            GetSnackBar(
+              icon: Icon(
+                MdiIcons.checkBold,
+                color: Get.theme.primaryColor,
+              ),
+              margin: EdgeInsets.all(2.w),
+              borderRadius: 1.w,
+              backgroundColor: kButtonColorLightTheme,
+              message: 'Success request has been removed.',
+              duration: const Duration(seconds: 1),
+              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
             ),
-            margin: EdgeInsets.all(2.w),
-            borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
-            message: 'Success request has been removed.',
-            duration: const Duration(seconds: 2),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-          ));
+          );
         },
       ),
     );
@@ -76,7 +84,7 @@ class DialogForum extends GetxController {
     showDialog(
       context: _context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(_context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -105,13 +113,13 @@ class DialogForum extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+              color: Theme.of(_context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
             backgroundColor: kButtonColorLightTheme,
             message: 'Success request has been approved.',
-            duration: const Duration(seconds: 2),
+            duration: const Duration(seconds: 1),
             forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
           ));
         },
