@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../dialog/dialog_forum.dart';
@@ -35,16 +37,21 @@ class RequestDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          centerTitle: true,
-          title: const AppBarTitle(
-            title: 'Request Details',
+        appBar: buildAppBar(
+          context: context,
+          title: 'Details',
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            ),
           ),
           actions: [
             IconButton(
-              tooltip: 'Dismiss Request❌',
+              tooltip: 'Dismiss',
               onPressed: () async {
                 await forum.dismissRequestDialog(
                   context,
@@ -55,12 +62,12 @@ class RequestDetails extends StatelessWidget {
                 );
               },
               icon: const Icon(
-                Icons.remove_circle_outline,
+                Iconsax.close_square,
                 color: Colors.red,
               ),
             ),
             IconButton(
-              tooltip: 'Publish Request🔥',
+              tooltip: 'Approve',
               onPressed: () async {
                 await forum.requestApprovalDialog(context,
                     assetLocation: 'assets/gifs/question_mark.gif',
@@ -75,8 +82,8 @@ class RequestDetails extends StatelessWidget {
                     requestDocId: requestDocId);
               },
               icon: Icon(
-                MdiIcons.publish,
-                color: Get.theme.primaryColor,
+                Iconsax.tick_square,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ],
@@ -89,9 +96,13 @@ class RequestDetails extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: Get.mediaQuery.size.width * 0.07,
-                      backgroundImage: NetworkImage(requesterProfileImageUrl),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5.w),
+                      child: Image.network(
+                        requesterProfileImageUrl,
+                        height: MediaQuery.of(context).size.width * 0.2,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(
                       width: 3.w,
@@ -102,18 +113,19 @@ class RequestDetails extends StatelessWidget {
                         Text(
                           requestedBy,
                           textScaleFactor: 1.2,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
                           timeago.format(requestedAt.toDate()),
-                          textScaleFactor: 0.7,
+                          textScaleFactor: 0.9,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
+                            color:
+                                Theme.of(context).textTheme.labelMedium!.color,
                           ),
                         ),
                       ],
@@ -124,16 +136,21 @@ class RequestDetails extends StatelessWidget {
                   height: 2.h,
                 ),
                 Text(
-                  topicTitle,
-                  textScaleFactor: 1.3,
+                  topicTitle.toUpperCase(),
+                  textScaleFactor: 1.2,
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 SizedBox(
                   height: 1.h,
                 ),
-                Text(topicDescription),
+                Text(
+                  topicDescription,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.labelMedium!.color,
+                  ),
+                ),
               ],
             ),
           ),
