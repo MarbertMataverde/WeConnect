@@ -77,7 +77,7 @@ class _ForumState extends State<Forum> {
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
-              return buildChannelTile(
+              return buildTopicTile(
                 context: context,
                 topicOwnerName: data.docs[index]['requested-by'],
                 topicTitle: data.docs[index]['topic-title'],
@@ -109,7 +109,7 @@ class _ForumState extends State<Forum> {
   }
 }
 
-Widget buildChannelTile({
+Widget buildTopicTile({
   required BuildContext context,
   required String topicOwnerName,
   required String topicTitle,
@@ -119,101 +119,97 @@ Widget buildChannelTile({
   //deleting channel
   required String channelDocId,
 }) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
-    child: Card(
-      child: InkWell(
-        onTap: onCliked,
-        borderRadius: BorderRadius.circular(4),
-        child: Slidable(
-          endActionPane: ActionPane(
-            motion: const StretchMotion(),
-            children: currentAccountType == 'accountTypeCampusAdmin'
-                ? [
-                    SlidableAction(
-                      onPressed: (_) {},
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Iconsax.trash,
-                      label: 'Delete',
-                    ),
-                  ]
-                : [
-                    SlidableAction(
-                      onPressed: (_) {},
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Iconsax.warning_2,
-                      label: 'Report',
-                    ),
-                  ],
-          ),
-          child: ListTile(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.5.h),
-            title: Text(
-              topicTitle,
-              textScaleFactor: 1.1,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  topicOwnerName,
-                  textScaleFactor: 0.9,
-                  style: TextStyle(
-                    height: 1.2,
-                    color: Theme.of(context).textTheme.labelMedium!.color,
+  return Card(
+    child: InkWell(
+      onTap: onCliked,
+      borderRadius: BorderRadius.circular(4),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const StretchMotion(),
+          children: currentAccountType == 'accountTypeCampusAdmin'
+              ? [
+                  SlidableAction(
+                    onPressed: (_) {},
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    icon: Iconsax.trash,
+                    label: 'Delete',
                   ),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                          text: '${topicVotes.length} ',
-                          style: TextStyle(
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: 'Votes ',
-                                style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                )),
-                            const TextSpan(
-                                text: '❤',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                )),
-                          ]),
-                    ),
-                    Text(
-                      DateFormat('d MMM yyyy').format(
-                        topicAcceptedDate.toDate(),
-                      ),
-                      textScaleFactor: 0.8,
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.labelMedium!.color,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                ]
+              : [
+                  SlidableAction(
+                    onPressed: (_) {},
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    icon: Iconsax.warning_2,
+                    label: 'Report',
+                  ),
+                ],
+        ),
+        child: ListTile(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.5.h),
+          title: Text(
+            topicTitle,
+            textScaleFactor: 1.1,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w500,
             ),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                topicOwnerName,
+                textScaleFactor: 1,
+                style: TextStyle(
+                  height: 1.2,
+                  color: Theme.of(context).textTheme.labelMedium!.color,
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: '${topicVotes.length} ',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyMedium!.color,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: 'Votes ',
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .color,
+                              )),
+                          const TextSpan(
+                              text: '❤',
+                              style: TextStyle(
+                                color: Colors.red,
+                              )),
+                        ]),
+                  ),
+                  Text(
+                    DateFormat('d MMM yyyy').format(
+                      topicAcceptedDate.toDate(),
+                    ),
+                    textScaleFactor: 0.8,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.labelMedium!.color,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
