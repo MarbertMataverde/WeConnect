@@ -4,14 +4,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../../dialog/dialog_forum.dart';
 import '../../../../phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
-
-import '../../../../../constant/constant_colors.dart';
 
 class ForumTopicRequestList extends StatefulWidget {
   const ForumTopicRequestList({Key? key}) : super(key: key);
@@ -59,51 +56,51 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
             itemCount: data.size,
             itemBuilder: (context, index) {
               Timestamp reportedAt = data.docs[index]['requested-at'];
-              return Slidable(
-                endActionPane: ActionPane(
-                  motion: const StretchMotion(),
-                  dragDismissible: true,
-                  children: [
-                    SlidableAction(
-                      onPressed: (_) {
-                        forum.requestApprovalDialog(context,
+              return Card(
+                child: Slidable(
+                  endActionPane: ActionPane(
+                    motion: const StretchMotion(),
+                    dragDismissible: true,
+                    children: [
+                      SlidableAction(
+                        onPressed: (_) {
+                          forum.requestApprovalDialog(context,
+                              assetLocation: 'assets/gifs/question_mark.gif',
+                              title: 'Request Approval',
+                              description:
+                                  'Are you sure about approving this topic request?',
+                              requestedBy: data.docs[index]['requested-by'],
+                              requesterProfileImageUrl: data.docs[index]
+                                  ['requester-profile-image-url'],
+                              requesterUid: data.docs[index]['requester-uid'],
+                              topicTitle: data.docs[index]['topic-title'],
+                              topicDescription: data.docs[index]
+                                  ['topic-description'],
+                              requestDocId: data.docs[index].id);
+                        },
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        icon: Iconsax.tick_square,
+                        label: 'Publish',
+                      ),
+                      SlidableAction(
+                        onPressed: (_) {
+                          forum.dismissRequestDialog(
+                            context,
                             assetLocation: 'assets/gifs/question_mark.gif',
-                            title: 'Request Approval',
+                            title: 'Request Dismissal',
                             description:
-                                'Are you sure about approving this topic request?',
-                            requestedBy: data.docs[index]['requested-by'],
-                            requesterProfileImageUrl: data.docs[index]
-                                ['requester-profile-image-url'],
-                            requesterUid: data.docs[index]['requester-uid'],
-                            topicTitle: data.docs[index]['topic-title'],
-                            topicDescription: data.docs[index]
-                                ['topic-description'],
-                            requestDocId: data.docs[index].id);
-                      },
-                      backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor: Colors.white,
-                      icon: Iconsax.tick_square,
-                      label: 'Publish',
-                    ),
-                    SlidableAction(
-                      onPressed: (_) {
-                        forum.dismissRequestDialog(
-                          context,
-                          assetLocation: 'assets/gifs/question_mark.gif',
-                          title: 'Request Dismissal',
-                          description:
-                              'Are you sure about dismissing this request?',
-                          requestDocId: data.docs[index].id,
-                        );
-                      },
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Iconsax.close_square,
-                      label: 'Dismiss',
-                    ),
-                  ],
-                ),
-                child: Card(
+                                'Are you sure about dismissing this request?',
+                            requestDocId: data.docs[index].id,
+                          );
+                        },
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        icon: Iconsax.close_square,
+                        label: 'Dismiss',
+                      ),
+                    ],
+                  ),
                   child: ListTile(
                     onTap: () {
                       Get.to(
