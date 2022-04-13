@@ -13,6 +13,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../../../../constant/constant.dart';
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_post_tile_pop_up_menu.dart';
+import '../../../../../controller/controller_report.dart';
 import '../../../../../dialog/dialog_post_tile_.dart';
 import '../../edit post caption/edit_caption.dart';
 import '../../post details/post_details.dart';
@@ -27,6 +28,9 @@ final box = GetStorage();
 //dialogs
 final dialogs = Get.put(DialogPostTile());
 
+//report
+final report = Get.put(ControllerReport());
+
 class ReportedPostTile extends StatelessWidget {
   const ReportedPostTile({
     Key? key,
@@ -38,8 +42,10 @@ class ReportedPostTile extends StatelessWidget {
     //deletion constructor
     required this.announcementTypeDoc,
     required this.postDocId,
-    required this.media,
+    required this.media, required this.reportDocId,
   }) : super(key: key);
+  //dismissal or deletion of the report details
+  final String reportDocId;
   //when announcement post created
   final Timestamp postCreatedAt;
   //account name
@@ -168,6 +174,14 @@ class ReportedPostTile extends StatelessWidget {
                           announcementTypeDoc,
                           postDocId,
                           postMedia,
+                        );
+                        await report.dismissReport(
+                          context: context,
+                          title: 'Report Dismissal',
+                          assetLocation: 'assets/gifs/dismiss_report.gif',
+                          description:
+                              'Are you sure you want to dissmiss this issue?',
+                          reportDocId: reportDocId,
                         );
                       },
                     ),

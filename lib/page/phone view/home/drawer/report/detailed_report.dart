@@ -109,7 +109,8 @@ class DetailedReport extends StatelessWidget {
                       announcementTypeDoc: reportType,
                       postDocId: postDocId,
                       media: _imageList,
-                      //edit caption
+                      //dismissal of report
+                      reportDocId: reportDocId,
                     );
                   }
 
