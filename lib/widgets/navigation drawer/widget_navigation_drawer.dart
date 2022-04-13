@@ -65,7 +65,6 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             icon: isLightTheme ? Iconsax.sun_1 : Iconsax.moon,
             onCliked: () {
               currentTheme.switchTheme();
-              
             },
           ),
           //account divider
@@ -79,12 +78,12 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
               selectedItem(context, 0);
             },
           ),
-          drawerItems(
-            context: context,
-            title: 'Edit Sign In Details',
-            icon: Iconsax.sms_edit,
-            onCliked: () {},
-          ),
+          // drawerItems(
+          //   context: context,
+          //   title: 'Edit Sign In Details',
+          //   icon: Iconsax.sms_edit,
+          //   onCliked: () {},
+          // ),
 
           //reported post
           Visibility(

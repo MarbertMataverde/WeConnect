@@ -21,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
     this.inputAction,
     this.maxCharLength,
     this.initialValue,
+    this.isEnable,
+    this.disableColor,
   }) : super(key: key);
   //?controller
   final TextEditingController? ctrlr;
@@ -46,10 +48,15 @@ class CustomTextFormField extends StatelessWidget {
   // max char length of the text field
   final int? maxCharLength;
   final String? initialValue;
+  //is disable
+  final bool? isEnable;
+  // disable color
+  final Color? disableColor;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: isEnable,
       initialValue: initialValue,
       textInputAction: inputAction,
       minLines: minimumLine,
@@ -72,7 +79,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         suffixIcon: suffixWidget,
         filled: kTrue,
-        fillColor: Theme.of(context).primaryColor.withAlpha(15),
+        fillColor: disableColor ?? Theme.of(context).primaryColor.withAlpha(15),
         hintText: hint,
         hintStyle:
             TextStyle(color: Theme.of(context).textTheme.labelMedium!.color),
