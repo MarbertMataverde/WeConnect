@@ -39,7 +39,7 @@ void selectedItem(
       break;
     case 7:
       //Mission Vision Goal of URS
-      Get.to(() => const MVG());
+      Get.to(() => const MVC());
       break;
     case 8:
       //Downlodable forms

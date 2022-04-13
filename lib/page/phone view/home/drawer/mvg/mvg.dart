@@ -1,49 +1,68 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../constant/constant_colors.dart';
 
-import '../../../../../widgets/appbar/appbar_title.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
 
-class MVG extends StatelessWidget {
-  const MVG({Key? key}) : super(key: key);
+class MVC extends StatelessWidget {
+  const MVC({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const AppBarTitle(title: 'URS M-V-G'),
-          centerTitle: true,
+        appBar: buildAppBar(
+          context: context,
+          title: 'MVC',
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(5.w),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildTitle(title: '🎯 Mission'),
+                _buildTitle(
+                  context: context,
+                  title: 'Mission',
+                ),
                 const Divider(),
                 _buildAnimatedText(
+                    context: context,
                     content: mission,
                     duration: const Duration(milliseconds: 20)),
                 SizedBox(
                   height: 5.h,
                 ),
-                _buildTitle(title: '👁️ Vision'),
+                _buildTitle(
+                  context: context,
+                  title: 'Vision',
+                ),
                 const Divider(),
                 _buildAnimatedText(
+                  context: context,
                   content: vision,
                   duration: const Duration(milliseconds: 40),
                 ),
                 SizedBox(
                   height: 5.h,
                 ),
-                _buildTitle(title: '☺ Core Values'),
+                _buildTitle(
+                  context: context,
+                  title: 'Core Values',
+                ),
                 const Divider(),
                 _buildAnimatedText(
+                  context: context,
                   content: coreValues,
                   duration: const Duration(milliseconds: 70),
                 ),
@@ -56,16 +75,23 @@ class MVG extends StatelessWidget {
 
 Widget _buildTitle({
   required String title,
+  required BuildContext context,
 }) {
   return DefaultTextStyle(
     style: TextStyle(
-      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-      fontSize: 20.sp,
+      color: Theme.of(context).primaryColor,
+      fontSize: 25.sp,
     ),
     child: AnimatedTextKit(
       isRepeatingAnimation: false,
       animatedTexts: [
-        TyperAnimatedText(title, speed: const Duration(milliseconds: 150)),
+        TyperAnimatedText(
+          title,
+          textAlign: TextAlign.center,
+          speed: const Duration(
+            milliseconds: 150,
+          ),
+        ),
       ],
       onTap: () {
         debugPrint("Tap Event");
@@ -77,15 +103,20 @@ Widget _buildTitle({
 Widget _buildAnimatedText({
   required String content,
   required Duration duration,
+  required BuildContext context,
 }) {
   return DefaultTextStyle(
     style: TextStyle(
-      color: Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
+      color: Theme.of(context).textTheme.labelMedium!.color,
     ),
     child: AnimatedTextKit(
       isRepeatingAnimation: false,
       animatedTexts: [
-        TypewriterAnimatedText(content, speed: duration),
+        TypewriterAnimatedText(
+          content,
+          textAlign: TextAlign.center,
+          speed: duration,
+        ),
       ],
       onTap: () {
         debugPrint("Tap Event");
