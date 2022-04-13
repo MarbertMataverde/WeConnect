@@ -31,8 +31,15 @@ class PhoneViewSignIn extends StatefulWidget {
 class _PhoneViewSignInState extends State<PhoneViewSignIn> {
   bool isLoading = false;
 
-  final TextEditingController _emailCtrlr = TextEditingController();
-  final TextEditingController _passwordCtrlr = TextEditingController();
+  late TextEditingController _emailCtrlr;
+  late TextEditingController _passwordCtrlr;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailCtrlr = TextEditingController();
+    _passwordCtrlr = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {

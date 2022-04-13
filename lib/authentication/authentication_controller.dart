@@ -178,8 +178,8 @@ class Authentication extends GetxController {
         dialog.emailAlreadyInUseDialog(
             _context,
             'assets/gifs/exsisting_account_found.gif',
-            'Email Already In Use 🤨',
-            'Your email is already in use 🤔 \nIf you forgot your password you can change it now by clicking the reset button 😉'); // student
+            'Email Already In Use',
+            'If you forgot your password you can change it now by clicking the reset button'); // student
       }
     } catch (e) {
       dialog.somethingWentWrongDialog(

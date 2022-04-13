@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../authentication/authentication_controller.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/button/custom_button.dart';
+import '../../../../widgets/global spinkit/global_spinkit.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
 
 final authentication = Get.put(Authentication());
@@ -37,16 +39,16 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+      appBar: buildAppBar(
+        context: context,
+        title: '',
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
           icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Get.theme.primaryColor,
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
         actions: [
@@ -56,7 +58,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
               child: Text(
                 'Acess Code: $_accessCode',
                 style: TextStyle(
-                  color: Get.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -77,7 +79,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                 'Professor Sign Up 👨🏻‍🏫',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  color: Get.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -93,6 +95,8 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                 child: Column(
                   children: [
                     CustomTextFormField(
+                      minimumLine: 1,
+                      maxLine: 1,
                       ctrlr: _nameCtrlr,
                       hint: 'Full Name',
                       isPassword: kFalse,
@@ -109,6 +113,8 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      minimumLine: 1,
+                      maxLine: 1,
                       ctrlr: _contNumCtrlr,
                       hint: 'Contact Number',
                       isPassword: kFalse,
@@ -128,6 +134,8 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      minimumLine: 1,
+                      maxLine: 1,
                       ctrlr: _employeeNumCtrlr,
                       hint: 'Employee Number',
                       isPassword: kFalse,
@@ -153,6 +161,8 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     ),
                     SizedBox(height: 1.h),
                     CustomTextFormField(
+                      minimumLine: 1,
+                      maxLine: 1,
                       ctrlr: _emailCtrlr,
                       hint: 'Email Address',
                       isPassword: kFalse,
@@ -172,6 +182,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     ),
                     SizedBox(height: 2.h),
                     CustomTextFormField(
+                      minimumLine: 1,
                       maxLine: 1,
                       ctrlr: _passwordCtrlr,
                       hint: 'Password',
@@ -192,12 +203,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
