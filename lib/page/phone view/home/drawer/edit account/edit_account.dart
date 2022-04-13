@@ -184,7 +184,7 @@ class _EditAccountState extends State<EditAccount> {
                           children: [
                             buildEditableTextField(
                               context: context,
-                              label: 'Full Name',
+                              label: 'Full Name  (LN, FN MI)',
                               initialValue: data['profile-name'],
                             ),
                             buildEditableTextField(

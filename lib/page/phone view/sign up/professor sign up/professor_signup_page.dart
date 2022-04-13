@@ -98,7 +98,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                       minimumLine: 1,
                       maxLine: 1,
                       ctrlr: _nameCtrlr,
-                      hint: 'Full Name',
+                      hint: 'Full Name (LN, FN MI)',
                       isPassword: kFalse,
                       keyboardType: TextInputType.text,
                       validator: (value) {
