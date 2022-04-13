@@ -65,18 +65,21 @@ class ControllerReport extends GetxController {
         onOkButtonPressed: () async {
           await firestore.collection('reports').doc(reportDocId).delete();
           Get.back();
-          Get.showSnackbar(GetSnackBar(
-            icon: Icon(
-              MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+          Get.back();
+          Get.showSnackbar(
+            GetSnackBar(
+              icon: Icon(
+                MdiIcons.checkBold,
+                color: Get.theme.primaryColor,
+              ),
+              margin: EdgeInsets.all(2.w),
+              borderRadius: 1.w,
+              backgroundColor: kButtonColorLightTheme,
+              message: 'Success report has been dismiss.',
+              duration: const Duration(seconds: 1),
+              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
             ),
-            margin: EdgeInsets.all(2.w),
-            borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
-            message: 'Success report has been dismiss.',
-            duration: const Duration(seconds: 3),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-          ));
+          );
         },
       ),
     );

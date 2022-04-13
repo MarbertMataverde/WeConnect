@@ -28,13 +28,14 @@ class ReportList extends StatelessWidget {
         context: context,
         title: 'Reports',
         leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Iconsax.arrow_square_left,
-              color: Theme.of(context).iconTheme.color,
-            )),
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: reportStream,
@@ -59,21 +60,24 @@ class ReportList extends StatelessWidget {
                     children: [
                       SlidableAction(
                         onPressed: (_) {
-                          Get.to(() => DetailedReport(
-                                //reported post tile
-                                reportType: data.docs[index]['report-type'],
-                                postDocId: data.docs[index]
-                                    ['post-documment-id'],
-                                //reporter concerns
-                                reportedAt: data.docs[index]['reported-at'],
-                                reporterName: data.docs[index]['reporter-name'],
-                                reporterProfileImageUrl: data.docs[index]
-                                    ['reporter-profile-image-url'],
-                                reportedConcern: data.docs[index]
-                                    ['report-concern'],
-                                reportedConcernDescription: data.docs[index]
-                                    ['report-concern-description'],
-                              ));
+                          Get.to(
+                            () => DetailedReport(
+                              //reported post tile
+                              reportType: data.docs[index]['report-type'],
+                              postDocId: data.docs[index]['post-documment-id'],
+                              //reporter concerns
+                              reportedAt: data.docs[index]['reported-at'],
+                              reporterName: data.docs[index]['reporter-name'],
+                              reporterProfileImageUrl: data.docs[index]
+                                  ['reporter-profile-image-url'],
+                              reportedConcern: data.docs[index]
+                                  ['report-concern'],
+                              reportedConcernDescription: data.docs[index]
+                                  ['report-concern-description'],
+                              //dismissal
+                              reportDocId: data.docs[index].id,
+                            ),
+                          );
                         },
                         backgroundColor: Theme.of(context).primaryColor,
                         foregroundColor: Colors.white,
@@ -100,19 +104,22 @@ class ReportList extends StatelessWidget {
                   ),
                   child: ListTile(
                     onTap: () {
-                      Get.to(() => DetailedReport(
-                            //reported post tile
-                            reportType: data.docs[index]['report-type'],
-                            postDocId: data.docs[index]['post-documment-id'],
-                            //reporter concerns
-                            reportedAt: data.docs[index]['reported-at'],
-                            reporterName: data.docs[index]['reporter-name'],
-                            reporterProfileImageUrl: data.docs[index]
-                                ['reporter-profile-image-url'],
-                            reportedConcern: data.docs[index]['report-concern'],
-                            reportedConcernDescription: data.docs[index]
-                                ['report-concern-description'],
-                          ));
+                      Get.to(
+                        () => DetailedReport(
+                          //reported post tile
+                          reportType: data.docs[index]['report-type'],
+                          postDocId: data.docs[index]['post-documment-id'],
+                          //reporter concerns
+                          reportedAt: data.docs[index]['reported-at'],
+                          reporterName: data.docs[index]['reporter-name'],
+                          reporterProfileImageUrl: data.docs[index]
+                              ['reporter-profile-image-url'],
+                          reportedConcern: data.docs[index]['report-concern'],
+                          reportedConcernDescription: data.docs[index]
+                              ['report-concern-description'],
+                          reportDocId: data.docs[index].id,
+                        ),
+                      );
                     },
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(5.w),

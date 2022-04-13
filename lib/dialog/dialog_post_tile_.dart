@@ -112,6 +112,7 @@ class DialogPostTile extends GetxController {
             postDocId,
             updatedCaption,
           );
+          Get.back();
         },
       ),
     );

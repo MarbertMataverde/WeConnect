@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../../../constant/constant.dart';
 import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../../../../dialog/dialog_post_tile_.dart';
@@ -72,8 +73,6 @@ class ReportedPostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
-      color: Get.isDarkMode ? kTextFormFieldColorDarkTheme : Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,9 +84,18 @@ class ReportedPostTile extends StatelessWidget {
                 Row(
                   children: [
                     //profile image
-                    CircleAvatar(
-                      radius: 14.sp,
-                      backgroundImage: NetworkImage(accountProfileImageUrl),
+                    Container(
+                      height: 10.w,
+                      width: 10.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2.w),
+                        color: Colors.transparent,
+                      ),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: randomAvatarImageAsset(),
+                        image: accountProfileImageUrl,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     SizedBox(
                       width: 3.w,
@@ -99,9 +107,6 @@ class ReportedPostTile extends StatelessWidget {
                         Text(
                           accountName,
                           style: TextStyle(
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
@@ -111,9 +116,8 @@ class ReportedPostTile extends StatelessWidget {
                           timeago.format(postCreatedAt.toDate()),
                           style: TextStyle(
                             fontSize: 9.sp,
-                            color: Get.isDarkMode
-                                ? kTextColorDarkTheme
-                                : kTextColorLightTheme,
+                            color:
+                                Theme.of(context).textTheme.labelMedium!.color,
                           ),
                         ),
                       ],
@@ -121,7 +125,7 @@ class ReportedPostTile extends StatelessWidget {
                   ],
                 ),
                 FocusedMenuHolder(
-                  menuWidth: MediaQuery.of(context).size.width * 0.50,
+                  menuWidth: Get.mediaQuery.size.width * 0.50,
                   blurSize: 1.0,
                   menuItemExtent: 5.h,
                   menuBoxDecoration: BoxDecoration(
@@ -132,13 +136,14 @@ class ReportedPostTile extends StatelessWidget {
                   blurBackgroundColor: Colors.black,
                   openWithTap: true,
                   menuOffset: 1.h,
+                  child: const Icon(
+                    Iconsax.more,
+                  ),
                   onPressed: () {},
-                  menuItems:
-                      //menu item for campus and registrar admin
-                      [
+                  menuItems: [
                     focusMenuItem(
                       'Edit Caption',
-                      MdiIcons.pencil,
+                      Iconsax.edit,
                       Colors.black54,
                       () {
                         Get.to(
@@ -151,16 +156,15 @@ class ReportedPostTile extends StatelessWidget {
                       },
                     ),
                     focusMenuItem(
-                      'Delete',
-                      Icons.delete_outlined,
+                      'Delete Post',
+                      Iconsax.trash,
                       Colors.red,
-                      () {
-                        //dialog for deletion of post
-                        dialogs.deletePostDialog(
+                      () async {
+                        await dialogs.deletePostDialog(
                           context,
                           'assets/gifs/question_mark.gif',
-                          'Delete Post 🗑',
-                          'Are you sure? your about to delete this post? 🤔',
+                          'Post Deletion',
+                          'You cannot undo this action, press ok to continue.',
                           announcementTypeDoc,
                           postDocId,
                           postMedia,
@@ -168,13 +172,6 @@ class ReportedPostTile extends StatelessWidget {
                       },
                     ),
                   ],
-                  child: Icon(
-                    Icons.more_vert_rounded,
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
-                    size: 13.sp,
-                  ),
                 ),
               ],
             ),
