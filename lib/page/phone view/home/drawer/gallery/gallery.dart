@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../widgets/appbar/appbar_title.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
 
 class Gallery extends StatelessWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -10,22 +11,29 @@ class Gallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const AppBarTitle(title: 'Gallery'),
-          centerTitle: true,
+        appBar: buildAppBar(
+          context: context,
+          title: 'Gallery',
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            ),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.all(5.w),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                _buildGalleryFacade(),
+                _buildGalleryFacade(context: context),
                 SizedBox(
                   height: 5.h,
                 ),
-                _buildGalleryFacilities(),
+                _buildGalleryFacilities(context: context),
               ],
             ),
           ),
@@ -33,11 +41,11 @@ class Gallery extends StatelessWidget {
   }
 }
 
-Widget _buildGalleryFacade() {
+Widget _buildGalleryFacade({required BuildContext context}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _buildTitle(title: 'URSB Facade'),
+      _buildTitle(context: context, title: 'URSB Facade'),
       _buildImage(imageList: [
         'assets/gallery/facade.jpg',
       ]),
@@ -48,11 +56,14 @@ Widget _buildGalleryFacade() {
   );
 }
 
-Widget _buildGalleryFacilities() {
+Widget _buildGalleryFacilities({required BuildContext context}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _buildTitle(title: 'URSB Facilities'),
+      _buildTitle(
+        context: context,
+        title: 'URSB Facilities',
+      ),
       _buildImage(imageList: [
         'assets/gallery/comlab.jpg',
         'assets/gallery/functionhall.jpg',
@@ -68,12 +79,13 @@ Widget _buildGalleryFacilities() {
 
 Widget _buildTitle({
   required String title,
+  required BuildContext context,
 }) {
   return Text(
     title,
-    textScaleFactor: 1.5,
+    textScaleFactor: 1.7,
     style: TextStyle(
-      color: Get.theme.primaryColor,
+      color: Theme.of(context).primaryColor,
     ),
   );
 }
@@ -99,10 +111,9 @@ Widget _buildImage({
           options: CarouselOptions(
             viewportFraction: 1,
             initialPage: 0,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: false,
             autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 5),
-            autoPlayAnimationDuration: const Duration(milliseconds: 900),
+            autoPlayInterval: const Duration(seconds: 3),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
             scrollDirection: Axis.horizontal,

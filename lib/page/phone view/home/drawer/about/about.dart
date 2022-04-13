@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
-import '../../../../../widgets/appbar/appbar_title.dart';
 
-import '../../../../../constant/constant_colors.dart';
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
