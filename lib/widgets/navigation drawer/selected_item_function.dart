@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weconnect/page/phone%20view/home/drawer/terms%20and%20condition/term_and_condition.dart';
 import '../../page/phone view/home/drawer/mvg/mvg.dart';
 import '../../page/phone%20view/home/drawer/about/about.dart';
 import '../../page/phone%20view/home/drawer/gallery/gallery.dart';
@@ -18,34 +19,43 @@ void selectedItem(
 ) {
   Get.back();
   switch (index) {
+    // edit account
     case 0:
-      //Edit Personal Information
       Get.to(() => const EditAccount());
       break;
-    case 2:
+    // forum topic request
+    case 1:
       Get.to(() => const ForumTopicRequestList());
       break;
-    case 3:
-      //report list
+    // announcement reports
+    case 2:
       Get.to(() => const ReportList());
       break;
-    case 5:
-      //about
+    // about
+    case 3:
       Get.to(() => const About());
       break;
-    case 6:
-      //gallery
+    // gallery
+    case 4:
       Get.to(() => const Gallery());
       break;
-    case 7:
-      //Mission Vision Goal of URS
+    // Mission Vision Goal of URS
+    case 5:
       Get.to(() => const MVC());
       break;
-    case 8:
-      //Downlodable forms
+    // downloadable forms
+    case 6:
       Get.to(() => const DownloadForms());
       break;
-    case 10:
+    // Terms and Condition
+    case 7:
+      Get.to(() => const TermsAndCondition());
+      break;
+     // Help & Feedback
+    // case 8:
+    //   Get.to(() => const HelpAndFeedback());
+    //   break;
+    case 9:
       authentication.signOut();
       break;
     default:

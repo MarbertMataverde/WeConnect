@@ -74,9 +74,7 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             context: context,
             title: 'Edit Account',
             icon: Iconsax.user_edit,
-            onCliked: () {
-              selectedItem(context, 0);
-            },
+            onCliked: () => selectedItem(context, 0),
           ),
           // drawerItems(
           //   context: context,
@@ -97,13 +95,13 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
                   context: context,
                   icon: Iconsax.judge,
                   title: 'Forum Topic Request',
-                  onCliked: () => selectedItem(context, 2),
+                  onCliked: () => selectedItem(context, 1),
                 ),
                 drawerItems(
                   context: context,
                   icon: Iconsax.warning_2,
                   title: 'Announcement Reports',
-                  onCliked: () => selectedItem(context, 3),
+                  onCliked: () => selectedItem(context, 2),
                 ),
               ],
             ),
@@ -115,24 +113,20 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             context: context,
             title: 'About',
             icon: Iconsax.people,
-            onCliked: () {
-              selectedItem(context, 5);
-            },
+            onCliked: () => selectedItem(context, 3),
           ),
           drawerItems(
             context: context,
             title: 'Gallery',
             icon: Iconsax.gallery,
-            onCliked: () {
-              selectedItem(context, 6);
-            },
+            onCliked: () => selectedItem(context, 4),
           ),
           drawerItems(
             context: context,
             title: 'Vision Mission Goals',
             icon: Iconsax.book,
             onCliked: () {
-              selectedItem(context, 7);
+              selectedItem(context, 5);
             },
           ),
           drawerItems(
@@ -140,7 +134,7 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             title: 'Downloadable Forms',
             icon: Iconsax.document_download,
             onCliked: () {
-              selectedItem(context, 8);
+              selectedItem(context, 6);
             },
           ),
           //others divider
@@ -160,7 +154,7 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             title: 'Help & Feedback',
             icon: Iconsax.lifebuoy,
             onCliked: () {
-              selectedItem(context, 9);
+              selectedItem(context, 8);
             },
           ),
           //sign out divider
@@ -170,7 +164,7 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             title: 'Sign Out',
             icon: Iconsax.logout,
             onCliked: () {
-              selectedItem(context, 10);
+              selectedItem(context, 9);
             },
           ),
         ],
