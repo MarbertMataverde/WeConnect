@@ -74,26 +74,21 @@ class DialogAuthentication extends GetxController {
 
   //email already in use dialog
   Future<dynamic> emailAlreadyInUseDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) {
     return showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         //? try again button
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
 
         //? reset button
-        buttonCancelColor: Get.isDarkMode
-            ? kTextFormFieldColorLightTheme
-            : kTextFormFieldColorDarkTheme,
-        buttonCancelText: Text(
+        buttonCancelText: const Text(
           'Reset',
-          style: TextStyle(
-            color: Get.theme.primaryColor,
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         onCancelButtonPressed: () {
           Get.back();
