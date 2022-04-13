@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
-import '../../../constant/constant_colors.dart';
 import '../../../widgets/button/custom_button.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 
@@ -25,11 +26,30 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   bool isLoading = false;
   //controller
-  final TextEditingController _emailCtrlr = TextEditingController();
+  late TextEditingController _emailCtrlr;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailCtrlr = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: buildAppBar(
+        context: context,
+        title: '',
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Iconsax.arrow_square_left,
+            color: Theme.of(context).iconTheme.color,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -45,7 +65,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   Text(
                     'Forgot',
                     style: TextStyle(
-                      color: Get.theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18.sp,
                     ),
@@ -53,7 +73,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   Text(
                     'Your Password 🤔',
                     style: TextStyle(
-                      color: Get.theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18.sp,
                       height: 0.9,
@@ -73,9 +93,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   'Enter your email address and we will\nsend you a link to reset your\npassword! 😉',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Get.isDarkMode
-                        ? kTextColorDarkTheme
-                        : kTextColorLightTheme,
+                    color: Theme.of(context).textTheme.labelMedium!.color,
                     fontSize: 12.sp,
                   ),
                 ),
@@ -84,6 +102,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Form(
                 key: _validationKey,
                 child: CustomTextFormField(
+                  minimumLine: 1,
+                  maxLine: 1,
                   ctrlr: _emailCtrlr,
                   hint: 'Email Address',
                   isPassword: kFalse,
@@ -104,12 +124,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? SpinKitSpinningLines(
-                      color: Get.theme.primaryColor,
-                      lineWidth: 1,
-                      itemCount: 5,
-                      size: 50,
-                    )
+                  ? buildGlobalSpinkit(context: context)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
