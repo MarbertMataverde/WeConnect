@@ -67,6 +67,7 @@ dependencies:
   iconsax: ^0.0.8
   google_nav_bar: ^5.0.6
   video_player: ^2.3.0
+  flutter_markdown: ^0.6.9+1
 
 dev_dependencies:
   flutter_test:
