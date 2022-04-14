@@ -7,6 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/controller/controller_account_information.dart';
+import 'package:weconnect/dialog/dialog_forum.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 
@@ -14,6 +15,8 @@ import '../../../phone%20view/home/forum/forum_topic_details.dart';
 import '../../../phone%20view/home/forum/open_new_topic.dart';
 
 import '../../../../widgets/navigation drawer/widget_navigation_drawer.dart';
+
+final _dialog = Get.put(DialogForum());
 
 class Forum extends StatefulWidget {
   const Forum({
@@ -83,7 +86,7 @@ class _ForumState extends State<Forum> {
                 topicTitle: data.docs[index]['topic-title'],
                 topicVotes: data.docs[index]['votes'],
                 topicAcceptedDate: data.docs[index]['request-accepted-at'],
-                channelDocId: data.docs[index].id,
+                topicDocId: data.docs[index].id,
                 onCliked: () {
                   Get.to(
                     () => ForumTopicDetails(
@@ -116,8 +119,7 @@ Widget buildTopicTile({
   required List topicVotes,
   required Timestamp topicAcceptedDate,
   VoidCallback? onCliked,
-  //deleting channel
-  required String channelDocId,
+  required String topicDocId,
 }) {
   return Card(
     child: InkWell(
@@ -138,7 +140,10 @@ Widget buildTopicTile({
                 ]
               : [
                   SlidableAction(
-                    onPressed: (_) {},
+                    onPressed: (_) {
+                      _dialog.reportTopicDialog(
+                          context: context, reportDocumentId: topicDocId);
+                    },
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     icon: Iconsax.warning_2,

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../constant/constant_colors.dart';
@@ -103,6 +104,26 @@ class ControllerForum extends GetxController {
       'commenter-profile-name': commenterProfileName,
       'commenter-comment': commenterComment,
       'commented-date': Timestamp.now(),
+    });
+  }
+
+  //forum report
+  Future forumTopicReport({
+    required reportConcern,
+    required reportConcernDescription,
+    required reportDocummentId,
+  }) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await firestore.collection('reports').doc('forum-topic-report').set({
+      'reported-at': Timestamp.now(),
+      'reporter-profile-image-url':
+          sharedPreferences.get('currentProfileImageUrl'),
+      'reporter-name': sharedPreferences.get('currentProfileName'),
+      'reporter-account-type': sharedPreferences.get('accountType'),
+      'report-concern': reportConcern,
+      'report-concern-description': reportConcernDescription,
+      'topic-documment-id': reportDocummentId,
+      'report-type': 'forum',
     });
   }
 }

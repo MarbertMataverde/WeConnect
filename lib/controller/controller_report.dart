@@ -11,14 +11,14 @@ import '../constant/constant_colors.dart';
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class ControllerReport extends GetxController {
-  Future newReport({
+  Future announcementReport({
     required reportType,
     required reportConcern,
     required reportConcernDescription,
     required reportDocummentId,
   }) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await firestore.collection('reports').doc().set({
+    await firestore.collection('reports').doc('announcement-report').set({
       'reported-at': Timestamp.now(),
       'reporter-profile-image-url':
           sharedPreferences.get('currentProfileImageUrl'),

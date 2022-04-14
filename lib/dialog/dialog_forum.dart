@@ -6,13 +6,14 @@ import 'package:sizer/sizer.dart';
 import '../controller/controller_forum.dart';
 
 import '../constant/constant_colors.dart';
+import '../widgets/text form field/custom_textformfield.dart';
 
 final ControllerForum forum = Get.put(ControllerForum());
 
 class DialogForum extends GetxController {
   //request dismissal dialog
   Future<dynamic> dismissRequestDialog(
-    _context, {
+    context, {
     required String assetLocation,
     required String title,
     required String description,
@@ -20,9 +21,9 @@ class DialogForum extends GetxController {
     required String requestDocId,
   }) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Theme.of(_context).primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         buttonOkText: const Text(
           'Yes',
           style: TextStyle(
@@ -68,7 +69,7 @@ class DialogForum extends GetxController {
 
   //request approval dialog
   Future<dynamic> requestApprovalDialog(
-    _context, {
+    context, {
     required String assetLocation,
     required String title,
     required String description,
@@ -82,9 +83,9 @@ class DialogForum extends GetxController {
     required String requestDocId,
   }) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Theme.of(_context).primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -113,7 +114,7 @@ class DialogForum extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Theme.of(_context).primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
@@ -124,6 +125,112 @@ class DialogForum extends GetxController {
           ));
         },
       ),
+    );
+  }
+
+  //report topic dialog
+  Future<dynamic> reportTopicDialog({
+    required BuildContext context,
+    required String reportDocumentId,
+  }) async {
+    // Validation Key
+    final _validationKey = GlobalKey<FormState>();
+    //controllers
+    final TextEditingController reportConcernCtrlr = TextEditingController();
+    final TextEditingController reportConcernDescriptionCtrlr =
+        TextEditingController();
+    Get.defaultDialog(
+      barrierDismissible: false,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      radius: 1.w,
+      title: 'Report post 🧐',
+      content: Form(
+        key: _validationKey,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomTextFormField(
+                ctrlr: reportConcernCtrlr,
+                hint: 'Reason of report..',
+                isPassword: false,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter the reason of report😊';
+                  }
+
+                  return null;
+                },
+              ),
+              SizedBox(height: 1.h),
+              CustomTextFormField(
+                minimumLine: 3,
+                maxLine: 5,
+                ctrlr: reportConcernDescriptionCtrlr,
+                hint: 'Your concern description..',
+                isPassword: false,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please describe your concern🤗';
+                  }
+
+                  return null;
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          style: TextButton.styleFrom(
+            primary: Theme.of(context).primaryColor,
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.1,
+            ),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+          child: const Text(
+            'Cancel',
+          ),
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+              primary: Colors.white,
+              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.mediaQuery.size.width * 0.1)),
+          onPressed: () async {
+            final _isValid = _validationKey.currentState!.validate();
+            Get.focusScope!.unfocus();
+
+            if (_isValid == true) {
+              await forum.forumTopicReport(
+                reportConcern: reportConcernCtrlr.text,
+                reportConcernDescription: reportConcernDescriptionCtrlr.text,
+                reportDocummentId: reportDocumentId,
+              );
+              Get.back();
+              Get.showSnackbar(GetSnackBar(
+                icon: Icon(
+                  MdiIcons.checkBold,
+                  color: Theme.of(context).primaryColor,
+                ),
+                margin: EdgeInsets.all(2.w),
+                borderRadius: 1.w,
+                backgroundColor: kButtonColorLightTheme,
+                message: 'Success report submitted.',
+                duration: const Duration(seconds: 1),
+                forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+              ));
+            }
+          },
+          child: const Text('Submit'),
+        )
+      ],
     );
   }
 }

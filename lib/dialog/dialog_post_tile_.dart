@@ -198,7 +198,7 @@ class DialogPostTile extends GetxController {
             Get.focusScope!.unfocus();
 
             if (_isValid == true) {
-              await controllerReportPost.newReport(
+              await controllerReportPost.announcementReport(
                 reportType: reportType,
                 reportConcern: reportConcernCtrlr.text,
                 reportConcernDescription: reportConcernDescriptionCtrlr.text,
