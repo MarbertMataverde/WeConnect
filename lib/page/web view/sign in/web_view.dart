@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import '../../../widgets/global%20spinkit/global_spinkit.dart';
-import '../../../constant/constant.dart';
 
 import '../../../authentication/authentication_controller.dart';
+import '../../../constant/constant.dart';
 import '../../../widgets/button/custom_button.dart';
+import '../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../widgets/text form field/custom_textformfield.dart';
 
 // Validation Key

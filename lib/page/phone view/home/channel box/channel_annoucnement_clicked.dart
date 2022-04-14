@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/page/phone%20view/home/channel%20box/channel_announcement_tile.dart';
-import 'package:weconnect/widgets/appbar/appbar_back.dart';
+import '../../../phone%20view/home/channel%20box/channel_announcement_tile.dart';
+import '../../../../widgets/appbar/appbar_back.dart';
 
 class ChannelTileCliked extends StatelessWidget {
   const ChannelTileCliked(

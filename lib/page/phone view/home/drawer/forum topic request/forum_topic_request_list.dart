@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
 import '../../../../../dialog/dialog_forum.dart';
 import '../../../../phone%20view/home/drawer/forum%20topic%20request/detailed_topic_request.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/setting/them_config.dart';
+import '../../setting/them_config.dart';
 import '../../controller/controller_account_information.dart';
 
 import 'drawer_items.dart';

@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:like_button/like_button.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../controller/controller_vote.dart';
 import '../../../../dialog/dialog_forum.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';

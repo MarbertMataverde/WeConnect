@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
-import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../dialog/dialog_post_tile_.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
+import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
 //dialogs
 final dialogs = Get.put(DialogPostTile());

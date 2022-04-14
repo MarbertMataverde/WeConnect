@@ -9,8 +9,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
-import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
+import '../../../../../widgets/text%20form%20field/custom_textformfield.dart';
 import '../../../../../controller/controller_account_information.dart';
 
 class EditAccount extends StatefulWidget {

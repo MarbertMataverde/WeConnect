@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
 
 import '../../../../../controller/controller_report.dart';
 import 'reported_post_tile.dart';

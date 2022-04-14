@@ -9,9 +9,9 @@ import 'package:intl/intl.dart';
 import 'package:like_button/like_button.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import '../../controller/controller_account_information.dart';
 
 import '../../constant/constant.dart';
+import '../../controller/controller_account_information.dart';
 import '../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../controller/controller_vote.dart';
 import '../../dialog/dialog_post_tile_.dart';

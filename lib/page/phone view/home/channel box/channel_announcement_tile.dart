@@ -6,7 +6,7 @@ import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:weconnect/page/phone%20view/home/channel%20box/channel_annoucnement_clicked.dart';
+import '../../../phone%20view/home/channel%20box/channel_annoucnement_clicked.dart';
 
 channelTile({
   required BuildContext context,

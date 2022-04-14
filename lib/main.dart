@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/setting/them_config.dart';
+import 'setting/them_config.dart';
 
 import 'firebase_options.dart';
 import 'page/phone view/sign in/phone_view.dart';

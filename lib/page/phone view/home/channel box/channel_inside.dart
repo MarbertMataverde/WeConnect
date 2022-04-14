@@ -3,10 +3,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:weconnect/page/phone%20view/home/channel%20box/channel_announcement_tile.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
-import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
-import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
+import '../../../phone%20view/home/channel%20box/channel_announcement_tile.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
+import '../../../../widgets/global%20spinkit/global_spinkit.dart';
+import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
 
 import '../../../../dialog/dialog_channel.dart';
 import '../../../../controller/controller_account_information.dart';

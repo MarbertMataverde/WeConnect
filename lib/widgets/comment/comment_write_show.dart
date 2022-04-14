@@ -7,7 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../appbar/build_appbar.dart';
 import 'comment_form.dart';
 import '../../constant/constant.dart';
 import '../../controller/controller_account_information.dart';

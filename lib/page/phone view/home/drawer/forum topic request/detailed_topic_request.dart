@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../../widgets/appbar/build_appbar.dart';
 
 import '../../../../../dialog/dialog_forum.dart';
 

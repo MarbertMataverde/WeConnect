@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../authentication/authentication_controller.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/button/custom_button.dart';

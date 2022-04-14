@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weconnect/page/phone%20view/home/drawer/terms%20and%20condition/term_and_condition.dart';
+import '../../page/phone%20view/home/drawer/terms%20and%20condition/term_and_condition.dart';
 import '../../page/phone view/home/drawer/mvg/mvg.dart';
 import '../../page/phone%20view/home/drawer/about/about.dart';
 import '../../page/phone%20view/home/drawer/gallery/gallery.dart';

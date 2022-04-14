@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weconnect/controller/controller_account_information.dart';
-import 'package:weconnect/dialog/dialog_forum.dart';
-import 'package:weconnect/widgets/appbar/build_appbar.dart';
-import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
+import '../../../../controller/controller_account_information.dart';
+import '../../../../dialog/dialog_forum.dart';
+import '../../../../widgets/appbar/build_appbar.dart';
+import '../../../../widgets/global%20spinkit/global_spinkit.dart';
 
 import '../../../phone%20view/home/forum/forum_topic_details.dart';
 import '../../../phone%20view/home/forum/open_new_topic.dart';
