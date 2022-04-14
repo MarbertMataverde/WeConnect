@@ -64,18 +64,26 @@ class _EditAccountState extends State<EditAccount> {
         .collection('account');
     return Scaffold(
       appBar: buildAppBar(
-        context: context,
-        title: 'Edit Account',
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Iconsax.arrow_square_left,
-            color: Theme.of(context).iconTheme.color,
+          context: context,
+          title: 'Edit Account',
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Iconsax.arrow_square_left,
+              color: Theme.of(context).iconTheme.color,
+            ),
           ),
-        ),
-      ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Iconsax.tick_square,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ]),
       body: FutureBuilder<DocumentSnapshot>(
         future: users.doc(currentUserId).get(),
         builder:
@@ -160,14 +168,27 @@ class _EditAccountState extends State<EditAccount> {
                                 Theme.of(context).textTheme.labelMedium!.color,
                           ),
                         )
-                      : Text(
-                          data['college'],
-                          textScaleFactor: 0.9,
-                          style: TextStyle(
-                            color:
-                                Theme.of(context).textTheme.labelMedium!.color,
-                          ),
-                        ),
+                      : currentAccountType == 'accountTypeProfessor'
+                          ? Text(
+                              accountType,
+                              textScaleFactor: 0.9,
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .color,
+                              ),
+                            )
+                          : Text(
+                              data['college'],
+                              textScaleFactor: 0.9,
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .color,
+                              ),
+                            ),
 
                   Divider(
                     height: 5.h,
@@ -180,21 +201,39 @@ class _EditAccountState extends State<EditAccount> {
                           label: 'Full Name',
                           initialValue: data['profile-name'],
                         )
-                      : Column(
-                          children: [
-                            buildEditableTextField(
-                              context: context,
-                              label: 'Full Name  (LN, FN MI)',
-                              initialValue: data['profile-name'],
+                      : currentAccountType == 'accountTypeProfessor'
+                          ? Column(
+                              children: [
+                                buildEditableTextField(
+                                  context: context,
+                                  label: 'Full Name  (LN, FN MI)',
+                                  initialValue: data['profile-name'],
+                                ),
+                                buildEditableTextField(
+                                  isEnable: false,
+                                  context: context,
+                                  label: 'Employee Number',
+                                  initialValue:
+                                      data['employee-number'].toString(),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                buildEditableTextField(
+                                  context: context,
+                                  label: 'Full Name  (LN, FN MI)',
+                                  initialValue: data['profile-name'],
+                                ),
+                                buildEditableTextField(
+                                  isEnable: false,
+                                  context: context,
+                                  label: 'Student Number',
+                                  initialValue:
+                                      data['student-number'].toString(),
+                                ),
+                              ],
                             ),
-                            buildEditableTextField(
-                              isEnable: false,
-                              context: context,
-                              label: 'Student Number',
-                              initialValue: data['student-number'].toString(),
-                            ),
-                          ],
-                        ),
                 ],
               ),
             );
@@ -212,22 +251,26 @@ Widget buildPreviousProfileImage({
   required BuildContext context,
 }) {
   return Center(
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        GestureDetector(
-          onTap: onCliked,
-          child: ClipRRect(
+    child: GestureDetector(
+      onTap: onCliked,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          ClipRRect(
             borderRadius: BorderRadius.circular(5.w),
             child: Image.network(
               currentProfileImageUrl!,
               width: MediaQuery.of(context).size.width * 0.25,
               height: MediaQuery.of(context).size.width * 0.25,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
-        ),
-      ],
+          Icon(
+            Iconsax.gallery_edit,
+            color: Colors.grey.withOpacity(0.5),
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -238,22 +281,26 @@ Widget buildNewProfileImage({
   File? newProfileImage,
 }) {
   return Center(
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        GestureDetector(
-          onTap: onCliked,
-          child: ClipRRect(
+    child: GestureDetector(
+      onTap: onCliked,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          ClipRRect(
             borderRadius: BorderRadius.circular(5.w),
             child: Image.file(
               newProfileImage!,
               width: MediaQuery.of(context).size.width * 0.25,
               height: MediaQuery.of(context).size.width * 0.25,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
-        ),
-      ],
+          Icon(
+            Iconsax.gallery_edit,
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ],
+      ),
     ),
   );
 }
