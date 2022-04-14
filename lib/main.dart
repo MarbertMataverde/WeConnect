@@ -52,17 +52,15 @@ class _InitialPageState extends State<InitialPage> {
           darkTheme: darkThemeData,
           themeMode: currentTheme.currentTheme(),
           defaultTransition: Transition.fadeIn,
-          home: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                //?phone view
-                if (constraints.maxWidth < 768) {
-                  return const PhoneViewSignIn();
-                } else {
-                  return const WebView();
-                }
-              },
-            ),
+          home: LayoutBuilder(
+            builder: (context, constraints) {
+              //?phone view
+              if (constraints.maxWidth < 768) {
+                return const PhoneViewSignIn();
+              } else {
+                return const WebView();
+              }
+            },
           ),
         );
       },
