@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 
 import '../../../../widgets/snakbar/snakbar.dart';
@@ -94,23 +93,28 @@ class ChannelSettings extends StatelessWidget {
       ),
     );
   }
+}
 
-  GetSnackBar globalSnackBar({
-    required BuildContext context,
-    required String message,
-    required IconData icon,
-  }) {
-    return GetSnackBar(
-      icon: Icon(
-        icon,
-        color: Theme.of(context).primaryColor,
+Widget buildListItem({
+  required BuildContext context,
+  required String title,
+  required IconData icon,
+  Color? iconColor,
+  VoidCallback? onCliked,
+}) {
+  return ListTile(
+    contentPadding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.05),
+    trailing: Icon(
+      icon,
+      color: iconColor ?? Theme.of(context).iconTheme.color,
+    ),
+    title: Text(
+      title,
+      style: TextStyle(
+        color: Theme.of(context).textTheme.bodyMedium!.color,
       ),
-      margin: EdgeInsets.all(2.w),
-      borderRadius: 1.w,
-      backgroundColor: Theme.of(context).primaryColor.withAlpha(10),
-      message: message,
-      duration: const Duration(seconds: 1),
-      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-    );
-  }
+    ),
+    onTap: onCliked,
+  );
 }

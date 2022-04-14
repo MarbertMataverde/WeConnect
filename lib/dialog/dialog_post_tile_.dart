@@ -57,14 +57,14 @@ class DialogPostTile extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
+            backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
             message: 'Post has been removed',
             duration: const Duration(seconds: 1),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+            forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
           ));
         },
       ),
@@ -204,14 +204,14 @@ class DialogPostTile extends GetxController {
               Get.showSnackbar(GetSnackBar(
                 icon: Icon(
                   MdiIcons.checkBold,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
                 margin: EdgeInsets.all(2.w),
                 borderRadius: 1.w,
-                backgroundColor: kButtonColorLightTheme,
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
                 message: 'Success report submitted.',
                 duration: const Duration(seconds: 3),
-                forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+                forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
               ));
             }
           },

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/snakbar/snakbar.dart';
 
 import '../constant/constant_colors.dart';
 import '../controller/controller_channel.dart';
@@ -41,18 +43,17 @@ class DialogChannel extends GetxController {
             channelDocId,
             channelAvatarImage,
           );
-          Get.back();
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
+            backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
             message: 'Channel has been removed',
             duration: const Duration(seconds: 1),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+            forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
           ));
         },
       ),

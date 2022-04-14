@@ -52,14 +52,14 @@ class DialogForum extends GetxController {
             GetSnackBar(
               icon: Icon(
                 MdiIcons.checkBold,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
               margin: EdgeInsets.all(2.w),
               borderRadius: 1.w,
-              backgroundColor: kButtonColorLightTheme,
+              backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
               message: 'Request has been removed',
               duration: const Duration(seconds: 1),
-              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+              forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
             ),
           );
         },
@@ -114,14 +114,14 @@ class DialogForum extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
+            backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
             message: 'Request has been approved.',
             duration: const Duration(seconds: 1),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+            forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
           ));
         },
       ),
@@ -217,14 +217,14 @@ class DialogForum extends GetxController {
               Get.showSnackbar(GetSnackBar(
                 icon: Icon(
                   MdiIcons.checkBold,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
                 margin: EdgeInsets.all(2.w),
                 borderRadius: 1.w,
-                backgroundColor: kButtonColorLightTheme,
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
                 message: 'Report submitted',
                 duration: const Duration(seconds: 1),
-                forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+                forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
               ));
             }
           },
