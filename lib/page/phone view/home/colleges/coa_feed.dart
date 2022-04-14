@@ -31,18 +31,18 @@ class _CoaFeedState extends State<CoaFeed> {
         appBar: buildAppBar(
           context: context,
           title: 'COA Feed',
-          leading: Visibility(
-            visible: !(currentAccountType == 'accountTypeCoaAdmin' ||
-                currentStudentCollege == 'College of Accountancy'),
-            child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Iconsax.arrow_square_left,
-                  color: Theme.of(context).iconTheme.color,
-                )),
-          ),
+          leading: !(currentAccountType == 'accountTypeCoaAdmin' ||
+                  currentStudentCollege == 'College of Accountancy')
+              ? IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Iconsax.arrow_square_left,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                )
+              : null,
           actions: [
             Visibility(
               visible: currentAccountType == 'accountTypeCoaAdmin',

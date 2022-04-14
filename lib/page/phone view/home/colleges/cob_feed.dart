@@ -32,18 +32,18 @@ class _CobFeedState extends State<CobFeed> {
         appBar: buildAppBar(
           context: context,
           title: 'COB Feed',
-          leading: Visibility(
-            visible: !(currentAccountType == 'accountTypeCobAdmin' ||
-                currentStudentCollege == 'College of Business'),
-            child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Iconsax.arrow_square_left,
-                  color: Theme.of(context).iconTheme.color,
-                )),
-          ),
+          leading: !(currentAccountType == 'accountTypeCobAdmin' ||
+                  currentStudentCollege == 'College of Business')
+              ? IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Iconsax.arrow_square_left,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                )
+              : null,
           actions: [
             Visibility(
               visible: currentAccountType == 'accountTypeCobAdmin',

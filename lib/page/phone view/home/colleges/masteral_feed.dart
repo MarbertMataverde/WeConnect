@@ -31,18 +31,18 @@ class _MasteralFeedState extends State<MasteralFeed> {
         appBar: buildAppBar(
           context: context,
           title: 'Masteral Feed',
-          leading: Visibility(
-            visible: !(currentAccountType == 'accountTypeMasteralAdmin' ||
-                currentStudentCollege == 'Masteral'),
-            child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Iconsax.arrow_square_left,
-                  color: Theme.of(context).iconTheme.color,
-                )),
-          ),
+          leading: !(currentAccountType == 'accountTypeMasteralAdmin' ||
+                  currentStudentCollege == 'Masteral')
+              ? IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Iconsax.arrow_square_left,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                )
+              : null,
           actions: [
             Visibility(
               visible: currentAccountType == 'accountTypeMasteralAdmin',

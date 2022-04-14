@@ -32,18 +32,18 @@ class _CcsFeedState extends State<CcsFeed> {
         appBar: buildAppBar(
           context: context,
           title: 'CCS Feed',
-          leading: Visibility(
-            visible: !(currentAccountType == 'accountTypeCcsAdmin' ||
-                currentStudentCollege == 'College of Computer Studies'),
-            child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Iconsax.arrow_square_left,
-                  color: Theme.of(context).iconTheme.color,
-                )),
-          ),
+          leading: !(currentAccountType == 'accountTypeCcsAdmin' ||
+                  currentStudentCollege == 'College of Computer Studies')
+              ? IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Iconsax.arrow_square_left,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                )
+              : null,
           actions: [
             Visibility(
               visible: currentAccountType == 'accountTypeCcsAdmin',
