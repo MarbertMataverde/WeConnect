@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
-import '../widgets/snakbar/snakbar.dart';
 
-import '../constant/constant_colors.dart';
 import '../controller/controller_channel.dart';
 
 final channel = Get.put(ControllerChannel());
