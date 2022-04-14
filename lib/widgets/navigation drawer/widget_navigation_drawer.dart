@@ -67,15 +67,15 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
               currentTheme.switchTheme();
             },
           ),
-          //account divider
-          namedDivider(context: context, dividerName: 'Account'),
-          //account items
-          drawerItems(
-            context: context,
-            title: 'Edit Account',
-            icon: Iconsax.user_edit,
-            onCliked: () => selectedItem(context, 0),
-          ),
+          // //account divider
+          // namedDivider(context: context, dividerName: 'Account'),
+          // //account items
+          // drawerItems(
+          //   context: context,
+          //   title: 'Edit Account',
+          //   icon: Iconsax.user_edit,
+          //   onCliked: () => selectedItem(context, 0),
+          // ),
           // drawerItems(
           //   context: context,
           //   title: 'Edit Sign In Details',
