@@ -164,7 +164,7 @@ Widget buildChannelTile({
       trailing: Visibility(
         visible: currentAccountType.toString() == 'accountTypeProfessor',
         child: FocusedMenuHolder(
-          menuWidth: Get.mediaQuery.size.width * 0.50,
+          menuWidth: MediaQuery.of(context).size.width * 0.50,
           blurSize: 1.0,
           menuItemExtent: 5.h,
           menuBoxDecoration: BoxDecoration(
@@ -182,7 +182,7 @@ Widget buildChannelTile({
               Iconsax.trash,
               Colors.red,
               () => channelDialog.deleteChannelDialog(
-                Get.context,
+                context,
                 assetLocation: 'assets/gifs/question_mark.gif',
                 title: 'Channel Delition 🗑',
                 description:

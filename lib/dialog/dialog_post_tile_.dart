@@ -105,6 +105,7 @@ class DialogPostTile extends GetxController {
             announcementTypeDoc,
             postDocId,
             updatedCaption,
+            context: context,
           );
           Get.back();
         },
@@ -170,7 +171,7 @@ class DialogPostTile extends GetxController {
       actions: [
         TextButton(
           style: TextButton.styleFrom(
-            primary:Theme.of(context).primaryColor,
+            primary: Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
             ),

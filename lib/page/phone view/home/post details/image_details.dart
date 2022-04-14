@@ -32,13 +32,13 @@ class ImageDetails extends StatelessWidget {
                               child: Image.network(
                                 item,
                                 fit: BoxFit.scaleDown,
-                                height: Get.mediaQuery.size.height,
+                                height: MediaQuery.of(context).size.height,
                               ),
                             ),
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height: Get.mediaQuery.size.height,
+                        height: MediaQuery.of(context).size.height,
                         aspectRatio: 16 / 9,
                         viewportFraction: 1,
                         initialPage: 0,

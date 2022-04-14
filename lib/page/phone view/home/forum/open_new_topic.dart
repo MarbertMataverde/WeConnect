@@ -43,6 +43,7 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
               onPressed: fieldIsValid
                   ? () async {
                       await forum.forumTopicRequest(
+                          context: context,
                           requestedBy: currentProfileName.toString(),
                           requesterProfileImageUrl:
                               currentProfileImageUrl.toString(),

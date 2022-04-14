@@ -47,7 +47,7 @@ class PostDetails extends StatelessWidget {
                         child: Image.network(
                           postMedia.first,
                           fit: BoxFit.scaleDown,
-                          width: Get.mediaQuery.size.width,
+                          width: MediaQuery.of(context).size.width,
                         ),
                       ),
                     )
@@ -67,7 +67,7 @@ class PostDetails extends StatelessWidget {
                                   child: Image.network(
                                     item,
                                     fit: BoxFit.scaleDown,
-                                    width: Get.mediaQuery.size.width,
+                                    width: MediaQuery.of(context).size.width,
                                   ),
                                 ),
                               ),
@@ -75,7 +75,7 @@ class PostDetails extends StatelessWidget {
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height: Get.mediaQuery.size.height * .5,
+                        height: MediaQuery.of(context).size.height * .5,
                         aspectRatio: 16 / 9,
                         viewportFraction: 1,
                         initialPage: 0,

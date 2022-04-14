@@ -144,8 +144,8 @@ class _ChannelNewState extends State<ChannelNew> {
                         pickImage();
                       },
                       child: SizedBox(
-                        width: Get.mediaQuery.size.width * 0.25,
-                        height: Get.mediaQuery.size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
                         child: Icon(
                           Iconsax.gallery_add,
                           size: 10.w,
@@ -181,7 +181,7 @@ class _ChannelNewState extends State<ChannelNew> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: Get.mediaQuery.size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: CustomTextFormField(
                           ctrlr: channelJoinTokenCtrlr,
                           hint: 'Token Code',

@@ -7,11 +7,8 @@ import 'package:sizer/sizer.dart';
 import '../constant/constant_colors.dart';
 
 class ControllerEditPostCaption extends GetxController {
-  Future editPostCaption(
-    String docName,
-    String postDocId,
-    String updatedData,
-  ) async {
+  Future editPostCaption(String docName, String postDocId, String updatedData,
+      {required BuildContext context}) async {
     firebase.FirebaseFirestore.instance
         .collection('announcements')
         .doc(docName)
@@ -25,7 +22,7 @@ class ControllerEditPostCaption extends GetxController {
           GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,

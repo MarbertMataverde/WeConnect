@@ -38,8 +38,8 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          height: Get.mediaQuery.size.height,
-          width: Get.mediaQuery.size.width * 0.35,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width * 0.35,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,

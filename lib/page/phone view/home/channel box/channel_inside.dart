@@ -164,7 +164,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                           builder: (selectFileController) {
                                         return IconButton(
                                           splashRadius:
-                                              Get.mediaQuery.size.width * 0.05,
+                                              MediaQuery.of(context).size.width * 0.05,
                                           onPressed: selectFileController
                                                   .fileIconButtonEnable
                                               ? () {
@@ -201,7 +201,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                           builder: (selectImageController) {
                                         return IconButton(
                                             splashRadius:
-                                                Get.mediaQuery.size.width *
+                                                MediaQuery.of(context).size.width *
                                                     0.05,
                                             onPressed: selectImageController
                                                     .imageIconButtonEnable
@@ -275,7 +275,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                           ),
                           GetBuilder<ControllerGetX>(builder: (controller) {
                             return IconButton(
-                              splashRadius: Get.mediaQuery.size.width * 0.05,
+                              splashRadius: MediaQuery.of(context).size.width * 0.05,
                               onPressed: controller.filesEmpty &&
                                       controller.textFieldEmptySend
                                   ? null

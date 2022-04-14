@@ -94,7 +94,7 @@ class _ForumTopicDetailsState extends State<ForumTopicDetails> {
                   children: [
                     //profile image
                     CircleAvatar(
-                      radius: Get.mediaQuery.size.width * 0.07,
+                      radius: MediaQuery.of(context).size.width * 0.07,
                       backgroundColor: Colors.transparent,
                       child: ClipOval(
                         child: FadeInImage.assetNetwork(
@@ -137,7 +137,7 @@ class _ForumTopicDetailsState extends State<ForumTopicDetails> {
                       circleColor: const CircleColor(
                           start: Colors.yellow, end: Colors.cyan),
                       bubblesColor: BubblesColor(
-                        dotPrimaryColor: Get.theme.primaryColor,
+                        dotPrimaryColor: Theme.of(context).primaryColor,
                         dotSecondaryColor: Colors.red,
                       ),
                       likeBuilder: (isLiked) => Icon(

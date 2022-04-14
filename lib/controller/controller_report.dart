@@ -41,13 +41,7 @@ class ControllerReport extends GetxController {
     showDialog(
       context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
-        buttonOkText: Text(
-          'Yes',
-          style: TextStyle(
-            color: Get.theme.textTheme.button!.color,
-          ),
-        ),
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -70,7 +64,7 @@ class ControllerReport extends GetxController {
             GetSnackBar(
               icon: Icon(
                 MdiIcons.checkBold,
-                color: Get.theme.primaryColor,
+                color: Theme.of(context).primaryColor,
               ),
               margin: EdgeInsets.all(2.w),
               borderRadius: 1.w,

@@ -148,7 +148,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SpinKitSpinningLines(
-                          color: Get.theme.primaryColor);
+                          color: Theme.of(context).primaryColor);
                     }
                     final data = snapshot.requireData;
                     return ListView.builder(

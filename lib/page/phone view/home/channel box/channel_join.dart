@@ -59,6 +59,7 @@ class _ChannelJoinState extends State<ChannelJoin> {
                             isJoining = true;
                           });
                           await channel.channelChecker(
+                              context: context,
                               token: tokenCtrlr.text,
                               studentUid: [currentUserId]);
                           setState(() {

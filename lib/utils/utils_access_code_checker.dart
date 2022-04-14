@@ -12,7 +12,7 @@ class AccessCodeChecker extends GetxController {
   //professor access code checker
   Future professorAccessCodeChecker(
     String _accessCode,
-    _context,
+    context,
   ) async {
     await firestore
         .collection('professor-access-code')
@@ -23,7 +23,7 @@ class AccessCodeChecker extends GetxController {
             professorDocSnapshot.exists
                 ? Get.to(() => const ProfessorSignUpPage(),
                     arguments: _accessCode)
-                : wrongAccessCodeDialog(_context),
+                : wrongAccessCodeDialog(context),
           },
         );
   }
@@ -31,7 +31,7 @@ class AccessCodeChecker extends GetxController {
   //student access code checher
   Future studentAccessCodeChecker(
     String _accessCode,
-    _context,
+    context,
   ) async {
     await firestore
         .collection('student-access-code')
@@ -42,17 +42,17 @@ class AccessCodeChecker extends GetxController {
             studentDocSnapshot.exists
                 ? Get.to(() => const StudentSignUpPage(),
                     arguments: _accessCode)
-                : wrongAccessCodeDialog(_context)
+                : wrongAccessCodeDialog(context)
           },
         );
   }
 
-  Future<dynamic> wrongAccessCodeDialog(_context) {
+  Future<dynamic> wrongAccessCodeDialog(context) {
     return showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         onlyOkButton: true,
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           'assets/gifs/empty_data.gif',
           fit: BoxFit.cover,

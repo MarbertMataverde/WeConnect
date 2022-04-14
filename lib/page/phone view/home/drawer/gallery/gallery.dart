@@ -46,7 +46,7 @@ Widget _buildGalleryFacade({required BuildContext context}) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       _buildTitle(context: context, title: 'URSB Facade'),
-      _buildImage(imageList: [
+      _buildImage(context: context, imageList: [
         'assets/gallery/facade.jpg',
       ]),
       const Divider(),
@@ -64,7 +64,7 @@ Widget _buildGalleryFacilities({required BuildContext context}) {
         context: context,
         title: 'URSB Facilities',
       ),
-      _buildImage(imageList: [
+      _buildImage(context: context, imageList: [
         'assets/gallery/comlab.jpg',
         'assets/gallery/functionhall.jpg',
         'assets/gallery/avr.jpg',
@@ -92,6 +92,7 @@ Widget _buildTitle({
 
 Widget _buildImage({
   required List<String> imageList,
+  required BuildContext context,
 }) {
   return imageList.length == 1
       ? Image.asset(imageList.first)
@@ -103,7 +104,7 @@ Widget _buildImage({
                   child: Image.asset(
                     item,
                     fit: BoxFit.cover,
-                    width: Get.mediaQuery.size.width,
+                    width: MediaQuery.of(context).size.width,
                   ),
                 ),
               )

@@ -8,8 +8,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weconnect/page/phone%20view/home/channel%20box/channel_annoucnement_clicked.dart';
 
-import '../../../../constant/constant_colors.dart';
-
 channelTile({
   required BuildContext context,
   required String announcementMessage,
@@ -116,7 +114,10 @@ Widget buildChannelImageOnly({
       children: [
         announcementImageList.length == 1
             ? singleImage(announcementImageList)
-            : carouselSlider(announcementImageList),
+            : carouselSlider(
+                announcementImageList,
+                context: context,
+              ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: announcementTime(context, announcementCreatedAt),
@@ -191,7 +192,10 @@ Widget buildChannelMessageAndImageTile({
         children: [
           announcementImageList.length == 1
               ? singleImage(announcementImageList)
-              : carouselSlider(announcementImageList),
+              : carouselSlider(
+                  announcementImageList,
+                  context: context,
+                ),
           Padding(
             padding: EdgeInsets.all(3.w),
             child: Column(
@@ -269,23 +273,24 @@ Widget buildChannelImageAndFileUrlTile({
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+        color: Theme.of(context).textTheme.bodyMedium!.color,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : carouselSlider(announcementImageList),
+              : carouselSlider(
+                  announcementImageList,
+                  context: context,
+                ),
           GestureDetector(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Downloadable File Here 📁",
                 textScaleFactor: 1.2,
-                style: TextStyle(color: Get.theme.primaryColor),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             onTap: () async {
@@ -322,23 +327,24 @@ Widget buildChannelAllHasDataTile({
     padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.w),
     child: Container(
       decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kTextFormFieldColorDarkTheme
-            : kTextFormFieldColorLightTheme,
+        color: Theme.of(context).textTheme.bodyMedium!.color,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           announcementImageList.length == 1
               ? Image.network(announcementImageList.first)
-              : carouselSlider(announcementImageList),
+              : carouselSlider(
+                  announcementImageList,
+                  context: context,
+                ),
           GestureDetector(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Downloadable File Here 📁",
                 textScaleFactor: 1.2,
-                style: TextStyle(color: Get.theme.primaryColor),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             onTap: () async {
@@ -366,7 +372,10 @@ Widget buildChannelAllHasDataTile({
   );
 }
 
-CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
+CarouselSlider carouselSlider(
+  List<dynamic> announcementImageList, {
+  required BuildContext context,
+}) {
   return CarouselSlider(
     items: announcementImageList
         .map(
@@ -383,7 +392,7 @@ CarouselSlider carouselSlider(List<dynamic> announcementImageList) {
         )
         .toList(),
     options: CarouselOptions(
-      height: Get.mediaQuery.size.height * .5,
+      height: MediaQuery.of(context).size.height * .5,
       aspectRatio: 16 / 9,
       viewportFraction: 1,
       initialPage: 0,
@@ -419,7 +428,7 @@ LinkWell linkWell({
     maxLines: maxLines,
     overflow: TextOverflow.fade,
     linkStyle: TextStyle(color: Theme.of(context).primaryColor),
-    style: TextStyle(color: Get.textTheme.bodyMedium!.color),
+    style: TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
   );
 }
 

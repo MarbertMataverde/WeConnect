@@ -29,7 +29,10 @@ class ChannelTileCliked extends StatelessWidget {
             Center(
               child: announcementImageList.length == 1
                   ? singleImage(announcementImageList)
-                  : carouselSlider(announcementImageList),
+                  : carouselSlider(
+                      announcementImageList,
+                      context: context,
+                    ),
             ),
             Padding(
               padding: EdgeInsets.all(5.w),

@@ -49,7 +49,7 @@ class _ForumTopicRequestListState extends State<ForumTopicRequestList> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SpinKitSpinningLines(color: Get.theme.primaryColor);
+            return SpinKitSpinningLines(color: Theme.of(context).primaryColor);
           }
           final data = snapshot.requireData;
           return ListView.builder(

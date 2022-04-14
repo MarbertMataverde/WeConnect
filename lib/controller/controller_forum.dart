@@ -17,6 +17,7 @@ class ControllerForum extends GetxController {
     required String requesterUid,
     required String topicTitle,
     required String topicDescription,
+    required BuildContext context,
   }) async {
     firestore
         .collection('forum')
@@ -36,7 +37,7 @@ class ControllerForum extends GetxController {
         GetSnackBar(
           icon: Icon(
             MdiIcons.checkBold,
-            color: Get.theme.primaryColor,
+            color:Theme.of(context).primaryColor,
           ),
           margin: EdgeInsets.all(2.w),
           borderRadius: 1.w,

@@ -127,14 +127,14 @@ class ControllerChannel extends GetxController {
 
   //channel is exsisting or not checker
   Future<void> channelChecker(
-      {required String token, required List studentUid}) async {
+      {required BuildContext context, required String token, required List studentUid}) async {
     firestore.collection('channels').doc(token).get().then(
           (channelExsist) => channelExsist.exists
               ? joinChannel(token: token, studentUid: studentUid)
               : Get.showSnackbar(GetSnackBar(
                   icon: Icon(
                     MdiIcons.alphaXBoxOutline,
-                    color: Get.theme.primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                   margin: EdgeInsets.all(2.w),
                   borderRadius: 1.w,
