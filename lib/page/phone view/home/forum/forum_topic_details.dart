@@ -9,12 +9,14 @@ import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/appbar/build_appbar.dart';
 import '../../../../controller/controller_vote.dart';
+import '../../../../dialog/dialog_forum.dart';
 import '../../../phone%20view/home/forum/forum_comment_list.dart';
 import '../../../../constant/constant.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_forum.dart';
 
 final ControllerForum forum = Get.put(ControllerForum());
+final _dialog = Get.put(DialogForum());
 
 class ForumTopicDetails extends StatefulWidget {
   const ForumTopicDetails({
@@ -67,11 +69,21 @@ class _ForumTopicDetailsState extends State<ForumTopicDetails> {
                 currentAccountType == 'accountTypeRegistrarAdmin'
             ? [
                 IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Iconsax.trash,
-                      color: Colors.red.shade300,
-                    )),
+                  onPressed: () async {
+                    await _dialog.deleteTopicDialog(
+                      context,
+                      assetLocation: 'assets/gifs/question_mark.gif',
+                      title: 'Topic Deletion',
+                      description:
+                          'You\'re about to delete this topic, click okay to continue.',
+                      topicDocId: widget.topicDocId,
+                    );
+                  },
+                  icon: Icon(
+                    Iconsax.trash,
+                    color: Colors.red.shade300,
+                  ),
+                ),
               ]
             : null,
       ),
