@@ -136,7 +136,7 @@ class _ChannelNewState extends State<ChannelNew> {
                     ),
                   )
                 : Material(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor.withAlpha(15),
                     borderRadius: BorderRadius.circular(5.w),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5.w),
@@ -149,6 +149,7 @@ class _ChannelNewState extends State<ChannelNew> {
                         child: Icon(
                           Iconsax.gallery_add,
                           size: 10.w,
+                          color: Theme.of(context).primaryColor.withAlpha(150),
                         ),
                       ),
                     ),
