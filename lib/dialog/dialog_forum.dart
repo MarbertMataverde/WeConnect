@@ -263,18 +263,20 @@ class DialogForum extends GetxController {
         onOkButtonPressed: () async {
           await forum.topicDeletion(topicDocId: topicDocId);
           Get.back();
-          Get.showSnackbar(GetSnackBar(
-            icon: Icon(
-              MdiIcons.checkBold,
-              color: Theme.of(context).primaryColor,
+          Get.showSnackbar(
+            GetSnackBar(
+              icon: Icon(
+                MdiIcons.checkBold,
+                color: Theme.of(context).primaryColor,
+              ),
+              margin: EdgeInsets.all(2.w),
+              borderRadius: 1.w,
+              backgroundColor: kButtonColorLightTheme,
+              message: 'Topic removed',
+              duration: const Duration(seconds: 1),
+              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
             ),
-            margin: EdgeInsets.all(2.w),
-            borderRadius: 1.w,
-            backgroundColor: kButtonColorLightTheme,
-            message: 'Topic removed',
-            duration: const Duration(seconds: 1),
-            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-          ));
+          );
         },
       ),
     );

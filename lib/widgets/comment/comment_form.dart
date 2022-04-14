@@ -25,7 +25,7 @@ Form buildCommentForm({
       textCapitalization: TextCapitalization.sentences,
       style: TextStyle(
         color: Theme.of(context).textTheme.labelMedium!.color,
-        fontSize: 10.sp,
+        fontSize: 12.sp,
       ),
       autofocus: false,
       controller: textEditingCtrlr,
