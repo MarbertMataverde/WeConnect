@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 
-import '../constant/constant_colors.dart';
 import '../page/phone view/forgot password/forgot_password.dart';
 
 class DialogAuthentication extends GetxController {
   //invalid account type
   Future<dynamic> invalidAccountTypeDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         onlyOkButton: true,
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -41,16 +40,16 @@ class DialogAuthentication extends GetxController {
 
   //reset password dialog
   Future<dynamic> resetPasswordDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         onlyOkButton: true,
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -117,27 +116,23 @@ class DialogAuthentication extends GetxController {
 
   //incorrect password dialog
   Future<dynamic> incorrectPasswordDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         //? try again button
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         buttonOkText: Text(
           'Try Again',
           style: TextStyle(
-            color: Get.isDarkMode
-                ? kTextButtonColorDarkTheme
-                : kTextButtonColorLightTheme,
+            color: Theme.of(context).textTheme.bodyMedium!.color,
           ),
         ),
         onlyOkButton: true,
-        buttonCancelColor:
-            Get.isDarkMode ? kButtonColorDarkTheme : kButtonColorLightTheme,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -161,16 +156,16 @@ class DialogAuthentication extends GetxController {
 
   //user not found dialog
   Future<dynamic> userNotFoundDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         onlyOkButton: true,
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -194,16 +189,16 @@ class DialogAuthentication extends GetxController {
 
   //something went wrong dialog
   Future<dynamic> somethingWentWrongDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
   ) {
     return showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
         onlyOkButton: true,
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,

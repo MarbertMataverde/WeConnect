@@ -347,6 +347,7 @@ class CcsAnnouncementPostTile extends StatelessWidget {
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
+                    context: context,
                     reportType: 'ccs-feed',
                     reportDocumentId: postDocId,
                   );

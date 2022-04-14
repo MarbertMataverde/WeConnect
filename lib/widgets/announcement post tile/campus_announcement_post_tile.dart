@@ -348,6 +348,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
+                    context: context,
                     reportType: 'campus-feed',
                     reportDocumentId: postDocId,
                   );

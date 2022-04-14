@@ -347,6 +347,7 @@ class CoaAnnouncementPostTile extends StatelessWidget {
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
+                    context: context,
                     reportType: 'coa-feed',
                     reportDocumentId: postDocId,
                   );

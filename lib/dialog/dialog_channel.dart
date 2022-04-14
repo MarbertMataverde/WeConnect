@@ -11,7 +11,7 @@ final channel = Get.put(ControllerChannel());
 
 class DialogChannel extends GetxController {
   //channel delition dialog
-  Future<dynamic> deleteChannelDialog(_context,
+  Future<dynamic> deleteChannelDialog(context,
       {required String assetLocation,
       required String title,
       required String description,
@@ -19,9 +19,9 @@ class DialogChannel extends GetxController {
       required String channelDocId,
       required String channelAvatarImage}) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -45,13 +45,13 @@ class DialogChannel extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
             backgroundColor: kButtonColorLightTheme,
-            message: 'Success channel has been removed',
-            duration: const Duration(seconds: 3),
+            message: 'Channel has been removed',
+            duration: const Duration(seconds: 1),
             forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
           ));
         },

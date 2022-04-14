@@ -347,6 +347,7 @@ class CobAnnouncementPostTile extends StatelessWidget {
                 Colors.red,
                 () {
                   dialogs.reportPostDialog(
+                    context: context,
                     reportType: 'cob-feed',
                     reportDocumentId: postDocId,
                   );

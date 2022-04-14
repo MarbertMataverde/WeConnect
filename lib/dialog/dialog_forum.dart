@@ -52,12 +52,12 @@ class DialogForum extends GetxController {
             GetSnackBar(
               icon: Icon(
                 MdiIcons.checkBold,
-                color: Get.theme.primaryColor,
+                color: Theme.of(context).primaryColor,
               ),
               margin: EdgeInsets.all(2.w),
               borderRadius: 1.w,
               backgroundColor: kButtonColorLightTheme,
-              message: 'Success request has been removed.',
+              message: 'Request has been removed',
               duration: const Duration(seconds: 1),
               forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
             ),
@@ -119,7 +119,7 @@ class DialogForum extends GetxController {
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
             backgroundColor: kButtonColorLightTheme,
-            message: 'Success request has been approved.',
+            message: 'Request has been approved.',
             duration: const Duration(seconds: 1),
             forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
           ));
@@ -202,7 +202,7 @@ class DialogForum extends GetxController {
               primary: Colors.white,
               backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
               padding: EdgeInsets.symmetric(
-                  horizontal: Get.mediaQuery.size.width * 0.1)),
+                  horizontal: MediaQuery.of(context).size.width * 0.1)),
           onPressed: () async {
             final _isValid = _validationKey.currentState!.validate();
             Get.focusScope!.unfocus();
@@ -222,7 +222,7 @@ class DialogForum extends GetxController {
                 margin: EdgeInsets.all(2.w),
                 borderRadius: 1.w,
                 backgroundColor: kButtonColorLightTheme,
-                message: 'Success report submitted.',
+                message: 'Report submitted',
                 duration: const Duration(seconds: 1),
                 forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
               ));

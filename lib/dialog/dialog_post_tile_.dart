@@ -23,7 +23,7 @@ final controllerReportPost = Get.put(ControllerReport());
 class DialogPostTile extends GetxController {
   //post delition dialog
   Future<dynamic> deletePostDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
@@ -33,9 +33,9 @@ class DialogPostTile extends GetxController {
     List postMedia,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -57,13 +57,13 @@ class DialogPostTile extends GetxController {
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
               MdiIcons.checkBold,
-              color: Get.theme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),
             borderRadius: 1.w,
             backgroundColor: kButtonColorLightTheme,
-            message: 'Success post has been removed',
-            duration: const Duration(seconds: 3),
+            message: 'Post has been removed',
+            duration: const Duration(seconds: 1),
             forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
           ));
         },
@@ -73,7 +73,7 @@ class DialogPostTile extends GetxController {
 
   //post edit caption dialog
   Future<dynamic> postEditCaptionDialog(
-    _context,
+    context,
     String assetLocation,
     String title,
     String description,
@@ -83,15 +83,9 @@ class DialogPostTile extends GetxController {
     String updatedCaption,
   ) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
-        buttonOkText: Text(
-          'Yes',
-          style: TextStyle(
-            color: Get.theme.textTheme.button!.color,
-          ),
-        ),
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
@@ -120,6 +114,7 @@ class DialogPostTile extends GetxController {
 
   //report post dialog
   Future<dynamic> reportPostDialog({
+    required BuildContext context,
     required String reportType,
     required String reportDocumentId,
   }) async {
@@ -131,7 +126,7 @@ class DialogPostTile extends GetxController {
         TextEditingController();
     Get.defaultDialog(
       barrierDismissible: false,
-      backgroundColor: Get.theme.scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       radius: 1.w,
       title: 'Report post 🧐',
       content: Form(
@@ -175,9 +170,9 @@ class DialogPostTile extends GetxController {
       actions: [
         TextButton(
           style: TextButton.styleFrom(
-            primary: Get.theme.primaryColor,
+            primary:Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(
-              horizontal: Get.mediaQuery.size.width * 0.1,
+              horizontal: MediaQuery.of(context).size.width * 0.1,
             ),
           ),
           onPressed: () {
@@ -190,9 +185,9 @@ class DialogPostTile extends GetxController {
         TextButton(
           style: TextButton.styleFrom(
               primary: Colors.white,
-              backgroundColor: Get.theme.primaryColor.withOpacity(0.7),
+              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
               padding: EdgeInsets.symmetric(
-                  horizontal: Get.mediaQuery.size.width * 0.1)),
+                  horizontal: MediaQuery.of(context).size.width * 0.1)),
           onPressed: () async {
             final _isValid = _validationKey.currentState!.validate();
             Get.focusScope!.unfocus();
@@ -208,7 +203,7 @@ class DialogPostTile extends GetxController {
               Get.showSnackbar(GetSnackBar(
                 icon: Icon(
                   MdiIcons.checkBold,
-                  color: Get.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                 ),
                 margin: EdgeInsets.all(2.w),
                 borderRadius: 1.w,

@@ -9,7 +9,7 @@ final xlsxAccessCodeGenerator = Get.put(XlsxAccessCodeGenerator());
 class DialogAccessCodeGenerator extends GetxController {
   //access code geneation confirmation dialog
   Future<dynamic> accessCodeConfirmationDialog(
-    _context, {
+    context, {
     required String assetLocation,
     required String title,
     required String description,
@@ -19,9 +19,9 @@ class DialogAccessCodeGenerator extends GetxController {
     required String studentAccessCodeFileName,
   }) async {
     showDialog(
-      context: _context,
+      context: context,
       builder: (_) => AssetGiffDialog(
-        buttonOkColor: Get.theme.primaryColor,
+        buttonOkColor: Theme.of(context).primaryColor,
         image: Image.asset(
           assetLocation,
           fit: BoxFit.cover,
