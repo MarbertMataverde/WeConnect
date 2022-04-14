@@ -42,7 +42,8 @@ class ReportedPostTile extends StatelessWidget {
     //deletion constructor
     required this.announcementTypeDoc,
     required this.postDocId,
-    required this.media, required this.reportDocId,
+    required this.media,
+    required this.reportDocId,
   }) : super(key: key);
   //dismissal or deletion of the report details
   final String reportDocId;
@@ -174,14 +175,6 @@ class ReportedPostTile extends StatelessWidget {
                           announcementTypeDoc,
                           postDocId,
                           postMedia,
-                        );
-                        await report.dismissReport(
-                          context: context,
-                          title: 'Report Dismissal',
-                          assetLocation: 'assets/gifs/dismiss_report.gif',
-                          description:
-                              'Are you sure you want to dissmiss this issue?',
-                          reportDocId: reportDocId,
                         );
                       },
                     ),
