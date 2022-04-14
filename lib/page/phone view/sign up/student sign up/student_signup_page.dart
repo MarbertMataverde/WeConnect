@@ -141,10 +141,19 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                               color: Theme.of(context).primaryColor,
                             ),
                             value: _collegeOf,
-                            hint: const Text(
+                            hint: Text(
                               'COA/COB/CCS/MASTERAL',
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .color),
                             ),
-                            items: _collegeList.map(buildMenuItem).toList(),
+                            items: _collegeList
+                                .map(
+                                  buildMenuItem,
+                                )
+                                .toList(),
                             onChanged: (value) => setState(
                               () => _collegeOf = value,
                             ),
@@ -268,14 +277,14 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
       ),
     );
   }
-}
 
-DropdownMenuItem<String> buildMenuItem(
-  String item,
-) =>
-    DropdownMenuItem(
-      value: item,
-      child: Text(
-        item,
-      ),
-    );
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(
+            color: Theme.of(context).textTheme.labelMedium!.color,
+          ),
+        ),
+      );
+}
