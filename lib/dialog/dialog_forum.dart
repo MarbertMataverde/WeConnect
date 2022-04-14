@@ -233,4 +233,50 @@ class DialogForum extends GetxController {
       ],
     );
   }
+
+  //topic delition dialog
+  Future<dynamic> deleteTopicDialog(
+    context, {
+    required String assetLocation,
+    required String title,
+    required String description,
+    required String topicDocId,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => AssetGiffDialog(
+        buttonOkColor: Theme.of(context).primaryColor,
+        image: Image.asset(
+          assetLocation,
+          fit: BoxFit.cover,
+        ),
+        entryAnimation: EntryAnimation.bottom,
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        description: Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        onOkButtonPressed: () async {
+          await forum.topicDeletion(topicDocId: topicDocId);
+          Get.back();
+          Get.showSnackbar(GetSnackBar(
+            icon: Icon(
+              MdiIcons.checkBold,
+              color: Theme.of(context).primaryColor,
+            ),
+            margin: EdgeInsets.all(2.w),
+            borderRadius: 1.w,
+            backgroundColor: kButtonColorLightTheme,
+            message: 'Topic removed',
+            duration: const Duration(seconds: 1),
+            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+          ));
+        },
+      ),
+    );
+  }
 }

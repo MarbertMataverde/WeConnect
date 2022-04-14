@@ -128,10 +128,20 @@ Widget buildTopicTile({
       child: Slidable(
         endActionPane: ActionPane(
           motion: const StretchMotion(),
-          children: currentAccountType == 'accountTypeCampusAdmin'
+          children: currentAccountType == 'accountTypeCampusAdmin' ||
+                  currentAccountType == 'accountTypeRegistrarAdmin'
               ? [
                   SlidableAction(
-                    onPressed: (_) {},
+                    onPressed: (_) {
+                      _dialog.deleteTopicDialog(
+                        context,
+                        assetLocation: 'assets/gifs/question_mark.gif',
+                        title: 'Topic Deletion',
+                        description:
+                            'You\'re about to delete this topic, click okay to continue.',
+                        topicDocId: topicDocId,
+                      );
+                    },
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     icon: Iconsax.trash,

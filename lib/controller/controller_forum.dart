@@ -126,4 +126,17 @@ class ControllerForum extends GetxController {
       'report-type': 'forum',
     });
   }
+
+  // topic deletion
+  Future<void> topicDeletion({
+    required topicDocId,
+  }) async {
+    //comment delition
+    await firestore
+        .collection('forum')
+        .doc('approved-request')
+        .collection('all-approved-request')
+        .doc(topicDocId)
+        .delete();
+  }
 }
