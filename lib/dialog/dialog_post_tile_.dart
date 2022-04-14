@@ -7,7 +7,6 @@ import '../constant/constant.dart';
 import '../controller/controller_delete_post.dart';
 import '../controller/controller_report.dart';
 
-import '../constant/constant_colors.dart';
 import '../controller/controller_edit_post_caption.dart';
 import '../widgets/text form field/custom_textformfield.dart';
 
