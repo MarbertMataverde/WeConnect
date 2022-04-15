@@ -88,15 +88,15 @@ class _SelectCollegeFeedState extends State<SelectCollegeFeed> {
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return FractionallySizedBox(
-                    widthFactor: 0.8,
+                    widthFactor: 0.95,
                     child: Container(
                       margin: EdgeInsets.all(5.w),
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(data[index]),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
-                        borderRadius: BorderRadius.circular(5.w),
+                        borderRadius: BorderRadius.circular(2.w),
                       ),
                     ),
                   );
