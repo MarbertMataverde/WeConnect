@@ -11,10 +11,10 @@ import 'cob_feed.dart';
 import 'masteral_feed.dart';
 
 List<String> data = [
-  'assets/colleges/coa.png',
-  'assets/colleges/cob.png',
-  'assets/colleges/ccs.png',
-  'assets/colleges/masteral.png',
+  'assets/colleges/coa.gif',
+  'assets/colleges/cob.gif',
+  'assets/colleges/ccs.gif',
+  'assets/colleges/masteral.gif',
 ];
 
 List<Widget> pages = [
