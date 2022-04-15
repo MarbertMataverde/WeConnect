@@ -12,6 +12,8 @@ import 'announcement_detailed_report.dart';
 
 final Stream<QuerySnapshot> reportStream = FirebaseFirestore.instance
     .collection('reports')
+    .doc('announcement-report')
+    .collection('reports')
     .orderBy('reported-at', descending: true)
     .snapshots();
 
@@ -118,6 +120,7 @@ class AnnouncementReportList extends StatelessWidget {
                           reportedConcern: data.docs[index]['report-concern'],
                           reportedConcernDescription: data.docs[index]
                               ['report-concern-description'],
+                          //dismissal
                           reportDocId: data.docs[index].id,
                         ),
                       );

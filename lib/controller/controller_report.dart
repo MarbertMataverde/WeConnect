@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
-
-import '../constant/constant_colors.dart';
+import 'package:weconnect/widgets/snakbar/snakbar.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -18,7 +16,12 @@ class ControllerReport extends GetxController {
     required reportDocummentId,
   }) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await firestore.collection('reports').doc('announcement-report').set({
+    await firestore
+        .collection('reports')
+        .doc('announcement-report')
+        .collection('reports')
+        .doc()
+        .set({
       'reported-at': Timestamp.now(),
       'reporter-profile-image-url':
           sharedPreferences.get('currentProfileImageUrl'),
@@ -31,6 +34,7 @@ class ControllerReport extends GetxController {
     });
   }
 
+  // announcement report dismissal
   Future dismissReport({
     required context,
     required String reportDocId,
@@ -66,20 +70,8 @@ class ControllerReport extends GetxController {
               .delete();
           Get.back();
           Get.back();
-          Get.showSnackbar(
-            GetSnackBar(
-              icon: Icon(
-                MdiIcons.checkBold,
-                color: Theme.of(context).primaryColor,
-              ),
-              margin: EdgeInsets.all(2.w),
-              borderRadius: 1.w,
-              backgroundColor: kButtonColorLightTheme,
-              message: 'Success report has been dismiss.',
-              duration: const Duration(seconds: 1),
-              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-            ),
-          );
+          buildCustomSnakbar(
+              context: context, icon: Iconsax.trash, message: 'Report dismiss');
         },
       ),
     );
