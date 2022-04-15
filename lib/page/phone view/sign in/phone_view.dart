@@ -29,7 +29,7 @@ class PhoneViewSignIn extends StatefulWidget {
 }
 
 class _PhoneViewSignInState extends State<PhoneViewSignIn> {
-  bool isLoading = true;
+  bool isLoading = false;
 
   late TextEditingController _emailCtrlr;
   late TextEditingController _passwordCtrlr;
