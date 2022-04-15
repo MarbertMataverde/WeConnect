@@ -48,4 +48,42 @@ class DialogChannel extends GetxController {
       ),
     );
   }
+
+  //change channel name dialog
+  Future<dynamic> changeChannelName(
+    context,
+    String assetLocation,
+    String title,
+    String description,
+    //edit channel name params
+    {
+    required String token,
+    required String newChannelName,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => AssetGiffDialog(
+        buttonOkColor: Theme.of(context).primaryColor,
+        image: Image.asset(
+          assetLocation,
+          fit: BoxFit.cover,
+        ),
+        entryAnimation: EntryAnimation.bottom,
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        description: Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        onOkButtonPressed: () async {
+          Get.back();
+          channel.changeChannelName(
+              context: context, token: token, newChannelName: newChannelName);
+        },
+      ),
+    );
+  }
 }

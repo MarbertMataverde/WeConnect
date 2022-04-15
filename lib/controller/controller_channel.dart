@@ -6,9 +6,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart' as p;
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/snakbar/snakbar.dart';
 
 import '../constant/constant_colors.dart';
 
@@ -127,7 +129,9 @@ class ControllerChannel extends GetxController {
 
   //channel is exsisting or not checker
   Future<void> channelChecker(
-      {required BuildContext context, required String token, required List studentUid}) async {
+      {required BuildContext context,
+      required String token,
+      required List studentUid}) async {
     firestore.collection('channels').doc(token).get().then(
           (channelExsist) => channelExsist.exists
               ? joinChannel(token: token, studentUid: studentUid)
@@ -356,5 +360,24 @@ class ControllerChannel extends GetxController {
       );
       listOfFileUrls.clear();
     }
+  }
+
+  //change channel name
+  Future<void> changeChannelName(
+      {required BuildContext context,
+      required String token,
+      required String newChannelName}) async {
+    firestore
+        .collection('channels')
+        .doc(token)
+        .update({'channel-name': newChannelName}).whenComplete(() {
+      Get.back();
+      Get.back();
+      Get.back();
+      buildCustomSnakbar(
+          context: context,
+          icon: Iconsax.edit,
+          message: 'Channel name updated!');
+    });
   }
 }
