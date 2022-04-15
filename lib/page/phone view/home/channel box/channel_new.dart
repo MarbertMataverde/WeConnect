@@ -6,16 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/snakbar/snakbar.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../controller/controller_account_information.dart';
 import '../../../../controller/controller_channel.dart';
 import '../../../../constant/constant.dart';
 import '../../../../widgets/text form field/custom_textformfield.dart';
-
-import '../../../../constant/constant_colors.dart';
 
 //random character generator
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -215,21 +213,10 @@ class _ChannelNewState extends State<ChannelNew> {
                                   Clipboard.setData(ClipboardData(
                                           text: channelJoinTokenCtrlr.text))
                                       .then(
-                                    (value) => Get.showSnackbar(
-                                      GetSnackBar(
-                                        icon: Icon(
-                                          MdiIcons.checkBold,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                        margin: EdgeInsets.all(2.w),
-                                        borderRadius: 1.w,
-                                        backgroundColor: kButtonColorLightTheme,
-                                        message: 'Token copied to clipboard',
-                                        duration: const Duration(seconds: 3),
-                                        forwardAnimationCurve:
-                                            Curves.fastLinearToSlowEaseIn,
-                                      ),
-                                    ),
+                                    (value) => buildCustomSnakbar(
+                                        context: context,
+                                        icon: Iconsax.copy,
+                                        message: 'Token copied to clipboard'),
                                   );
                                 }
                               : null,
