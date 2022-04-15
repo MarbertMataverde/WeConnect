@@ -58,13 +58,10 @@ class ChannelSettings extends StatelessWidget {
                   iconColor: Theme.of(context).primaryColor,
                   onCliked: () {
                     Clipboard.setData(ClipboardData(text: channelToken)).then(
-                      (value) => Get.showSnackbar(
-                        globalSnackBar(
+                      (value) => buildCustomSnakbar(
                           context: context,
-                          message: 'Token copied to clipboard',
                           icon: Iconsax.copy,
-                        ),
-                      ),
+                          message: 'Token copied to clipboard'),
                     );
                   },
                 ),
