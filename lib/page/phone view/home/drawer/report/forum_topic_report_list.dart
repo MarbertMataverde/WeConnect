@@ -8,9 +8,11 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../controller/controller_report.dart';
 import '../../../../../widgets/appbar/build_appbar.dart';
-import 'detailed_report.dart';
+import 'forum_topic_detailed_report.dart';
 
 final Stream<QuerySnapshot> reportStream = FirebaseFirestore.instance
+    .collection('reports')
+    .doc('forum-topic-report')
     .collection('reports')
     .orderBy('reported-at', descending: true)
     .snapshots();
@@ -18,15 +20,15 @@ final Stream<QuerySnapshot> reportStream = FirebaseFirestore.instance
 //report controller
 final report = Get.put(ControllerReport());
 
-class ReportList extends StatelessWidget {
-  const ReportList({Key? key}) : super(key: key);
+class ForumTopicReportList extends StatelessWidget {
+  const ForumTopicReportList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: 'Reports',
+        title: 'Forum Reports',
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -61,15 +63,14 @@ class ReportList extends StatelessWidget {
                       SlidableAction(
                         onPressed: (_) {
                           Get.to(
-                            () => DetailedReport(
-                              //reported post tile
-                              reportType: data.docs[index]['report-type'],
-                              postDocId: data.docs[index]['post-documment-id'],
-                              //reporter concerns
-                              reportedAt: data.docs[index]['reported-at'],
-                              reporterName: data.docs[index]['reporter-name'],
+                            () => ForumTopicDetailedReport(
+                              //actual topic doc id
+                              topicDocId: data.docs[index]
+                                  ['topic-documment-id'],
+                              //concern
                               reporterProfileImageUrl: data.docs[index]
                                   ['reporter-profile-image-url'],
+                              reporterName: data.docs[index]['reporter-name'],
                               reportedConcern: data.docs[index]
                                   ['report-concern'],
                               reportedConcernDescription: data.docs[index]
@@ -92,6 +93,7 @@ class ReportList extends StatelessWidget {
                             assetLocation: 'assets/gifs/dismiss_report.gif',
                             description:
                                 'Are you sure you want to dissmiss this issue?',
+                            reportDocType: 'forum-topic-report',
                             reportDocId: data.docs[index].id,
                           );
                         },
@@ -105,18 +107,17 @@ class ReportList extends StatelessWidget {
                   child: ListTile(
                     onTap: () {
                       Get.to(
-                        () => DetailedReport(
-                          //reported post tile
-                          reportType: data.docs[index]['report-type'],
-                          postDocId: data.docs[index]['post-documment-id'],
-                          //reporter concerns
-                          reportedAt: data.docs[index]['reported-at'],
-                          reporterName: data.docs[index]['reporter-name'],
+                        () => ForumTopicDetailedReport(
+                          //actual topic doc id
+                          topicDocId: data.docs[index]['topic-documment-id'],
+                          //concern
                           reporterProfileImageUrl: data.docs[index]
                               ['reporter-profile-image-url'],
+                          reporterName: data.docs[index]['reporter-name'],
                           reportedConcern: data.docs[index]['report-concern'],
                           reportedConcernDescription: data.docs[index]
                               ['report-concern-description'],
+                          //dismissal
                           reportDocId: data.docs[index].id,
                         ),
                       );

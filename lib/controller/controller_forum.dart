@@ -37,7 +37,7 @@ class ControllerForum extends GetxController {
         GetSnackBar(
           icon: Icon(
             MdiIcons.checkBold,
-            color:Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColor,
           ),
           margin: EdgeInsets.all(2.w),
           borderRadius: 1.w,
@@ -115,7 +115,12 @@ class ControllerForum extends GetxController {
     required reportDocummentId,
   }) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await firestore.collection('reports').doc('forum-topic-report').set({
+    await firestore
+        .collection('reports')
+        .doc('forum-topic-report')
+        .collection('reports')
+        .doc()
+        .set({
       'reported-at': Timestamp.now(),
       'reporter-profile-image-url':
           sharedPreferences.get('currentProfileImageUrl'),

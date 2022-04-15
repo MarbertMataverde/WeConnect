@@ -99,6 +99,12 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
                   title: 'Announcement Reports',
                   onCliked: () => selectedItem(context, 2),
                 ),
+                drawerItems(
+                  context: context,
+                  icon: Iconsax.warning_2,
+                  title: 'Forum Topic Reports',
+                  onCliked: () => selectedItem(context, 21),
+                ),
               ],
             ),
           ),

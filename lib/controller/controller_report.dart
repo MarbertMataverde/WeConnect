@@ -37,6 +37,7 @@ class ControllerReport extends GetxController {
     required String title,
     required String assetLocation,
     required String description,
+    required String reportDocType,
   }) async {
     showDialog(
       context: context,
@@ -57,7 +58,12 @@ class ControllerReport extends GetxController {
           textAlign: TextAlign.center,
         ),
         onOkButtonPressed: () async {
-          await firestore.collection('reports').doc(reportDocId).delete();
+          await firestore
+              .collection('reports')
+              .doc(reportDocType)
+              .collection('reports')
+              .doc(reportDocId)
+              .delete();
           Get.back();
           Get.back();
           Get.showSnackbar(

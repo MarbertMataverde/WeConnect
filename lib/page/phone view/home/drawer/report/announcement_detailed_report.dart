@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../../widgets/appbar/build_appbar.dart';
 
 import '../../../../../controller/controller_report.dart';
@@ -11,8 +12,8 @@ import 'reported_post_tile.dart';
 //report
 final report = Get.put(ControllerReport());
 
-class DetailedReport extends StatelessWidget {
-  const DetailedReport({
+class AnnouncementDetailedReport extends StatelessWidget {
+  const AnnouncementDetailedReport({
     Key? key,
     required this.reportType,
     required this.postDocId,
@@ -66,6 +67,7 @@ class DetailedReport extends StatelessWidget {
                 title: 'Report Dismissal',
                 assetLocation: 'assets/gifs/dismiss_report.gif',
                 description: 'Are you sure you want to dissmiss this issue?',
+                reportDocType: 'announcement-report',
                 reportDocId: reportDocId,
               );
             },
@@ -114,70 +116,72 @@ class DetailedReport extends StatelessWidget {
                     );
                   }
 
-                  return const Text("loading");
+                  return buildGlobalSpinkit(context: context);
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5.w),
-                          child: Image.network(
-                            reporterProfileImageUrl,
-                            height: MediaQuery.of(context).size.width * 0.1,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 2.w,
-                        ),
-                        Text(
-                          reporterName,
-                          textScaleFactor: 1.1,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 5.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            reportedConcern.toUpperCase(),
-                            textScaleFactor: 1,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            reportedConcernDescription,
-                            textScaleFactor: 0.9,
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium!
-                                  .color,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              const Divider(),
+              announcementReportConcern(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget announcementReportConcern(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(3.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5.w),
+                child: Image.network(
+                  reporterProfileImageUrl,
+                  height: MediaQuery.of(context).size.width * 0.1,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(
+                width: 2.w,
+              ),
+              Text(
+                reporterName,
+                textScaleFactor: 1.1,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
-        ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                reportedConcern.toUpperCase(),
+                textScaleFactor: 1,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Text(
+                reportedConcernDescription,
+                textScaleFactor: 0.9,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.labelMedium!.color,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weconnect/page/phone%20view/home/drawer/report/forum_topic_report_list.dart';
 import '../../page/phone%20view/home/drawer/terms%20and%20condition/term_and_condition.dart';
 import '../../page/phone view/home/drawer/mvg/mvg.dart';
 import '../../page/phone%20view/home/drawer/about/about.dart';
@@ -9,7 +10,7 @@ import '../../page/phone%20view/home/drawer/forum%20topic%20request/forum_topic_
 
 import '../../authentication/authentication_controller.dart';
 import '../../page/phone view/home/drawer/edit account/edit_account.dart';
-import '../../page/phone view/home/drawer/report/report_list.dart';
+import '../../page/phone view/home/drawer/report/announcement_report_list.dart';
 
 final authentication = Get.put(Authentication());
 
@@ -29,7 +30,11 @@ void selectedItem(
       break;
     // announcement reports
     case 2:
-      Get.to(() => const ReportList());
+      Get.to(() => const AnnouncementReportList());
+      break;
+    // forum topic reports
+    case 21:
+      Get.to(() => const ForumTopicReportList());
       break;
     // about
     case 3:
@@ -51,7 +56,7 @@ void selectedItem(
     case 7:
       Get.to(() => const TermsAndCondition());
       break;
-     // Help & Feedback
+    // Help & Feedback
     // case 8:
     //   Get.to(() => const HelpAndFeedback());
     //   break;
