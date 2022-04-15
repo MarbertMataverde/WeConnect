@@ -7,7 +7,6 @@ import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/snakbar/snakbar.dart';
 import '../controller/controller_forum.dart';
 
-import '../constant/constant_colors.dart';
 import '../widgets/text form field/custom_textformfield.dart';
 
 final ControllerForum forum = Get.put(ControllerForum());
@@ -260,20 +259,8 @@ class DialogForum extends GetxController {
         onOkButtonPressed: () async {
           await forum.topicDeletion(topicDocId: topicDocId);
           Get.back();
-          Get.showSnackbar(
-            GetSnackBar(
-              icon: Icon(
-                MdiIcons.checkBold,
-                color: Theme.of(context).primaryColor,
-              ),
-              margin: EdgeInsets.all(2.w),
-              borderRadius: 1.w,
-              backgroundColor: kButtonColorLightTheme,
-              message: 'Topic removed',
-              duration: const Duration(seconds: 1),
-              forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-            ),
-          );
+          buildCustomSnakbar(
+              context: context, icon: Iconsax.trash, message: 'Topic removed');
         },
       ),
     );
