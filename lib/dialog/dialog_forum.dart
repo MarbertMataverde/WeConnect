@@ -222,7 +222,7 @@ class DialogForum extends GetxController {
               buildCustomSnakbar(
                   context: context,
                   icon: Iconsax.tick_square,
-                  message: 'Report submited.');
+                  message: 'Report submitted.');
             }
           },
           child: const Text('Submit'),

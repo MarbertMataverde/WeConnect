@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import '../constant/constant.dart';
@@ -8,6 +9,7 @@ import '../controller/controller_delete_post.dart';
 import '../controller/controller_report.dart';
 
 import '../controller/controller_edit_post_caption.dart';
+import '../widgets/snakbar/snakbar.dart';
 import '../widgets/text form field/custom_textformfield.dart';
 
 //delete post
@@ -128,7 +130,10 @@ class DialogPostTile extends GetxController {
       barrierDismissible: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       radius: 1.w,
-      title: 'Report post 🧐',
+      title: 'Report Form',
+      titleStyle: TextStyle(
+        color: Theme.of(context).textTheme.bodyMedium!.color,
+      ),
       content: Form(
         key: _validationKey,
         child: Padding(
@@ -142,7 +147,7 @@ class DialogPostTile extends GetxController {
                 isPassword: kFalse,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter the reason of report😊';
+                    return 'Please enter the reason of report';
                   }
 
                   return null;
@@ -157,7 +162,7 @@ class DialogPostTile extends GetxController {
                 isPassword: kFalse,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please describe your concern🤗';
+                    return 'Please describe your concern';
                   }
 
                   return null;
@@ -200,18 +205,10 @@ class DialogPostTile extends GetxController {
                 reportDocummentId: reportDocumentId,
               );
               Get.back();
-              Get.showSnackbar(GetSnackBar(
-                icon: Icon(
-                  MdiIcons.checkBold,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-                margin: EdgeInsets.all(2.w),
-                borderRadius: 1.w,
-                backgroundColor: Theme.of(context).primaryColor.withAlpha(200),
-                message: 'Success report submitted.',
-                duration: const Duration(seconds: 3),
-                forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
-              ));
+              buildCustomSnakbar(
+                  context: context,
+                  icon: Iconsax.tick_square,
+                  message: 'Report submitted.');
             }
           },
           child: const Text('Submit'),
