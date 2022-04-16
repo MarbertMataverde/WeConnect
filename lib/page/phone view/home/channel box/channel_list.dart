@@ -115,6 +115,7 @@ class _ChannelListState extends State<ChannelList> {
                         token: data.docs[index].id,
                         channelAvatarImage: data.docs[index]
                             ['channel-avatar-image'],
+                        channelDocId: data.docs[index].id,
                       ));
                 },
                 //deleting channel

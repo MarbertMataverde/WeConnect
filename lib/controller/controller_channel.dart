@@ -380,4 +380,31 @@ class ControllerChannel extends GetxController {
           message: 'Channel name updated!');
     });
   }
+
+  // //change channel avatar
+  // Future<void> changeChannelAvatar({
+  //   required BuildContext context,
+  //   //recent avatar deletion
+  //   required String avatarStorageRefUrl,
+  //   //uploading new avatar to storage
+  //   required filePath,
+  //   required String channelName,
+  //   //channel collection
+  //   required String channelToken,
+  //   required String channelDocId,
+  // }) async {
+  //   //deletion of recent avatar
+  //   await storage.refFromURL(avatarStorageRefUrl).delete();
+  //   //uploading for new avatar image
+  //   await uploadAvatar(filePath: filePath, channelName: channelName);
+  //   //updating avatar url to new one
+  //   await firestore.collection('channels').doc(channelToken).update(
+  //     {'channel-avatar-image': avatarDownloadUrl},
+  //   ).whenComplete(
+  //     () => buildCustomSnakbar(
+  //         context: context,
+  //         icon: Iconsax.tick_square,
+  //         message: 'Channel Avatar Change'),
+  //   );
+  // }
 }

@@ -14,12 +14,13 @@ import '../../../../controller/controller_getx.dart';
 import '../../../phone%20view/home/channel%20box/channel_settings.dart';
 
 class ChannelInside extends StatefulWidget {
-  const ChannelInside(
-      {Key? key,
-      required this.channelName,
-      required this.token,
-      required this.channelAvatarImage})
-      : super(key: key);
+  const ChannelInside({
+    Key? key,
+    required this.channelName,
+    required this.token,
+    required this.channelAvatarImage,
+    required this.channelDocId,
+  }) : super(key: key);
 
   //channel name
   final String channelName;
@@ -27,6 +28,7 @@ class ChannelInside extends StatefulWidget {
   final String channelAvatarImage;
   //channel doc id
   final String token;
+  final String channelDocId;
 
   @override
   State<ChannelInside> createState() => _ChannelInsideState();
@@ -97,6 +99,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                       channelToken: widget.token,
                       channelAvatarImage: widget.channelAvatarImage,
                       channelName: widget.channelName,
+                      channelDocId: widget.channelDocId,
                     ));
               },
               icon: Icon(
@@ -163,8 +166,10 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       GetBuilder<ControllerGetX>(
                                           builder: (selectFileController) {
                                         return IconButton(
-                                          splashRadius:
-                                              MediaQuery.of(context).size.width * 0.05,
+                                          splashRadius: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                           onPressed: selectFileController
                                                   .fileIconButtonEnable
                                               ? () {
@@ -200,9 +205,10 @@ class _ChannelInsideState extends State<ChannelInside> {
                                       GetBuilder<ControllerGetX>(
                                           builder: (selectImageController) {
                                         return IconButton(
-                                            splashRadius:
-                                                MediaQuery.of(context).size.width *
-                                                    0.05,
+                                            splashRadius: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05,
                                             onPressed: selectImageController
                                                     .imageIconButtonEnable
                                                 ? () {
@@ -275,7 +281,8 @@ class _ChannelInsideState extends State<ChannelInside> {
                           ),
                           GetBuilder<ControllerGetX>(builder: (controller) {
                             return IconButton(
-                              splashRadius: MediaQuery.of(context).size.width * 0.05,
+                              splashRadius:
+                                  MediaQuery.of(context).size.width * 0.05,
                               onPressed: controller.filesEmpty &&
                                       controller.textFieldEmptySend
                                   ? null
