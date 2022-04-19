@@ -161,13 +161,13 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
                                 placeholder: kPostImagePlaceholder,
                                 image: item,
                                 fit: BoxFit.cover,
-                                width:  MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width,
                               ),
                             ),
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height:  MediaQuery.of(context).size.height * .5,
+                        height: MediaQuery.of(context).size.height * .5,
                         viewportFraction: 1,
                         initialPage: 0,
                         enableInfiniteScroll: false,
@@ -264,7 +264,7 @@ class MasteralAnnouncementPostTile extends StatelessWidget {
 
   FocusedMenuHolder meneHolder(BuildContext context) {
     return FocusedMenuHolder(
-      menuWidth:  MediaQuery.of(context).size.width * 0.50,
+      menuWidth: MediaQuery.of(context).size.width * 0.50,
       blurSize: 1.0,
       menuItemExtent: 5.h,
       menuBoxDecoration: BoxDecoration(
