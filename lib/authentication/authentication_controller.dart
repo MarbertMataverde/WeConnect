@@ -29,38 +29,49 @@ final dialog = Get.put(DialogAuthentication());
 
 class Authentication extends GetxController {
   //sign in
-  Future<void> signIn(String _emailAddress, String _password, _context) async {
+  Future<void> signIn(String _emailAddress, String _password, context) async {
     //shared preferences initialization
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       await _auth
           .signInWithEmailAndPassword(email: _emailAddress, password: _password)
-          .then((UserCredential value) async {
-        //this will make sure that the current user id is not null
-        await sharedPreferences.setString('currentUid', value.user!.uid);
-        await sharedPreferences.setString(
-            'signInToken', value.user!.email as String);
-        await accountInformation
-            .getter(sharedPreferences.get('currentUid') as String);
-      });
+          .then(
+        (UserCredential value) async {
+          if (value.user!.emailVerified) {
+            //this will make sure that the current user id is not null
+            await sharedPreferences.setString('currentUid', value.user!.uid);
+            await sharedPreferences.setString(
+                'signInToken', value.user!.email as String);
+            await accountInformation
+                .getter(sharedPreferences.get('currentUid') as String);
+          } else {
+            dialog.emailNotVerified(
+                context: context,
+                assetLocation: 'assets/gifs/warning.gif',
+                title: 'Not Verified Account',
+                description: 'Please check your mail to verify your account');
+          }
+        },
+      );
+
       // accountInformation.getter();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         dialog.userNotFoundDialog(
-            _context,
+            context,
             'assets/gifs/user_not_found.gif',
             'User Not Found 😕',
             'We can\'t find your account please make sure your credential is correct and try again 😊');
       } else if (e.code == 'wrong-password') {
         dialog.incorrectPasswordDialog(
-            _context,
+            context,
             'assets/gifs/incorrect_password.gif',
             'Incorrect Password 🤔',
             'Please make sure your password is correct ✔ 😉');
       }
     } catch (e) {
       dialog.somethingWentWrongDialog(
-          _context,
+          context,
           'assets/gifs/something_went_wrong.gif',
           'Someting Went Wrong 😕',
           'Please restart the app or contact tech support 👨🏻‍💻');
@@ -75,7 +86,7 @@ class Authentication extends GetxController {
     int _studentNumber,
     String _emailAddress,
     String _password,
-    _context,
+    context,
   ) async {
     //shared preferences initialization
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -98,10 +109,12 @@ class Authentication extends GetxController {
           'profile-image-url': kDefaultProfile,
           'profile-email': _emailAddress,
           'channels': [],
-        }).whenComplete(() {
+        }).whenComplete(() async {
           firestore.collection('student-access-code').doc(_accessCode).delete();
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
+          //email verification
+          await _auth.currentUser?.sendEmailVerification();
         });
         //this will make sure that the current user id is not null
         await sharedPreferences.setString('currentUid', value.user!.uid);
@@ -113,14 +126,14 @@ class Authentication extends GetxController {
       if (e.code == 'weak-password') {
       } else if (e.code == 'email-already-in-use') {
         dialog.emailAlreadyInUseDialog(
-            _context,
+            context,
             'assets/gifs/exsisting_account_found.gif',
             'Email Already In Use',
             'If you forgot your password you can change it now by clicking the reset button'); // student
       }
     } catch (e) {
       dialog.somethingWentWrongDialog(
-          _context,
+          context,
           'assets/gifs/something_went_wrong.gif',
           'Someting Went Wrong 😕',
           'Please restart the app or contact tech support 👨🏻‍💻');
@@ -135,7 +148,7 @@ class Authentication extends GetxController {
     int _employeeNumber,
     String _emailAddress,
     String _password,
-    _context,
+    context,
   ) async {
     //shared preferences initialization
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -158,13 +171,15 @@ class Authentication extends GetxController {
           'employee-number': _employeeNumber,
           'profile-email': _emailAddress,
           'channels': [],
-        }).whenComplete(() {
+        }).whenComplete(() async {
           firestore
               .collection('professor-access-code')
               .doc(_accessCode)
               .delete();
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
+          //email verification
+          await _auth.currentUser?.sendEmailVerification();
         });
         //this will make sure that the current user id is not null
         await sharedPreferences.setString('currentUid', value.user!.uid);
@@ -176,14 +191,14 @@ class Authentication extends GetxController {
       if (e.code == 'weak-password') {
       } else if (e.code == 'email-already-in-use') {
         dialog.emailAlreadyInUseDialog(
-            _context,
+            context,
             'assets/gifs/exsisting_account_found.gif',
             'Email Already In Use',
             'If you forgot your password you can change it now by clicking the reset button'); // student
       }
     } catch (e) {
       dialog.somethingWentWrongDialog(
-          _context,
+          context,
           'assets/gifs/something_went_wrong.gif',
           'Someting Went Wrong 😕',
           'Please restart the app or contact tech support 👨🏻‍💻');
@@ -191,16 +206,16 @@ class Authentication extends GetxController {
   }
 
   // reset password
-  Future<void> resetPassword(String _email, _context) async {
+  Future<void> resetPassword(String _email, context) async {
     try {
       await _auth.sendPasswordResetEmail(email: _email).whenComplete(() =>
-          dialog.resetPasswordDialog(_context, 'assets/gifs/email_sent.gif',
+          dialog.resetPasswordDialog(context, 'assets/gifs/email_sent.gif',
               'Mail Sent 💌', 'We have e-mailed your password reset link! 🤗'));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {}
     } catch (e) {
       dialog.somethingWentWrongDialog(
-          _context,
+          context,
           'assets/gifs/something_went_wrong.gif',
           'Someting Went Wrong 😕',
           'Please restart the app or contact tech support 👨🏻‍💻');

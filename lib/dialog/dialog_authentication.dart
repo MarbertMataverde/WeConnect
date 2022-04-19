@@ -219,4 +219,70 @@ class DialogAuthentication extends GetxController {
       ),
     );
   }
+
+  //welcome dialog
+  Future<void> newUserWelcomeDialog({
+    required BuildContext context,
+    required String assetLocation,
+    required String title,
+    required String description,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => AssetGiffDialog(
+        onlyOkButton: true,
+        buttonOkColor: Theme.of(context).primaryColor,
+        image: Image.asset(
+          assetLocation,
+          fit: BoxFit.cover,
+        ),
+        entryAnimation: EntryAnimation.bottom,
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        description: Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        onOkButtonPressed: () {
+          Get.back();
+        },
+      ),
+    );
+  }
+
+  // email not verified dialog
+  Future<void> emailNotVerified({
+    required BuildContext context,
+    required String assetLocation,
+    required String title,
+    required String description,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => AssetGiffDialog(
+        onlyOkButton: true,
+        buttonOkColor: Theme.of(context).primaryColor,
+        image: Image.asset(
+          assetLocation,
+          fit: BoxFit.cover,
+        ),
+        entryAnimation: EntryAnimation.bottom,
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        description: Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        onOkButtonPressed: () {
+          Get.back();
+        },
+      ),
+    );
+  }
 }
