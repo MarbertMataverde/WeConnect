@@ -39,7 +39,7 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
     result = await FilePicker.platform.pickFiles(
       allowCompression: true,
       allowMultiple: true,
-      allowedExtensions: ['png', 'jpg'],
+      allowedExtensions: ['png', 'jpg', 'gif'],
       type: FileType.custom,
     );
   }
