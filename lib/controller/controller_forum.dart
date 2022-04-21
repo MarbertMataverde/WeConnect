@@ -2,12 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/snakbar/snakbar.dart';
-
-import '../constant/constant_colors.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
