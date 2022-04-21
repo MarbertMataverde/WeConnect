@@ -135,18 +135,10 @@ class ControllerChannel extends GetxController {
     firestore.collection('channels').doc(token).get().then(
           (channelExsist) => channelExsist.exists
               ? joinChannel(token: token, studentUid: studentUid)
-              : Get.showSnackbar(GetSnackBar(
-                  icon: Icon(
-                    MdiIcons.alphaXBoxOutline,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  margin: EdgeInsets.all(2.w),
-                  borderRadius: 1.w,
-                  backgroundColor: kButtonColorLightTheme,
-                  message: 'Token din\'t exsist',
-                  duration: const Duration(seconds: 2),
-                  forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-                )),
+              : buildCustomSnakbar(
+                  context: context,
+                  icon: Iconsax.information,
+                  message: 'Token din\'t exsist'),
         );
   }
 
