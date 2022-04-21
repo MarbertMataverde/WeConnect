@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/snakbar/snakbar.dart';
 
 import '../constant/constant_colors.dart';
 
@@ -33,20 +35,8 @@ class ControllerForum extends GetxController {
       'requester-profile-image-url': requesterProfileImageUrl,
     }).whenComplete(() {
       Get.back();
-      Get.showSnackbar(
-        GetSnackBar(
-          icon: Icon(
-            MdiIcons.checkBold,
-            color: Theme.of(context).primaryColor,
-          ),
-          margin: EdgeInsets.all(2.w),
-          borderRadius: 1.w,
-          backgroundColor: kButtonColorLightTheme,
-          message: 'Success request has been sent.',
-          duration: const Duration(seconds: 2),
-          forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
-        ),
-      );
+      buildCustomSnakbar(
+          context: context, icon: Iconsax.tick_square, message: 'Request sent');
     });
   }
 
