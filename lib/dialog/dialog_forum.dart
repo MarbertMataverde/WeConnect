@@ -259,6 +259,7 @@ class DialogForum extends GetxController {
         onOkButtonPressed: () async {
           await forum.topicDeletion(topicDocId: topicDocId);
           Get.back();
+          Get.back();
           buildCustomSnakbar(
               context: context, icon: Iconsax.trash, message: 'Topic removed');
         },
