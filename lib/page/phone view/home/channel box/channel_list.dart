@@ -187,7 +187,7 @@ Widget buildChannelTile({
                 assetLocation: 'assets/gifs/question_mark.gif',
                 title: 'Channel Delition 🗑',
                 description:
-                    'Yor\'re about to delete this channel\nare you sure about that?',
+                    'You\'re about to delete this channel\nare you sure about that?',
                 channelDocId: channelDocId,
                 channelAvatarImage: channelAvatarImage,
               ),
