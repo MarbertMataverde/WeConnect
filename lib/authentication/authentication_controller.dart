@@ -37,20 +37,26 @@ class Authentication extends GetxController {
           .signInWithEmailAndPassword(email: _emailAddress, password: _password)
           .then(
         (UserCredential value) async {
-          if (value.user!.emailVerified) {
-            //this will make sure that the current user id is not null
-            await sharedPreferences.setString('currentUid', value.user!.uid);
-            await sharedPreferences.setString(
-                'signInToken', value.user!.email as String);
-            await accountInformation
-                .getter(sharedPreferences.get('currentUid') as String);
-          } else {
-            dialog.emailNotVerified(
-                context: context,
-                assetLocation: 'assets/gifs/warning.gif',
-                title: 'Not Verified Account',
-                description: 'Please check your mail to verify your account');
-          }
+          // if (value.user!.emailVerified) {
+          //   //this will make sure that the current user id is not null
+          //   await sharedPreferences.setString('currentUid', value.user!.uid);
+          //   await sharedPreferences.setString(
+          //       'signInToken', value.user!.email as String);
+          //   await accountInformation
+          //       .getter(sharedPreferences.get('currentUid') as String);
+          // } else {
+          //   dialog.emailNotVerified(
+          //       context: context,
+          //       assetLocation: 'assets/gifs/warning.gif',
+          //       title: 'Not Verified Account',
+          //       description: 'Please check your mail to verify your account');
+          // }
+          //this will make sure that the current user id is not null
+          await sharedPreferences.setString('currentUid', value.user!.uid);
+          await sharedPreferences.setString(
+              'signInToken', value.user!.email as String);
+          await accountInformation
+              .getter(sharedPreferences.get('currentUid') as String);
         },
       );
 
