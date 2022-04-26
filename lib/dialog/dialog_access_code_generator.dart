@@ -42,6 +42,7 @@ class DialogAccessCodeGenerator extends GetxController {
             studentAxCodeCtrlr,
             studentAccessCodeFileName,
           );
+          Navigator.pop(context);
         },
       ),
     );
