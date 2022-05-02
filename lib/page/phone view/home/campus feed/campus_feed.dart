@@ -94,7 +94,7 @@ class _CampusFeedState extends State<CampusFeed> {
                   postDocId: data.docs[index].id,
                   media: _imageList,
                   //account type
-                  accountType: currentAccountType.toString(),
+                  accountType: data.docs[index]['account-type'],
                   //announcement list of votes
                   announcementVotes: data.docs[index]['votes'],
                 );

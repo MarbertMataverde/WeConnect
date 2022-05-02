@@ -65,6 +65,8 @@ class CampusAnnouncementPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(accountType);
+    print(currentAccountType);
     return Padding(
       padding: EdgeInsets.only(bottom: 2.h, left: 2.w, right: 2.w),
       child: Card(
@@ -275,11 +277,8 @@ class CampusAnnouncementPostTile extends StatelessWidget {
       openWithTap: true,
       menuOffset: 1.h,
       onPressed: () {},
-      menuItems: accountType == 'accountTypeCampusAdmin' ||
-              accountType == 'accountTypeRegistrarAdmin'
-          ?
-          //menu item for campus and registrar admin
-          [
+      menuItems: accountType == currentAccountType //edit its only owned post
+          ? [
               focusMenuItem(
                 'Details',
                 Iconsax.firstline,
@@ -325,9 +324,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                 },
               ),
             ]
-          :
-          //menu item for professors and students
-          [
+          : [
               focusMenuItem(
                 'Details',
                 Iconsax.firstline,

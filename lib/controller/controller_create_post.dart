@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:get/get.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
 
 //*THIS IS THE INSTANCE TO FIREBASE STORAGE
 final firebase_storage.FirebaseStorage storage =
@@ -36,6 +37,7 @@ class ControllerCreatePost extends GetxController {
         .collection('post')
         .doc()
         .set({
+          'account-type': currentAccountType,
           'post-caption': _postCaption,
           'post-media': listOfImageUrls,
           'account-name': _accountName,
