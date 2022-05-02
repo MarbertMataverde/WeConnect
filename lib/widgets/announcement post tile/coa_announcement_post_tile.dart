@@ -157,9 +157,8 @@ class CoaAnnouncementPostTile extends StatelessWidget {
                           .map(
                             (item) => Padding(
                               padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: FadeInImage.assetNetwork(
-                                placeholder: kPostImagePlaceholder,
-                                image: item,
+                              child: Image.network(
+                                item,
                                 fit: BoxFit.cover,
                                 width: MediaQuery.of(context).size.width,
                               ),

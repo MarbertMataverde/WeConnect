@@ -157,9 +157,8 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                           .map(
                             (item) => Padding(
                               padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: FadeInImage.assetNetwork(
-                                placeholder: kPostImagePlaceholder,
-                                image: item,
+                              child: Image.network(
+                                item,
                                 fit: BoxFit.cover,
                                 width: MediaQuery.of(context).size.width,
                               ),
@@ -167,7 +166,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height:  MediaQuery.of(context).size.height * .5,
+                        height: MediaQuery.of(context).size.height * .5,
                         viewportFraction: 1,
                         initialPage: 0,
                         enableInfiniteScroll: false,
@@ -264,7 +263,7 @@ class CampusAnnouncementPostTile extends StatelessWidget {
 
   FocusedMenuHolder meneHolder(BuildContext context) {
     return FocusedMenuHolder(
-      menuWidth:  MediaQuery.of(context).size.width * 0.50,
+      menuWidth: MediaQuery.of(context).size.width * 0.50,
       blurSize: 1.0,
       menuItemExtent: 5.h,
       menuBoxDecoration: BoxDecoration(
