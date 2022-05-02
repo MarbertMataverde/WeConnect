@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weconnect/page/phone%20view/home/drawer/report/forum_topic_report_list.dart';
+import '../../page/phone view/home/drawer/help and feedback/help_and_feedback.dart';
 import '../../page/phone%20view/home/drawer/terms%20and%20condition/term_and_condition.dart';
 import '../../page/phone view/home/drawer/mvg/mvg.dart';
 import '../../page/phone%20view/home/drawer/about/about.dart';
@@ -57,9 +58,9 @@ void selectedItem(
       Get.to(() => const TermsAndCondition());
       break;
     // Help & Feedback
-    // case 8:
-    //   Get.to(() => const HelpAndFeedback());
-    //   break;
+    case 8:
+      Get.to(() => const HelpAndFeedback());
+      break;
     case 9:
       authentication.signOut();
       break;
