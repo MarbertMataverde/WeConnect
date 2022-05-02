@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:like_button/like_button.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:weconnect/widgets/post%20list/account_type_post_list.dart';
 import '../../controller/controller_account_information.dart';
 
 import '../../constant/constant.dart';
@@ -76,46 +77,55 @@ class CampusAnnouncementPostTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      //profile image
-                      Container(
-                        height: 10.w,
-                        width: 10.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2.w),
-                          color: Colors.transparent,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        () => AccountTypePostList(
+                          name: accountName,
                         ),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: randomAvatarImageAsset(),
-                          image: accountProfileImageUrl,
-                          fit: BoxFit.contain,
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        //profile image
+                        Container(
+                          height: 10.w,
+                          width: 10.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.w),
+                            color: Colors.transparent,
+                          ),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: randomAvatarImageAsset(),
+                            image: accountProfileImageUrl,
+                            fit: BoxFit.contain,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //account name
-                          Text(
-                            accountName,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
+                        SizedBox(
+                          width: 3.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //account name
+                            Text(
+                              accountName,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                          //when post created with time ago format
-                          Text(
-                            timeago.format(postCreatedAt.toDate()),
-                            style: TextStyle(
-                              fontSize: 9.sp,
+                            //when post created with time ago format
+                            Text(
+                              timeago.format(postCreatedAt.toDate()),
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   meneHolder(context),
                 ],
