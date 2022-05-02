@@ -65,8 +65,6 @@ class CampusAnnouncementPostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(accountType);
-    print(currentAccountType);
     return Padding(
       padding: EdgeInsets.only(bottom: 2.h, left: 2.w, right: 2.w),
       child: Card(
