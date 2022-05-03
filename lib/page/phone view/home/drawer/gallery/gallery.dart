@@ -51,7 +51,9 @@ Widget _buildGalleryFacade({required BuildContext context}) {
       ]),
       const Divider(),
       const Text(
-          'The marvelous façade of URS Binangonan exudes majesty and strength. The four pillars framing its central feature projects the feeling of stability for all its denizens. It was the first structure built as a part of the then Rizal State College Binangonan Campus through the efforts of its leading benefactors; Governor Casimiro “Ito” Ynares, Mayor Cesar Ynares and Congressman Gilberto Duavit.'),
+        'The marvelous façade of URS Binangonan exudes majesty and strength. The four pillars framing its central feature projects the feeling of stability for all its denizens. It was the first structure built as a part of the then Rizal State College Binangonan Campus through the efforts of its leading benefactors; Governor Casimiro “Ito” Ynares, Mayor Cesar Ynares and Congressman Gilberto Duavit.',
+        textAlign: TextAlign.justify,
+      ),
     ],
   );
 }
@@ -72,7 +74,9 @@ Widget _buildGalleryFacilities({required BuildContext context}) {
       ]),
       const Divider(),
       const Text(
-          'To better facilitate the learning process, URSB maintains a conducive learning environment by providing educational facilities such as Audio Visual Room, Internet center, Computer laboratories, Typing Rooms, Libraries and Function Halls. To keep pace with the fast-evolving technology, URSB also strive to update its instructional equipment in all academic classrooms.'),
+        'To better facilitate the learning process, URSB maintains a conducive learning environment by providing educational facilities such as Audio Visual Room, Internet center, Computer laboratories, Typing Rooms, Libraries and Function Halls. To keep pace with the fast-evolving technology, URSB also strive to update its instructional equipment in all academic classrooms.',
+        textAlign: TextAlign.justify,
+      ),
     ],
   );
 }

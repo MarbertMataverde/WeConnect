@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../widgets/appbar/build_appbar.dart';
 
-
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
 
@@ -71,5 +70,6 @@ Widget _aboutContent() {
   return const Text(
     '''URS Binangonan campus started out as an extension campus of Rizal State College (RSC). The building where it is now situated was initially constructed to house the Vicente Madrigal National High School and was inaugurated on August 26, 1998. But through the efforts of Dr. Heracleo Lagrada, president of RSC, and with the aid of Dr. Edith Doblada, DECS Superintendent, RSC requested the Hon. Cong. Gilberto M. Duavit and Hon. Gov. Casimiro Ynares Jr. to allow RSC to occupy the newly constructed building. The first floor of the building was then occupied by the Rizal Science High School while the second and third floor housed the RSC Binangonan Campus. Under the supervision of the College Director, Dr Reenecilla Paz De leon, and Deputy Director Mr. Norven Doblada, RSC Binangonan Campus maintained three institutes: The Institute of Cooperative, Economics, and Management (ICEM), Institute of Fisheries and Sciences (IFAS) and the Graduate School. The campus initially catered to 1,116 students and 38 faculty members and started the operation on June 04, 1998.
   ''',
+    textAlign: TextAlign.justify,
   );
 }
