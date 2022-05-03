@@ -88,43 +88,50 @@ class _ChannelListState extends State<ChannelList> {
           ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: currentAccountType == 'accountTypeProfessor'
-            ? _professorStream
-            : _studentStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return const Center(child: Text('Something went wrong'));
-          }
+      body: currentAccountType == 'accountTypeProfessor' ||
+              currentAccountType == 'accountTypeStudent'
+          ? StreamBuilder<QuerySnapshot>(
+              stream: currentAccountType == 'accountTypeProfessor'
+                  ? _professorStream
+                  : _studentStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Something went wrong'));
+                }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return buildGlobalSpinkit(context: context);
-          }
-          final data = snapshot.requireData;
-          return ListView.builder(
-            itemCount: data.size,
-            itemBuilder: (context, index) {
-              return buildChannelTile(
-                context: context,
-                channelAvatarImage: data.docs[index]['channel-avatar-image'],
-                channelAdminName: data.docs[index]['channel-admin-name'],
-                channelName: data.docs[index]['channel-name'],
-                onCliked: () {
-                  Get.to(() => ChannelInside(
-                        channelName: data.docs[index]['channel-name'],
-                        token: data.docs[index].id,
-                        channelAvatarImage: data.docs[index]
-                            ['channel-avatar-image'],
-                        channelDocId: data.docs[index].id,
-                      ));
-                },
-                //deleting channel
-                channelDocId: data.docs[index].id,
-              );
-            },
-          );
-        },
-      ),
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return buildGlobalSpinkit(context: context);
+                }
+                final data = snapshot.requireData;
+                return ListView.builder(
+                  itemCount: data.size,
+                  itemBuilder: (context, index) {
+                    return buildChannelTile(
+                      context: context,
+                      channelAvatarImage: data.docs[index]
+                          ['channel-avatar-image'],
+                      channelAdminName: data.docs[index]['channel-admin-name'],
+                      channelName: data.docs[index]['channel-name'],
+                      onCliked: () {
+                        Get.to(() => ChannelInside(
+                              channelName: data.docs[index]['channel-name'],
+                              token: data.docs[index].id,
+                              channelAvatarImage: data.docs[index]
+                                  ['channel-avatar-image'],
+                              channelDocId: data.docs[index].id,
+                            ));
+                      },
+                      //deleting channel
+                      channelDocId: data.docs[index].id,
+                    );
+                  },
+                );
+              },
+            )
+          : const Center(
+              child: Text('Nothing as of now to your account type 😊'),
+            ),
     );
   }
 }
