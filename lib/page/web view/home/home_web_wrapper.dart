@@ -48,14 +48,14 @@ FocusedMenuHolder meneHolder(BuildContext context) {
     openWithTap: true,
     onPressed: () {},
     menuItems: [
-      focusMenuItem(
-        'New Admin Account',
-        Iconsax.flash,
-        Colors.black54,
-        () {
-          Get.to(() => const NewAdminAccount());
-        },
-      ),
+      // focusMenuItem(
+      //   'New Admin Account',
+      //   Iconsax.flash,
+      //   Colors.black54,
+      //   () {
+      //     Get.to(() => const NewAdminAccount());
+      //   },
+      // ),
       focusMenuItem(
         'Sign Out',
         Iconsax.logout,
