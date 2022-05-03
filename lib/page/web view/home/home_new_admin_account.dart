@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weconnect/widgets/text%20form%20field/custom_textformfield.dart';
 
 class NewAdminAccount extends StatelessWidget {
   const NewAdminAccount({Key? key}) : super(key: key);
@@ -6,10 +7,19 @@ class NewAdminAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: Text('Hello World'),
-        ),
+      body: Column(
+        children: [
+          CustomTextFormField(
+            isPassword: false,
+            validator: (_) {},
+            hint: 'Public Name: ex. MIS Admin',
+          ),
+          CustomTextFormField(
+            isPassword: false,
+            validator: (_) {},
+            hint: 'Public Name: ex. MIS Admin',
+          ),
+        ],
       ),
     );
   }
