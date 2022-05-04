@@ -46,7 +46,7 @@ class _ChannelInsideState extends State<ChannelInside> {
   @override
   void dispose() {
     super.dispose();
-    announcementCtrlr;
+    announcementCtrlr.dispose();
   }
 
   final getxContoller = Get.put(ControllerGetX());

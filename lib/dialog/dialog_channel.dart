@@ -40,6 +40,7 @@ class DialogChannel extends GetxController {
             channelDocId,
             channelAvatarImage,
           );
+          Get.back();
           buildCustomSnakbar(
               context: context,
               icon: Iconsax.box_remove,

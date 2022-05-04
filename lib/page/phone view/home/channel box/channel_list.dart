@@ -149,10 +149,11 @@ Widget buildChannelTile({
     onTap: onCliked,
     child: ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
-      leading: CircleAvatar(
-        radius: 10.w,
-        backgroundImage: NetworkImage(
+      leading: ClipOval(
+        child: Image.network(
           channelAvatarImage,
+          width: 50,
+          fit: BoxFit.cover,
         ),
       ),
       title: Text(
@@ -189,7 +190,7 @@ Widget buildChannelTile({
               'Delete Channel',
               Iconsax.trash,
               Colors.red,
-              () => channelDialog.deleteChannelDialog(
+              () async => await channelDialog.deleteChannelDialog(
                 context,
                 assetLocation: 'assets/gifs/question_mark.gif',
                 title: 'Channel Delition 🗑',
@@ -198,7 +199,7 @@ Widget buildChannelTile({
                 channelDocId: channelDocId,
                 channelAvatarImage: channelAvatarImage,
               ),
-            )
+            ),
           ],
           child: Icon(Iconsax.more_square,
               color: Theme.of(context).iconTheme.color),
