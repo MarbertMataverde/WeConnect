@@ -79,13 +79,24 @@ class _ForumTopicDetailsState extends State<ForumTopicDetails> {
                       topicDocId: widget.topicDocId,
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Iconsax.trash,
-                    color: Colors.red.shade300,
+                    color: Colors.red,
                   ),
                 ),
               ]
-            : null,
+            : [
+                IconButton(
+                  onPressed: () async {
+                    _dialog.reportTopicDialog(
+                        context: context, reportDocumentId: widget.topicDocId);
+                  },
+                  icon: const Icon(
+                    Iconsax.warning_2,
+                    color: Colors.red,
+                  ),
+                ),
+              ],
       ),
       body: NotificationListener<UserScrollNotification>(
         onNotification: (notification) {
