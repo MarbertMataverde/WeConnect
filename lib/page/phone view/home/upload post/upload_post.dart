@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
+import 'package:path/path.dart' as b;
 
 import '../../../../controller/controller_create_post.dart';
 
@@ -28,7 +31,19 @@ class UploadFeedPost extends StatefulWidget {
 }
 
 class _UploadFeedPostState extends State<UploadFeedPost> {
-  final TextEditingController _descriptionCtrlr = TextEditingController();
+  late final TextEditingController _descriptionCtrlr;
+
+  @override
+  void initState() {
+    super.initState();
+    _descriptionCtrlr = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionCtrlr.dispose();
+  }
 
   //is upload button enable or not
   bool uploadButtonEnable = false;
@@ -36,12 +51,16 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
 
   FilePickerResult? result;
   Future<void> pickImages() async {
-    result = await FilePicker.platform.pickFiles(
+    result = await FilePicker.platform
+        .pickFiles(
       allowCompression: true,
       allowMultiple: true,
       allowedExtensions: ['png', 'jpg', 'gif'],
       type: FileType.custom,
-    );
+    )
+        .whenComplete(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -134,6 +153,80 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                     ),
                   ],
                 ),
+                Divider(
+                  height: 5.h,
+                ),
+                result == null
+                    ? const Text('Selected image here')
+                    : SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.height,
+                        child: GridView.builder(
+                          itemCount: result!.count,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      (MediaQuery.of(context).orientation ==
+                                              Orientation.portrait)
+                                          ? 2
+                                          : 3),
+                          itemBuilder: (context, index) {
+                            List<File> files = result!.paths
+                                .map((path) => File(path!))
+                                .toList();
+                            return Padding(
+                              padding: EdgeInsets.all(1.w),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(1.h)),
+                                child: Stack(
+                                  children: [
+                                    Image.file(
+                                      files[index],
+                                      width: MediaQuery.of(context).size.width,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.040,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        color:
+                                            const Color.fromARGB(72, 0, 0, 0),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 1.h,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.w),
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.30,
+                                          child: Text(
+                                            b.basename(files[index]
+                                                .path), // getting just the file base name
+                                            textScaleFactor: 0.8,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
               ],
             ),
           ),
