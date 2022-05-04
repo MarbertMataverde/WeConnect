@@ -176,51 +176,69 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                                 .toList();
                             return Padding(
                               padding: EdgeInsets.all(1.w),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(1.h)),
-                                child: Stack(
-                                  children: [
-                                    Image.file(
-                                      files[index],
-                                      width: MediaQuery.of(context).size.width,
-                                      fit: BoxFit.cover,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    () => ZoomInImage(
+                                      image: files[index],
+                                      tag: index,
+                                      path: files[index].path,
                                     ),
-                                    Positioned(
-                                      bottom: 0,
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
+                                  );
+                                },
+                                child: Hero(
+                                  flightShuttleBuilder: flightShuttleBuilder,
+                                  tag: index,
+                                  child: ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.h)),
+                                    child: Stack(
+                                      children: [
+                                        Image.file(
+                                          files[index],
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
                                                 0.040,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color:
-                                            const Color.fromARGB(72, 0, 0, 0),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 1.h,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w),
-                                        child: SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.30,
-                                          child: Text(
-                                            b.basename(files[index]
-                                                .path), // getting just the file base name
-                                            textScaleFactor: 0.8,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              color: Colors.white,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            color: const Color.fromARGB(
+                                                72, 0, 0, 0),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 1.h,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              child: Text(
+                                                b.basename(files[index]
+                                                    .path), // getting just the file base name
+                                                textScaleFactor: 0.8,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             );
@@ -234,4 +252,69 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
       ),
     );
   }
+}
+
+class ZoomInImage extends StatelessWidget {
+  const ZoomInImage(
+      {Key? key, required this.image, required this.tag, required this.path})
+      : super(key: key);
+
+  final File image;
+  final Object tag;
+  final String path;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Hero(
+          tag: tag,
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Stack(children: [
+              Image.file(image),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.040,
+                  width: MediaQuery.of(context).size.width,
+                  color: const Color.fromARGB(72, 0, 0, 0),
+                ),
+              ),
+              Positioned(
+                bottom: 1.h,
+                child: SizedBox(
+                  child: Text(
+                    b.basename(path), // getting just the file base name
+                    textScaleFactor: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// this fix the bug of hero layout drawing in transition
+/// the bug is it shows red and yellow line in theres no scaffold widget in
+/// widget tree
+Widget flightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  return DefaultTextStyle(
+    style: DefaultTextStyle.of(toHeroContext).style,
+    child: toHeroContext.widget,
+  );
 }
