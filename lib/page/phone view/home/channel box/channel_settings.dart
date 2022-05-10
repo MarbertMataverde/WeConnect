@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:weconnect/controller/controller_account_information.dart';
 import 'package:weconnect/page/phone%20view/home/channel%20box/channel_edit_channel_name.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 
@@ -114,14 +115,17 @@ class _ChannelSettingsState extends State<ChannelSettings> {
                     );
                   },
                 ),
-                buildListItem(
-                  context: context,
-                  title: 'Change Channel Name',
-                  icon: Iconsax.edit_2,
-                  onCliked: () => Get.to(
-                    () => EditChannelName(
-                      currentName: widget.channelName,
-                      token: widget.channelToken,
+                Visibility(
+                  visible: currentAccountType == 'accountTypeProfessor',
+                  child: buildListItem(
+                    context: context,
+                    title: 'Change Channel Name',
+                    icon: Iconsax.edit_2,
+                    onCliked: () => Get.to(
+                      () => EditChannelName(
+                        currentName: widget.channelName,
+                        token: widget.channelToken,
+                      ),
                     ),
                   ),
                 ),
