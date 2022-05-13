@@ -159,7 +159,7 @@ Widget buildChannelFileOnly({
               ),
               onTap: () async {
                 final url = fileUrl.first;
-                if (await canLaunch(url)) launch(url);
+                if (await canLaunchUrl(url)) launchUrl(url);
               },
             ),
             announcementTime(context, announcementCreatedAt),
@@ -252,7 +252,7 @@ Widget buildChannelMessageAndFileUrlTile({
               ),
               onTap: () async {
                 final url = fileUrl.first;
-                if (await canLaunch(url)) launch(url);
+                if (await canLaunchUrl(url)) launchUrl(url);
               },
             ),
             announcementTime(context, announcementCreatedAt),
@@ -295,7 +295,7 @@ Widget buildChannelImageAndFileUrlTile({
             ),
             onTap: () async {
               final url = fileUrl.first;
-              if (await canLaunch(url)) launch(url);
+              if (await canLaunchUrl(url)) launchUrl(url);
             },
           ),
           Padding(
@@ -349,7 +349,7 @@ Widget buildChannelAllHasDataTile({
             ),
             onTap: () async {
               final url = fileUrl.first;
-              if (await canLaunch(url)) launch(url);
+              if (await canLaunchUrl(url)) launchUrl(url);
             },
           ),
           Padding(

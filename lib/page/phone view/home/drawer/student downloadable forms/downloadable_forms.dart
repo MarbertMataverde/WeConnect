@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../../constant/constant_forms_url.dart';
 
 import '../../../../../widgets/appbar/build_appbar.dart';
@@ -169,12 +169,10 @@ Future openBrowserURL({
   required String url,
   bool inApp = true,
 }) async {
-  if (await canLaunch(url)) {
-    await launch(
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(
       url,
-      forceSafariVC: inApp, // ios
-      forceWebView: inApp, // android
-      enableJavaScript: true, // android
+      mode: LaunchMode.platformDefault,
     );
   }
 }
@@ -183,11 +181,7 @@ Future openBroweserUrl({
   required String url,
   bool inApp = false,
 }) async {
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: inApp, // ios
-        forceWebView: inApp, //android
-        enableJavaScript: true //android
-        );
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url, mode: LaunchMode.platformDefault);
   }
 }
