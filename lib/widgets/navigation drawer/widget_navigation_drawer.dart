@@ -150,14 +150,29 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
               selectedItem(context, 7);
             },
           ),
-
-          drawerItems(
-            context: context,
-            title: 'Help & Feedback',
-            icon: Iconsax.lifebuoy,
-            onCliked: () {
-              selectedItem(context, 8);
-            },
+          // send help and feedback
+          Visibility(
+            visible: currentAccountType != 'accountTypeCampusAdmin',
+            child: drawerItems(
+              context: context,
+              title: 'Help & Feedback',
+              icon: Iconsax.lifebuoy,
+              onCliked: () {
+                selectedItem(context, 8);
+              },
+            ),
+          ),
+          // help and feedbacks
+          Visibility(
+            visible: currentAccountType == 'accountTypeCampusAdmin',
+            child: drawerItems(
+              context: context,
+              title: 'Help & Feedbacks',
+              icon: Iconsax.lifebuoy,
+              onCliked: () {
+                selectedItem(context, 81);
+              },
+            ),
           ),
           //sign out divider
           namedDivider(context: context),
