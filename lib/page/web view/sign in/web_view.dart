@@ -109,7 +109,7 @@ class _WebViewState extends State<WebView> {
               ),
               SizedBox(height: 3.h),
               isLoading
-                  ? buildGlobalSpinkit(context: context)
+                  ? buildGlobalSpinkit(context: context, size: 30)
                   : CustomButton(
                       onPress: () async {
                         setState(() {
