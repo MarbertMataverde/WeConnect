@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeChanger with ChangeNotifier {
-  static bool _isLight = true;
+  static bool _isLight = false;
 
   ThemeMode currentTheme() {
     return _isLight ? ThemeMode.light : ThemeMode.dark;
