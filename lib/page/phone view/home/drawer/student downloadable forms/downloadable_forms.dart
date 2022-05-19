@@ -165,23 +165,17 @@ Widget _buildDOwnloadFormListTile({
   );
 }
 
-Future openBrowserURL({
-  required String url,
-  bool inApp = true,
-}) async {
-  if (await canLaunchUrlString(url)) {
-    await launchUrlString(
-      url,
-      mode: LaunchMode.platformDefault,
-    );
-  }
-}
-
 Future openBroweserUrl({
   required String url,
   bool inApp = false,
 }) async {
   if (await canLaunchUrlString(url)) {
-    await launchUrlString(url, mode: LaunchMode.platformDefault);
+    await launchUrlString(
+      url,
+      mode: LaunchMode.externalApplication,
+      webViewConfiguration: const WebViewConfiguration(
+        enableJavaScript: true,
+      ),
+    );
   }
 }

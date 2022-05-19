@@ -6,6 +6,7 @@ import 'package:linkwell/linkwell.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:weconnect/page/phone%20view/home/drawer/student%20downloadable%20forms/downloadable_forms.dart';
 import '../../../phone%20view/home/channel%20box/channel_annoucnement_clicked.dart';
 
 channelTile({
@@ -159,7 +160,7 @@ Widget buildChannelFileOnly({
               ),
               onTap: () async {
                 final url = fileUrl.first;
-                if (await canLaunchUrl(url)) launchUrl(url);
+                await openBroweserUrl(url: url.toString());
               },
             ),
             announcementTime(context, announcementCreatedAt),
@@ -251,8 +252,10 @@ Widget buildChannelMessageAndFileUrlTile({
                 ),
               ),
               onTap: () async {
-                final url = fileUrl.first;
-                if (await canLaunchUrl(url)) launchUrl(url);
+                final Uri url = fileUrl.first;
+                if (await canLaunchUrl(url)) {
+                  openBroweserUrl(url: url.toString());
+                }
               },
             ),
             announcementTime(context, announcementCreatedAt),
@@ -294,8 +297,10 @@ Widget buildChannelImageAndFileUrlTile({
               ),
             ),
             onTap: () async {
-              final url = fileUrl.first;
-              if (await canLaunchUrl(url)) launchUrl(url);
+              final Uri url = fileUrl.first;
+              if (await canLaunchUrl(url)) {
+                openBroweserUrl(url: url.toString());
+              }
             },
           ),
           Padding(
@@ -348,8 +353,11 @@ Widget buildChannelAllHasDataTile({
               ),
             ),
             onTap: () async {
-              final url = fileUrl.first;
-              if (await canLaunchUrl(url)) launchUrl(url);
+              final Uri url = fileUrl.first;
+
+              if (await canLaunchUrl(url)) {
+                openBroweserUrl(url: url.toString());
+              }
             },
           ),
           Padding(
