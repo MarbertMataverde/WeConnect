@@ -4,7 +4,7 @@ final lightThemeData = ThemeData(
   visualDensity: VisualDensity.comfortable,
   primaryColor: const Color(0xff05AAFA),
   scaffoldBackgroundColor: const Color(0xffffffff),
-  iconTheme: const IconThemeData(color: Color(0xff003366)),
+  iconTheme: const IconThemeData(color: Color(0xff0F2346)),
   cardTheme: const CardTheme(
     elevation: 2,
     color: Color(0xffffffff),
@@ -13,9 +13,9 @@ final lightThemeData = ThemeData(
   disabledColor: const Color.fromARGB(255, 160, 160, 160),
   textTheme: const TextTheme(
     labelMedium: TextStyle(color: Color.fromARGB(200, 11, 24, 47)),
-    bodySmall: TextStyle(color: Color(0xff003366)),
-    bodyMedium: TextStyle(color: Color(0xff003366)),
-    bodyLarge: TextStyle(color: Color(0xff003366)),
+    bodySmall: TextStyle(color: Color(0xff0F2346)),
+    bodyMedium: TextStyle(color: Color(0xff0F2346)),
+    bodyLarge: TextStyle(color: Color(0xff0F2346)),
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
@@ -38,12 +38,12 @@ final lightThemeData = ThemeData(
 final darkThemeData = ThemeData(
   visualDensity: VisualDensity.comfortable,
   primaryColor: const Color(0xff03E0CF),
-  scaffoldBackgroundColor: const Color(0xff003366),
+  scaffoldBackgroundColor: const Color(0xff0F2346),
   iconTheme: const IconThemeData(color: Colors.white),
-  cardColor: const Color(0xff003366),
+  cardColor: const Color(0xff0F2346),
   cardTheme: const CardTheme(
     elevation: 1,
-    color: Color(0xff003366),
+    color: Color(0xff0F2346),
     shadowColor: Color.fromARGB(70, 255, 255, 255),
   ),
   disabledColor: const Color.fromARGB(255, 95, 95, 95),
