@@ -17,10 +17,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  getAccountInformation();
   // whenever your initialization is completed, remove the splash screen:
   FlutterNativeSplash.remove();
 
   runApp(const InitialPage());
+}
+
+Future getAccountInformation() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  accountInformation.getter(sharedPreferences.get('currentUid').toString());
 }
 
 class InitialPage extends StatefulWidget {
@@ -33,16 +39,10 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
-    getAccountInformation();
     currentTheme.addListener(() {
       setState(() {});
     });
     super.initState();
-  }
-
-  Future getAccountInformation() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    accountInformation.getter(sharedPreferences.get('currentUid').toString());
   }
 
   @override
