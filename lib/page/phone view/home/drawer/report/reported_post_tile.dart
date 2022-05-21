@@ -187,10 +187,6 @@ class ReportedPostTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ExpandableText(
               postCaption,
-              style: TextStyle(
-                color:
-                    Get.isDarkMode ? kTextColorDarkTheme : kTextColorLightTheme,
-              ),
               maxLines: 3,
               expandText: 'more',
               expandOnTextTap: true,
