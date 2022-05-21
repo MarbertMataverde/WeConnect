@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
@@ -43,6 +44,8 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('kk').format(now);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -71,8 +74,21 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Image.asset(
+                  'assets/app_icon/logo.png',
+                  fit: BoxFit.cover,
+                  height: 20.h,
+                ),
+              ),
               Text(
-                'Hola Giants 👋🏻',
+                // 'Hola 👋🏻',
+                int.parse(formattedDate) >= 18 // 6PM
+                    ? 'Good Evening!'
+                    : int.parse(formattedDate) >= 12 && // 12 to 5PM
+                            int.parse(formattedDate) <= 17
+                        ? 'Good Afternoon!'
+                        : 'Good Morning!',
                 textScaleFactor: 2,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
@@ -84,7 +100,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                 'Enter your credentials to access your account.',
                 textScaleFactor: 0.9,
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: 1.h),
               Form(
                 key: _validationKey,
                 child: Column(
