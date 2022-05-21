@@ -89,7 +89,7 @@ flutter_icons:
   # native splash
 flutter_native_splash:
   # App icon background color.
-  color: "#0F2346"
+  color: "#FFFFFF"
   image: "assets/app_icon/splash.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
