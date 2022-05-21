@@ -11,7 +11,6 @@ import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../constant/constant.dart';
-import '../../../../../constant/constant_colors.dart';
 import '../../../../../controller/controller_post_tile_pop_up_menu.dart';
 import '../../../../../controller/controller_report.dart';
 import '../../../../../dialog/dialog_post_tile_.dart';

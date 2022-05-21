@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final lightThemeData = ThemeData(
   visualDensity: VisualDensity.comfortable,
-  primaryColor: const Color(0xff44C7FF),
+  primaryColor: const Color(0xFF1667A4),
   scaffoldBackgroundColor: const Color(0xffffffff),
   iconTheme: const IconThemeData(color: Color(0xff0F2346)),
   cardTheme: const CardTheme(
@@ -28,7 +28,7 @@ final lightThemeData = ThemeData(
       }),
       foregroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-        return const Color(0xff44C7FF);
+        return const Color(0xff1667A4);
       }),
     ),
   ),
@@ -37,7 +37,7 @@ final lightThemeData = ThemeData(
 
 final darkThemeData = ThemeData(
   visualDensity: VisualDensity.comfortable,
-  primaryColor: const Color(0xff44C7FF),
+  primaryColor: const Color(0xff39AFE6),
   scaffoldBackgroundColor: const Color(0xff0F2346),
   iconTheme: const IconThemeData(color: Colors.white),
   cardColor: const Color(0xff0F2346),
@@ -63,7 +63,7 @@ final darkThemeData = ThemeData(
       }),
       foregroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-        return const Color(0xff44C7FF);
+        return const Color(0xff39AFE6);
       }),
     ),
   ),
