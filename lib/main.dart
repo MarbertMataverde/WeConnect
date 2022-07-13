@@ -12,6 +12,8 @@ import 'page/phone%20view/home/home_phone_wrapper.dart';
 import 'page/web view/sign in/web_view.dart';
 import 'setting/setting_theme.dart';
 
+//TODO Rebuild the entire app for web and make it responsive!
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
