@@ -4,13 +4,13 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'setting/them_config.dart';
+import '../../setting/them_config.dart';
 
-import 'firebase_options.dart';
-import 'page/phone view/sign in/phone_view.dart';
-import 'page/phone%20view/home/home_phone_wrapper.dart';
-import 'page/web view/sign in/web_view.dart';
-import 'setting/setting_theme.dart';
+import '../../firebase_options.dart';
+import '../../page/phone view/sign in/phone_view.dart';
+import '../../page/phone%20view/home/home_phone_wrapper.dart';
+import '../../page/web view/sign in/web_view.dart';
+import '../../setting/setting_theme.dart';
 
 //TODO Rebuild the entire app for web and make it responsive!
 
