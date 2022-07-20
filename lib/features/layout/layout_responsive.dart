@@ -19,7 +19,7 @@ class Responsive extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth <= phoneSize) {
           return phone;
-        } else if (constraints.maxWidth >= tabletSize ||
+        } else if (constraints.maxWidth >= tabletSize &&
             constraints.maxWidth <= tabletBreakPointSize) {
           return tablet;
         } else {
