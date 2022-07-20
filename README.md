@@ -1,5 +1,5 @@
-<img src="assets/gif/readme/wecoonect_readme.gif" alt="WeConnect Animated Logo">
 
+![WeConnect Animated Logo](https://github.com/MarbertMataverde/WeConnect/blob/main/assets/gifs/readme/weconnect_readme.gif)
 # ✨WeConnect
 
 A new Portal for URS🔥
