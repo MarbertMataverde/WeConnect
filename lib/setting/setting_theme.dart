@@ -32,13 +32,13 @@ final lightThemeData = ThemeData(
       }),
     ),
   ),
-  fontFamily: 'Inter',
+  fontFamily: 'Poppins',
 );
 
 final darkThemeData = ThemeData(
   visualDensity: VisualDensity.comfortable,
-  primaryColor: const Color(0xff39AFE6),
-  scaffoldBackgroundColor: const Color(0xff0F2346),
+  primaryColor: const Color(0xff4AE0DF),
+  scaffoldBackgroundColor: const Color(0xff282A37),
   iconTheme: const IconThemeData(color: Colors.white),
   cardColor: const Color(0xff0F2346),
   cardTheme: const CardTheme(
@@ -67,5 +67,5 @@ final darkThemeData = ThemeData(
       }),
     ),
   ),
-  fontFamily: 'Inter',
+  fontFamily: 'Poppins',
 );
