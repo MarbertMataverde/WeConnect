@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weconnect/features/layout/layout_responsive.dart';
 import 'package:weconnect/features/login/view/veiw.dart';
+import 'package:weconnect/setting/setting_theme.dart';
 
 import '../../firebase_options.dart';
 import '../../page/phone%20view/home/home_phone_wrapper.dart';
@@ -37,8 +38,11 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightThemeData,
+      themeMode: ThemeMode.dark,
+      darkTheme: darkThemeData,
       home: Responsive(
         phone: LoginPhone(),
         tablet: LoginTablet(),
