@@ -49,18 +49,18 @@ class AccountTypePostList extends StatelessWidget {
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
-              List _imageList = data.docs[index]['post-media'];
+              List imageList = data.docs[index]['post-media'];
               return CampusAnnouncementPostTile(
                 postCreatedAt: data.docs[index]['post-created-at'],
                 accountName: data.docs[index]['account-name'],
                 postCaption: data.docs[index]['post-caption'],
                 accountProfileImageUrl: data.docs[index]
                     ['account-profile-image-url'],
-                postMedia: _imageList,
+                postMedia: imageList,
                 //delition data
                 announcementTypeDoc: 'campus-feed',
                 postDocId: data.docs[index].id,
-                media: _imageList,
+                media: imageList,
                 //account type
                 accountType: data.docs[index]['account-type'],
                 //announcement list of votes

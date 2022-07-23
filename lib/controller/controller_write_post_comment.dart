@@ -4,26 +4,26 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 class ControllerWritePostComment extends GetxController {
   Future<void> writeCommentToCampusPost(
-    String _collectionName,
-    String _docName,
-    String _userComment,
-    String _userProfileUrl,
-    String _userName,
-    String _postDocId,
-    Timestamp _dateTime,
+    String collectionName,
+    String docName,
+    String userComment,
+    String userProfileUrl,
+    String userName,
+    String postDocId,
+    Timestamp dateTime,
   ) async {
     FirebaseFirestore.instance
-        .collection(_collectionName)
-        .doc(_docName)
+        .collection(collectionName)
+        .doc(docName)
         .collection('post')
-        .doc(_postDocId)
+        .doc(postDocId)
         .collection('comments')
         .doc()
         .set({
-      'comment': _userComment,
-      'profile-name': _userName,
-      'profile-url': _userProfileUrl,
-      'created-at': _dateTime
+      'comment': userComment,
+      'profile-name': userName,
+      'profile-url': userProfileUrl,
+      'created-at': dateTime
     });
   }
 }

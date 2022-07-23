@@ -29,12 +29,12 @@ final dialog = Get.put(DialogAuthentication());
 
 class Authentication extends GetxController {
   //sign in
-  Future<void> signIn(String _emailAddress, String _password, context) async {
+  Future<void> signIn(String emailAddress, String password, context) async {
     //shared preferences initialization
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
       await _auth
-          .signInWithEmailAndPassword(email: _emailAddress, password: _password)
+          .signInWithEmailAndPassword(email: emailAddress, password: password)
           .then(
         (UserCredential value) async {
           // if (value.user!.emailVerified) {
@@ -86,12 +86,12 @@ class Authentication extends GetxController {
 
   //sign up new student account
   Future<void> studentSignUp(
-    String _accessCode,
-    String _fullName,
-    String _college,
-    int _studentNumber,
-    String _emailAddress,
-    String _password,
+    String accessCode,
+    String fullName,
+    String college,
+    int studentNumber,
+    String emailAddress,
+    String password,
     context,
   ) async {
     //shared preferences initialization
@@ -99,7 +99,7 @@ class Authentication extends GetxController {
     try {
       await _auth
           .createUserWithEmailAndPassword(
-              email: _emailAddress, password: _password)
+              email: emailAddress, password: password)
           .then((value) async {
         firestore
             .collection('accounts')
@@ -107,16 +107,16 @@ class Authentication extends GetxController {
             .collection('account')
             .doc(_auth.currentUser!.uid)
             .set({
-          'regs-access-code': _accessCode,
+          'regs-access-code': accessCode,
           'account-tpye': 'studentAccountInformation',
-          'profile-name': _fullName,
-          'college': _college,
-          'student-number': _studentNumber,
+          'profile-name': fullName,
+          'college': college,
+          'student-number': studentNumber,
           'profile-image-url': kDefaultProfile,
-          'profile-email': _emailAddress,
+          'profile-email': emailAddress,
           'channels': [],
         }).whenComplete(() async {
-          firestore.collection('student-access-code').doc(_accessCode).delete();
+          firestore.collection('student-access-code').doc(accessCode).delete();
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
           //email verification
@@ -148,12 +148,12 @@ class Authentication extends GetxController {
 
   //sign up new professor account
   Future<void> professorSignUp(
-    String _accessCode,
-    String _fullName,
-    int _contactNumber,
-    int _employeeNumber,
-    String _emailAddress,
-    String _password,
+    String accessCode,
+    String fullName,
+    int contactNumber,
+    int employeeNumber,
+    String emailAddress,
+    String password,
     context,
   ) async {
     //shared preferences initialization
@@ -161,7 +161,7 @@ class Authentication extends GetxController {
     try {
       await _auth
           .createUserWithEmailAndPassword(
-              email: _emailAddress, password: _password)
+              email: emailAddress, password: password)
           .then((value) async {
         firestore
             .collection('accounts')
@@ -169,18 +169,18 @@ class Authentication extends GetxController {
             .collection('account')
             .doc(_auth.currentUser!.uid)
             .set({
-          'regs-access-code': _accessCode,
+          'regs-access-code': accessCode,
           'account-tpye': 'professorAccountInformation',
           'profile-image-url': kDefaultProfile,
-          'profile-name': _fullName,
-          'contact-number': _contactNumber,
-          'employee-number': _employeeNumber,
-          'profile-email': _emailAddress,
+          'profile-name': fullName,
+          'contact-number': contactNumber,
+          'employee-number': employeeNumber,
+          'profile-email': emailAddress,
           'channels': [],
         }).whenComplete(() async {
           firestore
               .collection('professor-access-code')
-              .doc(_accessCode)
+              .doc(accessCode)
               .delete();
           //getting account information
           Get.offAll(() => const HomePhoneWrapper());
@@ -212,9 +212,9 @@ class Authentication extends GetxController {
   }
 
   // reset password
-  Future<void> resetPassword(String _email, context) async {
+  Future<void> resetPassword(String email, context) async {
     try {
-      await _auth.sendPasswordResetEmail(email: _email).whenComplete(() =>
+      await _auth.sendPasswordResetEmail(email: email).whenComplete(() =>
           dialog.resetPasswordDialog(context, 'assets/gifs/email_sent.gif',
               'Mail Sent 💌', 'We have e-mailed your password reset link! 🤗'));
     } on FirebaseAuthException catch (e) {

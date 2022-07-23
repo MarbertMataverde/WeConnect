@@ -83,10 +83,9 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
                         setState(() {
                           isLoading = true;
                         });
-                        final _isValid =
-                            _validationKey.currentState!.validate();
+                        final isValid = _validationKey.currentState!.validate();
 
-                        if (_isValid == true) {
+                        if (isValid == true) {
                           await dialog.accessCodeConfirmationDialog(
                             context,
                             assetLocation: 'assets/gifs/question_mark.gif',

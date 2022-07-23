@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weconnect/widgets/snakbar/snakbar.dart';
 import '../controller/controller_forum.dart';
@@ -52,7 +51,7 @@ class DialogForum extends GetxController {
           Get.showSnackbar(
             GetSnackBar(
               icon: Icon(
-                MdiIcons.checkBold,
+                Iconsax.check,
                 color: Theme.of(context).scaffoldBackgroundColor,
               ),
               margin: EdgeInsets.all(2.w),
@@ -114,7 +113,7 @@ class DialogForum extends GetxController {
           Get.back();
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
-              MdiIcons.checkBold,
+              Iconsax.check,
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
             margin: EdgeInsets.all(2.w),
@@ -135,7 +134,7 @@ class DialogForum extends GetxController {
     required String reportDocumentId,
   }) async {
     // Validation Key
-    final _validationKey = GlobalKey<FormState>();
+    final validationKey = GlobalKey<FormState>();
     //controllers
     final TextEditingController reportConcernCtrlr = TextEditingController();
     final TextEditingController reportConcernDescriptionCtrlr =
@@ -149,7 +148,7 @@ class DialogForum extends GetxController {
         color: Theme.of(context).textTheme.bodyMedium!.color,
       ),
       content: Form(
-        key: _validationKey,
+        key: validationKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -208,10 +207,10 @@ class DialogForum extends GetxController {
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.1)),
           onPressed: () async {
-            final _isValid = _validationKey.currentState!.validate();
+            final isValid = validationKey.currentState!.validate();
             Get.focusScope!.unfocus();
 
-            if (_isValid == true) {
+            if (isValid == true) {
               await forum.forumTopicReport(
                 reportConcern: reportConcernCtrlr.text,
                 reportConcernDescription: reportConcernDescriptionCtrlr.text,

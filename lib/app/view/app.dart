@@ -43,7 +43,7 @@ class _InitialPageState extends State<InitialPage> {
       theme: lightThemeData,
       themeMode: ThemeMode.dark,
       darkTheme: darkThemeData,
-      home: Responsive(
+      home: const Responsive(
         phone: LoginPhone(),
         tablet: LoginTablet(),
         desktop: LoginDesktop(),

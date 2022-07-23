@@ -25,53 +25,53 @@ bool? isSignedIn;
 String? userThemePreference = 'light'; // default  light
 
 class ControllerAccountInformation extends GetxController {
-  Future getter(String _currentUid) async {
+  Future getter(String currentUid) async {
     accountTypeIdentifier(
       //campus admin
       'campus-admin',
-      _currentUid,
+      currentUid,
       'accountTypeCampusAdmin',
     );
     accountTypeIdentifier(
       //registrar admin
       'registrar-admin',
-      _currentUid,
+      currentUid,
       'accountTypeRegistrarAdmin',
     );
     accountTypeIdentifier(
       //coa admin
       'coa-admin',
-      _currentUid,
+      currentUid,
       'accountTypeCoaAdmin',
     );
     accountTypeIdentifier(
       //cob admin
       'cob-admin',
-      _currentUid,
+      currentUid,
       'accountTypeCobAdmin',
     );
     accountTypeIdentifier(
       //ccs admin
       'ccs-admin',
-      _currentUid,
+      currentUid,
       'accountTypeCcsAdmin',
     );
     accountTypeIdentifier(
       //masteral admin
       'masteral-admin',
-      _currentUid,
+      currentUid,
       'accountTypeMasteralAdmin',
     );
     accountTypeIdentifier(
       //professor
       'professors',
-      _currentUid,
+      currentUid,
       'accountTypeProfessor',
     );
     accountTypeIdentifier(
       //student
       'students',
-      _currentUid,
+      currentUid,
       'accountTypeStudent',
     );
   }

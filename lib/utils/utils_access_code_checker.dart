@@ -11,18 +11,18 @@ final firestore = FirebaseFirestore.instance;
 class AccessCodeChecker extends GetxController {
   //professor access code checker
   Future professorAccessCodeChecker(
-    String _accessCode,
+    String accessCode,
     context,
   ) async {
     await firestore
         .collection('professor-access-code')
-        .doc(_accessCode)
+        .doc(accessCode)
         .get()
         .then(
           (professorDocSnapshot) => {
             professorDocSnapshot.exists
                 ? Get.to(() => const ProfessorSignUpPage(),
-                    arguments: _accessCode)
+                    arguments: accessCode)
                 : wrongAccessCodeDialog(context),
           },
         );
@@ -30,18 +30,17 @@ class AccessCodeChecker extends GetxController {
 
   //student access code checher
   Future studentAccessCodeChecker(
-    String _accessCode,
+    String accessCode,
     context,
   ) async {
     await firestore
         .collection('student-access-code')
-        .doc(_accessCode)
+        .doc(accessCode)
         .get()
         .then(
           (studentDocSnapshot) => {
             studentDocSnapshot.exists
-                ? Get.to(() => const StudentSignUpPage(),
-                    arguments: _accessCode)
+                ? Get.to(() => const StudentSignUpPage(), arguments: accessCode)
                 : wrongAccessCodeDialog(context)
           },
         );

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart' as firebase;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 import '../constant/constant_colors.dart';
@@ -21,7 +21,7 @@ class ControllerEditPostCaption extends GetxController {
         Get.showSnackbar(
           GetSnackBar(
             icon: Icon(
-              MdiIcons.checkBold,
+              Iconsax.check,
               color: Theme.of(context).primaryColor,
             ),
             margin: EdgeInsets.all(2.w),

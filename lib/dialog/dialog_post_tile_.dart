@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:sizer/sizer.dart';
 import '../constant/constant.dart';
 import '../controller/controller_delete_post.dart';
@@ -57,7 +57,7 @@ class DialogPostTile extends GetxController {
           Get.back();
           Get.showSnackbar(GetSnackBar(
             icon: Icon(
-              MdiIcons.checkBold,
+              Iconsax.check,
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
             margin: EdgeInsets.all(2.w),
@@ -121,7 +121,7 @@ class DialogPostTile extends GetxController {
     required String reportDocumentId,
   }) async {
     // Validation Key
-    final _validationKey = GlobalKey<FormState>();
+    final validationKey = GlobalKey<FormState>();
     //controllers
     final TextEditingController reportConcernCtrlr = TextEditingController();
     final TextEditingController reportConcernDescriptionCtrlr =
@@ -135,7 +135,7 @@ class DialogPostTile extends GetxController {
         color: Theme.of(context).textTheme.bodyMedium!.color,
       ),
       content: Form(
-        key: _validationKey,
+        key: validationKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -194,10 +194,10 @@ class DialogPostTile extends GetxController {
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.1)),
           onPressed: () async {
-            final _isValid = _validationKey.currentState!.validate();
+            final isValid = validationKey.currentState!.validate();
             Get.focusScope!.unfocus();
 
-            if (_isValid == true) {
+            if (isValid == true) {
               await controllerReportPost.announcementReport(
                 reportType: reportType,
                 reportConcern: reportConcernCtrlr.text,

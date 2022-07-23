@@ -72,7 +72,7 @@ class _ChannelInsideState extends State<ChannelInside> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _channelAnnouncementsStream = FirebaseFirestore
+    final Stream<QuerySnapshot> channelAnnouncementsStream = FirebaseFirestore
         .instance
         .collection('channels')
         .doc(widget.token)
@@ -113,7 +113,7 @@ class _ChannelInsideState extends State<ChannelInside> {
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: _channelAnnouncementsStream,
+              stream: channelAnnouncementsStream,
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {

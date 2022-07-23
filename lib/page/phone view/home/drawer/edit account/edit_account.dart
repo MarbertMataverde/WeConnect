@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:sizer/sizer.dart';
 import '../../../../../widgets/appbar/build_appbar.dart';
 import '../../../../../widgets/text%20form%20field/custom_textformfield.dart';
@@ -133,7 +133,7 @@ class _EditAccountState extends State<EditAccount> {
                         (value) => Get.showSnackbar(
                           GetSnackBar(
                             icon: Icon(
-                              MdiIcons.checkBold,
+                              Iconsax.check,
                               color: Theme.of(context).primaryColor,
                             ),
                             margin: EdgeInsets.all(2.w),

@@ -86,9 +86,9 @@ class ForumCommentListState extends State<ForumCommentList> {
               context: context,
               formKey: _formKey,
               onSend: () async {
-                final _isValid = _formKey.currentState!.validate();
+                final isValid = _formKey.currentState!.validate();
 
-                if (_isValid == true) {
+                if (isValid == true) {
                   await forum.addTopicComment(
                     commenterComment: topicCommentCtrl.text,
                     commenterProfileImageUrl: currentProfileImageUrl.toString(),

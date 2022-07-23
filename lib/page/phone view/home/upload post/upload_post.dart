@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../../widgets/appbar/build_appbar.dart';
 import '../../../../widgets/text%20form%20field/custom_textformfield.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as b;
 
 import '../../../../controller/controller_create_post.dart';
@@ -90,15 +91,15 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                           setState(() {
                             isLoading = true;
                           });
-                          SharedPreferences _sp =
+                          SharedPreferences sp =
                               await SharedPreferences.getInstance();
                           await _createPost.dataChecker(
                             result,
                             widget.collectionName,
                             _descriptionCtrlr.text,
-                            _sp.get('currentProfileName') as String,
-                            _sp.get('currentProfileImageUrl') as String,
-                            _sp.get('accountType') as String,
+                            sp.get('currentProfileName') as String,
+                            sp.get('currentProfileImageUrl') as String,
+                            sp.get('accountType') as String,
                             widget.docName,
                           );
                           setState(() {

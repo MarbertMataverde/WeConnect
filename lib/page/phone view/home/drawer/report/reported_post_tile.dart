@@ -142,9 +142,6 @@ class ReportedPostTile extends StatelessWidget {
                   blurBackgroundColor: Colors.black,
                   openWithTap: true,
                   menuOffset: 1.h,
-                  child: const Icon(
-                    Iconsax.more,
-                  ),
                   onPressed: () {},
                   menuItems: [
                     focusMenuItem(
@@ -178,6 +175,9 @@ class ReportedPostTile extends StatelessWidget {
                       },
                     ),
                   ],
+                  child: const Icon(
+                    Iconsax.more,
+                  ),
                 ),
               ],
             ),

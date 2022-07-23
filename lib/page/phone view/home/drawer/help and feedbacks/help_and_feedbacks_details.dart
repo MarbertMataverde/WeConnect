@@ -52,11 +52,11 @@ class HelpAndFeedBacksDetails extends StatelessWidget {
                   shape: const CircleBorder(),
                   child: CircleAvatar(
                     backgroundColor: Colors.grey[100],
+                    radius: 40.0,
                     child: Image.network(
                       senderImageUrl,
                       height: 60,
                     ),
-                    radius: 40.0,
                   ),
                 ),
               ),

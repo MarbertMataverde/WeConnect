@@ -82,10 +82,9 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                         setState(() {
                           isLoading = true;
                         });
-                        final _isValid =
-                            _validationKey.currentState!.validate();
+                        final isValid = _validationKey.currentState!.validate();
                         Get.focusScope!.unfocus();
-                        if (_isValid == true) {
+                        if (isValid == true) {
                           await acessCodeChecker.studentAccessCodeChecker(
                             _axCodeCtrlr.text,
                             context,

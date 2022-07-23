@@ -50,7 +50,7 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    final _pages = [
+    final pages = [
       //campus feed (main feed)
       const CampusFeed(),
       //college account type based feed
@@ -71,7 +71,7 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
       const Forum(),
     ];
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: pages[_currentIndex],
       bottomNavigationBar: GNav(
         activeColor: Theme.of(context).primaryColor,
         padding: EdgeInsets.all(5.w),

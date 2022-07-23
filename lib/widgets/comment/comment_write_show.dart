@@ -49,7 +49,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+    final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
         .collection(widget.collectionName)
         .doc(widget.docName)
         .collection('post')
@@ -139,7 +139,7 @@ class _ShowAllCommentState extends State<ShowAllComment> {
               ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: _usersStream,
+                  stream: usersStream,
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
@@ -175,9 +175,9 @@ class _ShowAllCommentState extends State<ShowAllComment> {
                 context: context,
                 formKey: _formKey,
                 onSend: () async {
-                  final _isValid = _formKey.currentState!.validate();
+                  final isValid = _formKey.currentState!.validate();
 
-                  if (_isValid == true) {
+                  if (isValid == true) {
                     await _addComment.writeCommentToCampusPost(
                       widget.collectionName, //? COLLECTION NAME
                       widget.docName, //? DOCUMENT NAME

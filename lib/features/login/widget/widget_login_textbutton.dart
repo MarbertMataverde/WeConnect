@@ -11,12 +11,6 @@ Widget loginTextButton({
     height: 55,
     child: TextButton(
       onPressed: () {},
-      child: globalLoginText(
-        text: text,
-        textScaleFactor: textScaleFactor,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).primaryColor,
-      ),
       style: TextButton.styleFrom(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -25,6 +19,12 @@ Widget loginTextButton({
         ),
         primary: Theme.of(context).primaryColor,
         backgroundColor: const Color(0xff323645),
+      ),
+      child: globalLoginText(
+        text: text,
+        textScaleFactor: textScaleFactor,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).primaryColor,
       ),
     ),
   );
@@ -35,12 +35,12 @@ Widget loginForgotPassword({required BuildContext context}) {
     alignment: Alignment.centerRight,
     child: TextButton(
       onPressed: () {},
+      style: TextButton.styleFrom(
+        primary: Theme.of(context).primaryColor,
+      ),
       child: globalLoginText(
         text: 'Forgot Password',
         fontWeight: FontWeight.w300,
-      ),
-      style: TextButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
       ),
     ),
   );

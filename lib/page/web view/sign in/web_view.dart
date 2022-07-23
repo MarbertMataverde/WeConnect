@@ -64,13 +64,13 @@ class _WebViewState extends State<WebView> {
                       hint: 'Email',
                       isPassword: kFalse,
                       validator: (value) {
-                        bool _isEmailValid = RegExp(
+                        bool isEmailValid = RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
                           return 'Please Enter Your Email 💌';
                         }
-                        if (!_isEmailValid) {
+                        if (!isEmailValid) {
                           return 'Invalid Email 😐';
                         }
                         return null;
@@ -115,10 +115,9 @@ class _WebViewState extends State<WebView> {
                         setState(() {
                           isLoading = true;
                         });
-                        final _isValid =
-                            _validationKey.currentState!.validate();
+                        final isValid = _validationKey.currentState!.validate();
                         Get.focusScope!.unfocus();
-                        if (_isValid == true) {
+                        if (isValid == true) {
                           await authentication.signIn(
                             _emailCtrlr.text,
                             _passwordCtrlr.text,

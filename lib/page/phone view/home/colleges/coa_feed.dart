@@ -92,18 +92,18 @@ class _CoaFeedState extends State<CoaFeed> {
             return ListView.builder(
               itemCount: data.size,
               itemBuilder: (context, index) {
-                List _imageList = data.docs[index]['post-media'];
+                List imageList = data.docs[index]['post-media'];
                 return CoaAnnouncementPostTile(
                   postCreatedAt: data.docs[index]['post-created-at'],
                   accountName: data.docs[index]['account-name'],
                   postCaption: data.docs[index]['post-caption'],
                   accountProfileImageUrl: data.docs[index]
                       ['account-profile-image-url'],
-                  postMedia: _imageList,
+                  postMedia: imageList,
                   //delition data
                   announcementTypeDoc: 'coa-feed',
                   postDocId: data.docs[index].id,
-                  media: _imageList,
+                  media: imageList,
                   //accountType
                   accountType: currentAccountType.toString(),
                   //announcement list of votes

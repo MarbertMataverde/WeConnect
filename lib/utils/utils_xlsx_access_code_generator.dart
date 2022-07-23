@@ -24,19 +24,19 @@ String getRandomString(int length) => String.fromCharCodes(
 
 class XlsxAccessCodeGenerator extends GetxController {
   Future<void> createAccessCodeExcelFile(
-    String _collectionName,
-    String _accessCodeController,
-    String _fileName,
+    String collectionName,
+    String accessCodeController,
+    String fileName,
   ) async {
     final Workbook workbook = Workbook();
     final Worksheet sheet = workbook.worksheets[0];
-    for (var i = 0; i < int.parse(_accessCodeController); i++) {
+    for (var i = 0; i < int.parse(accessCodeController); i++) {
       // this will track the current generated access code
       generatedAccessCodeTracker = getRandomString(9);
       //this will put each generated access code to our firestore database
       //as document so that we can easily check the access code if existing or not
       firestore
-          .collection(_collectionName)
+          .collection(collectionName)
           .doc(generatedAccessCodeTracker)
           .set({});
       //adding each generated access code to excel sheet row by row
@@ -49,7 +49,7 @@ class XlsxAccessCodeGenerator extends GetxController {
     AnchorElement(
         href:
             'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-      ..setAttribute('download', '$_fileName.xlsx')
+      ..setAttribute('download', '$fileName.xlsx')
       ..click();
   }
 }

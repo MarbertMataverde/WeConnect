@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 import 'package:weconnect/widgets/snakbar/snakbar.dart';
 
@@ -56,11 +57,11 @@ class ControllerChannel extends GetxController {
 
   //deleting channel
   Future<void> deleteChannel(
-    String _channelDocId,
-    String _avatarImageUrl,
+    String channelDocId,
+    String avatarImageUrl,
   ) async {
-    firestore.collection('channels').doc(_channelDocId).delete().whenComplete(
-        () => deleteAvatarImageFromFireStoreStorage(_avatarImageUrl));
+    firestore.collection('channels').doc(channelDocId).delete().whenComplete(
+        () => deleteAvatarImageFromFireStoreStorage(avatarImageUrl));
   }
 
   Future<void> deleteAvatarImageFromFireStoreStorage(String imageUrl) async {

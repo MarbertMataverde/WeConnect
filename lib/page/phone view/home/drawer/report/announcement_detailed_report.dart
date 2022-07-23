@@ -99,18 +99,18 @@ class AnnouncementDetailedReport extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.done) {
                     Map<String, dynamic> snapshotData =
                         snapshot.data!.data() as Map<String, dynamic>;
-                    List _imageList = snapshotData['post-media'];
+                    List imageList = snapshotData['post-media'];
                     return ReportedPostTile(
                       postCreatedAt: snapshotData['post-created-at'],
                       accountName: snapshotData['account-name'],
                       postCaption: snapshotData['post-caption'],
                       accountProfileImageUrl:
                           snapshotData['account-profile-image-url'],
-                      postMedia: _imageList,
+                      postMedia: imageList,
                       //delition data
                       announcementTypeDoc: reportType,
                       postDocId: postDocId,
-                      media: _imageList,
+                      media: imageList,
                       //dismissal of report
                       reportDocId: reportDocId,
                     );
