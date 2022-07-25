@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weconnect/core/widget/widget_global_textbutton.dart';
 import 'package:weconnect/features/layout/constant/constant_screen_sizes.dart';
 import 'package:weconnect/features/layout/constant/constant_sizebox.dart';
-import 'package:weconnect/features/login/widget/widget_login_text.dart';
+import 'package:weconnect/core/widget/widget_global_text.dart';
 import 'package:weconnect/features/login/widget/widget_login_textbutton.dart';
 import 'package:weconnect/features/login/widget/widget_login_textformfield.dart';
 import 'package:weconnect/features/login/widget/widget_svg.dart';
@@ -47,12 +48,12 @@ class _LoginDesktopState extends State<LoginDesktop> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          globalLoginText(
+                          globalText(
                             text: 'Login your account.',
                             textScaleFactor: 3,
                             fontWeight: FontWeight.w600,
                           ),
-                          globalLoginText(
+                          globalText(
                             text: '"Nurturing Tommorow\'s Noblest"',
                             textScaleFactor: 1.2,
                             fontWeight: FontWeight.w100,
@@ -95,9 +96,11 @@ class _LoginDesktopState extends State<LoginDesktop> {
                               ),
                             ),
                           ),
-                          loginForgotPassword(context: context),
+                          loginForgotPassword(
+                            context: context,
+                          ),
                           sizedBox(height: 20),
-                          loginTextButton(
+                          globalTextButton(
                             context: context,
                             text: 'Login',
                             textScaleFactor: 1.5,

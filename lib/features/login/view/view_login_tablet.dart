@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:weconnect/features/layout/constant/constant_screen_sizes.dart';
+import 'package:weconnect/core/widget/widget_global_textbutton.dart';
 import 'package:weconnect/features/layout/constant/constant_sizebox.dart';
-import 'package:weconnect/features/login/widget/widget_login_text.dart';
+import 'package:weconnect/core/widget/widget_global_text.dart';
 import 'package:weconnect/features/login/widget/widget_login_textbutton.dart';
 import 'package:weconnect/features/login/widget/widget_login_textformfield.dart';
 import 'package:weconnect/features/login/widget/widget_svg.dart';
@@ -34,20 +34,20 @@ class _LoginTabletState extends State<LoginTablet> {
             children: [
               svgAssetLogo(
                 assetPath: 'assets/app_icon/plain_light_logo.svg',
-                width: desktopSize * 0.080,
+                width: MediaQuery.of(context).size.width * 0.12,
               ),
               sizedBox(),
               SizedBox(
-                width: 400,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    globalLoginText(
+                    globalText(
                       text: 'Login your account.',
                       textScaleFactor: 2.2,
                       fontWeight: FontWeight.w600,
                     ),
-                    globalLoginText(
+                    globalText(
                       text: '"Nurturing Tommorow\'s Noblest"',
                       fontWeight: FontWeight.w100,
                     ),
@@ -84,7 +84,7 @@ class _LoginTabletState extends State<LoginTablet> {
                     ),
                     loginForgotPassword(context: context),
                     sizedBox(height: 20),
-                    loginTextButton(
+                    globalTextButton(
                       context: context,
                       text: 'Login',
                       textScaleFactor: 1.2,
