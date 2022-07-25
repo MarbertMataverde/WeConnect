@@ -1,45 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:weconnect/features/login/widget/widget_login_text.dart';
+import 'package:weconnect/core/widget/widget_global_text.dart';
+import 'package:weconnect/features/forgot_password/view/view_forgot_password.dart';
 
-Widget loginTextButton({
+Widget loginForgotPassword({
   required BuildContext context,
-  required String text,
-  double? textScaleFactor,
 }) {
-  return SizedBox(
-    width: double.infinity,
-    height: 55,
-    child: TextButton(
-      onPressed: () {},
-      style: TextButton.styleFrom(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(2),
-          ),
-        ),
-        primary: Theme.of(context).primaryColor,
-        backgroundColor: const Color(0xff323645),
-      ),
-      child: globalLoginText(
-        text: text,
-        textScaleFactor: textScaleFactor,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).primaryColor,
-      ),
-    ),
-  );
-}
-
-Widget loginForgotPassword({required BuildContext context}) {
   return Align(
     alignment: Alignment.centerRight,
     child: TextButton(
-      onPressed: () {},
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (routeContext) => const ForgotPassword(),
+        ),
+      ),
       style: TextButton.styleFrom(
         primary: Theme.of(context).primaryColor,
       ),
-      child: globalLoginText(
-        text: 'Forgot Password',
+      child: globalText(
+        text: 'Reset Password',
         fontWeight: FontWeight.w300,
       ),
     ),
@@ -50,13 +28,13 @@ Widget loginCreate({required BuildContext context}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      globalLoginText(
+      globalText(
         text: 'Dont have an account?',
         fontWeight: FontWeight.w300,
       ),
       TextButton(
         onPressed: () {},
-        child: globalLoginText(
+        child: globalText(
           text: 'Create',
           color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.w300,
