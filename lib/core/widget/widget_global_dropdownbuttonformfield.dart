@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 
-Widget globalTextFormField({
+Widget globalDropdownButtonFormField({
   required BuildContext context,
-  double? textScaleFactor,
-  TextInputType? textInputType,
-  TextEditingController? controller,
-  bool? isObscure,
-  Widget? prefixIcon,
-  Widget? passwordVisibilityIconButton,
-  String? hint,
-  String? initialValue,
-  bool? isEnable,
+  String hintText = '',
+  required List<DropdownMenuItem<String>>? items,
+  required Function(String?)? onChange,
+  required String? value,
 }) {
-  return TextFormField(
-    enabled: isEnable,
-    initialValue: initialValue,
-    controller: controller,
-    obscureText: isObscure ?? false,
-    keyboardType: textInputType ?? TextInputType.text,
-    cursorColor: Theme.of(context).textTheme.bodyMedium!.color,
+  return DropdownButtonFormField<String>(
+    dropdownColor: const Color(0xff323645),
+    isExpanded: true,
     style: TextStyle(
       color: Theme.of(context).textTheme.bodyMedium!.color,
     ),
     decoration: InputDecoration(
-      hintText: hint,
       hintStyle: TextStyle(
           color: Theme.of(context).textTheme.bodyMedium!.color?.withAlpha(150)),
       filled: true,
@@ -36,8 +26,18 @@ Widget globalTextFormField({
         borderRadius: BorderRadius.circular(2),
         borderSide: BorderSide.none,
       ),
-      prefixIcon: prefixIcon,
-      suffixIcon: passwordVisibilityIconButton,
     ),
+    hint: hintText != ''
+        ? Text(
+            hintText,
+            style: TextStyle(
+              color:
+                  Theme.of(context).textTheme.bodyMedium!.color?.withAlpha(150),
+            ),
+          )
+        : null,
+    value: value,
+    items: items,
+    onChanged: onChange,
   );
 }
