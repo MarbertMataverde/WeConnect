@@ -4,4 +4,4 @@
 
 With WeConnect, you can access all of your information from one place. Whether you're a student, faculty member, or staff, you can get anything from your grades to class schedules and read the latest news instantly. You'll never be out of the loop with WeConnect!
 
-NOTE: This repo is not maintained and move to the new and updated code based <a>https://github.com/MarbertMataverde/weconnect_urs_portal</a>
+NOTE: This repo is not maintained and move to the new and updated code base <a>https://github.com/MarbertMataverde/weconnect_urs_portal</a>
