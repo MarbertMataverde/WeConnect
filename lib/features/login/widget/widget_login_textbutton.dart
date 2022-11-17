@@ -14,7 +14,7 @@ Widget loginForgotPassword({
         ),
       ),
       style: TextButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
+        foregroundColor: Theme.of(context).primaryColor,
       ),
       child: globalText(
         text: 'Reset Password',

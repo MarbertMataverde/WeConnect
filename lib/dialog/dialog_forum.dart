@@ -188,8 +188,7 @@ class DialogForum extends GetxController {
       actions: [
         TextButton(
           style: TextButton.styleFrom(
-            primary: Theme.of(context).primaryColor,
-            padding: EdgeInsets.symmetric(
+            foregroundColor: Theme.of(context).primaryColor, padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
             ),
           ),
@@ -202,8 +201,7 @@ class DialogForum extends GetxController {
         ),
         TextButton(
           style: TextButton.styleFrom(
-              primary: Colors.white,
-              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+              foregroundColor: Colors.white, backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.1)),
           onPressed: () async {

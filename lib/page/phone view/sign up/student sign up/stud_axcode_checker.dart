@@ -104,7 +104,7 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
+                      foregroundColor: Theme.of(context).primaryColor,
                     ),
                     onPressed: () {
                       Get.off(() => const ProfessorAxCodeChecker());
