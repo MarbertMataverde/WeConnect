@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weconnect/features/login/view/view_login.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weconnect/page/phone%20view/sign%20in/phone_view.dart';
+import 'package:weconnect/page/web%20view/sign%20in/web_view.dart';
 import 'package:weconnect/setting/setting_theme.dart';
 
 import '../../firebase_options.dart';
@@ -35,11 +39,15 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightThemeData,
-        themeMode: ThemeMode.dark,
-        darkTheme: darkThemeData,
-        home: const Login());
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: lightThemeData,
+      themeMode: ThemeMode.dark,
+      darkTheme: darkThemeData,
+      home: Sizer(
+        builder: (context, orientation, deviceType) =>
+            kIsWeb ? const WebView() : const PhoneViewSignIn(),
+      ),
+    );
   }
 }
