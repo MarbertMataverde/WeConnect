@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -47,30 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBtTy_2jZHrXhWau9lWgh_f_fZENWpUEsY',
-    appId: '1:247985629491:web:f96f24cdf25685e02ab646',
-    messagingSenderId: '247985629491',
-    projectId: 'weconnect-f6cb7',
-    authDomain: 'weconnect-f6cb7.firebaseapp.com',
-    storageBucket: 'weconnect-f6cb7.appspot.com',
-    measurementId: 'G-HT9GR904JJ',
+    apiKey: 'AIzaSyDR8veV6AczrH07XS8zj2yz9OSJNquvsfE',
+    appId: '1:952165729221:web:facb7759baa7a0c6e541ac',
+    messagingSenderId: '952165729221',
+    projectId: 'weconnect-og',
+    authDomain: 'weconnect-og.firebaseapp.com',
+    storageBucket: 'weconnect-og.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBl1PcNEWJhtVxmQUrdm4-pzbdgTjdZD60',
-    appId: '1:247985629491:android:28eba6317708c0252ab646',
-    messagingSenderId: '247985629491',
-    projectId: 'weconnect-f6cb7',
-    storageBucket: 'weconnect-f6cb7.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA5ctdkxIW9M9EkhJEnT9vm32YRaUNQkWs',
-    appId: '1:247985629491:ios:17def9f199e543102ab646',
-    messagingSenderId: '247985629491',
-    projectId: 'weconnect-f6cb7',
-    storageBucket: 'weconnect-f6cb7.appspot.com',
-    iosClientId: '247985629491-ihfktvpidg337rqvsum5t9o7kps9vp5m.apps.googleusercontent.com',
-    iosBundleId: 'com.example.weconnect',
+    apiKey: 'AIzaSyDLisS2bYsoFJs9Yu24BH8BhPcA0IANTxc',
+    appId: '1:952165729221:android:66e3f7abe30525fae541ac',
+    messagingSenderId: '952165729221',
+    projectId: 'weconnect-og',
+    storageBucket: 'weconnect-og.appspot.com',
   );
 }
