@@ -22,65 +22,56 @@ String? currentProfileName;
 String? currentProfileImageUrl;
 String? currentUserId;
 bool? isSignedIn;
-String? userThemePreference = 'light'; // default  light
 
 class ControllerAccountInformation extends GetxController {
   Future getter(String currentUid) async {
     accountTypeIdentifier(
-      //campus admin
-      'campus-admin',
-      currentUid,
-      'accountTypeCampusAdmin',
+      doc: 'campus-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeCampusAdmin',
     );
     accountTypeIdentifier(
-      //registrar admin
-      'registrar-admin',
-      currentUid,
-      'accountTypeRegistrarAdmin',
+      doc: 'registrar-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeRegistrarAdmin',
     );
     accountTypeIdentifier(
-      //coa admin
-      'coa-admin',
-      currentUid,
-      'accountTypeCoaAdmin',
+      doc: 'coa-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeCoaAdmin',
     );
     accountTypeIdentifier(
-      //cob admin
-      'cob-admin',
-      currentUid,
-      'accountTypeCobAdmin',
+      doc: 'cob-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeCobAdmin',
     );
     accountTypeIdentifier(
-      //ccs admin
-      'ccs-admin',
-      currentUid,
-      'accountTypeCcsAdmin',
+      doc: 'ccs-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeCcsAdmin',
     );
     accountTypeIdentifier(
-      //masteral admin
-      'masteral-admin',
-      currentUid,
-      'accountTypeMasteralAdmin',
+      doc: 'masteral-admin',
+      currentUid: currentUid,
+      accountType: 'accountTypeMasteralAdmin',
     );
     accountTypeIdentifier(
-      //professor
-      'professors',
-      currentUid,
-      'accountTypeProfessor',
+      doc: 'professors',
+      currentUid: currentUid,
+      accountType: 'accountTypeProfessor',
     );
     accountTypeIdentifier(
-      //student
-      'students',
-      currentUid,
-      'accountTypeStudent',
+      doc: 'students',
+      currentUid: currentUid,
+      accountType: 'accountTypeStudent',
     );
   }
 
-  Future accountTypeIdentifier(
-    String doc,
-    String currentUid,
-    String accountType,
-  ) async {
+  Future accountTypeIdentifier({
+    required String doc,
+    required String currentUid,
+    required String accountType,
+  }) async {
     try {
       await firestore
           .collection('accounts')
@@ -93,13 +84,17 @@ class ControllerAccountInformation extends GetxController {
           if (value.exists) {
             SharedPreferences sharedPreferences =
                 await SharedPreferences.getInstance();
+
             //writing data to sharedPreference
             await sharedPreferences.setBool('isSignedIn', true);
             isSignedIn = sharedPreferences.getBool('isSignedIn');
+
             currentUserId = sharedPreferences.get('currentUid').toString();
+
             await sharedPreferences.setString('accountType', accountType);
             currentAccountType =
                 sharedPreferences.get('accountType').toString();
+
             await sharedPreferences.setString(
                 'currentProfileImageUrl', value.get('profile-image-url'));
             currentProfileImageUrl =
