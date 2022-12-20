@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/button/custom_text_button.dart';
 
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
@@ -38,12 +39,11 @@ class _WebViewState extends State<WebView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
+              const Flexible(
                 child: Text(
                   'Welcome Back Admin 👋🏻',
                   textScaleFactor: 2,
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -97,15 +97,7 @@ class _WebViewState extends State<WebView> {
               ),
               Align(
                 alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Need Support 👨‍💻',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
+                child: customTextButton(onPress: () {}, label: 'Need Support?'),
               ),
               SizedBox(height: 3.h),
               isLoading

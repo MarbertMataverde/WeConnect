@@ -317,7 +317,7 @@ class _ChannelInsideState extends State<ChannelInside> {
                                 color: controller.filesEmpty &&
                                         controller.textFieldEmptySend
                                     ? Theme.of(context).disabledColor
-                                    : Theme.of(context).primaryColor,
+                                    : Theme.of(context).iconTheme.color,
                               ),
                             );
                           }),

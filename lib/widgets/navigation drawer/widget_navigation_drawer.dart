@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
-import '../../setting/them_config.dart';
 import '../../controller/controller_account_information.dart';
 
 import 'drawer_items.dart';
@@ -53,16 +52,16 @@ class _WidgetNavigationDrawerState extends State<WidgetNavigationDrawer> {
             profileName: currentProfileName.toString(),
           ),
           //theme divider
-          namedDivider(context: context, dividerName: 'Account'),
+          // namedDivider(context: context, dividerName: 'Account'),
           //theme items
-          drawerItems(
-            context: context,
-            title: 'Toggle Theme',
-            icon: isLightTheme ? Iconsax.sun_1 : Iconsax.moon,
-            onCliked: () {
-              currentTheme.switchTheme();
-            },
-          ),
+          // drawerItems(
+          //   context: context,
+          //   title: 'Toggle Theme',
+          //   icon: isLightTheme ? Iconsax.sun_1 : Iconsax.moon,
+          //   onCliked: () {
+          //     currentTheme.switchTheme();
+          //   },
+          // ),
           // //account divider
           // namedDivider(context: context, dividerName: 'Account'),
           // //account items

@@ -15,9 +15,7 @@ Form buildCommentForm({
     child: TextFormField(
       validator: (value) {
         if (value!.isEmpty) {
-          if (value.isEmpty) {
-            return 'Please Enter Comment 📝';
-          }
+          return;
         }
         return null;
       },
@@ -37,7 +35,7 @@ Form buildCommentForm({
       //*Decoration
       decoration: InputDecoration(
         errorStyle: TextStyle(
-          color: Theme.of(context).primaryColor.withAlpha(180),
+          color: Theme.of(context).primaryColor,
         ),
         //*Hint Text
         hintText: 'Say something...',
@@ -46,7 +44,7 @@ Form buildCommentForm({
             splashRadius: 1,
             icon: Icon(
               Iconsax.send_2,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).iconTheme.color,
             )),
 
         hintStyle: TextStyle(
@@ -54,7 +52,7 @@ Form buildCommentForm({
         ),
         //*Filled Color
         filled: true,
-        fillColor: Theme.of(context).primaryColor.withAlpha(15),
+        fillColor: Theme.of(context).primaryColor,
         //*Enabled Border
         border: kLoginPageTextFormFieldOutlineInputBorder,
       ),

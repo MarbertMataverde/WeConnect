@@ -9,7 +9,7 @@ class CustomTextFormField extends StatelessWidget {
     Key? key,
     this.ctrlr,
     this.hint,
-    required this.isPassword,
+    this.isPassword,
     this.keyboardType,
     required this.validator,
     this.inputFormater,
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   //?hint
   final String? hint;
   //?it is password or not
-  final bool isPassword;
+  final bool? isPassword;
   final TextInputType? keyboardType;
   // ignore: prefer_typing_uninitialized_variables
   final validator;
@@ -66,20 +66,20 @@ class CustomTextFormField extends StatelessWidget {
       inputFormatters: inputFormater,
       keyboardType: keyboardType,
       controller: ctrlr,
-      obscureText: isPassword,
+      obscureText: isPassword ?? false,
       autovalidateMode: autovalidateMode,
       onChanged: onChanged,
       style: TextStyle(
         color: Theme.of(context).textTheme.labelMedium!.color,
       ),
-      cursorColor: Theme.of(context).primaryColor,
+      cursorColor: Theme.of(context).textTheme.labelMedium!.color,
       decoration: InputDecoration(
         errorStyle: TextStyle(
-          color: Theme.of(context).primaryColor.withAlpha(180),
+          color: Theme.of(context).errorColor,
         ),
         suffixIcon: suffixWidget,
         filled: kTrue,
-        fillColor: disableColor ?? Theme.of(context).primaryColor.withAlpha(15),
+        fillColor: disableColor ?? Theme.of(context).primaryColor,
         hintText: hint,
         hintStyle:
             TextStyle(color: Theme.of(context).textTheme.labelMedium!.color),

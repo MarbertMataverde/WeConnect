@@ -55,7 +55,7 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
               icon: Icon(
                 Iconsax.direct_send,
                 color: fieldIsValid
-                    ? Theme.of(context).primaryColor
+                    ? Theme.of(context).iconTheme.color
                     : Theme.of(context).disabledColor,
               ),
             ),
@@ -79,10 +79,10 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
                       isPassword: false,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Title is required 😊';
+                          return 'Title is required';
                         }
                         if (value.toString().length < 8) {
-                          return 'Title should be at least 8 character 😊';
+                          return 'Title should be at least 8 character';
                         }
                       },
                     ),
@@ -97,10 +97,10 @@ class _OpenNewTopicState extends State<OpenNewTopic> {
                       isPassword: false,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Description is required 😊';
+                          return 'Description is required';
                         }
                         if (value.toString().length < 20) {
-                          return 'Description must be at least 20 character 😊';
+                          return 'Description must be at least 20 character';
                         }
                       },
                     ),

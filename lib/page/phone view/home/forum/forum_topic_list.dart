@@ -124,7 +124,6 @@ Widget buildTopicTile({
   return Card(
     child: InkWell(
       onTap: onCliked,
-      borderRadius: BorderRadius.circular(4),
       child: Slidable(
         endActionPane: ActionPane(
           motion: const StretchMotion(),
@@ -170,7 +169,7 @@ Widget buildTopicTile({
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).textTheme.bodyMedium!.color,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -179,7 +178,7 @@ Widget buildTopicTile({
             children: [
               Text(
                 topicOwnerName,
-                textScaleFactor: 1,
+                textScaleFactor: .8,
                 style: TextStyle(
                   height: 1.2,
                   color: Theme.of(context).textTheme.labelMedium!.color,

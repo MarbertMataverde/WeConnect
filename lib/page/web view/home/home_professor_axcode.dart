@@ -44,11 +44,10 @@ class _ProfessorAxCodeGeneratorState extends State<ProfessorAxCodeGenerator> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Generate Access Code',
                 textScaleFactor: 1.5,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

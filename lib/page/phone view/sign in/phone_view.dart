@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/button/custom_text_button.dart';
 import '../../../authentication/authentication_controller.dart';
 import '../../../constant/constant.dart';
 
@@ -51,18 +52,11 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         actions: [
-          TextButton(
-            onPressed: () {
-              Get.to(() => const StudentAxCodeChecker());
-            },
-            child: Text(
-              'SIGN UP',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          customTextButton(
+              onPress: () {
+                Get.to(() => const StudentAxCodeChecker());
+              },
+              label: 'SIGN UP')
         ],
       ),
       body: SingleChildScrollView(
@@ -82,7 +76,6 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                 ),
               ),
               Text(
-                // 'Hola 👋🏻',
                 int.parse(formattedDate) >= 18 // 6PM
                     ? 'Good Evening!'
                     : int.parse(formattedDate) >= 12 && // 12 to 5PM
@@ -90,8 +83,7 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                         ? 'Good Afternoon!'
                         : 'Good Morning!',
                 textScaleFactor: 2,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -116,10 +108,10 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
-                          return 'Please Enter Your Email 💌';
+                          return 'Please Enter Your Email';
                         }
                         if (!isEmailValid) {
-                          return 'Invalid Email 😐';
+                          return 'Invalid Email';
                         }
                         return null;
                       },
@@ -133,10 +125,10 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Password 🔐';
+                          return 'Please Enter Password';
                         }
                         if (value.toString().length < 8) {
-                          return 'Password Should Be Longer or Equal to 8 characters 👌';
+                          return 'Password Should Be Longer or Equal to 8 characters';
                         }
                         return null;
                       },
@@ -145,20 +137,12 @@ class _PhoneViewSignInState extends State<PhoneViewSignIn> {
                 ),
               ),
               Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {
-                    Get.to(() => const ForgotPassword());
-                  },
-                  child: Text(
-                    'Forgot Password',
-                    textScaleFactor: 0.9,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-              ),
+                  alignment: Alignment.topRight,
+                  child: customTextButton(
+                      onPress: () {
+                        Get.to(() => const ForgotPassword());
+                      },
+                      label: 'Forgot Password')),
               SizedBox(height: 3.h),
               isLoading
                   ? buildGlobalSpinkit(context: context)

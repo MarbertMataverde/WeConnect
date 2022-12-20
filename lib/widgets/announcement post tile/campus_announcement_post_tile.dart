@@ -67,14 +67,14 @@ class CampusAnnouncementPostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 2.h, left: 2.w, right: 2.w),
+      padding: const EdgeInsets.all(8.0),
       child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 2.w, right: 2.w),
-              child: Row(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
@@ -130,68 +130,68 @@ class CampusAnnouncementPostTile extends StatelessWidget {
                   meneHolder(context),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ExpandableText(
-                postCaption,
-                animationDuration: const Duration(milliseconds: 1500),
-                maxLines: 3,
-                expandText: 'read more 📖',
-                expandOnTextTap: true,
-                collapseOnTextTap: true,
-                collapseText: 'collapse 📕',
-                animation: true,
-                animationCurve: Curves.fastLinearToSlowEaseIn,
-                linkColor: Theme.of(context).primaryColor,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ExpandableText(
+                  postCaption,
+                  animationDuration: const Duration(milliseconds: 1500),
+                  maxLines: 3,
+                  expandText: 'read more 📖',
+                  expandOnTextTap: true,
+                  collapseOnTextTap: true,
+                  collapseText: 'collapse 📕',
+                  animation: true,
+                  animationCurve: Curves.fastLinearToSlowEaseIn,
+                  linkColor: Theme.of(context).primaryColor,
+                ),
               ),
-            ),
-            postMedia.length == 1
-                ? GestureDetector(
-                    onTap: () => Get.to(() => PostDetails(
-                          postMedia: postMedia,
-                          postCaption: postCaption,
-                        )),
-                    child: Image.network(
-                      postMedia.first,
-                      fit: BoxFit.contain,
-                    ),
-                  )
-                : GestureDetector(
-                    onTap: () => Get.to(() => PostDetails(
-                          postMedia: postMedia,
-                          postCaption: postCaption,
-                        )),
-                    child: CarouselSlider(
-                      items: postMedia
-                          .map(
-                            (item) => Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: Image.network(
-                                item,
-                                fit: BoxFit.cover,
-                                width: MediaQuery.of(context).size.width,
+              postMedia.length == 1
+                  ? GestureDetector(
+                      onTap: () => Get.to(() => PostDetails(
+                            postMedia: postMedia,
+                            postCaption: postCaption,
+                          )),
+                      child: Image.network(
+                        postMedia.first,
+                        fit: BoxFit.contain,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () => Get.to(() => PostDetails(
+                            postMedia: postMedia,
+                            postCaption: postCaption,
+                          )),
+                      child: CarouselSlider(
+                        items: postMedia
+                            .map(
+                              (item) => Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                                child: Image.network(
+                                  item,
+                                  fit: BoxFit.cover,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                      options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * .5,
-                        viewportFraction: 1,
-                        initialPage: 0,
-                        enableInfiniteScroll: false,
-                        autoPlay: false,
-                        autoPlayInterval: const Duration(seconds: 5),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 900),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
+                            )
+                            .toList(),
+                        options: CarouselOptions(
+                          height: MediaQuery.of(context).size.height * .5,
+                          viewportFraction: 1,
+                          initialPage: 0,
+                          enableInfiniteScroll: false,
+                          autoPlay: false,
+                          autoPlayInterval: const Duration(seconds: 5),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 900),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
                       ),
                     ),
-                  ),
-            saySomething(context: context),
-          ],
+              saySomething(context: context),
+            ],
+          ),
         ),
       ),
     );

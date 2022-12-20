@@ -110,7 +110,7 @@ class _UploadFeedPostState extends State<UploadFeedPost> {
                   icon: Icon(
                     Iconsax.direct_send,
                     color: uploadButtonEnable && result != null
-                        ? Theme.of(context).primaryColor
+                        ? Theme.of(context).iconTheme.color
                         : Theme.of(context).disabledColor,
                   ),
                 )

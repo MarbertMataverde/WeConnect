@@ -18,10 +18,10 @@ final _validationKey = GlobalKey<FormState>();
 
 //*LIST OF COLLEGES
 final _collegeList = [
-  'College of Accountancy',
-  'College of Business',
-  'College of Computer Studies',
-  'Masteral',
+  '  College of Accountancy',
+  '  College of Business',
+  '  College of Computer Studies',
+  '  Masteral',
 ];
 String? _collegeOf;
 
@@ -50,7 +50,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: '',
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -66,8 +65,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
               padding: EdgeInsets.only(right: 5.w),
               child: Text(
                 'Acess Code: $_accessCode',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -88,12 +86,11 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                 'Student Sign Up 👨🏻‍🎓',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Getting to know you 😎',
+                'Getting to know you',
                 style: TextStyle(
                   fontSize: 12.sp,
                 ),
@@ -107,56 +104,59 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       minimumLine: 1,
                       maxLine: 1,
                       ctrlr: _nameCtrlr,
-                      hint: 'Full Name (LN, FN MI)',
+                      hint: 'Full Name',
                       isPassword: kFalse,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Your Beautiful Name 🤗';
+                          return 'Please Enter Your Beautiful Name';
                         }
                         if (value.toString().length <= 2) {
-                          return 'Please Enter Your Full Name 😉';
+                          return 'Please Enter Your Full Name';
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 2.h),
                     Container(
-                      height: 7.h,
+                      height: 50,
+                      width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor.withAlpha(15),
+                        color: Theme.of(context).primaryColor,
                         borderRadius:
                             BorderRadius.circular(kTextFormFieldRadius),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            iconSize: 20.sp,
-                            dropdownColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            value: _collegeOf,
-                            hint: Text(
-                              'COA/COB/CCS/MASTERAL',
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          borderRadius:
+                              BorderRadius.circular(kTextFormFieldRadius),
+                          isExpanded: true,
+                          iconSize: 20.sp,
+                          dropdownColor: Theme.of(context).primaryColor,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                          value: _collegeOf,
+                          hint: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              '  Select College',
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .textTheme
                                       .labelMedium!
                                       .color),
                             ),
-                            items: _collegeList
-                                .map(
-                                  buildMenuItem,
-                                )
-                                .toList(),
-                            onChanged: (value) => setState(
-                              () => _collegeOf = value,
-                            ),
+                          ),
+                          items: _collegeList
+                              .map(
+                                buildMenuItem,
+                              )
+                              .toList(),
+                          onChanged: (value) => setState(
+                            () => _collegeOf = value,
                           ),
                         ),
                       ),
@@ -174,7 +174,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       ],
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Enter Student Number 😊';
+                          return 'Enter Student Number';
                         }
                       },
                     ),
@@ -182,7 +182,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'This what you will use to sign in 🔐',
+                        'This what you will use to sign in',
                         style: TextStyle(
                           fontSize: 12.sp,
                         ),
@@ -201,10 +201,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
-                          return 'Please Enter Your Email 😊';
+                          return 'Please Enter Your Email';
                         }
                         if (!isEmailValid) {
-                          return 'Invalid Email 😐';
+                          return 'Invalid Email';
                         }
                         return null;
                       },
@@ -219,10 +219,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Password 🔐';
+                          return 'Please Enter Password';
                         }
                         if (value.toString().length < 8) {
-                          return 'Password Should Be Longer or Equal to 8 characters👌';
+                          return 'Password Should Be Longer or Equal to 8 characters';
                         }
                         return null;
                       },
@@ -244,7 +244,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                         if (_collegeOf == null) {
                           Get.defaultDialog(
                             content: Text(
-                              'Please Select College 😉',
+                              'Please Select College',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -268,7 +268,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                           isLoading = false;
                         });
                       },
-                      text: 'Create⚡',
+                      text: 'Create',
                     ),
             ],
           ),

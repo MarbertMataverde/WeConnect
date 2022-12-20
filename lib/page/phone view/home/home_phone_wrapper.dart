@@ -73,7 +73,7 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
     return Scaffold(
       body: pages[_currentIndex],
       bottomNavigationBar: GNav(
-        activeColor: Theme.of(context).primaryColor,
+        activeColor: Theme.of(context).textTheme.bodyMedium!.color,
         padding: EdgeInsets.all(5.w),
         color: Theme.of(context).iconTheme.color,
         gap: 2.w,
@@ -90,7 +90,7 @@ class _HomePhoneWrapperState extends State<HomePhoneWrapper> {
           ),
           GButton(
             icon: Iconsax.direct,
-            text: 'Channels',
+            text: 'Group',
           ),
           GButton(
             icon: Iconsax.messages_3,

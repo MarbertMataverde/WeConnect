@@ -104,7 +104,7 @@ class _ChannelSettingsState extends State<ChannelSettings> {
                   context: context,
                   title: widget.channelToken,
                   icon: Iconsax.copy,
-                  iconColor: Theme.of(context).primaryColor,
+                  iconColor: Theme.of(context).iconTheme.color,
                   onCliked: () {
                     Clipboard.setData(ClipboardData(text: widget.channelToken))
                         .then(

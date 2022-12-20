@@ -20,14 +20,15 @@ class CustomButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPress,
         style: TextButton.styleFrom(
-          foregroundColor: Theme.of(context).primaryColor, side: borderSide,
-          backgroundColor: Theme.of(context).primaryColor.withAlpha(30),
+          foregroundColor: Colors.white,
+          side: borderSide,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         child: Text(
           text,
-          style: TextStyle(
-            color: Theme.of(context).primaryColor,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
       ),

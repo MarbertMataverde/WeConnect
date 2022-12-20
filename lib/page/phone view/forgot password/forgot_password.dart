@@ -39,7 +39,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: '',
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -65,15 +64,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   Text(
                     'Forgot',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18.sp,
                     ),
                   ),
                   Text(
-                    'Your Password 🤔',
+                    'Your Password',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18.sp,
                       height: 0.9,
@@ -113,10 +110,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(value!);
                     if (value.isEmpty) {
-                      return 'Please Enter Your Email😊';
+                      return 'Please Enter Your Email';
                     }
                     if (!isEmailValid) {
-                      return 'Invalid Email😐';
+                      return 'Invalid Email';
                     }
                     return null;
                   },
@@ -144,7 +141,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           isLoading = false;
                         });
                       },
-                      text: 'Reset Now ⚡',
+                      text: 'Reset Now',
                     ),
             ],
           ),

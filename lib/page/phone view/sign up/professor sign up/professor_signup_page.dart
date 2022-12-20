@@ -41,7 +41,6 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: '',
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -57,8 +56,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
               padding: EdgeInsets.only(right: 5.w),
               child: Text(
                 'Acess Code: $_accessCode',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -79,12 +77,11 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                 'Professor Sign Up 👨🏻‍🏫',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Getting to know you 😎',
+                'Getting to know you',
                 style: TextStyle(
                   fontSize: 12.sp,
                 ),
@@ -98,15 +95,15 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                       minimumLine: 1,
                       maxLine: 1,
                       ctrlr: _nameCtrlr,
-                      hint: 'Full Name (LN, FN MI)',
+                      hint: 'Full Name',
                       isPassword: kFalse,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Your Beautiful Name 🤗';
+                          return 'Please Enter Your Beautiful Name';
                         }
                         if (value.toString().length <= 2) {
-                          return 'Please Enter Your Full Name 😉';
+                          return 'Please Enter Your Full Name';
                         }
                         return null;
                       },
@@ -128,7 +125,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                           return 'Please Enter A Valid PH Contact Number 📞';
                         }
                         if (value.isEmpty) {
-                          return 'Enter Contact Number 😊';
+                          return 'Enter Contact Number';
                         }
                       },
                     ),
@@ -145,7 +142,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                       ],
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Enter Employee Number 😊';
+                          return 'Enter Employee Number';
                         }
                       },
                     ),
@@ -153,7 +150,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'This what you will use to sign in 🔐',
+                        'This what you will use to sign in',
                         style: TextStyle(
                           fontSize: 12.sp,
                         ),
@@ -172,10 +169,10 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value!);
                         if (value.isEmpty) {
-                          return 'Please Enter Your Email 😊';
+                          return 'Please Enter Your Email';
                         }
                         if (!isEmailValid) {
-                          return 'Invalid Email 😐';
+                          return 'Invalid Email';
                         }
                         return null;
                       },
@@ -190,10 +187,10 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Password 🔐';
+                          return 'Please Enter Password';
                         }
                         if (value.toString().length < 8) {
-                          return 'Password Should Be Longer or Equal to 8 characters 👌';
+                          return 'Password Should Be Longer or Equal to 8 characters';
                         }
                         return null;
                       },
@@ -226,7 +223,7 @@ class _ProfessorSignUpPageState extends State<ProfessorSignUpPage> {
                           isLoading = false;
                         });
                       },
-                      text: 'Create⚡',
+                      text: 'Create',
                     ),
             ],
           ),

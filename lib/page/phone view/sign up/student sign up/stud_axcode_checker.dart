@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/button/custom_text_button.dart';
 import '../../../../widgets/appbar/appbar_back.dart';
 
 import '../../../../constant/constant.dart';
@@ -46,11 +47,10 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Student Sign Up 👨🏻‍🎓',
                 textScaleFactor: 1.7,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -102,20 +102,11 @@ class _StudentAxCodeCheckerState extends State<StudentAxCodeChecker> {
                   const Text(
                     'Sign up as',
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).primaryColor,
-                    ),
-                    onPressed: () {
-                      Get.off(() => const ProfessorAxCodeChecker());
-                    },
-                    child: Text(
-                      'Professor',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+                  customTextButton(
+                      onPress: () {
+                        Get.off(() => const ProfessorAxCodeChecker());
+                      },
+                      label: 'Professor')
                 ],
               )
             ],

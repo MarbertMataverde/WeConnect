@@ -41,11 +41,10 @@ class _ProfessorAxCodeCheckerState extends State<ProfessorAxCodeChecker> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Professor Sign Up 👨🏻‍🏫',
                 textScaleFactor: 1.7,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

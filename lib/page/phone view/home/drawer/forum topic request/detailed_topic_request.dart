@@ -80,7 +80,7 @@ class RequestDetails extends StatelessWidget {
               },
               icon: Icon(
                 Iconsax.tick_square,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).iconTheme.color,
               ),
             ),
           ],

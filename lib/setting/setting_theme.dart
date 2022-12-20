@@ -35,23 +35,25 @@ final lightThemeData = ThemeData(
   fontFamily: 'Poppins',
 );
 
-final darkThemeData = ThemeData(
+final darkThemeData = ThemeData.dark().copyWith(
   visualDensity: VisualDensity.comfortable,
-  primaryColor: const Color(0xff4AE0DF),
+  primaryColor: const Color(0xff323645),
   scaffoldBackgroundColor: const Color(0xff282A37),
   iconTheme: const IconThemeData(color: Colors.white),
-  cardColor: const Color(0xff0F2346),
+  errorColor: const Color(0xff338C8C),
+  cardColor: const Color(0xff323645),
   cardTheme: const CardTheme(
     elevation: 1,
-    color: Color(0xff0F2346),
+    color: Color(0xff323645),
     shadowColor: Color.fromARGB(70, 255, 255, 255),
   ),
   disabledColor: const Color.fromARGB(255, 95, 95, 95),
   textTheme: const TextTheme(
-      labelMedium: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
-      bodySmall: TextStyle(color: Colors.white),
-      bodyMedium: TextStyle(color: Colors.white),
-      bodyLarge: TextStyle(color: Colors.white)),
+    labelMedium: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
+    bodySmall: TextStyle(color: Colors.white),
+    bodyMedium: TextStyle(color: Colors.white),
+    bodyLarge: TextStyle(color: Colors.white),
+  ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
@@ -63,9 +65,11 @@ final darkThemeData = ThemeData(
       }),
       foregroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-        return const Color(0xff39AFE6);
+        return Colors.white;
       }),
     ),
   ),
-  fontFamily: 'Poppins',
+  primaryTextTheme: ThemeData.dark().textTheme.apply(
+        fontFamily: 'Poppins',
+      ),
 );

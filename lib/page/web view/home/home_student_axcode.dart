@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weconnect/widgets/button/custom_text_button.dart';
 import '../../../widgets/global%20spinkit/global_spinkit.dart';
 import '../../../dialog/dialog_access_code_generator.dart';
 
@@ -43,11 +44,10 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Generate Access Code',
                 textScaleFactor: 1.5,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -109,17 +109,11 @@ class _StudentAxCodeGeneratorState extends State<StudentAxCodeGenerator> {
                   const Text(
                     'Not for students?',
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(() => const ProfessorAxCodeGenerator());
-                    },
-                    child: Text(
-                      'Professors',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+                  customTextButton(
+                      onPress: () {
+                        Get.to(() => const ProfessorAxCodeGenerator());
+                      },
+                      label: 'Professors')
                 ],
               )
             ],

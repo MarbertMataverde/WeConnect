@@ -234,7 +234,10 @@ class _ForumTopicDetailsState extends State<ForumTopicDetails> {
       floatingActionButton: isFabVisible
           ? FloatingActionButton(
               backgroundColor: Theme.of(context).primaryColor,
-              child: const Icon(Iconsax.message_add),
+              child: Icon(
+                Iconsax.message_add,
+                color: Theme.of(context).iconTheme.color,
+              ),
               onPressed: () {
                 Get.to(
                   () => ForumCommentList(

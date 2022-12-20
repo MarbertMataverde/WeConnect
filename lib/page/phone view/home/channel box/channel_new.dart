@@ -71,7 +71,7 @@ class _ChannelNewState extends State<ChannelNew> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: 'New Channel',
+        title: 'New Group',
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -108,7 +108,7 @@ class _ChannelNewState extends State<ChannelNew> {
                   icon: Icon(
                     Iconsax.tick_square,
                     color: checkIconButtonIsEnable && selectedImage != null
-                        ? Theme.of(context).primaryColor
+                        ? Theme.of(context).iconTheme.color
                         : Theme.of(context).disabledColor,
                   ),
                 ),
@@ -134,7 +134,7 @@ class _ChannelNewState extends State<ChannelNew> {
                     ),
                   )
                 : Material(
-                    color: Theme.of(context).primaryColor.withAlpha(15),
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(5.w),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5.w),
@@ -147,7 +147,7 @@ class _ChannelNewState extends State<ChannelNew> {
                         child: Icon(
                           Iconsax.gallery_add,
                           size: 10.w,
-                          color: Theme.of(context).primaryColor.withAlpha(150),
+                          color: Theme.of(context).iconTheme.color,
                         ),
                       ),
                     ),
@@ -201,7 +201,7 @@ class _ChannelNewState extends State<ChannelNew> {
                           onPressed: () {
                             channelJoinTokenCtrlr.text = getRandomString(7);
                           },
-                          icon: const Icon(Iconsax.text_block),
+                          icon: const Icon(Iconsax.shuffle),
                         ),
                       ),
                       Expanded(
