@@ -59,8 +59,6 @@ class Authentication extends GetxController {
               .getter(sharedPreferences.get('currentUid') as String);
         },
       );
-
-      // accountInformation.getter();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         dialog.userNotFoundDialog(
